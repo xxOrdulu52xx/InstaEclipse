@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">InstaEclipse</string>
+    <string name="home">Home</string>
+    <string name="features">Features</string>
+    <string name="help">Help</string>
+    <string name="module_status">Module Status: Checking...</string>
+    <string name="restart_instagram">Restart Instagram</string>
+    <string name="module_disabled">⚠ Module is not enabled. Please enable it.</string>
+    <string name="instaeclipse">InstaEclipse</string>
+    <string name="version_0_1">Version: 0.1</string>
+</resources>

@@ -4,8 +4,7 @@ InstaEclipse is an **LSPosed module** designed to enhance your Instagram experie
 
 ---
 
-<details>
-<summary>## 🛠️ Installation Instructions</summary>
+## 🛠️ Installation Instructions  
 
 ### 1️⃣ Install the Module  
 - Download and install the **InstaEclipse APK**. You can find the latest release [here](https://github.com/your-repo/releases).  
@@ -26,12 +25,9 @@ InstaEclipse is an **LSPosed module** designed to enhance your Instagram experie
 - Go back to the **Home Tab** in the InstaEclipse module.  
 - Click **Restart Instagram**.  
 
-</details>
-
 ---
 
-<details>
-<summary>## ✨ Features</summary>
+## ✨ Features  
 
 ### 🎛️ Developer Options  
 - Unlock hidden developer tools within Instagram.  
@@ -50,12 +46,9 @@ InstaEclipse is an **LSPosed module** designed to enhance your Instagram experie
 ### 🚫 Remove Ads  
 - Declutter your feed by removing intrusive ads.  
 
-</details>
-
 ---
 
-<details>
-<summary>## 📖 FAQ</summary>
+## 📖 FAQ  
 
 ### ❓ Module not enabled?  
 Disable and re-enable the module in LSPosed.  
@@ -72,28 +65,19 @@ This is due to obfuscation in **Stable** versions of Instagram. Use **Beta** or 
 ### ❓ Distraction-Free Mode enabled, but content still appears?  
 Force stop Instagram and **clear its cache** to apply the changes properly.  
 
-</details>
-
 ---
 
-<details>
-<summary>## 📂 Resources</summary>
+## 📂 Resources  
 
 - 🐙 **GitHub Repository:** [Explore InstaEclipse](https://github.com/ReSo7200/InstaEclipse)  
 - 💬 **Support & Updates:** [Telegram Channel](https://t.me/InstaEclipse)  
 
-</details>
-
 ---
 
-<details>
-<summary>## 🎉 Special Thanks</summary>
-
+## 🎉 Special Thanks  
 A big shoutout to our amazing contributors for making InstaEclipse possible! 💜  
 
 > **Contributions are always welcome!** Feel free to submit issues or pull requests to help improve InstaEclipse.  
-
-</details>
 
 ---
 

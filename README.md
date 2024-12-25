@@ -29,7 +29,7 @@ This module is built to stay compatible with **new Instagram releases** by lever
 ## 🛠️ Installation Instructions  
 
 ### 1️⃣ Install the Module  
-- Download and install the **InstaEclipse APK**. You can find the latest release [here](https://github.com/your-repo/releases).  
+- Download and install the **InstaEclipse APK**. You can find the latest release [here](https://github.com/ReSo7200/InstaEclipse/releases).  
 
 ### 2️⃣ Enable the Module in LSPosed  
 - Open the **LSPosed Manager**.  

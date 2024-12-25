@@ -73,10 +73,7 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 
 ---
 
-## 🎉 Special Thanks  
-
-### 🙏 A Big Thank You!  
-We deeply appreciate the effort and support of our contributors and community members. You've made InstaEclipse what it is today! 💜  
+## 🎉 Contributors 
 
 ---
 

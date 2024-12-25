@@ -2,6 +2,26 @@
 
 InstaEclipse is an **LSPosed module** designed to enhance your Instagram experience with advanced features like developer options, ghost mode, distraction-free mode, and more! 🚀  
 
+## ✨ Features  
+
+### 🎛️ Developer Options  
+- Unlock hidden developer tools within Instagram.  
+- **Note:** Developer Options should only be used with **Alpha** or **Beta** versions of Instagram.  
+
+### 👻 Ghost Mode  
+- Stay incognito while browsing stories, lives, or DMs.    
+
+### 🧘 Distraction-Free Mode  
+- Enjoy Instagram without stories, reels, or explore feed distractions.  
+- **Important:** After enabling Distraction-Free Mode:  
+  1. **Force stop Instagram**.  
+  2. **Clear Instagram's cache**.  
+  3. Launch Instagram for a clean experience.  
+
+### 🚫 Remove Ads  
+- Declutter your feed by removing intrusive ads.  
+
+---
 ---
 
 ## 🛠️ Installation Instructions  
@@ -24,27 +44,6 @@ InstaEclipse is an **LSPosed module** designed to enhance your Instagram experie
 ### 5️⃣ Restart Instagram  
 - Go back to the **Home Tab** in the InstaEclipse module.  
 - Click **Restart Instagram**.  
-
----
-
-## ✨ Features  
-
-### 🎛️ Developer Options  
-- Unlock hidden developer tools within Instagram.  
-- **Note:** Developer Options should only be used with **Alpha** or **Beta** versions of Instagram.  
-
-### 👻 Ghost Mode  
-- Stay incognito while browsing stories, lives, or DMs.    
-
-### 🧘 Distraction-Free Mode  
-- Enjoy Instagram without stories, reels, or explore feed distractions.  
-- **Important:** After enabling Distraction-Free Mode:  
-  1. **Force stop Instagram**.  
-  2. **Clear Instagram's cache**.  
-  3. Launch Instagram for a clean experience.  
-
-### 🚫 Remove Ads  
-- Declutter your feed by removing intrusive ads.  
 
 ---
 

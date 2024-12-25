@@ -1,6 +1,7 @@
 # InstaEclipse - ⚡ Enhance Your Instagram Experience!  
 
 InstaEclipse is an **LSPosed module** designed to enhance your Instagram experience with advanced features like developer options, ghost mode, distraction-free mode, and more! 🚀  
+
 ---
 ## ✨ Features  
 

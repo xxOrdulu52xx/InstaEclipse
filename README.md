@@ -83,8 +83,8 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 ---
 
 ### 🙌 Special Thanks to:  
-- **Amàzing World** - For inspiration and guidance.  
-- **Bluepapilte (MyInsta Mod Owner)** - For continuous support and contributions. [Telegram](https://t.me/instasmashrepo)  
+- **Amàzing World** 
+- **Bluepapilte (MyInsta Mod Owner)** [Telegram](https://t.me/instasmashrepo)  
 
 ---
 

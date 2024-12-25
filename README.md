@@ -80,11 +80,12 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 ---
 
 ### 👑 Project Owner  
-- [**ReSo7200**](https://github.com/ReSo7200/)  
+- [ReSo7200](https://github.com/ReSo7200/)  
 
 ---
 
 ### 🙌 Special Thanks to:  
+- [xHookman](https://github.com/ReSo7200/)  
 - **Amàzing World** 
 - **Bluepapilte (MyInsta Mod Owner)** [Telegram](https://t.me/instasmashrepo)  
 

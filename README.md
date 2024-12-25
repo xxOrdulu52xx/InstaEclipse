@@ -98,10 +98,3 @@ We welcome contributions from everyone!
 > Every contribution, big or small, is highly valued. Thank you for helping us grow!  
 
 ---
-
-Want to see your name here? Contribute to InstaEclipse and join our growing list of amazing supporters! 🎉
-
-
----
-
-Enjoy a more personalized and enhanced Instagram experience with InstaEclipse! 🌟

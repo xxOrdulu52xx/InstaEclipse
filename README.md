@@ -78,8 +78,7 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 ---
 
 ### 👑 Project Owner  
-- **ReSo7200** - The visionary and creator behind InstaEclipse. 🚀  
-  For his dedication, innovation, and continuous improvements to the module!  
+- [**ReSo7200**](https://github.com/ReSo7200/)  
 
 ---
 

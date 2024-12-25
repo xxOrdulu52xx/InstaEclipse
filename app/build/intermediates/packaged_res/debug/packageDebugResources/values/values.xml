@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ig_version">
+        <item>292.0.0.16.110</item>
+    </string-array>
+    <string-array name="target_app">
+        <item>com.instagram.android</item>
+    </string-array>
+    <color name="accent_blue">#448AFF</color>
+    <color name="black">#121212</color>
+    <color name="bottom_nav_icon">#B0BEC5</color>
+    <color name="bottom_nav_icon_active">#448AFF</color>
+    <color name="dark_gray">#1E1E1E</color>
+    <color name="gray">#3C3C3C</color>
+    <color name="green">#4CAF50</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="purple_200">#9C27B0</color>
+    <color name="red">#FF0000</color>
+    <color name="warning_yellow">#FFCA28</color>
+    <color name="white">#FFFFFF</color>
+    <string name="app_name">InstaEclipse</string>
+    <string name="features">Features</string>
+    <string name="help">Help</string>
+    <string name="home">Home</string>
+    <string name="instaeclipse">InstaEclipse</string>
+    <string name="module_disabled">⚠ Module is not enabled. Please enable it.</string>
+    <string name="module_status">Module Status: Checking...</string>
+    <string name="restart_instagram">Restart Instagram</string>
+    <string name="version_0_1">Version: 0.1</string>
+    <style name="SpinnerPopup" parent="Theme.AppCompat.Light">
+        <item name="android:textAppearance">@style/SpinnerTextAppearance</item>
+        <item name="android:background">@android:color/black</item>
+    </style>
+    <style name="SpinnerTextAppearance" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">10sp</item>
+        <item name="android:autoSizeMaxTextSize">18sp</item>
+        <item name="android:autoSizeStepGranularity">1sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="Theme.InstaEclipse" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+    <style name="Theme.MyApp" parent="Theme.AppCompat.Light.DarkActionBar">
+        
+        <item name="colorPrimary">@color/gray</item>
+
+        
+        <item name="colorPrimaryDark">@color/gray</item>
+
+        
+        <item name="colorAccent">@color/gray</item>
+
+        
+        <item name="colorControlActivated">@color/warning_yellow</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlHighlight">@color/gray</item>
+    </style>
+    <style name="ToolbarTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@color/purple_200</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

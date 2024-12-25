@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Developer Options Guide"
+            android:textColor="@color/purple_200"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="200px"
+            android:layout_marginBottom="10px"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Use it on Beta/Alpha versions only!"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="5px"
+            android:layout_marginBottom="30px"
+            android:paddingBottom="1dp" />
+
+        <!-- Instruction 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Open Instagram and hold the Home button."
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="25px"
+            android:paddingBottom="8dp" />
+
+        <!-- Instruction 2 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Navigate to Developer Options > MetaConfig Settings &amp; Overrides."
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="25px"
+            android:paddingBottom="8dp" />
+
+        <!-- Instruction 3 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. Search for 'Employee' and enable the following options:"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="25px"
+            android:paddingBottom="8dp" />
+
+        <!-- Sub-items -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• is employee"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• employee options"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:paddingBottom="4dp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• is employee or test user"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:layout_marginBottom="25px"
+            android:paddingBottom="16dp" />
+
+        <!-- Instruction 4 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. Finally, disable the Developer Options from the module to prevent app crashes."
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+</ScrollView>

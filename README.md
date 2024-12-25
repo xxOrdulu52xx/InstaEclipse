@@ -74,9 +74,36 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 ---
 
 ## 🎉 Special Thanks  
-A big shoutout to our amazing contributors for making InstaEclipse possible! 💜  
 
-> **Contributions are always welcome!** Feel free to submit issues or pull requests to help improve InstaEclipse.  
+### 🙏 A Big Thank You!  
+We deeply appreciate the effort and support of our contributors and community members. You've made InstaEclipse what it is today! 💜  
+
+---
+
+### 👑 Project Owner  
+- **ReSo7200** - The visionary and creator behind InstaEclipse. 🚀  
+  For his dedication, innovation, and continuous improvements to the module!  
+
+---
+
+### 🙌 Special Thanks to:  
+- **Amàzing World** - For inspiration and guidance.  
+- **Bluepapilte (MyInsta Mod Owner)** - For continuous support and contributions. [Telegram](https://t.me/instasmashrepo)  
+
+---
+
+### 💡 Contributions  
+We welcome contributions from everyone!  
+- **Have an idea?** Open an issue or submit a feature request.  
+- **Found a bug?** Report it through our [GitHub Issues](https://github.com/ReSo7200/InstaEclipse/issues).  
+- **Want to help?** Submit a pull request to improve InstaEclipse.
+
+> Every contribution, big or small, is highly valued. Thank you for helping us grow!  
+
+---
+
+Want to see your name here? Contribute to InstaEclipse and join our growing list of amazing supporters! 🎉
+
 
 ---
 

@@ -12,9 +12,9 @@ This module is built to stay compatible with **new Instagram releases** by lever
 ## ✨ Features  
 
 ### 🎛️ Developer Options  
-- Unlock hidden developer tools within Instagram.  
-- **Note:** Developer Options should only be used with **Alpha** or **Beta** versions of Instagram.
-- Also make sure you are signed in before enabling the developer options from the module, and follow its guide.
+- Access hidden developer tools within Instagram for advanced functionality.  
+- **Note:** These options are intended for use with **Alpha** or **Beta** versions of Instagram.  
+- Ensure you are signed in before enabling Developer Options through the module and follow the provided guide for proper setup.
 
 ### 👻 Ghost Mode  
 - Stay incognito while browsing stories, lives, or DMs.    

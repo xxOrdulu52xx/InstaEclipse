@@ -40,9 +40,9 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     Boolean isDistraction_Feed_Enabled;
     Boolean isDistraction_Reels_Enabled;
     Boolean isDistraction_Explore_Enabled;
-
+    Boolean isDistraction_Comments_Enabled;
     Boolean isRemove_Ads_Enabled;
-    Boolean isremove_Analytics_Enabled;
+    Boolean isRemove_Analytics_Enabled;
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -75,13 +75,14 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 isDistraction_Feed_Enabled = XposedPreferences.getPrefs().getBoolean("disableFeed",false);
                 isDistraction_Reels_Enabled = XposedPreferences.getPrefs().getBoolean("disableReels",false);
                 isDistraction_Explore_Enabled = XposedPreferences.getPrefs().getBoolean("disableExplore",false);
+                isDistraction_Comments_Enabled = XposedPreferences.getPrefs().getBoolean("disableComments", false);
             }
 
             // Remove ads
             isRemove_Ads_Enabled = XposedPreferences.getPrefs().getBoolean("removeAds", false);
 
             // Remove analysis
-            isremove_Analytics_Enabled = XposedPreferences.getPrefs().getBoolean("removeAnalytics", false);
+            isRemove_Analytics_Enabled = XposedPreferences.getPrefs().getBoolean("removeAnalytics", false);
 
 
         } catch (Exception e) {
@@ -164,6 +165,9 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     uriConditions.add(uri -> ((uri.getPath().contains("/discover/topical_explore") || uri.getPath().contains("/discover/topical_explore_stream"))));
                     uriConditions.add(uri ->  (uri.getHost().contains("i.instagram.com")) && (uri.getPath().contains("/api/v1/fbsearch/top_serp/")));
                 }
+                if (isDistraction_Comments_Enabled){
+                    uriConditions.add(uri -> ((uri.getPath().contains("/api/v1/media/") && uri.getPath().contains("comments/"))));
+                }
             }
 
             if (isRemove_Ads_Enabled){
@@ -173,7 +177,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 uriConditions.add(uri -> uri.getPath().equals("/api/v1/ads/graphql/"));
             }
 
-            if (isremove_Analytics_Enabled){
+            if (isRemove_Analytics_Enabled){
                 uriConditions.add(uri -> uri.getHost().contains("graph.instagram.com"));
                 uriConditions.add(uri -> uri.getPath().contains("/logging_client_events"));
                 uriConditions.add(uri -> uri.getHost().contains("graph.facebook.com"));

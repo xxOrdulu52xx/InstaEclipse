@@ -20,12 +20,14 @@ public class DistractionFreeFragment extends Fragment {
     private static final String FEED_KEY = "disableFeed";
     private static final String REELS_KEY = "disableReels";
     private static final String EXPLORE_KEY = "disableExplore";
+    private static final String COMMENTS_KEY = "disableExplore";
 
     private Switch enableAllToggle;
     private Switch storiesToggle;
     private Switch feedToggle;
     private Switch reelsToggle;
     private Switch exploreToggle;
+    private Switch commentsToggle;
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -44,6 +46,7 @@ public class DistractionFreeFragment extends Fragment {
         feedToggle = view.findViewById(R.id.feed_toggle);
         reelsToggle = view.findViewById(R.id.reels_toggle);
         exploreToggle = view.findViewById(R.id.explore_toggle);
+        commentsToggle = view.findViewById(R.id.comments_toggle);
 
         // Load saved states
         loadToggleStates();
@@ -55,6 +58,7 @@ public class DistractionFreeFragment extends Fragment {
             feedToggle.setChecked(isChecked);
             reelsToggle.setChecked(isChecked);
             exploreToggle.setChecked(isChecked);
+            commentsToggle.setChecked(isChecked);
         });
 
         // Individual toggles
@@ -62,6 +66,7 @@ public class DistractionFreeFragment extends Fragment {
         feedToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(FEED_KEY, isChecked));
         reelsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(REELS_KEY, isChecked));
         exploreToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(EXPLORE_KEY, isChecked));
+        commentsToggle.setOnCheckedChangeListener(((buttonView, isChecked) -> saveToggleState(COMMENTS_KEY, isChecked)));
 
         return view;
     }
@@ -72,6 +77,7 @@ public class DistractionFreeFragment extends Fragment {
         feedToggle.setChecked(preferences.getBoolean(FEED_KEY, false));
         reelsToggle.setChecked(preferences.getBoolean(REELS_KEY, false));
         exploreToggle.setChecked(preferences.getBoolean(EXPLORE_KEY, false));
+        commentsToggle.setChecked(preferences.getBoolean(COMMENTS_KEY, false));
     }
 
     private void saveToggleState(String key, boolean value) {

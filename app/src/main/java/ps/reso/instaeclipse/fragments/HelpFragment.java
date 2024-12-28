@@ -27,9 +27,19 @@ public class HelpFragment extends Fragment {
         // Find the GitHub button
         ImageButton githubButton = view.findViewById(R.id.github_button);
 
+        // Find the Telegram button
+        ImageButton telegramButton = view.findViewById(R.id.telegram_button);
+
+
         // Set the click listener for the GitHub button
         githubButton.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ReSo7200/InstaEclipse/tree/main"));
+            startActivity(intent);
+        });
+
+        // Set the click listener for the Telegram button
+        telegramButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/InstaEclipse"));
             startActivity(intent);
         });
 

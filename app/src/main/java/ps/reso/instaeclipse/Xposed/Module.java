@@ -42,6 +42,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     Boolean isDistraction_Explore_Enabled;
 
     Boolean isRemove_Ads_Enabled;
+    Boolean isremove_Analytics_Enabled;
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -78,6 +79,9 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             // Remove ads
             isRemove_Ads_Enabled = XposedPreferences.getPrefs().getBoolean("removeAds", false);
+
+            // Remove analysis
+            isremove_Analytics_Enabled = XposedPreferences.getPrefs().getBoolean("removeAnalytics", false);
 
 
         } catch (Exception e) {
@@ -126,14 +130,12 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             if (isDevEnabled) {
                 DevOptionsEnable devOptionsEnable = new DevOptionsEnable();
                 devOptionsEnable.handleDevOptions(lpparam);
-                XposedBridge.log(TAG + " | Developer options enabled.");
             }
 
             if (isGhost_Enabled) {
                 if (isGhost_DM_Enabled) {
                     GhostModeDM ghostModeDM = new GhostModeDM();
                     ghostModeDM.handleGhostMode(lpparam);
-                    XposedBridge.log(TAG + " | DM ghost mode enabled.");
                 }
 
                 if (isGhost_Story_Enabled) {
@@ -167,8 +169,15 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             if (isRemove_Ads_Enabled){
                 uriConditions.add(uri -> uri.getPath().contains("/api/v1/profile_ads/get_profile_ads/"));
                 uriConditions.add(uri -> uri.getPath().contains("/ads/"));
-                uriConditions.add(uri -> uri.getHost().contains("graph.instagram.com"));
                 uriConditions.add(uri -> uri.getPath().contains("/feed/injected_reels_media/"));
+                uriConditions.add(uri -> uri.getPath().equals("/api/v1/ads/graphql/"));
+            }
+
+            if (isremove_Analytics_Enabled){
+                uriConditions.add(uri -> uri.getHost().contains("graph.instagram.com"));
+                uriConditions.add(uri -> uri.getPath().contains("/logging_client_events"));
+                uriConditions.add(uri -> uri.getHost().contains("graph.facebook.com"));
+                uriConditions.add(uri -> uri.getPath().endsWith("/activities"));
             }
 
             // Pass the dynamically rebuilt conditions to the interceptor

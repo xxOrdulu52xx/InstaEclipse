@@ -30,26 +30,28 @@ public class DevOptionsEnable {
                         String classToHook = "X." + first + second + third;
 
                         try {
-                            Class<?> cls = XposedHelpers.findClass(classToHook, lpparam.classLoader);
+                            Class<?> targetClass = XposedHelpers.findClass(classToHook, lpparam.classLoader);
+                            Method[] methods = targetClass.getDeclaredMethods();
 
-                            Method[] methods = cls.getDeclaredMethods();
                                 try {
-                                    if (methods.length == 1 && methods[0].getName().equals("A00") &&
-                                            methods[0].getReturnType() == Boolean.TYPE &&
-                                            methods[0].getParameterCount() == 1) {
+                                    for (Method method : targetClass.getDeclaredMethods()) {
+                                        if (methods.length == 1 && methods[0].getName().equals("A00") &&
+                                                methods[0].getReturnType() == Boolean.TYPE &&
+                                                methods[0].getParameterCount() == 1  && method.getParameterTypes()[0].getName().contains("UserSession")) {
 
-                                        Class<?> declaringClass = methods[0].getDeclaringClass();
+                                            Class<?> declaringClass = methods[0].getDeclaringClass();
 
-                                        if (declaringClass != null) {
-                                            Field[] fields = declaringClass.getDeclaredFields();
-                                            if (fields.length == 0) {
+                                            if (declaringClass != null) {
+                                                Field[] fields = declaringClass.getDeclaredFields();
+                                                if (fields.length == 0) {
 
-                                                num_of_hooks += 1;
-                                                Class<?> UserSessionClass = XposedHelpers.findClass(Utils.USER_SESSION_CLASS, lpparam.classLoader);
-                                                hookDevOptions(cls, "A00", UserSessionClass);
+                                                    num_of_hooks += 1;
+                                                    Class<?> UserSessionClass = XposedHelpers.findClass(Utils.USER_SESSION_CLASS, lpparam.classLoader);
+                                                    hookDevOptions(targetClass, "A00", UserSessionClass);
+
+                                                }
 
                                             }
-
                                         }
                                     }
                                 } catch (NoClassDefFoundError | XposedHelpers.ClassNotFoundError e) {
@@ -73,7 +75,7 @@ public class DevOptionsEnable {
             }
 
         } catch (Exception e) {
-            XposedBridge.log("(DevOptionsEnable) Error in Auto mode: " + e.getMessage());
+            XposedBridge.log("(DevOptionsEnable) Error in Dev-Options: " + e.getMessage());
         }
     }
 
@@ -100,7 +102,7 @@ public class DevOptionsEnable {
         } catch (XposedHelpers.ClassNotFoundError e) {
             //XposedBridge.log("(DevOptionsEnable) XposedHelpers couldn't find class: " + targetClass.getName() + " or parameter class: " + secondTargetClass.getName() + " - " + e.getMessage());
         } catch (Exception e) {
-            //XposedBridge.log("(DevOptionsEnable) General exception while hooking method: " + methodToHook + " in class: " + targetClass.getName() + " - " + e.getMessage());
+            XposedBridge.log("(DevOptionsEnable) General exception while hooking method: " + methodToHook + " in class: " + targetClass.getName() + " - " + e.getMessage());
         }
     }
 }

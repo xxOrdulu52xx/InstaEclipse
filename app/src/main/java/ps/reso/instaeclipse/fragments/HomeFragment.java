@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void checkInstagramStatus() {
-        String instagramPackage = "com.instagram.android"; // Correct package name
+        String instagramPackage = Utils.IG_PACKAGE_NAME; // IG package name
         PackageManager pm = requireContext().getPackageManager(); // Get PackageManager
 
         try {

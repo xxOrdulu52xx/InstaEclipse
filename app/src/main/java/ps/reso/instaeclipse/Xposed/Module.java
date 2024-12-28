@@ -42,7 +42,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     Boolean isDistraction_Explore_Enabled;
 
     Boolean isRemove_Ads_Enabled;
-    Boolean isRemove_Analysis_Enabled;
+    Boolean isremove_Analytics_Enabled;
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -81,7 +81,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             isRemove_Ads_Enabled = XposedPreferences.getPrefs().getBoolean("removeAds", false);
 
             // Remove analysis
-            isRemove_Analysis_Enabled = XposedPreferences.getPrefs().getBoolean("removeAnalysis", false);
+            isremove_Analytics_Enabled = XposedPreferences.getPrefs().getBoolean("removeAnalytics", false);
 
 
         } catch (Exception e) {
@@ -173,7 +173,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 uriConditions.add(uri -> uri.getPath().equals("/api/v1/ads/graphql/"));
             }
 
-            if (isRemove_Analysis_Enabled){
+            if (isremove_Analytics_Enabled){
                 uriConditions.add(uri -> uri.getHost().contains("graph.instagram.com"));
                 uriConditions.add(uri -> uri.getPath().contains("/logging_client_events"));
                 uriConditions.add(uri -> uri.getHost().contains("graph.facebook.com"));

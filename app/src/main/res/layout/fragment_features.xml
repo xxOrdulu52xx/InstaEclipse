@@ -264,7 +264,7 @@
 
         <!-- Remove Ads Section -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/remove_analysis_card"
+            android:id="@+id/remove_Analytics_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
@@ -283,7 +283,7 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@drawable/ic_analysis"
+                    android:src="@drawable/ic_analytics"
                     android:contentDescription="Remove Analysis"
                     android:layout_marginEnd="8dp"
                     app:tint="@color/white" />
@@ -293,14 +293,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remove Analysis"
+                    android:text="Remove Analytics"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <!-- Toggle -->
                 <Switch
-                    android:id="@+id/remove_analysis_toggle"
+                    android:id="@+id/remove_Analytics_toggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="48dp"

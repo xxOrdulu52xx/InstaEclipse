@@ -25,10 +25,12 @@ public class FeaturesFragment extends Fragment {
     private static final String GHOST_MODE_KEY = "enableGhostMode";
     private static final String DISTRACTION_FREE_KEY = "enableDistractionFree";
     private static final String REMOVE_ADS_KEY = "removeAds";
+    private static final String REMOVE_ANALYSIS_KEY = "removeAnalysis";
     private Switch devOptionsToggle;
     private Switch ghostModeToggle;
     private Switch distractionFreeToggle;
     private Switch removeAdsToggle;
+    private Switch removeAnalysisToggle;
     private CardView devOptionsCard;
     private CardView ghostModeCard;
     private CardView distractionFreeCard;
@@ -57,6 +59,7 @@ public class FeaturesFragment extends Fragment {
         ghostModeToggle = view.findViewById(R.id.ghost_mode_toggle);
         distractionFreeToggle = view.findViewById(R.id.distraction_free_toggle);
         removeAdsToggle = view.findViewById(R.id.remove_ads_toggle);
+        removeAnalysisToggle = view.findViewById(R.id.remove_analysis_toggle);
 
         // Initialize card views
         devOptionsCard = view.findViewById(R.id.dev_options_card);
@@ -101,6 +104,7 @@ public class FeaturesFragment extends Fragment {
         });
 
         removeAdsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(REMOVE_ADS_KEY, isChecked));
+        removeAnalysisToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(REMOVE_ANALYSIS_KEY, isChecked));
 
         return view;
     }
@@ -113,6 +117,7 @@ public class FeaturesFragment extends Fragment {
         ghostModeToggle.setChecked(sharedPreferences.getBoolean(GHOST_MODE_KEY, false));
         distractionFreeToggle.setChecked(sharedPreferences.getBoolean(DISTRACTION_FREE_KEY, false));
         removeAdsToggle.setChecked(sharedPreferences.getBoolean(REMOVE_ADS_KEY, false));
+        removeAnalysisToggle.setChecked(sharedPreferences.getBoolean(REMOVE_ANALYSIS_KEY, false));
     }
 
     /**

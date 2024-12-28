@@ -36,7 +36,7 @@ This module is built to stay compatible with **new Instagram releases** by lever
 
 ## 🛠️ Installation Instructions  
 ---
-Install Instagram from [APKMirror](https://www.apkmirror.com/apk/instagram/instagram-instagram/), as the module doesn't fully support Google play store versions yet!
+⚠️ Install Instagram from [APKMirror](https://www.apkmirror.com/apk/instagram/instagram-instagram/), as the module doesn't fully support Google play store versions yet!
 ---
 
 ### 1️⃣ Install the Module  
@@ -44,7 +44,7 @@ Install Instagram from [APKMirror](https://www.apkmirror.com/apk/instagram/insta
 
 ### 2️⃣ Enable the Module in LSPosed
 ---
-⚠️ Make sure you are using the latest LSPosed Fork by [JingMatrix](https://github.com/JingMatrix/)
+⚠️ Make sure you are using the latest LSPosed Fork by [JingMatrix](https://github.com/JingMatrix/LSPosed)
 ---
 - Open the **LSPosed Manager**.  
 - Enable the **InstaEclipse Module** for the **Instagram app**.  

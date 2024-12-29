@@ -14,6 +14,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import ps.reso.instaeclipse.mods.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.GhostModeDM;
+import ps.reso.instaeclipse.mods.GhostModeTypingStatus;
 import ps.reso.instaeclipse.mods.Interceptor;
 
 import java.net.URI;
@@ -33,6 +34,8 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     Boolean isGhost_Enabled;
     Boolean isGhost_DM_Enabled;
+
+    Boolean isGhost_Typing_Enabled;
     Boolean isGhost_Story_Enabled;
     Boolean isGhost_Live_Enabled;
     Boolean isDistraction_Free_Enabled;
@@ -49,7 +52,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         XposedBridge.log(TAG + " | Zygote initialized.");
     }
 
-    public void loadPreferences(){
+    public void loadPreferences() {
         try {
             // Load & Reload preferences
             XposedPreferences.loadPreferences();
@@ -61,8 +64,9 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             // Ghost mode
             isGhost_Enabled = XposedPreferences.getPrefs().getBoolean("enableGhostMode", false);
 
-            if (isGhost_Enabled){
+            if (isGhost_Enabled) {
                 isGhost_DM_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeDM", false);
+                isGhost_Typing_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeTyping", false);
                 isGhost_Story_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeLive", false);
                 isGhost_Live_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeStory", false);
             }
@@ -70,11 +74,11 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             // Distraction free
             isDistraction_Free_Enabled = XposedPreferences.getPrefs().getBoolean("enableDistractionFree", false);
 
-            if (isDistraction_Free_Enabled){
-                isDistraction_Stories_Enabled = XposedPreferences.getPrefs().getBoolean("disableStories",false);
-                isDistraction_Feed_Enabled = XposedPreferences.getPrefs().getBoolean("disableFeed",false);
-                isDistraction_Reels_Enabled = XposedPreferences.getPrefs().getBoolean("disableReels",false);
-                isDistraction_Explore_Enabled = XposedPreferences.getPrefs().getBoolean("disableExplore",false);
+            if (isDistraction_Free_Enabled) {
+                isDistraction_Stories_Enabled = XposedPreferences.getPrefs().getBoolean("disableStories", false);
+                isDistraction_Feed_Enabled = XposedPreferences.getPrefs().getBoolean("disableFeed", false);
+                isDistraction_Reels_Enabled = XposedPreferences.getPrefs().getBoolean("disableReels", false);
+                isDistraction_Explore_Enabled = XposedPreferences.getPrefs().getBoolean("disableExplore", false);
                 isDistraction_Comments_Enabled = XposedPreferences.getPrefs().getBoolean("disableComments", false);
             }
 
@@ -89,6 +93,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             XposedBridge.log(TAG + " | Failed to initialize preferences: " + e.getMessage());
         }
     }
+
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
@@ -120,9 +125,11 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             XposedBridge.log(TAG + " | Failed to hook MainActivity: " + e.getMessage());
         }
     }
+
     private void hookInstagram(XC_LoadPackage.LoadPackageParam lpparam) {
 
         try {
+
             uriConditions.clear();
             XposedBridge.log(TAG + " | Instagram package detected. Hooking...");
 
@@ -139,6 +146,11 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     ghostModeDM.handleGhostMode(lpparam);
                 }
 
+                if (isGhost_Typing_Enabled){
+                    GhostModeTypingStatus ghostModeTypingStatus = new GhostModeTypingStatus();
+                    ghostModeTypingStatus.handleTypingStatus(lpparam);
+                }
+
                 if (isGhost_Story_Enabled) {
                     uriConditions.add(uri -> uri.getPath().contains("/api/v2/media/seen/"));
                 }
@@ -148,8 +160,8 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 }
             }
 
-            if (isDistraction_Free_Enabled){
-                if (isDistraction_Stories_Enabled){
+            if (isDistraction_Free_Enabled) {
+                if (isDistraction_Stories_Enabled) {
                     uriConditions.add(uri -> uri.getPath().contains("/feed/reels_tray/") || uri.getPath().contains("/api/v1/feed/reels_media_stream/"));
                     uriConditions.add(uri -> uri.getPath().contains("feed/get_latest_reel_media/"));
                     uriConditions.add(uri -> uri.getPath().contains("direct_v2/pending_inbox/?visual_message"));
@@ -157,27 +169,28 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 }
                 if (isDistraction_Feed_Enabled) {
                     uriConditions.add(uri -> uri.getPath().endsWith("/feed/timeline/"));
+
                 }
-                if (isDistraction_Reels_Enabled){
+                if (isDistraction_Reels_Enabled) {
                     uriConditions.add(uri -> ((uri.getPath().endsWith("/qp/batch_fetch/") || uri.getPath().contains("api/v1/clips") || uri.getPath().contains("clips") || uri.getPath().contains("mixed_media") || uri.getPath().contains("mixed_media/discover/stream/"))));
                 }
-                if (isDistraction_Explore_Enabled){
+                if (isDistraction_Explore_Enabled) {
                     uriConditions.add(uri -> ((uri.getPath().contains("/discover/topical_explore") || uri.getPath().contains("/discover/topical_explore_stream"))));
-                    uriConditions.add(uri ->  (uri.getHost().contains("i.instagram.com")) && (uri.getPath().contains("/api/v1/fbsearch/top_serp/")));
+                    uriConditions.add(uri -> (uri.getHost().contains("i.instagram.com")) && (uri.getPath().contains("/api/v1/fbsearch/top_serp/")));
                 }
-                if (isDistraction_Comments_Enabled){
+                if (isDistraction_Comments_Enabled) {
                     uriConditions.add(uri -> ((uri.getPath().contains("/api/v1/media/") && uri.getPath().contains("comments/"))));
                 }
             }
 
-            if (isRemove_Ads_Enabled){
-                uriConditions.add(uri -> uri.getPath().contains("/api/v1/profile_ads/get_profile_ads/"));
+            if (isRemove_Ads_Enabled) {
+                uriConditions.add(uri -> uri.getPath().contains("profile_ads/get_profile_ads/"));
                 uriConditions.add(uri -> uri.getPath().contains("/ads/"));
                 uriConditions.add(uri -> uri.getPath().contains("/feed/injected_reels_media/"));
                 uriConditions.add(uri -> uri.getPath().equals("/api/v1/ads/graphql/"));
             }
 
-            if (isRemove_Analytics_Enabled){
+            if (isRemove_Analytics_Enabled) {
                 uriConditions.add(uri -> uri.getHost().contains("graph.instagram.com"));
                 uriConditions.add(uri -> uri.getPath().contains("/logging_client_events"));
                 uriConditions.add(uri -> uri.getHost().contains("graph.facebook.com"));
@@ -188,8 +201,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             if (!uriConditions.isEmpty()) {
                 interceptor.handleInterceptor(lpparam, uriConditions);
             }
-
-
 
 
         } catch (Exception e) {

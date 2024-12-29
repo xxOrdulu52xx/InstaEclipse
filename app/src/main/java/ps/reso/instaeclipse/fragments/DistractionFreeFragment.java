@@ -20,7 +20,7 @@ public class DistractionFreeFragment extends Fragment {
     private static final String FEED_KEY = "disableFeed";
     private static final String REELS_KEY = "disableReels";
     private static final String EXPLORE_KEY = "disableExplore";
-    private static final String COMMENTS_KEY = "disableExplore";
+    private static final String COMMENTS_KEY = "disableComments";
 
     private Switch enableAllToggle;
     private Switch storiesToggle;

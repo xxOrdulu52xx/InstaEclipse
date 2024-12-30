@@ -1,43 +1,43 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Version: 0.2b(D)</string>
-    <string name="home">Home</string>
-    <string name="features">Features</string>
-    <string name="help">Help</string>
+    <string name="version">Sürüm: 0.2b(D)</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="features">Özellikler</string>
+    <string name="help">Yardım</string>
 
     <!-- home -->
-    <string name="module_disabled">Module is not enabled. Please enable it.</string>
+    <string name="module_disabled">Modül etkin değil. Lütfen etkinleştirin.</string>
 
-    <string name="module_status">Module Status:</string>
+    <string name="module_status">Modül Durumu:</string>
 
-    <string name="module_status_disabled">Module Status: Disabled</string>
-    <string name="request_enable_module">Please enable the module in Xposed Installer.</string>
+    <string name="module_status_disabled">Modül Durumu: Devre Dışı</string>
+    <string name="request_enable_module">Lütfen modülü Xposed Installer'da etkinleştirin.</string>
 
-    <string name="module_status_enabled_no_root">Module Status: Enabled (No Root Access)</string>
-    <string name="request_enable_root">Root access is required for auto-restart. Manual restart required.</string>
+    <string name="module_status_enabled_no_root">Modül Durumu: Etkin (Root Erişimi Yok)</string>
+    <string name="request_enable_root">Otomatik yeniden başlatma için root erişimi gereklidir. Manuel yeniden başlatma gerekli.</string>
 
-    <string name="module_status_enabled">Module Status: Enabled</string>
-    <string name="module_active">The module is active and working.</string>
+    <string name="module_status_enabled">Modül Durumu: Etkin</string>
+    <string name="module_active">Modül aktif ve çalışıyor.</string>
 
-    <string name="checking_instagram">Checking Instagram</string>
-    <string name="installed_instagram_version">Instagram Installed - Version: </string>
-    <string name="not_installed_instagram">Instagram is not installed.</string>
-    <string name="error_instagram">Error checking Instagram status.</string>
+    <string name="checking_instagram">Instagram Kontrol Ediliyor</string>
+    <string name="installed_instagram_version">Yüklü Instagram Sürümü: </string>
+    <string name="not_installed_instagram">Instagram yüklü değil.</string>
+    <string name="error_instagram">Instagram durumu kontrol edilirken hata oluştu.</string>
 
-    <string name="restart_instagram">Restart Instagram</string>
-    <string name="contributors">Contributors</string>
-    <string name="special_thanks">Special Thanks</string>
+    <string name="restart_instagram">Instagram'ı Yeniden Başlat</string>
+    <string name="contributors">Katkıda Bulunanlar</string>
+    <string name="special_thanks">Özel Teşekkürler</string>
 
     <!-- Don't translate! -->
     <string name="instagram_logo" translatable="false">Instagram Logo</string>
 
     <!-- help -->
-    <string name="help_amp_troubleshooting">Help &amp; Troubleshooting</string>
-    <string name="find_updates_and_documentation">Find updates and documentation.</string>
-    <string name="go_to_github">Go to GitHub</string>
-    <string name="find_support">Find support.</string>
-    <string name="go_to_telegram">Go to Telegram</string>
+    <string name="help_amp_troubleshooting">Yardım &amp; Sorun Giderme</string>
+    <string name="find_updates_and_documentation">Güncellemeleri ve dokümantasyonu bulun.</string>
+    <string name="go_to_github">GitHub'a Git</string>
+    <string name="find_support">Destek bulun.</string>
+    <string name="go_to_telegram">Telegram'a Git</string>
     <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
 
     <!-- Don't translate! -->
@@ -45,44 +45,44 @@
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
 
-    <!-- faq -->
-    <string name="frequently_asked_questions">Frequently Asked Questions</string>
-    <string name="faq_1">1. Not working/crashes when using Google Play Version? Use APKMirror APKs</string>
-    <string name="faq_2">2. Module not enabled? Disable and re-enable the module in LSPosed.</string>
-    <string name="faq_3">3. Features not working? Force stop and restart Instagram.</string>
-    <string name="faq_4">4. Developer options cause crashes? Follow the developer options guide.</string>
-    <string name="faq_5">5. Developer options have weird labels or numbers? Use Beta or Alpha versions as Stable versions have obfuscation.</string>
-    <string name="faq_6">6. Distraction Free enabled but content still appears? Force stop Instagram and clear its cache.</string>
+   <!-- faq -->
+    <string name="frequently_asked_questions">Sıkça Sorulan Sorular</string>
+    <string name="faq_1">1. Google Play Sürümünü kullanırken çalışmıyor veya çöküyor mu? APKMirror APK'lerini kullanın.</string>
+    <string name="faq_2">2. Modül etkin değil mi? Modülü LSPosed'de devre dışı bırakıp tekrar etkinleştirin.</string>
+    <string name="faq_3">3. Özellikler çalışmıyor mu? Instagram'ı zorla durdurup yeniden başlatın.</string>
+    <string name="faq_4">4. Geliştirici seçenekleri çöküyor mu? Geliştirici seçenekleri rehberini takip edin.</string>
+    <string name="faq_5">5. Geliştirici seçeneklerinde garip etiketler veya numaralar mı var? Kararlı sürümler karıştırma içerdiğinden Beta veya Alpha sürümlerini kullanın.</string>
+    <string name="faq_6">6. Dikkat Dağıtıcıları Kapat seçeneği etkin ancak içerik hâlâ görünüyor mu? Instagram'ı zorla durdurun ve önbelleğini temizleyin.</string>
     
     <!-- features -->
-    <string name="developer_options">Developer Options</string>
-    <string name="ghost_mode">Ghost Mode</string>
-    <string name="distraction_free">Distraction Free</string>
-    <string name="remove_ads">Remove Ads</string>
-    <string name="remove_analytics">Remove Analytics</string>
+    <string name="developer_options">Geliştirici Seçenekleri</string>
+    <string name="ghost_mode">Hayalet Modu</string>
+    <string name="distraction_free">Dikkat Dağıtıcıları Kapat</string>
+    <string name="remove_ads">Reklamları Kaldır</string>
+    <string name="remove_analytics">Analitikleri Kaldır</string>
 
-    <string name="enable_disable_all">Enable/Disable All</string>
+    <string name="enable_disable_all">Tümünü Etkinleştir/Devre Dışı Bırak</string>
 
     <!-- Don't translate! -->
     <string name="hint" translatable="false">Hint</string>
 
     <!-- ghost -->
-    <string name="ghost_mode_options">Ghost Mode Options</string>
-    <string name="typing">Typing</string>
-    <string name="story">Story</string>
-    <string name="live">Live</string>
-    <string name="direct_messages">Direct Messages</string>
-    <string name="disable_typing">Disable typing</string>
+    <string name="ghost_mode_options">Hayalet Modu Seçenekleri</string>
+    <string name="typing">Yazıyor</string>
+    <string name="story">Hikaye</string>
+    <string name="live">Canlı Yayın</string>
+    <string name="direct_messages">Direkt Mesajlar</string>
+    <string name="disable_typing">Yazıyor'u Devre Dışı Bırak</string>
 
     <!-- developer_options -->
-    <string name="developer_options_guide">Developer Options Guide</string>
-    <string name="dev_options_version_req">Use it on Beta/Alpha versions only!</string>
-    <string name="dev_options_req">Make sure you are signed in first!</string>
+    <string name="developer_options_guide">Geliştirici Seçenekleri Rehberi</string>
+    <string name="dev_options_version_req">Sadece Beta/Alpha sürümlerinde kullanın!</string>
+    <string name="dev_options_req">Önce giriş yaptığınızdan emin olun!</string>
 
-    <string name="dev_options_1">1. Open Instagram and hold the Home button.</string>
-    <string name="dev_options_2">2. Navigate to Developer Options > MetaConfig Settings &amp; Overrides.</string>
-    <string name="dev_options_3">3. Search for \'Employee\' and enable the following options:</string>
-    <string name="dev_options_4">4. Finally, disable the Developer Options from the module to prevent app crashes.</string>
+    <string name="dev_options_1">1. Instagram'ı açın ve Ana Sayfa butonuna basılı tutun.</string>
+    <string name="dev_options_2">2. Geliştirici Seçenekleri > MetaConfig Ayarları &amp; Override'lara gidin.</string>
+    <string name="dev_options_3">3. 'Employee' kelimesini arayın ve aşağıdaki seçenekleri etkinleştirin:</string>
+    <string name="dev_options_4">4. Son olarak, uygulama çökmesini önlemek için modülden Geliştirici Seçeneklerini devre dışı bırakın.</string>
 
     <!-- Don't translate! -->
     <string name="is_employee" translatable="false">• is employee</string>
@@ -90,19 +90,19 @@
     <string name="employee_options" translatable="false">• employee options</string>
 
     <!-- distraction free -->
-    <string name="distraction_free_options">Distraction Free Options</string>
-    <string name="disable_stories">Disable Stories</string>
-    <string name="disable_feed">Disable Feed</string>
-    <string name="disable_reels">Disable Reels</string>
-    <string name="disable_explore">Disable Explore</string>
-    <string name="disable_comments">Disable Comments</string>
+    <string name="distraction_free_options">Dikkat Dağıtıcıları Kapat</string>
+    <string name="disable_stories">Hikayeleri Devre Dışı Bırak</string>
+    <string name="disable_feed">Akışı Devre Dışı Bırak</string>
+    <string name="disable_reels">Reels'leri Devre Dışı Bırak</string>
+    <string name="disable_explore">Keşfet'i Devre Dışı Bırak</string>
+    <string name="disable_comments">Yorumları Devre Dışı Bırak</string>
 
     <!-- contributor card -->
-    <string name="contributor_name">Contributor Name</string>
+    <string name="contributor_name">akifakif32</string>
 
     <!-- Toast -->
-    <string name="restart_insta_toast">Restarting Instagram</string>
-    <string name="failed_restart_insta_toast">Failed to restart Instagram</string>
-    <string name="non_root_restart_insta_toast">Please force stop Instagram and open it</string>
-    <string name="clear_cache_insta_toast">Please clear Instagram\'s app cache for the best experience</string>
+    <string name="restart_insta_toast">Instagram Yeniden Başlatılıyor</string>
+    <string name="failed_restart_insta_toast">Instagram yeniden başlatılamadı</string>
+    <string name="non_root_restart_insta_toast">Lütfen Instagram'ı durmaya zorlayın ve yeniden açın</string>
+    <string name="clear_cache_insta_toast">En iyi deneyim için lütfen Instagram'ın önbelleğini temizleyin</string>
 </resources>

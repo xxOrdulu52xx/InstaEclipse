@@ -1,3 +1,0 @@
-ps.reso.instaeclipse.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Developer Options Guide"
+            android:text="@string/developer_options_guide"
             android:textColor="@color/purple_200"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Use it on Beta/Alpha versions only!"
+            android:text="@string/dev_options_version_req"
             android:textColor="@color/red"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Make sure you are signed in first!"
+            android:text="@string/dev_options_req"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:gravity="center"
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1. Open Instagram and hold the Home button."
+            android:text="@string/dev_options_1"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_marginBottom="25px"
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2. Navigate to Developer Options > MetaConfig Settings &amp; Overrides."
+            android:text="@string/dev_options_2"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_marginBottom="25px"
@@ -72,7 +72,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="3. Search for 'Employee' and enable the following options:"
+            android:text="@string/dev_options_3"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_marginBottom="25px"
@@ -82,16 +82,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• is employee"
-            android:textColor="@color/green"
-            android:textSize="16sp"
-            android:paddingStart="16dp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="• employee options"
+            android:text="@string/is_employee"
             android:textColor="@color/green"
             android:textSize="16sp"
             android:paddingStart="16dp"
@@ -101,18 +92,29 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• is employee or test user"
+            android:text="@string/employee_options"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:paddingBottom="4dp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/is_employee_or_test_user"
             android:textColor="@color/green"
             android:textSize="16sp"
             android:paddingStart="16dp"
             android:layout_marginBottom="25px"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            tools:ignore="RtlSymmetry" />
 
         <!-- Instruction 4 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4. Finally, disable the Developer Options from the module to prevent app crashes."
+            android:text="@string/dev_options_4"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:paddingBottom="8dp" />

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/distraction_free_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,7 +32,7 @@
                 android:id="@+id/fragment_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Distraction Free Options"
+                android:text="@string/distraction_free_options"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -62,7 +61,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_toggle_all"
-                        android:contentDescription="Toggle All"
+                        android:contentDescription="@string/enable_disable_all"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -71,7 +70,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Enable/Disable All"
+                        android:text="@string/enable_disable_all"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -115,7 +114,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_story"
-                        android:contentDescription="Disable Stories"
+                        android:contentDescription="@string/disable_stories"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -124,7 +123,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Disable Stories"
+                        android:text="@string/disable_stories"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -161,7 +160,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_feed"
-                        android:contentDescription="Disable Feed"
+                        android:contentDescription="@string/disable_feed"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -170,7 +169,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Disable Feed"
+                        android:text="@string/disable_feed"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -207,7 +206,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_reels"
-                        android:contentDescription="Disable Reels"
+                        android:contentDescription="@string/disable_reels"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -216,7 +215,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Disable Reels"
+                        android:text="@string/disable_reels"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -238,6 +237,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/dark_gray">
 
                 <LinearLayout
@@ -252,7 +252,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_explore"
-                        android:contentDescription="Disable Explore"
+                        android:contentDescription="@string/disable_explore"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -261,7 +261,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Disable Explore"
+                        android:text="@string/disable_explore"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -275,6 +275,53 @@
                         android:minHeight="48dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <!-- Disable Comments -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/disable_comments_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/dark_gray">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_reels"
+                        android:contentDescription="@string/disable_comments"
+                        android:layout_marginEnd="8dp"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/disable_comments"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/comments_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
     </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

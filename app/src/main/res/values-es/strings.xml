@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- aplicación -->
     <string name="app_name">InstaEclipse</string>
@@ -83,7 +84,7 @@
 
     <string name="dev_options_1">1. Abre Instagram y mantén presionado el botón Inicio.</string>
     <string name="dev_options_2">2. Ve a Opciones de Desarrollador > Configuración y Overrides de MetaConfig.</string>
-    <string name="dev_options_3">3. Busca 'Employee' y habilita las siguientes opciones:</string>
+    <string name="dev_options_3">3. Busca \'Employee\' y habilita las siguientes opciones:</string>
     <string name="dev_options_4">4. Finalmente, desactiva las Opciones de Desarrollador desde el módulo para evitar fallos.</string>
 
     <!-- No traducir -->

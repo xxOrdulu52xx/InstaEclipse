@@ -1,5 +1,0 @@
-ps.reso.instaeclipse.test.app-core-1.6.1-0 C:\Users\abdal\.gradle\caches\8.9\transforms\5bcfccffefe424eced3e42cc9266111b\transformed\core-1.6.1\res
-ps.reso.instaeclipse.test.app-androidTest-1 E:\apk\ProjectInsta\instaEclipse\app\build\generated\res\resValues\androidTest\debug
-ps.reso.instaeclipse.test.app-mergeDebugAndroidTestResources-2 E:\apk\ProjectInsta\instaEclipse\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-ps.reso.instaeclipse.test.app-mergeDebugAndroidTestResources-3 E:\apk\ProjectInsta\instaEclipse\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-ps.reso.instaeclipse.test.app-debugAndroidTest-4 E:\apk\ProjectInsta\instaEclipse\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

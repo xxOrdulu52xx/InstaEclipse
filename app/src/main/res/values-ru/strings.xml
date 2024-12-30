@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app wide -->
+    <string name="app_name">InstaEclipse</string>
+    <string name="version">Версия: 0.2.1</string>
+    <string name="home">Главная</string>
+    <string name="features">Функции</string>
+    <string name="help">Помощь</string>
+
+    <!-- home -->
+    <string name="module_disabled">Модуль не включен. Пожалуйста включите его.</string>
+
+    <string name="module_status">Статус модуля:</string>
+
+    <string name="module_status_disabled">Статус модуля: Выключен</string>
+    <string name="request_enable_module">Пожалуйста включите модуль в Xposed Installer.</string>
+
+    <string name="module_status_enabled_no_root">Статус модуля: Включен (Без рут доступа)</string>
+    <string name="request_enable_root">Рут доступ требуется для авто-перезагрузки. Требуется ручная перезагрузка.</string>
+
+    <string name="module_status_enabled">Статус модуля: Включен</string>
+    <string name="module_active">Модуль включен и работает.</string>
+
+    <string name="checking_instagram">Проверка Instagram</string>
+    <string name="installed_instagram_version">Instagram установлен - Версия: </string>
+    <string name="not_installed_instagram">Instagram не установлен.</string>
+    <string name="error_instagram">Ошибка проверки статуса Instagram.</string>
+
+    <string name="restart_instagram">Перезагрузка Instagram</string>
+    <string name="contributors">Участники</string>
+    <string name="special_thanks">Большое Cпасибо</string>
+
+    <!-- Don't translate! -->
+    <string name="instagram_logo" translatable="false">Instagram Logo</string>
+
+    <!-- help -->
+    <string name="help_amp_troubleshooting">Помощь &amp; Поддержка</string>
+    <string name="find_updates_and_documentation">Найти обновления и документацию.</string>
+    <string name="go_to_github">Перейти в GitHub</string>
+    <string name="find_support">Найти поддержку.</string>
+    <string name="go_to_telegram">Перейти в Telegram</string>
+    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram группа</string>
+
+    <!-- Don't translate! -->
+    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
+
+    <!-- faq -->
+    <string name="frequently_asked_questions">Часто задаваемые вопросы (FAQ)</string>
+    <string name="faq_1">1. Не работает/вылетает с версией из Google Play? Используйте APK файлы с APKMirror</string>
+    <string name="faq_2">2. Модуль не включен? Выключите and сново включите модуль в LSPosed.</string>
+    <string name="faq_3">3. Функции не работают? Остановите и перезапустите Instagram.</string>
+    <string name="faq_4">4. Режим Разработчика вызывает вылеты? Следуйте инструкции для Режима Разработчика.</string>
+    <string name="faq_5">5. Режим Разработчика имеет странные название или цифры? Используйте Alpha и Beta версии, так как обычные версии имеют искажение.</string>
+    <string name="faq_6">6. Режим Без Отвлечений включен, но контент все еще присуствует? Остановите Instagram и очистите кэш.</string>
+
+    <!-- features -->
+    <string name="developer_options">Режим Разработчика</string>
+    <string name="ghost_mode">Режим Призрака</string>
+    <string name="distraction_free">Режим Без Отвлечений</string>
+    <string name="remove_ads">Убрать рекламу</string>
+    <string name="remove_analytics">Убрать аналитику</string>
+
+    <string name="enable_disable_all">Включить/Выключить все</string>
+
+    <!-- Don't translate! -->
+    <string name="hint" translatable="false">Hint</string>
+
+    <!-- ghost -->
+    <string name="ghost_mode_options">Настройки Режима Призрака</string>
+    <string name="typing">Печатание</string>
+    <string name="story">История</string>
+    <string name="live">Прямой эфир</string>
+    <string name="direct_messages">Личные сообщения</string>
+    <string name="disable_typing">Не отправлять "печатает"</string>
+
+    <!-- developer_options -->
+    <string name="developer_options_guide">Инструкция для Режима Разработчика</string>
+    <string name="dev_options_version_req">Используйте только с Alpha/Beta версиями!</string>
+    <string name="dev_options_req">Убидитесь, что вы вошли в аккаунт!</string>
+
+    <string name="dev_options_1">1. Откройте Instagram и удерживайте кнопку с Домиком.</string>
+    <string name="dev_options_2">2. Перейдите в Developer Options > MetaConfig Settings &amp; Overrides.</string>
+    <string name="dev_options_3">3. Найдите \'Employee\' и включите следующие опции:</string>
+    <string name="dev_options_4">4. И наконец, выключите Режим Разработчика в модуле, чтобы Instagram не вылетал.</string>
+
+    <!-- Don't translate! -->
+    <string name="is_employee" translatable="false">• is employee</string>
+    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
+    <string name="employee_options" translatable="false">• employee options</string>
+
+    <!-- distraction free -->
+    <string name="distraction_free_options">Настройки Режима Без Отвлечений</string>
+    <string name="disable_stories">Выключить Истории</string>
+    <string name="disable_feed">Выключить Ленту</string>
+    <string name="disable_reels">Выключить Reels</string>
+    <string name="disable_explore">Выключить Explore</string>
+    <string name="disable_comments">Выключить Комментарии</string>
+
+    <!-- contributor card -->
+    <string name="contributor_name">Имя участника</string>
+
+    <!-- Toast -->
+    <string name="restart_insta_toast">Перезагрузка Instagram</string>
+    <string name="failed_restart_insta_toast">Не удалось перезагрузить Instagram</string>
+    <string name="non_root_restart_insta_toast">Пожалуйста остановите Instagram и откройте его</string>
+    <string name="clear_cache_insta_toast">Пожалуйста очистите кэш Instagram для лучшего использования</string>
+</resources>

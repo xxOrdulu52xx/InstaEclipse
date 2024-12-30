@@ -9,6 +9,7 @@ InstaEclipse is an **LSPosed module** designed to enhance your Instagram experie
 This module is built to stay compatible with **new Instagram releases** by leveraging dynamic analysis to locate targeted classes and methods automatically. 🧠✨  
 
 ---
+
 ## ✨ Features  
 
 ### 🎛️ Developer Options  
@@ -17,7 +18,7 @@ This module is built to stay compatible with **new Instagram releases** by lever
 - Ensure you are signed in before enabling Developer Options through the module and follow the provided guide for proper setup.
 
 ### 👻 Ghost Mode  
-- Stay incognito while browsing stories, lives, or DMs.    
+- Stay incognito while browsing stories, lives, or DMs.  
 
 ### 🧘 Distraction-Free Mode  
 - Enjoy Instagram without stories, reels, or explore feed distractions.  
@@ -33,11 +34,14 @@ This module is built to stay compatible with **new Instagram releases** by lever
 - Block Instagram's tracking and analytics to protect your privacy.  
 - Prevent unnecessary data sharing and usage metrics.  
 
+### 🌐 Language Support  
+- Supports multiple languages including **Turkish** and **Portuguese**.
+
 ---
 
 ## 🛠️ Installation Instructions  
 ---
-⚠️ Install Instagram from [APKMirror](https://www.apkmirror.com/apk/instagram/instagram-instagram/), as the module doesn't fully support Google play store versions yet!
+⚠️ Install Instagram from [APKMirror](https://www.apkmirror.com/apk/instagram/instagram-instagram/), as the module doesn't fully support Google Play Store versions yet!
 ---
 
 ### 1️⃣ Install the Module  
@@ -86,14 +90,12 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 ## 📂 Resources  
 
 - 🐙 **GitHub Repository:** [Explore InstaEclipse](https://github.com/ReSo7200/InstaEclipse)  
-- 💬 **Support & Updates:** [Telegram Channel](https://t.me/InstaEclipse)
-- ⚙️ **LSPosed - Fork By [JingMatrix](https://github.com/JingMatrix/)** [LSPosed](https://github.com/JingMatrix/LSPosed)
+- 💬 **Support & Updates:** [Telegram Channel](https://t.me/InstaEclipse)  
+- ⚙️ **LSPosed - Fork By [JingMatrix](https://github.com/JingMatrix/)** [LSPosed](https://github.com/JingMatrix/LSPosed)  
 
 ---
 
-## 🎉 Contributors 
-
----
+## 🎉 Contributors  
 
 ### 👑 Project Owner  
 - [ReSo7200](https://github.com/ReSo7200/)  
@@ -101,10 +103,12 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 ---
 
 ### 🙌 Special Thanks to:  
-- [xHookman](https://github.com/ReSo7200/)  
-- **Amàzing World** 
-- **Bluepapilte (MyInsta Mod Owner)** [Telegram](https://t.me/instasmashrepo)
-- **BdrcnAYYDIN** [Telegram](https://t.me/BdrcnAYYDIN)
+- [xHookman](https://github.com/xHookman)  
+- **Amàzing World**  
+- **Bluepapilte (MyInsta Mod Owner)** [Telegram](https://t.me/instasmashrepo)  
+- **BdrcnAYYDIN** [Telegram](https://t.me/BdrcnAYYDIN)  
+- [akifakif32](https://github.com/akifakif32) - Turkish  
+- [oka1da](https://github.com/oka1da) - Portuguese  
 
 ---
 
@@ -115,5 +119,4 @@ We welcome contributions from everyone!
 - **Want to help?** Submit a pull request to improve InstaEclipse.
 
 > Every contribution, big or small, is highly valued. Thank you for helping us grow!  
-
 ---

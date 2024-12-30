@@ -110,6 +110,7 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 - [akifakif32](https://github.com/akifakif32) - Turkish  
 - [oka1da](https://github.com/oka1da) - Portuguese
 - [ffnuser](https://github.com/ffnuser) - Russian
+- [Lxchoooo](https://github.com/Lxchoooo) - Spanish
 
 ---
 

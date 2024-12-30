@@ -104,9 +104,9 @@ public class HomeFragment extends Fragment {
             os.flush();
             os.writeBytes("am start -n " + Utils.IG_PACKAGE_NAME + "/com.instagram.mainactivity.InstagramMainActivity\n");
             os.flush();
-            Toast.makeText(getActivity(), R.string.restart_insta_toast, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.restart_insta_toast), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), R.string.failed_restart_insta_toast, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.failed_restart_insta_toast), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment {
         intent.setData(Uri.parse("package:" + instagramPackage));
         startActivity(intent);
 
-        Toast.makeText(requireContext(), R.string.non_root_restart_insta_toast, Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), getString(R.string.non_root_restart_insta_toast), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -131,13 +131,13 @@ public class HomeFragment extends Fragment {
             PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
             String versionName = packageInfo.versionName;
 
-            instagramStatusText.setText(R.string.installed_instagram_version + versionName);
+            instagramStatusText.setText(getString(R.string.installed_instagram_version) + versionName);
             instagramStatusText.setTextColor(getResources().getColor(R.color.green));
         } catch (PackageManager.NameNotFoundException e) {
-            instagramStatusText.setText(R.string.not_installed_instagram);
+            instagramStatusText.setText(getString(R.string.not_installed_instagram));
             instagramStatusText.setTextColor(getResources().getColor(R.color.red));
         } catch (Exception e) {
-            instagramStatusText.setText(R.string.error_instagram);
+            instagramStatusText.setText(getString(R.string.error_instagram));
             instagramStatusText.setTextColor(getResources().getColor(R.color.red));
         }
     }

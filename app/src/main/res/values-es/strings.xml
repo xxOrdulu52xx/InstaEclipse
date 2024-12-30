@@ -1,0 +1,110 @@
+<resources>
+    <!-- aplicación -->
+    <string name="app_name">InstaEclipse</string>
+    <string name="version">Versión: 0.2b(D)</string>
+    <string name="home">Inicio</string>
+    <string name="features">Características</string>
+    <string name="help">Ayuda</string>
+
+    <!-- inicio -->
+    <string name="module_disabled">El módulo no está habilitado. Por favor, actívalo.</string>
+
+    <string name="module_status">Estado del Módulo:</string>
+
+    <string name="module_status_disabled">Estado del Módulo: Deshabilitado</string>
+    <string name="request_enable_module">Por favor, habilita el módulo en Xposed Installer.</string>
+
+    <string name="module_status_enabled_no_root">Estado del Módulo: Habilitado (Sin acceso root)</string>
+    <string name="request_enable_root">Se requiere acceso root para reinicio automático. Se necesita reinicio manual.</string>
+
+    <string name="module_status_enabled">Estado del Módulo: Habilitado</string>
+    <string name="module_active">El módulo está activo y funcionando.</string>
+
+    <string name="checking_instagram">Verificando Instagram</string>
+    <string name="installed_instagram_version">Instagram Instalado - Versión: </string>
+    <string name="not_installed_instagram">Instagram no está instalado.</string>
+    <string name="error_instagram">Error al verificar el estado de Instagram.</string>
+
+    <string name="restart_instagram">Reiniciar Instagram</string>
+    <string name="contributors">Contribuidores</string>
+    <string name="special_thanks">Agradecimientos Especiales</string>
+
+    <!-- Don't translate! -->
+    <string name="instagram_logo" translatable="false">Instagram Logo</string>
+
+
+    <!-- ayuda -->
+    <string name="help_amp_troubleshooting">Ayuda y Solución de Problemas</string>
+    <string name="find_updates_and_documentation">Encuentra actualizaciones y documentación.</string>
+    <string name="go_to_github">Ir a GitHub</string>
+    <string name="find_support">Encuentra soporte.</string>
+    <string name="go_to_telegram">Ir a Telegram</string>
+    <string name="instaeclipse_telegram_group" translatable="false">Grupo de Telegram InstaEclipse</string>
+
+    <!-- No traducir -->
+    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
+
+
+    <!-- FAQ -->
+    <string name="frequently_asked_questions">Preguntas Frecuentes</string>
+    <string name="faq_1">1. ¿No funciona o se cierra con la versión de Google Play? Usa los APKs de APKMirror.</string>
+    <string name="faq_2">2. ¿El módulo no está habilitado? Desactiva y vuelve a habilitar el módulo en LSPosed.</string>
+    <string name="faq_3">3. ¿Las funciones no funcionan? Fuerza el cierre y reinicia Instagram.</string>
+    <string name="faq_4">4. ¿Las opciones de desarrollador causan fallos? Sigue la guía de opciones de desarrollador.</string>
+    <string name="faq_5">5. ¿Las opciones de desarrollador tienen etiquetas o números extraños? Usa versiones Beta o Alpha, ya que las versiones estables tienen ofuscación.</string>
+    <string name="faq_6">6. ¿Modo Sin Distracciones activado pero aún aparece contenido? Fuerza el cierre de Instagram y borra su caché.</string>
+
+    <!-- características -->
+    <string name="developer_options">Opciones de Desarrollador</string>
+    <string name="ghost_mode">Modo Fantasma</string>
+    <string name="distraction_free">Sin Distracciones</string>
+    <string name="remove_ads">Eliminar Anuncios</string>
+    <string name="remove_analytics">Eliminar Analíticas</string>
+
+    <string name="enable_disable_all">Activar/Desactivar Todo</string>
+
+    <!-- No traducir -->
+    <string name="hint" translatable="false">Hint</string>
+
+    <!-- modo fantasma -->
+    <string name="ghost_mode_options">Opciones de Modo Fantasma</string>
+    <string name="typing">Escribiendo</string>
+    <string name="story">Historia</string>
+    <string name="live">En Vivo</string>
+    <string name="direct_messages">Mensajes Directos</string>
+    <string name="disable_typing">Desactivar escribiendo</string>
+
+    <!-- opciones de desarrollador -->
+    <string name="developer_options_guide">Guía de Opciones de Desarrollador</string>
+    <string name="dev_options_version_req">¡Úsalo solo en versiones Beta/Alpha!</string>
+    <string name="dev_options_req">¡Asegúrate de haber iniciado sesión primero!</string>
+
+    <string name="dev_options_1">1. Abre Instagram y mantén presionado el botón Inicio.</string>
+    <string name="dev_options_2">2. Ve a Opciones de Desarrollador > Configuración y Overrides de MetaConfig.</string>
+    <string name="dev_options_3">3. Busca 'Employee' y habilita las siguientes opciones:</string>
+    <string name="dev_options_4">4. Finalmente, desactiva las Opciones de Desarrollador desde el módulo para evitar fallos.</string>
+
+    <!-- No traducir -->
+    <string name="is_employee" translatable="false">• is employee</string>
+    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
+    <string name="employee_options" translatable="false">• employee options</string>
+
+    <!-- sin distracciones -->
+    <string name="distraction_free_options">Opciones Sin Distracciones</string>
+    <string name="disable_stories">Desactivar Historias</string>
+    <string name="disable_feed">Desactivar Feed</string>
+    <string name="disable_reels">Desactivar Reels</string>
+    <string name="disable_explore">Desactivar Explorar</string>
+    <string name="disable_comments">Desactivar Comentarios</string>
+
+    <!-- tarjeta de contribuidor -->
+    <string name="contributor_name">Nombre del Contribuidor</string>
+
+    <!-- Toast -->
+    <string name="restart_insta_toast">Reiniciando Instagram</string>
+    <string name="failed_restart_insta_toast">No se pudo reiniciar Instagram</string>
+    <string name="non_root_restart_insta_toast">Por favor, fuerza el cierre de Instagram y ábrelo</string>
+    <string name="clear_cache_insta_toast">Por favor, borra la caché de Instagram para la mejor experiencia</string>
+</resources>

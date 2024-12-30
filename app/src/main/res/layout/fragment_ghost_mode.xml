@@ -26,7 +26,7 @@
                 android:id="@+id/fragment_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ghost Mode Options"
+                android:text="@string/ghost_mode_options"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -55,7 +55,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_toggle_all"
-                        android:contentDescription="Toggle All"
+                        android:contentDescription="@string/toggle_all"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -64,7 +64,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Enable/Disable All"
+                        android:text="@string/enable_disable_all"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -109,7 +109,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_dm"
-                        android:contentDescription="Direct Messages"
+                        android:contentDescription="@string/direct_messages"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -118,7 +118,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Direct Messages"
+                        android:text="@string/direct_messages"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -156,7 +156,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_no_typing"
-                        android:contentDescription="Disable typing"
+                        android:contentDescription="@string/disable_typing"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -165,7 +165,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Typing"
+                        android:text="@string/typing"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -203,7 +203,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_story"
-                        android:contentDescription="Story"
+                        android:contentDescription="@string/story"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -212,7 +212,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Story"
+                        android:text="@string/story"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -249,7 +249,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_live"
-                        android:contentDescription="Live"
+                        android:contentDescription="@string/live"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 
@@ -258,7 +258,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Live"
+                        android:text="@string/live"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />

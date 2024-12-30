@@ -19,7 +19,7 @@
             android:id="@+id/fragment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Features"
+            android:text="@string/features"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -51,7 +51,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_dev_options"
-                    android:contentDescription="Developer Options"
+                    android:contentDescription="@string/developer_options"
                     android:layout_marginEnd="8dp"
                     app:tint="@color/warning_yellow" />
 
@@ -60,7 +60,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Enable Developer Options"
+                    android:text="@string/developer_options"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -81,7 +81,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="Hint"
+                    android:contentDescription="@string/hint"
                     android:src="@drawable/ic_arrow_right"
                     app:tint="@color/gray"
                     tools:ignore="ImageContrastCheck" />
@@ -113,7 +113,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_ghost_mode"
-                    android:contentDescription="Ghost Mode"
+                    android:contentDescription="@string/ghost_mode"
                     android:layout_marginEnd="8dp"
                     app:tint="@color/white" />
 
@@ -122,7 +122,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Ghost Mode"
+                    android:text="@string/ghost_mode"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -143,7 +143,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="Hint"
+                    android:contentDescription="@string/hint"
                     android:src="@drawable/ic_arrow_right"
                     app:tint="@color/gray"
                     tools:ignore="ImageContrastCheck" />
@@ -175,7 +175,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_distraction_free"
-                    android:contentDescription="Distraction Free"
+                    android:contentDescription="@string/distraction_free"
                     android:layout_marginEnd="8dp"
                     app:tint="@color/white" />
 
@@ -184,7 +184,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Distraction Free"
+                    android:text="@string/distraction_free"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -205,7 +205,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="Hint"
+                    android:contentDescription="@string/hint"
                     android:src="@drawable/ic_arrow_right"
                     app:tint="@color/gray"
                     tools:ignore="ImageContrastCheck" />
@@ -235,7 +235,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_remove_ads"
-                    android:contentDescription="Remove Ads"
+                    android:contentDescription="@string/remove_ads"
                     android:layout_marginEnd="8dp"
                     app:tint="@color/white" />
 
@@ -244,7 +244,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remove Ads"
+                    android:text="@string/remove_ads"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -284,7 +284,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_analytics"
-                    android:contentDescription="Remove Analysis"
+                    android:contentDescription="@string/remove_analysis"
                     android:layout_marginEnd="8dp"
                     app:tint="@color/white" />
 
@@ -293,7 +293,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remove Analytics"
+                    android:text="@string/remove_analytics"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />

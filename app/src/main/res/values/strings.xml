@@ -1,11 +1,108 @@
 <resources>
+    <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
+    <string name="version">Version: 0.2b(D)</string>
     <string name="home">Home</string>
     <string name="features">Features</string>
     <string name="help">Help</string>
-    <string name="module_status">Module Status: Checking...</string>
+
+    <!-- home -->
+    <string name="module_disabled">Module is not enabled. Please enable it.</string>
+
+    <string name="module_status">Module Status:</string>
+
+    <string name="module_status_disabled">Module Status: Disabled</string>
+    <string name="request_enable_module">Please enable the module in Xposed Installer.</string>
+
+    <string name="module_status_enabled_no_root">Module Status: Enabled (No Root Access)</string>
+    <string name="request_enable_root">Root access is required for auto-restart. Manual restart required.</string>
+
+    <string name="module_status_enabled">Module Status: Enabled</string>
+    <string name="module_active">The module is active and working.</string>
+
+    <string name="checking_instagram">Checking Instagram</string>
+    <string name="installed_instagram_version">Instagram Installed - Version: </string>
+    <string name="not_installed_instagram">Instagram is not installed.</string>
+    <string name="error_instagram">Error checking Instagram status.</string>
+
     <string name="restart_instagram">Restart Instagram</string>
-    <string name="module_disabled">⚠ Module is not enabled. Please enable it.</string>
-    <string name="instaeclipse">InstaEclipse</string>
-    <string name="version_0_1">Version: 0.1</string>
+    <string name="contributors">Contributors</string>
+    <string name="special_thanks">Special Thanks</string>
+
+    <!-- don't translate! -->
+    <string name="instagram_logo" translatable="false">Instagram Logo</string>
+
+    <!-- help -->
+    <string name="help_amp_troubleshooting">Help &amp; Troubleshooting</string>
+    <string name="find_updates_and_documentation">Find updates and documentation.</string>
+    <string name="go_to_github">Go to GitHub</string>
+    <string name="find_support">Find support.</string>
+    <string name="go_to_telegram">Go to Telegram</string>
+    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
+
+    <!-- Don't translate! -->
+    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
+
+    <!-- faq -->
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
+    <string name="faq_1">1. Not working/crashes when using Google Play Version? Use APKMirror APKs</string>
+    <string name="faq_2">2. Module not enabled? Disable and re-enable the module in LSPosed.</string>
+    <string name="faq_3">3. Features not working? Force stop and restart Instagram.</string>
+    <string name="faq_4">4. Developer options cause crashes? Follow the developer options guide.</string>
+    <string name="faq_5">5. Developer options have weird labels or numbers? Use Beta or Alpha versions as Stable versions have obfuscation.</string>
+    <string name="faq_6">6. Distraction Free enabled but content still appears? Force stop Instagram and clear its cache.</string>
+    
+    <!-- features -->
+    <string name="developer_options">Developer Options</string>
+    <string name="ghost_mode">Ghost Mode</string>
+    <string name="distraction_free">Distraction Free</string>
+    <string name="remove_ads">Remove Ads</string>
+    <string name="remove_analytics">Remove Analytics</string>
+
+    <string name="enable_disable_all">Enable/Disable All</string>
+
+    <!-- Don't translate! -->
+    <string name="hint" translatable="false">Hint</string>
+
+    <!-- ghost -->
+    <string name="ghost_mode_options">Ghost Mode Options</string>
+    <string name="typing">Typing</string>
+    <string name="story">Story</string>
+    <string name="live">Live</string>
+    <string name="direct_messages">Direct Messages</string>
+    <string name="disable_typing">Disable typing</string>
+
+    <!-- developer_options -->
+    <string name="developer_options_guide">Developer Options Guide</string>
+    <string name="dev_options_version_req">Use it on Beta/Alpha versions only!</string>
+    <string name="dev_options_req">Make sure you are signed in first!</string>
+
+    <string name="dev_options_1">1. Open Instagram and hold the Home button.</string>
+    <string name="dev_options_2">2. Navigate to Developer Options > MetaConfig Settings &amp; Overrides.</string>
+    <string name="dev_options_3">3. Search for \'Employee\' and enable the following options:</string>
+    <string name="dev_options_4">4. Finally, disable the Developer Options from the module to prevent app crashes.</string>
+
+    <!-- Don't translate! -->
+    <string name="is_employee" translatable="false">• is employee</string>
+    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
+    <string name="employee_options" translatable="false">• employee options</string>
+
+    <!-- distraction free -->
+    <string name="distraction_free_options">Distraction Free Options</string>
+    <string name="disable_stories">Disable Stories</string>
+    <string name="disable_feed">Disable Feed</string>
+    <string name="disable_reels">Disable Reels</string>
+    <string name="disable_explore">Disable Explore</string>
+    <string name="disable_comments">Disable Comments</string>
+
+    <!-- contributor card -->
+    <string name="contributor_name">Contributor Name</string>
+
+    <!-- Toast -->
+    <string name="restart_insta_toast">Restarting Instagram</string>
+    <string name="failed_restart_insta_toast">Failed to restart Instagram</string>
+    <string name="non_root_restart_insta_toast">Please force stop Instagram and open it</string>
+    <string name="clear_cache_insta_toast">Please clear Instagram\'s app cache for the best experience</string>
 </resources>

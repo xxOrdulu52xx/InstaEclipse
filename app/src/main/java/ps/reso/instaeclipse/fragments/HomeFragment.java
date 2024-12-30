@@ -34,11 +34,7 @@ public class HomeFragment extends Fragment {
     private TextView moduleStatus;
     private TextView moduleSubtext;
     private MaterialButton restartInstagramButton;
-
     private final boolean hasRootAccess = MainActivity.hasRootAccess;
-
-    private boolean isWaitingForForceStop = false;
-
     private TextView instagramStatusText;
 
     @Nullable
@@ -83,19 +79,19 @@ public class HomeFragment extends Fragment {
         boolean isModuleEnabled = MainActivity.isModuleActive();
 
         if (!isModuleEnabled) {
-            moduleStatus.setText("Module Status: Disabled");
+            moduleStatus.setText(R.string.module_status_disabled);
             moduleStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-            moduleSubtext.setText("Please enable the module in Xposed Installer.");
+            moduleSubtext.setText(R.string.request_enable_module);
             restartInstagramButton.setEnabled(false);
         } else if (!hasRootAccess) {
-            moduleStatus.setText("Module Status: Enabled (No Root Access)");
+            moduleStatus.setText(R.string.module_status_enabled_no_root);
             moduleStatus.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
-            moduleSubtext.setText("Root access is required for auto-restart. Manual restart required.");
+            moduleSubtext.setText(R.string.request_enable_root);
             restartInstagramButton.setEnabled(true);
         } else {
-            moduleStatus.setText("Module Status: Enabled");
+            moduleStatus.setText(R.string.module_status_enabled);
             moduleStatus.setTextColor(getResources().getColor(android.R.color.holo_green_light));
-            moduleSubtext.setText("The module is active and working.");
+            moduleSubtext.setText(R.string.module_active);
             restartInstagramButton.setEnabled(true);
         }
     }
@@ -108,35 +104,22 @@ public class HomeFragment extends Fragment {
             os.flush();
             os.writeBytes("am start -n " + Utils.IG_PACKAGE_NAME + "/com.instagram.mainactivity.InstagramMainActivity\n");
             os.flush();
-            Toast.makeText(getActivity(), "Restarting Instagram...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.restart_insta_toast, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "Failed to restart Instagram", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.failed_restart_insta_toast, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void restartInstagramNonRoot() {
         String instagramPackage = "com.instagram.android";
 
-        if (!isWaitingForForceStop) {
-            // Step 1: Redirect the user to the app settings
-            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            intent.setData(Uri.parse("package:" + instagramPackage));
-            startActivity(intent);
-            isWaitingForForceStop = true;
+        // Redirect the user to the app settings
+        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + instagramPackage));
+        startActivity(intent);
 
-            Toast.makeText(requireContext(), "Please force stop Instagram and open it.", Toast.LENGTH_SHORT).show();
-        } else {
-            // Step 2: Restart Instagram only if it's stopped
-            Intent launchIntent = requireContext().getPackageManager().getLaunchIntentForPackage(instagramPackage);
-            if (launchIntent != null) {
-                startActivity(launchIntent);
-                Toast.makeText(requireContext(), "Instagram restarted.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(requireContext(), "Instagram not found.", Toast.LENGTH_SHORT).show();
-            }
+        Toast.makeText(requireContext(), R.string.non_root_restart_insta_toast, Toast.LENGTH_SHORT).show();
 
-            isWaitingForForceStop = false;
-        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -148,13 +131,13 @@ public class HomeFragment extends Fragment {
             PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
             String versionName = packageInfo.versionName;
 
-            instagramStatusText.setText("Instagram Installed - Version: " + versionName);
+            instagramStatusText.setText(R.string.installed_instagram_version + versionName);
             instagramStatusText.setTextColor(getResources().getColor(R.color.green));
         } catch (PackageManager.NameNotFoundException e) {
-            instagramStatusText.setText("Instagram is not installed.");
+            instagramStatusText.setText(R.string.not_installed_instagram);
             instagramStatusText.setTextColor(getResources().getColor(R.color.red));
         } catch (Exception e) {
-            instagramStatusText.setText("Error checking Instagram status.");
+            instagramStatusText.setText(R.string.error_instagram);
             instagramStatusText.setTextColor(getResources().getColor(R.color.red));
         }
     }

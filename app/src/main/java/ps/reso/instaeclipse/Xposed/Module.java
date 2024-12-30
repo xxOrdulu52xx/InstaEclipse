@@ -12,6 +12,7 @@ import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import ps.reso.instaeclipse.R;
 import ps.reso.instaeclipse.mods.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.GhostModeDM;
 import ps.reso.instaeclipse.mods.GhostModeTypingStatus;
@@ -25,7 +26,7 @@ import java.util.function.Predicate;
 
 public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
-    private static final String TAG = "InstaEclipse";
+    private static final String TAG = String.valueOf(R.string.app_name);
     private static final String IG_PACKAGE_NAME = "com.instagram.android";
     private static final String MY_PACKAGE_NAME = "ps.reso.instaeclipse";
 

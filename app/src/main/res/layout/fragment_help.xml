@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -23,7 +24,7 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Help &amp; Troubleshooting"
+                android:text="@string/help_amp_troubleshooting"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="22sp"
@@ -51,7 +52,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/ic_github_logo"
-                        android:contentDescription="GitHub"
+                        android:contentDescription="@string/github"
                         android:layout_marginEnd="16dp"
                         app:tint="@color/white" />
 
@@ -64,7 +65,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="InstaEclipse GitHub"
+                            android:text="@string/instaeclipse_github"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -72,7 +73,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Find updates and documentation."
+                            android:text="@string/find_updates_and_documentation"
                             android:textColor="@color/purple_200"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp" />
@@ -83,7 +84,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/ic_arrow_right"
-                        android:contentDescription="Go to GitHub"
+                        android:contentDescription="@string/go_to_github"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         app:tint="@color/white" />
                 </LinearLayout>
@@ -110,7 +111,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/ic_telegram_logo"
-                        android:contentDescription="Telegram"
+                        android:contentDescription="@string/telegram"
                         android:layout_marginEnd="16dp"
                         app:tint="@color/white" />
 
@@ -123,7 +124,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="InstaEclipse Telegram Group"
+                            android:text="@string/instaeclipse_telegram_group"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -131,7 +132,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Find support."
+                            android:text="@string/find_support"
                             android:textColor="@color/purple_200"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp" />
@@ -142,7 +143,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/ic_arrow_right"
-                        android:contentDescription="Go to Telegram"
+                        android:contentDescription="@string/go_to_telegram"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         app:tint="@color/white" />
                 </LinearLayout>
@@ -168,7 +169,7 @@
                         android:id="@+id/faq_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Frequently Asked Questions"
+                        android:text="@string/frequently_asked_questions"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -179,7 +180,16 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="1. Not working/crashes when using Google Play Version? Use APKMirror APKs"
+                        android:text="@string/faq_1"
+                        android:textColor="@color/purple_200"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="8dp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/faq_2"
                         android:textColor="@color/purple_200"
                         android:textSize="14sp"
                         android:layout_marginBottom="8dp" />
@@ -187,7 +197,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="2. Module not enabled? Disable and re-enable the module in LSPosed."
+                        android:text="@string/faq_3"
                         android:textColor="@color/purple_200"
                         android:textSize="14sp"
                         android:layout_marginBottom="8dp" />
@@ -195,7 +205,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3. Features not working? Force stop and restart Instagram."
+                        android:text="@string/faq_4"
                         android:textColor="@color/purple_200"
                         android:textSize="14sp"
                         android:layout_marginBottom="8dp" />
@@ -203,7 +213,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="4. Developer options cause crashes? Follow the developer options guide."
+                        android:text="@string/faq_5"
                         android:textColor="@color/purple_200"
                         android:textSize="14sp"
                         android:layout_marginBottom="8dp" />
@@ -211,15 +221,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="5. Developer options have weird labels or numbers? Use Beta or Alpha versions as Stable versions have obfuscation."
-                        android:textColor="@color/purple_200"
-                        android:textSize="14sp"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="6. Distraction Free enabled but content still appears? Force stop Instagram and clear its cache."
+                        android:text="@string/faq_6"
                         android:textColor="@color/purple_200"
                         android:textSize="14sp"
                         android:layout_marginBottom="8dp" />

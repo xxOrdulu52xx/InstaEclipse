@@ -99,7 +99,7 @@ public class FeaturesFragment extends Fragment {
         distractionFreeToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveToggleState(DISTRACTION_FREE_KEY, isChecked);
             if (isChecked) {
-                Toast.makeText(getContext(), "Please clear Instagram's app cache for the best experience.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.clear_cache_insta_toast, Toast.LENGTH_SHORT).show();
             }
         });
 

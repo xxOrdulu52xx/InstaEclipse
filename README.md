@@ -106,7 +106,9 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 - [xHookman](https://github.com/xHookman)  
 - **Amàzing World**  
 - **Bluepapilte (MyInsta Mod Owner)** [Telegram](https://t.me/instasmashrepo)  
-- **BdrcnAYYDIN** [Telegram](https://t.me/BdrcnAYYDIN)  
+- **BdrcnAYYDIN** [Telegram](https://t.me/BdrcnAYYDIN)
+
+#### Translations by:
 - [akifakif32](https://github.com/akifakif32) - Turkish  
 - [oka1da](https://github.com/oka1da) - Portuguese
 - [ffnuser](https://github.com/ffnuser) - Russian

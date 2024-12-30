@@ -55,7 +55,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_toggle_all"
-                        android:contentDescription="@string/toggle_all"
+                        android:contentDescription="@string/enable_disable_all"
                         android:layout_marginEnd="8dp"
                         app:tint="@color/white" />
 

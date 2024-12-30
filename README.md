@@ -108,7 +108,8 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 - **Bluepapilte (MyInsta Mod Owner)** [Telegram](https://t.me/instasmashrepo)  
 - **BdrcnAYYDIN** [Telegram](https://t.me/BdrcnAYYDIN)  
 - [akifakif32](https://github.com/akifakif32) - Turkish  
-- [oka1da](https://github.com/oka1da) - Portuguese  
+- [oka1da](https://github.com/oka1da) - Portuguese
+- [ffnuser](https://github.com/ffnuser) - Russian
 
 ---
 

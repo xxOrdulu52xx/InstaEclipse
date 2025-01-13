@@ -2,13 +2,15 @@ package ps.reso.instaeclipse.Xposed;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
+import android.annotation.SuppressLint;
 import android.app.AndroidAppHelper;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import org.luckypray.dexkit.DexKitBridge;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 
-public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
+public class Module implements IXposedHookLoadPackage {
 
     private static final String TAG = String.valueOf(R.string.app_name);
     private static final String IG_PACKAGE_NAME = "com.instagram.android";
@@ -48,10 +50,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     Boolean isRemove_Ads_Enabled;
     Boolean isRemove_Analytics_Enabled;
 
-    @Override
-    public void initZygote(StartupParam startupParam) throws Throwable {
-        XposedBridge.log(TAG + " | Zygote initialized.");
-    }
+    public DexKitBridge dexKit;
 
     public void loadPreferences() {
         try {
@@ -94,7 +93,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             XposedBridge.log(TAG + " | Failed to initialize preferences: " + e.getMessage());
         }
     }
-
+    @SuppressLint("UnsafeDynamicallyLoadedCode")
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
@@ -105,10 +104,32 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         // Hook into own app
         if (lpparam.packageName.equals(MY_PACKAGE_NAME)) {
             hookOwnModule(lpparam);
+            try {
+                // Load the DexKit native library using the absolute path
+                String libPath = lpparam.appInfo.nativeLibraryDir + "/libdexkit.so";
+                System.load(libPath);
+                XposedBridge.log(TAG + " | DexKit loaded from: " + libPath);
+            } catch (Exception e) {
+                XposedBridge.log(TAG + " | Failed to load DexKit: " + e.getMessage());
+                return;
+            }
+
+            // Initialize DexKit
+            try {
+                dexKit = DexKitBridge.create(lpparam.appInfo.sourceDir);
+                XposedBridge.log(TAG + " | DexKit initialized successfully.");
+
+                if(dexKit == null){
+                    XposedBridge.log("NULLLLLLLLLLLLLLLLLLLLLL");
+                }
+            } catch (Exception e) {
+                XposedBridge.log(TAG + " | Error initializing DexKit: " + e.getMessage());
+            }
         }
 
         // Hook into Instagram
         if (lpparam.packageName.equals(IG_PACKAGE_NAME)) {
+            // Hook Instagram
             hookInstagram(lpparam);
         }
     }
@@ -137,8 +158,15 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             Interceptor interceptor = new Interceptor();
 
             if (isDevEnabled) {
-                DevOptionsEnable devOptionsEnable = new DevOptionsEnable();
-                devOptionsEnable.handleDevOptions(lpparam);
+                try {
+                    if(dexKit == null){
+                        XposedBridge.log("NULLLLLLLLLLLLLLLLLLLLLL");
+                    }
+                    new DevOptionsEnable().handleDevOptions(dexKit, lpparam.classLoader);
+                    XposedBridge.log(TAG + " | DevOptions enabled.");
+                } catch (Exception e) {
+                    XposedBridge.log(TAG + " | Failed to enable DevOptions: " + e.getMessage());
+                }
             }
 
             if (isGhost_Enabled) {
@@ -167,6 +195,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     uriConditions.add(uri -> uri.getPath().contains("feed/get_latest_reel_media/"));
                     uriConditions.add(uri -> uri.getPath().contains("direct_v2/pending_inbox/?visual_message"));
                     uriConditions.add(uri -> uri.getPath().contains("stories/hallpass/"));
+                    //uriConditions.add(uri -> uri.getPath().contains("/highlights/"));
                 }
                 if (isDistraction_Feed_Enabled) {
                     uriConditions.add(uri -> uri.getPath().endsWith("/feed/timeline/"));

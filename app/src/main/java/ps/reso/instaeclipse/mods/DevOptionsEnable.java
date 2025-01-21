@@ -1,73 +1,104 @@
 package ps.reso.instaeclipse.mods;
 
-import org.luckypray.dexkit.DexKitBridge;
-import org.luckypray.dexkit.query.FindMethod;
-import org.luckypray.dexkit.query.enums.StringMatchType;
-import org.luckypray.dexkit.query.matchers.MethodMatcher;
-import org.luckypray.dexkit.result.MethodDataList;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import ps.reso.instaeclipse.utils.Utils;
 
 public class DevOptionsEnable {
-
-    private static final String TAG = "DevOptionsEnable";
-
-    public void handleDevOptions(DexKitBridge dexKit, ClassLoader classLoader) {
-        if (dexKit == null) {
-            XposedBridge.log(TAG + " | DexKit is null. Aborting.");
-            return;
+    public void handleDevOptions(XC_LoadPackage.LoadPackageParam lpparam) {
+        try {
+            ClassLoader classLoader = lpparam.classLoader;
+            handleAutoMode(lpparam);
+        } catch (Exception e) {
+            XposedBridge.log("(DevOptionsEnable) Error handling Dev Options: " + e.getMessage());
         }
+    }
+
+    private void handleAutoMode(XC_LoadPackage.LoadPackageParam lpparam) {
+        String characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         try {
-            MethodDataList methodList = dexKit.findMethod(
-                    FindMethod.create()
-                            .matcher(MethodMatcher.create()
-                                    .paramTypes("com.instagram.service.session.UserSession")
-                                    .returnType(boolean.class)
-                                    .addUsingString("DevOptions", StringMatchType.Contains)
-                            )
-            );
+            int num_of_hooks = 0;
+            //  Perform dynamic search
+            for (char first : characters.toCharArray()) {
+                for (char second : characters.toCharArray()) {
+                    for (char third : characters.toCharArray()) {
+                        String classToHook = "X." + first + second + third;
 
-            if (methodList.isEmpty()) {
-                XposedBridge.log(TAG + " | No suitable method found.");
-                return;
+                        try {
+                            Class<?> targetClass = XposedHelpers.findClass(classToHook, lpparam.classLoader);
+                            Method[] methods = targetClass.getDeclaredMethods();
+                            Field[] fields = targetClass.getDeclaredFields();
+
+                            try {
+                                for (Method method : targetClass.getDeclaredMethods()) {
+                                    if (methods.length == 1 && methods[0].getName().equals("A00") &&
+                                            methods[0].getReturnType() == Boolean.TYPE &&
+                                            methods[0].getParameterCount() == 1 && method.getParameterTypes()[0].getName().contains("UserSession") &&
+                                            fields.length == 0 && Modifier.isFinal(method.getModifiers())) {
+
+                                        num_of_hooks += 1;
+                                        Class<?> UserSessionClass = XposedHelpers.findClass(Utils.USER_SESSION_CLASS, lpparam.classLoader);
+                                        hookDevOptions(targetClass, "A00", UserSessionClass);
+
+
+                                    }
+                                }
+                            } catch (NoClassDefFoundError | XposedHelpers.ClassNotFoundError e) {
+                                //XposedBridge.log("(DevOptionsEnable) Skipping method due to missing dependency: " + e.getMessage());
+                            } catch (Exception e) {
+                                //XposedBridge.log("(DevOptionsEnable) General exception while inspecting method: " + e.getMessage());
+                            }
+
+                        } catch (NoClassDefFoundError | XposedHelpers.ClassNotFoundError e) {
+                            //XposedBridge.log("(DevOptionsEnable) Skipping class " + classToHook + " due to missing dependency: " + e.getMessage());
+                        } catch (Exception e) {
+                            //XposedBridge.log("(DevOptionsEnable) General exception while inspecting class: " + e.getMessage());
+                        }
+                    }
+                }
             }
 
-            for (var methodData : methodList) {
-                XposedBridge.log(TAG + " | Found method: " + methodData.getDeclaredClassName() + "." + methodData.getName());
+            if (num_of_hooks <= 0) {
+                // No suitable classes found
+                XposedBridge.log("(DevOptionsEnable) No suitable classes found during dynamic search.");
             }
 
-            var methodData = methodList.get(0);
-            hookDevOptions(methodData.getDeclaredClassName(), methodData.getName(), classLoader);
         } catch (Exception e) {
-            XposedBridge.log(TAG + " | Error while handling Dev Options: " + e.getMessage());
+            XposedBridge.log("(DevOptionsEnable) Error in Dev-Options: " + e.getMessage());
         }
     }
 
 
-    private void hookDevOptions(String className, String methodName, ClassLoader classLoader) {
+    private void hookDevOptions(Class<?> targetClass, String methodToHook, Class<?> secondTargetClass) {
         try {
-            XposedBridge.log(TAG + ": Hooking method " + methodName + " in class " + className);
-
-            Class<?> targetClass = XposedHelpers.findClass(className, classLoader);
-            Class<?> userSessionClass = XposedHelpers.findClass("com.instagram.service.session.UserSession", classLoader);
-
             XposedHelpers.findAndHookMethod(
                     targetClass,
-                    methodName,
-                    userSessionClass,
+                    methodToHook,
+                    secondTargetClass, // Second class parameter (UserSessionClass)
                     new XC_MethodReplacement() {
                         @Override
                         protected Object replaceHookedMethod(MethodHookParam param) {
-                            XposedBridge.log(TAG + ": Successfully hooked method " + methodName);
-                            return true;
+                            XposedBridge.log("(DevOptionsEnable) Successfully Hooked into method: " + methodToHook + " in class: " + targetClass.getName());
+                            return true; // Ensure the method always returns true
                         }
                     }
             );
+            //XposedBridge.log("(DevOptionsEnable) Successfully hooked method: " + methodToHook + " in class: " + targetClass.getName());
+        } catch (NoSuchMethodError e) {
+            //XposedBridge.log("(DevOptionsEnable) No such method: " + methodToHook + " in class: " + targetClass.getName() + " - " + e.getMessage());
+        } catch (NoClassDefFoundError e) {
+            //XposedBridge.log("(DevOptionsEnable) No such class definition found for: " + targetClass.getName() + " or parameter class: " + secondTargetClass.getName() + " - " + e.getMessage());
+        } catch (XposedHelpers.ClassNotFoundError e) {
+            //XposedBridge.log("(DevOptionsEnable) XposedHelpers couldn't find class: " + targetClass.getName() + " or parameter class: " + secondTargetClass.getName() + " - " + e.getMessage());
         } catch (Exception e) {
-            XposedBridge.log(TAG + ": Error while hooking method: " + e.getMessage());
+            //XposedBridge.log("(DevOptionsEnable) General exception while hooking method: " + methodToHook + " in class: " + targetClass.getName() + " - " + e.getMessage());
         }
     }
 }

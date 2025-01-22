@@ -13,7 +13,7 @@
     <string name="module_status">Modul Statusu:</string>
 
     <string name="module_status_disabled">Modul Statusu: Deaktiv</string>
-    <string name="request_enable_module">Lütfən modulu Xposed Installer'da aktiv edin.</string>
+    <string name="request_enable_module">Lütfən modulu Xposed Installer\'da aktiv edin.</string>
 
     <string name="module_status_enabled_no_root">Modul Statusu: Aktiv (Root Yoxdur)</string>
     <string name="request_enable_root">Avtomatik yenidən başlatma üçün root  lazımdır. Manual yenidən başlatma lazımdır.</string>
@@ -26,7 +26,7 @@
     <string name="not_installed_instagram">Instagram quraşdırılmayıb.</string>
     <string name="error_instagram">Instagram statusu yoxlanarkən xəta baş verdi.</string>
 
-    <string name="restart_instagram">Instagram'ı Yenidən Başlat</string>
+    <string name="restart_instagram">Instagram\'ı Yenidən Başlat</string>
     <string name="contributors">Təhfə Verənlər</string>
     <string name="special_thanks">Xüsusi Təşəkkürlər</string>
 
@@ -36,9 +36,9 @@
     <!-- help -->
     <string name="help_amp_troubleshooting">Kömək &amp; Problemlərin Həlli</string>
     <string name="find_updates_and_documentation">Yeniləmələri və Dökümentasiyanı tapın.</string>
-    <string name="go_to_github">GitHub'a Keç</string>
+    <string name="go_to_github">GitHub\'a Keç</string>
     <string name="find_support">Dəstək alın.</string>
-    <string name="go_to_telegram">Telegram'a Keç</string>
+    <string name="go_to_telegram">Telegram\'a Keç</string>
     <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
 
     <!-- Don’t translate! -->
@@ -48,12 +48,12 @@
 
     <!-- faq -->
     <string name="frequently_asked_questions">Tez-tez Soruşulan Suallar</string>
-    <string name="faq_1">1. Google Play Versiyasındı işləmir və ya xəta verir? APKMirror APK'lərindən istifadə edin.</string>
-    <string name="faq_2">2. Modul aktiv deyil? Modulu LSPosed'də deaktiv edib yenidən aktiv edin.</string>
-    <string name="faq_3">3. Funksiyalar işləmir? Instagram'ı zorla dayandırıb keşini təmizləyin.</string>
+    <string name="faq_1">1. Google Play Versiyasındı işləmir və ya xəta verir? APKMirror APK\'lərindən istifadə edin.</string>
+    <string name="faq_2">2. Modul aktiv deyil? Modulu LSPosed\'də deaktiv edib yenidən aktiv edin.</string>
+    <string name="faq_3">3. Funksiyalar işləmir? Instagram\'ı zorla dayandırıb keşini təmizləyin.</string>
     <string name="faq_4">4. Tərtibatçı variantları xəta verir? Tərtibatçı variantları bələdçisini izləyin.</string>
     <string name="faq_5">5. Tərtibatçı variantlarında qəribə etiketlər və ya nömrələr var? Sabit versiyalardı qarışıq olduğunu gözünə alaraq Beta və ya Alfa versiyalardan istifadə edin.</string>
-    <string name="faq_6">6. "Dikkat Dağıtıcıları Bağla" funksiyası aktiv amma məzmun hələ də görünür? Instagram'ı zorla dayandırın və keşini təmizləyin.</string>
+    <string name="faq_6">6. "Dikkat Dağıtıcıları Bağla" funksiyası aktiv amma məzmun hələ də görünür? Instagram\'ı zorla dayandırın və keşini təmizləyin.</string>
 
     <!-- features -->
     <string name="developer_options">Tərtibatçı Variantları</string>
@@ -80,7 +80,7 @@
     <string name="dev_options_version_req">Yalnız Beta/Alfa versiyalarında istifadə edin!</string>
     <string name="dev_options_req">Əvvəlcə daxil olduğunuzdan əmin olun!</string>
 
-    <string name="dev_options_1">1. Instagram'ı açın və Ana Səhifə düyməsini basıb saxlayın.</string>
+    <string name="dev_options_1">1. Instagram\'ı açın və Ana Səhifə düyməsini basıb saxlayın.</string>
     <string name="dev_options_2">2. Tərtibatçı Variantları > MetaConfig Ayarları &amp; Override-lara keçin.</string>
     <string name="dev_options_3">3. "Employee" sözünü axtarın və aşağıdaki variantları aktiv edin:</string>
     <string name="dev_options_4">4. Sonda, tətbiqin xəta verməməsi üçün moduldaki Tərtibatçı Variantlarını deaktiv edin.</string>
@@ -94,7 +94,7 @@
     <string name="distraction_free_options">Diqqət Dağıtıcıları Bağlat Seçimləri</string>
     <string name="disable_stories">Hekayələri Deaktiv Et</string>
     <string name="disable_feed">Axışı Deaktiv Et</string>
-    <string name="disable_reels">Reels'ləri Deaktiv Et</string>
+    <string name="disable_reels">Reels\'ləri Deaktiv Et</string>
     <string name="disable_explore">Kəşf Etməyi Deaktiv Et</string>
     <string name="disable_comments">Rəyləri Deaktiv Et</string>
 
@@ -104,6 +104,6 @@
     <!-- Toast -->
     <string name="restart_insta_toast">Instagram Yenidən Başlatılır</string>
     <string name="failed_restart_insta_toast">Instagram yenidən başlatıla bilmədi</string>
-    <string name="non_root_restart_insta_toast">Zəhmət olmasa Instagram'ı zorla dayandırıb yenidən açın</string>
-    <string name="clear_cache_insta_toast">Ən yaxşı təcrübə üçün Instagram'ın keşini təmizləyin</string>
+    <string name="non_root_restart_insta_toast">Zəhmət olmasa Instagram\'ı zorla dayandırıb yenidən açın</string>
+    <string name="clear_cache_insta_toast">Ən yaxşı təcrübə üçün Instagram\'ın keşini təmizləyin</string>
 </resources>

@@ -2,10 +2,19 @@ package ps.reso.instaeclipse.Xposed;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
+import android.annotation.SuppressLint;
 import android.app.AndroidAppHelper;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
+
+import org.luckypray.dexkit.DexKitBridge;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
@@ -18,24 +27,20 @@ import ps.reso.instaeclipse.mods.GhostModeDM;
 import ps.reso.instaeclipse.mods.GhostModeTypingStatus;
 import ps.reso.instaeclipse.mods.Interceptor;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 
-
+@SuppressLint("UnsafeDynamicallyLoadedCode")
 public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     private static final String TAG = String.valueOf(R.string.app_name);
     private static final String IG_PACKAGE_NAME = "com.instagram.android";
     private static final String MY_PACKAGE_NAME = "ps.reso.instaeclipse";
-
+    public static DexKitBridge dexKitBridge;
+    private static String moduleSourceDir;
+    private static String moduleLibDir;
     List<Predicate<URI>> uriConditions = new ArrayList<>();
     Boolean isDevEnabled;
-
     Boolean isGhost_Enabled;
     Boolean isGhost_DM_Enabled;
-
     Boolean isGhost_Typing_Enabled;
     Boolean isGhost_Story_Enabled;
     Boolean isGhost_Live_Enabled;
@@ -47,10 +52,24 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     Boolean isDistraction_Comments_Enabled;
     Boolean isRemove_Ads_Enabled;
     Boolean isRemove_Analytics_Enabled;
+    public static ClassLoader hostClassLoader;
+
+    // for dev usage
+    public static void showToast(final String text) {
+        new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(AndroidAppHelper.currentApplication().getApplicationContext(), text, Toast.LENGTH_LONG).show());
+    }
 
     @Override
-    public void initZygote(StartupParam startupParam) throws Throwable {
+    public void initZygote(StartupParam startupParam) {
         XposedBridge.log(TAG + " | Zygote initialized.");
+        // Save the module's APK path
+        moduleSourceDir = startupParam.modulePath;
+        String abi = Build.SUPPORTED_ABIS[0]; // Primary ABI
+        abi = abi.replaceAll("-v\\d+a$", ""); // Regex to remove version suffix
+        moduleLibDir = moduleSourceDir.substring(0, moduleSourceDir.lastIndexOf("/")) + "/lib/" + abi;
+
+
+        // XposedBridge.log(TAG + " | Module paths initialized:" + "\nSourceDir: " + moduleSourceDir + "\nLibDir: " + moduleLibDir);
     }
 
     public void loadPreferences() {
@@ -96,32 +115,62 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     }
 
     @Override
-    public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-
-        loadPreferences(); // Ensure preferences are loaded
+    public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) {
+        // Ensure preferences are loaded
+        loadPreferences();
 
         XposedBridge.log(TAG + " | Loaded package: " + lpparam.packageName);
 
-        // Hook into own app
+        // Hook into your module
         if (lpparam.packageName.equals(MY_PACKAGE_NAME)) {
-            hookOwnModule(lpparam);
+            try {
+                if (dexKitBridge == null) {
+                    // Load the .so file from your module
+                    System.load(moduleLibDir + "/libdexkit.so");
+                    XposedBridge.log("libdexkit.so loaded successfully.");
+
+                    // Initialize DexKitBridge with your module's APK (for module-specific tasks, if needed)
+                    dexKitBridge = DexKitBridge.create(moduleSourceDir);
+                    // XposedBridge.log("DexKitBridge initialized for InstaEclipse.");
+                }
+
+                // Hook your module
+                hookOwnModule(lpparam);
+
+            } catch (Exception e) {
+                XposedBridge.log("Failed to initialize DexKitBridge for InstaEclipse: " + e.getMessage());
+            }
         }
 
         // Hook into Instagram
         if (lpparam.packageName.equals(IG_PACKAGE_NAME)) {
-            hookInstagram(lpparam);
+            try {
+                if (dexKitBridge == null) {
+                    // Load the .so file from your module (if not already loaded)
+                    System.load(moduleLibDir + "/libdexkit.so");
+                    // XposedBridge.log("libdexkit.so loaded successfully.");
+
+                    // Initialize DexKitBridge with Instagram's APK
+                    dexKitBridge = DexKitBridge.create(lpparam.appInfo.sourceDir);
+                    // XposedBridge.log("DexKitBridge initialized with Instagram's APK: " + lpparam.appInfo.sourceDir);
+                }
+
+                // Use Instagram's ClassLoader
+                hostClassLoader = lpparam.classLoader;
+
+                // Call the method to hook Instagram
+                hookInstagram(lpparam);
+
+            } catch (Exception e) {
+                XposedBridge.log("Failed to initialize DexKitBridge for Instagram: " + e.getMessage());
+            }
         }
     }
 
     private void hookOwnModule(XC_LoadPackage.LoadPackageParam lpparam) {
         try {
-            findAndHookMethod(
-                    MY_PACKAGE_NAME + ".MainActivity",
-                    lpparam.classLoader,
-                    "isModuleActive",
-                    XC_MethodReplacement.returnConstant(true)
-            );
-            XposedBridge.log(TAG + " | Successfully hooked isModuleActive().");
+            findAndHookMethod(MY_PACKAGE_NAME + ".MainActivity", lpparam.classLoader, "isModuleActive", XC_MethodReplacement.returnConstant(true));
+            // XposedBridge.log(TAG + " | Successfully hooked isModuleActive().");
         } catch (Exception e) {
             XposedBridge.log(TAG + " | Failed to hook MainActivity: " + e.getMessage());
         }
@@ -138,7 +187,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             if (isDevEnabled) {
                 DevOptionsEnable devOptionsEnable = new DevOptionsEnable();
-                devOptionsEnable.handleDevOptions(lpparam);
+                devOptionsEnable.handleDevOptions(dexKitBridge);
             }
 
             if (isGhost_Enabled) {
@@ -147,7 +196,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     ghostModeDM.handleGhostMode(lpparam);
                 }
 
-                if (isGhost_Typing_Enabled){
+                if (isGhost_Typing_Enabled) {
                     GhostModeTypingStatus ghostModeTypingStatus = new GhostModeTypingStatus();
                     ghostModeTypingStatus.handleTypingStatus(lpparam);
                 }
@@ -207,10 +256,5 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         } catch (Exception e) {
             XposedBridge.log(TAG + " | Failed to hook Instagram: " + e.getMessage());
         }
-    }
-
-    // for dev usage
-    public static void showToast(final String text) {
-        new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(AndroidAppHelper.currentApplication().getApplicationContext(), text, Toast.LENGTH_LONG).show());
     }
 }

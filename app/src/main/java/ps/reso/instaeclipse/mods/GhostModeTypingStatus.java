@@ -30,11 +30,41 @@ public class GhostModeTypingStatus {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             CharSequence charSequence = (CharSequence) param.args[0];
+                            int i = (int) param.args[1];
+                            int i2 = (int) param.args[2];
+                            int i3 = (int) param.args[3];
 
                             // Add your custom logic here
-                            if (charSequence != null && charSequence.length() >= 0) {
+                            if (charSequence.length() > 0 || i != 0 || i2 != 0 || i3 != 0) {
+
+                                // Prevent original typing status logic from running
                                 XposedBridge.log("Typing ghost mode activated: Blocking typing status.");
                                 param.setResult(null); // Prevent original logic from executing
+
+                                XposedHelpers.findAndHookMethod("X.10S", classLoader, "FVN", boolean.class, boolean.class, new XC_MethodHook() {
+                                    @Override
+                                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+
+                                        param.args[0] = true; // Example: Always set first param to true
+                                        param.args[1] = true; // Example: Always set second param to true
+                                    }
+                                    @Override
+                                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                    }
+                                });
+                            }
+                            else{
+                                XposedHelpers.findAndHookMethod("X.10S", classLoader, "FVN", boolean.class, boolean.class, new XC_MethodHook() {
+                                    @Override
+                                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+
+                                        param.args[0] = false; // Example: Always set first param to true
+                                        param.args[1] = false; // Example: Always set second param to true
+                                    }
+                                    @Override
+                                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                    }
+                                });
                             }
                         }
                     }
@@ -45,6 +75,7 @@ public class GhostModeTypingStatus {
     }
 
     private void performDynamicAnalysisForTypingStatus(XC_LoadPackage.LoadPackageParam lpparam) {
+
         String characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         // Iterate through potential class names

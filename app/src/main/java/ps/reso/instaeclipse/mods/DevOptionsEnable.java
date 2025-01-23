@@ -13,18 +13,15 @@ import java.util.List;
 
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
-import ps.reso.instaeclipse.R;
 import ps.reso.instaeclipse.Xposed.Module;
 
 
 public class DevOptionsEnable {
-
-    private static final String TAG = String.valueOf(R.string.app_name);
     public void handleDevOptions(DexKitBridge bridge) {
         try {
             findAndHookDynamicMethod(bridge);
         } catch (Exception e) {
-            XposedBridge.log("(DevOptionsEnable) Error handling Dev Options: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error handling Dev Options: " + e.getMessage());
         }
     }
 
@@ -68,7 +65,7 @@ public class DevOptionsEnable {
                 }
             }
         } catch (Exception e) {
-            XposedBridge.log(TAG + " | Error during dynamic method discovery and hooking: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error during dynamic method discovery and hooking: " + e.getMessage());
         }
     }
 
@@ -102,10 +99,10 @@ public class DevOptionsEnable {
                     try {
                         Method targetMethod = invokedMethod.getMethodInstance(Module.hostClassLoader);
                         XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.returnConstant(true));
-                        XposedBridge.log(TAG + "(InstaEclipse | DevOptions) Successfully hooked target method: " +
+                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): Successfully hooked target method: " +
                                 invokedMethod.getClassName() + "." + invokedMethod.getName());
                     } catch (Exception e) {
-                        XposedBridge.log(TAG + " | Error hooking method: " + e.getMessage());
+                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error hooking method: " + e.getMessage());
                     }
                     return; // Exit after hooking the target
                 }
@@ -113,7 +110,7 @@ public class DevOptionsEnable {
 
 
         } catch (Exception e) {
-            XposedBridge.log(TAG + " | Error inspecting invoked methods: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error inspecting invoked methods: " + e.getMessage());
         }
     }
 }

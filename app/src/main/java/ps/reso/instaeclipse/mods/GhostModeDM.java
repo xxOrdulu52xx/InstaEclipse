@@ -20,7 +20,7 @@ public class GhostModeDM {
             // Perform dynamic analysis
             performDynamicAnalysis(lpparam, UserSessionClass);
         } catch (Exception e) {
-            XposedBridge.log("(GhostModeDM) Error handling Ghost Mode: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | GhostModeDM): Error handling Ghost Mode: " + e.getMessage());
         }
     }
 
@@ -51,9 +51,9 @@ public class GhostModeDM {
                     }
             );
 
-            XposedBridge.log("(GhostModeDM) Successfully hooked method: " + targeted_MethodName + " in class: " + classToHook);
+            XposedBridge.log("(InstaEclipse | GhostModeDM): Successfully hooked method: " + targeted_MethodName + " in class: " + classToHook);
         } catch (Exception e) {
-            XposedBridge.log("(GhostModeDM) Failed to hook method: " + targeted_MethodName + " in class: " + classToHook + " - " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | GhostModeDM): Failed to hook method: " + targeted_MethodName + " in class: " + classToHook + " - " + e.getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ public class GhostModeDM {
                                         // Hook the matched method
                                         hookGhostMode(classToHook, param_Class, UserSessionClass, targeted_MethodName, lpparam.classLoader);
 
-                                        XposedBridge.log("(InstaEclipse) Hooked method: " + method.getName() + " in class: " + classToHook);
+                                        // XposedBridge.log("(InstaEclipse | GhostModeDM): Hooked method: " + method.getName() + " in class: " + classToHook);
                                         break outerLoop; // Exit the loops once a match is found
                                     }
                                 }

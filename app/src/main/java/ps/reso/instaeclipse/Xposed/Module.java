@@ -21,7 +21,6 @@ import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import ps.reso.instaeclipse.R;
 import ps.reso.instaeclipse.mods.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.GhostModeDM;
 import ps.reso.instaeclipse.mods.GhostModeTypingStatus;
@@ -30,8 +29,6 @@ import ps.reso.instaeclipse.mods.Interceptor;
 
 @SuppressLint("UnsafeDynamicallyLoadedCode")
 public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
-
-    private static final String TAG = String.valueOf(R.string.app_name);
     private static final String IG_PACKAGE_NAME = "com.instagram.android";
     private static final String MY_PACKAGE_NAME = "ps.reso.instaeclipse";
     public static DexKitBridge dexKitBridge;
@@ -61,7 +58,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     @Override
     public void initZygote(StartupParam startupParam) {
-        XposedBridge.log(TAG + " | Zygote initialized.");
+        XposedBridge.log("(InstaEclipse): Zygote initialized.");
         // Save the module's APK path
         moduleSourceDir = startupParam.modulePath;
         String abi = Build.SUPPORTED_ABIS[0]; // Primary ABI
@@ -69,7 +66,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         moduleLibDir = moduleSourceDir.substring(0, moduleSourceDir.lastIndexOf("/")) + "/lib/" + abi;
 
 
-        // XposedBridge.log(TAG + " | Module paths initialized:" + "\nSourceDir: " + moduleSourceDir + "\nLibDir: " + moduleLibDir);
+        // XposedBridge.log("InstaEclipse | Module paths initialized:" + "\nSourceDir: " + moduleSourceDir + "\nLibDir: " + moduleLibDir);
     }
 
     public void loadPreferences() {
@@ -110,7 +107,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
 
         } catch (Exception e) {
-            XposedBridge.log(TAG + " | Failed to initialize preferences: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse): Failed to initialize preferences: " + e.getMessage());
         }
     }
 
@@ -119,7 +116,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         // Ensure preferences are loaded
         loadPreferences();
 
-        XposedBridge.log(TAG + " | Loaded package: " + lpparam.packageName);
+        XposedBridge.log("(InstaEclipse): Loaded package: " + lpparam.packageName);
 
         // Hook into your module
         if (lpparam.packageName.equals(MY_PACKAGE_NAME)) {
@@ -138,7 +135,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 hookOwnModule(lpparam);
 
             } catch (Exception e) {
-                XposedBridge.log("Failed to initialize DexKitBridge for InstaEclipse: " + e.getMessage());
+                XposedBridge.log("(InstaEclipse): Failed to initialize DexKitBridge for InstaEclipse: " + e.getMessage());
             }
         }
 
@@ -162,7 +159,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 hookInstagram(lpparam);
 
             } catch (Exception e) {
-                XposedBridge.log("Failed to initialize DexKitBridge for Instagram: " + e.getMessage());
+                XposedBridge.log("(InstaEclipse): Failed to initialize DexKitBridge for Instagram: " + e.getMessage());
             }
         }
     }
@@ -170,9 +167,9 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     private void hookOwnModule(XC_LoadPackage.LoadPackageParam lpparam) {
         try {
             findAndHookMethod(MY_PACKAGE_NAME + ".MainActivity", lpparam.classLoader, "isModuleActive", XC_MethodReplacement.returnConstant(true));
-            // XposedBridge.log(TAG + " | Successfully hooked isModuleActive().");
+            // XposedBridge.log("InstaEclipse | Successfully hooked isModuleActive().");
         } catch (Exception e) {
-            XposedBridge.log(TAG + " | Failed to hook MainActivity: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse): Failed to hook MainActivity: " + e.getMessage());
         }
     }
 
@@ -181,7 +178,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         try {
 
             uriConditions.clear();
-            XposedBridge.log(TAG + " | Instagram package detected. Hooking...");
+            XposedBridge.log("(InstaEclipse): Instagram package detected. Hooking...");
 
             Interceptor interceptor = new Interceptor();
 
@@ -254,7 +251,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
 
         } catch (Exception e) {
-            XposedBridge.log(TAG + " | Failed to hook Instagram: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse): Failed to hook Instagram: " + e.getMessage());
         }
     }
 }

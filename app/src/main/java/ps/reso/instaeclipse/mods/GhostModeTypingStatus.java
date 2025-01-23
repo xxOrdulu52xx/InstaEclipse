@@ -14,7 +14,7 @@ public class GhostModeTypingStatus {
         try {
             performDynamicAnalysisForTypingStatus(lpparam);
         } catch (Exception e) {
-            XposedBridge.log("(GhostModeTypingStatus) Error handling typing status: " + e.getMessage());
+            XposedBridge.log("GhostModeTypingStatus Error handling typing status: " + e.getMessage());
         }
     }
 

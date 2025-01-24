@@ -23,7 +23,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import ps.reso.instaeclipse.mods.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.GhostModeDM;
-import ps.reso.instaeclipse.mods.GhostModeTypingStatus;
 import ps.reso.instaeclipse.mods.Interceptor;
 
 
@@ -38,7 +37,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     Boolean isDevEnabled;
     Boolean isGhost_Enabled;
     Boolean isGhost_DM_Enabled;
-    Boolean isGhost_Typing_Enabled;
     Boolean isGhost_Story_Enabled;
     Boolean isGhost_Live_Enabled;
     Boolean isDistraction_Free_Enabled;
@@ -83,7 +81,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             if (isGhost_Enabled) {
                 isGhost_DM_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeDM", false);
-                isGhost_Typing_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeTyping", false);
                 isGhost_Story_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeLive", false);
                 isGhost_Live_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeStory", false);
             }
@@ -191,11 +188,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 if (isGhost_DM_Enabled) {
                     GhostModeDM ghostModeDM = new GhostModeDM();
                     ghostModeDM.handleGhostMode(lpparam);
-                }
-
-                if (isGhost_Typing_Enabled) {
-                    GhostModeTypingStatus ghostModeTypingStatus = new GhostModeTypingStatus();
-                    ghostModeTypingStatus.handleTypingStatus(lpparam);
                 }
 
                 if (isGhost_Story_Enabled) {

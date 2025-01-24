@@ -18,7 +18,6 @@ import ps.reso.instaeclipse.R;
 public class GhostModeFragment extends Fragment {
     private static final String ENABLE_ALL_KEY = "enableAllGhostMode";
     private static final String DM_KEY = "ghostModeDM";
-    private static final String TYPING_KEY = "ghostModeTyping";
     private static final String STORY_KEY = "ghostModeStory";
     private static final String LIVE_KEY = "ghostModeLive";
 
@@ -26,8 +25,6 @@ public class GhostModeFragment extends Fragment {
     private Switch enableAllToggle;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch dmToggle;
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private Switch typingToggle;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch storyToggle;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
@@ -47,7 +44,6 @@ public class GhostModeFragment extends Fragment {
         // Initialize toggles
         enableAllToggle = view.findViewById(R.id.toggle_all);
         dmToggle = view.findViewById(R.id.dm_toggle);
-        typingToggle = view.findViewById(R.id.no_typing_toggle);
         storyToggle = view.findViewById(R.id.story_toggle);
         liveToggle = view.findViewById(R.id.live_toggle);
 
@@ -58,14 +54,12 @@ public class GhostModeFragment extends Fragment {
         enableAllToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveToggleState(ENABLE_ALL_KEY, isChecked);
             dmToggle.setChecked(isChecked);
-            typingToggle.setChecked(isChecked);
             storyToggle.setChecked(isChecked);
             liveToggle.setChecked(isChecked);
         });
 
         // Individual toggles
         dmToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(DM_KEY, isChecked));
-        typingToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(TYPING_KEY, isChecked));
         storyToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(STORY_KEY, isChecked));
         liveToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(LIVE_KEY, isChecked));
 
@@ -75,7 +69,6 @@ public class GhostModeFragment extends Fragment {
     private void loadToggleStates() {
         enableAllToggle.setChecked(preferences.getBoolean(ENABLE_ALL_KEY, false));
         dmToggle.setChecked(preferences.getBoolean(DM_KEY, false));
-        typingToggle.setChecked(preferences.getBoolean(TYPING_KEY, false));
         storyToggle.setChecked(preferences.getBoolean(STORY_KEY, false));
         liveToggle.setChecked(preferences.getBoolean(LIVE_KEY, false));
     }

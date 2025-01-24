@@ -3,7 +3,4 @@
     <string-array name="target_app">
         <item>com.instagram.android</item>
     </string-array>
-    <string-array name="ig_version">
-        <item>292.0.0.16.110</item>
-    </string-array>
 </resources>

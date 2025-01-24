@@ -54,6 +54,7 @@
                         android:src="@drawable/ic_github_logo"
                         android:contentDescription="@string/github"
                         android:layout_marginEnd="16dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <LinearLayout
@@ -113,6 +114,7 @@
                         android:src="@drawable/ic_telegram_logo"
                         android:contentDescription="@string/telegram"
                         android:layout_marginEnd="16dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <LinearLayout

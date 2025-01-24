@@ -57,6 +57,7 @@
                         android:src="@drawable/ic_toggle_all"
                         android:contentDescription="@string/enable_disable_all"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -111,6 +112,7 @@
                         android:src="@drawable/ic_dm"
                         android:contentDescription="@string/direct_messages"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -206,6 +208,7 @@
                         android:src="@drawable/ic_live"
                         android:contentDescription="@string/live"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->

@@ -53,6 +53,7 @@
                     android:src="@drawable/ic_dev_options"
                     android:contentDescription="@string/developer_options"
                     android:layout_marginEnd="8dp"
+                    android:layoutDirection="ltr"
                     app:tint="@color/warning_yellow" />
 
                 <!-- Title -->
@@ -115,6 +116,7 @@
                     android:src="@drawable/ic_ghost_mode"
                     android:contentDescription="@string/ghost_mode"
                     android:layout_marginEnd="8dp"
+                    android:layoutDirection="ltr"
                     app:tint="@color/white" />
 
                 <!-- Title -->
@@ -177,6 +179,7 @@
                     android:src="@drawable/ic_distraction_free"
                     android:contentDescription="@string/distraction_free"
                     android:layout_marginEnd="8dp"
+                    android:layoutDirection="ltr"
                     app:tint="@color/white" />
 
                 <!-- Title -->

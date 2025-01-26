@@ -24,6 +24,8 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import ps.reso.instaeclipse.mods.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.GhostModeDM;
 import ps.reso.instaeclipse.mods.Interceptor;
+import ps.reso.instaeclipse.mods.misc.AutoPlayDisable;
+import ps.reso.instaeclipse.mods.misc.StoryFlipping;
 
 
 @SuppressLint("UnsafeDynamicallyLoadedCode")
@@ -47,6 +49,9 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     Boolean isDistraction_Comments_Enabled;
     Boolean isRemove_Ads_Enabled;
     Boolean isRemove_Analytics_Enabled;
+    Boolean is_Misc_Enabled;
+    Boolean isStop_Story_Flipping_Enabled;
+    Boolean isStop_Video_AutoPlay_Enabled;
     public static ClassLoader hostClassLoader;
 
     // for dev usage
@@ -101,6 +106,14 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             // Remove analysis
             isRemove_Analytics_Enabled = XposedPreferences.getPrefs().getBoolean("removeAnalytics", false);
+
+            // Misc options
+            is_Misc_Enabled = XposedPreferences.getPrefs().getBoolean("miscOptions", false);
+
+            if (is_Misc_Enabled){
+                isStop_Story_Flipping_Enabled = XposedPreferences.getPrefs().getBoolean("storyFlipping", false);
+                isStop_Video_AutoPlay_Enabled = XposedPreferences.getPrefs().getBoolean("videoAutoPlay", false);
+            }
 
 
         } catch (Exception e) {
@@ -173,7 +186,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     private void hookInstagram(XC_LoadPackage.LoadPackageParam lpparam) {
 
         try {
-
             uriConditions.clear();
             XposedBridge.log("(InstaEclipse): Instagram package detected. Hooking...");
 
@@ -231,9 +243,20 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             if (isRemove_Analytics_Enabled) {
                 uriConditions.add(uri -> uri.getHost().contains("graph.instagram.com"));
-                uriConditions.add(uri -> uri.getPath().contains("/logging_client_events"));
                 uriConditions.add(uri -> uri.getHost().contains("graph.facebook.com"));
+                uriConditions.add(uri -> uri.getPath().contains("/logging_client_events"));
                 uriConditions.add(uri -> uri.getPath().endsWith("/activities"));
+            }
+
+            if (is_Misc_Enabled){
+                if (isStop_Story_Flipping_Enabled){
+                    StoryFlipping storyFlipping = new StoryFlipping();
+                    storyFlipping.handleStoryFlippingDisable(dexKitBridge);
+                }
+                if (isStop_Video_AutoPlay_Enabled){
+                    AutoPlayDisable autoPlayDisable = new AutoPlayDisable();
+                    autoPlayDisable.handleAutoPlayDisable(dexKitBridge);
+                }
             }
 
             // Pass the dynamically rebuilt conditions to the interceptor

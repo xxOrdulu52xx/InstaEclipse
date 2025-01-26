@@ -97,6 +97,12 @@
     <string name="disable_explore">تعطيل الاستكشاف</string>
     <string name="disable_comments">تعطيل التعليقات</string>
 
+    <!-- Miscellaneous -->
+    <string name="misc">الخيارات الأضافية</string>
+    <string name="miscellaneous_options">الخيارات الأضافية</string>
+    <string name="story_flipping">تعطيل التنقل التلقائي للقصص</string>
+    <string name="video_autoplay">تعطيل التشغيل التلقائي للفيديوهات</string>
+
     <!-- contributor card -->
     <string name="contributor_name">اسم المساهم</string>
 

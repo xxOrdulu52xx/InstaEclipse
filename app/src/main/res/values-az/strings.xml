@@ -98,6 +98,12 @@
     <string name="disable_explore">Kəşf Etməyi Deaktiv Et</string>
     <string name="disable_comments">Rəyləri Deaktiv Et</string>
 
+    <!-- Miscellaneous -->
+    <string name="misc">Müxtəlif</string>
+    <string name="miscellaneous_options">Müxtəlif Seçimlər</string>
+    <string name="story_flipping">Hekayə Çevirməni Deaktiv Et</string>
+    <string name="video_autoplay">Video Avtomatik Oynatmağı Deaktiv Et</string>
+
     <!-- contributor card -->
     <string name="contributor_name">Töhfə Verənin Adı</string>
 

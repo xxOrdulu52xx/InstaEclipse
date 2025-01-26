@@ -2,7 +2,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Versiya: 0.2.1</string>
+    <string name="version">Versiya: 0.3</string>
     <string name="home">Ana Səhifə</string>
     <string name="features">Funksiyalar</string>
     <string name="help">Kömək</string>

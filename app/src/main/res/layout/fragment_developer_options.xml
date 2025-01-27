@@ -37,17 +37,6 @@
             android:layout_marginBottom="30px"
             android:paddingBottom="1dp" />
 
-        <!-- Instruction 0 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dev_options_req"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_marginBottom="25px"
-            android:paddingBottom="8dp" />
-
         <!-- Instruction 1 -->
         <TextView
             android:layout_width="match_parent"

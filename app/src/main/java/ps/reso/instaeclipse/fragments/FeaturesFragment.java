@@ -1,5 +1,6 @@
 package ps.reso.instaeclipse.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,15 +26,20 @@ public class FeaturesFragment extends Fragment {
     private static final String GHOST_MODE_KEY = "enableGhostMode";
     private static final String DISTRACTION_FREE_KEY = "enableDistractionFree";
     private static final String REMOVE_ADS_KEY = "removeAds";
-    private static final String remove_Analytics_KEY = "removeAnalytics";
+    private static final String REMOVE_ANALYTICS_KEY = "removeAnalytics";
+    private static final String MISC_KEY = "miscOptions";
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch devOptionsToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch ghostModeToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch distractionFreeToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch removeAdsToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch removeAnalyticsToggle;
-    private CardView devOptionsCard;
-    private CardView ghostModeCard;
-    private CardView distractionFreeCard;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private Switch miscToggle;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -60,11 +66,14 @@ public class FeaturesFragment extends Fragment {
         distractionFreeToggle = view.findViewById(R.id.distraction_free_toggle);
         removeAdsToggle = view.findViewById(R.id.remove_ads_toggle);
         removeAnalyticsToggle = view.findViewById(R.id.remove_Analytics_toggle);
+        miscToggle = view.findViewById(R.id.misc_toggle);
+
 
         // Initialize card views
-        devOptionsCard = view.findViewById(R.id.dev_options_card);
-        ghostModeCard = view.findViewById(R.id.ghost_mode_card);
-        distractionFreeCard = view.findViewById(R.id.distraction_free_card);
+        CardView devOptionsCard = view.findViewById(R.id.dev_options_card);
+        CardView ghostModeCard = view.findViewById(R.id.ghost_mode_card);
+        CardView distractionFreeCard = view.findViewById(R.id.distraction_free_card);
+        CardView miscCard = view.findViewById(R.id.misc_card);
 
         // Load and set toggle states
         loadToggleStates();
@@ -93,6 +102,14 @@ public class FeaturesFragment extends Fragment {
                     .commit();
         });
 
+        // Set up card click listener for Misc Options
+        miscCard.setOnClickListener(v -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new MiscFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
         // Add listeners for toggles
         devOptionsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(DEV_OPTIONS_KEY, isChecked));
         ghostModeToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(GHOST_MODE_KEY, isChecked));
@@ -104,7 +121,8 @@ public class FeaturesFragment extends Fragment {
         });
 
         removeAdsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(REMOVE_ADS_KEY, isChecked));
-        removeAnalyticsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(remove_Analytics_KEY, isChecked));
+        removeAnalyticsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(REMOVE_ANALYTICS_KEY, isChecked));
+        miscToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(MISC_KEY, isChecked));
 
         return view;
     }
@@ -117,7 +135,8 @@ public class FeaturesFragment extends Fragment {
         ghostModeToggle.setChecked(sharedPreferences.getBoolean(GHOST_MODE_KEY, false));
         distractionFreeToggle.setChecked(sharedPreferences.getBoolean(DISTRACTION_FREE_KEY, false));
         removeAdsToggle.setChecked(sharedPreferences.getBoolean(REMOVE_ADS_KEY, false));
-        removeAnalyticsToggle.setChecked(sharedPreferences.getBoolean(remove_Analytics_KEY, false));
+        removeAnalyticsToggle.setChecked(sharedPreferences.getBoolean(REMOVE_ANALYTICS_KEY, false));
+        miscToggle.setChecked(sharedPreferences.getBoolean(MISC_KEY, false));
     }
 
     /**

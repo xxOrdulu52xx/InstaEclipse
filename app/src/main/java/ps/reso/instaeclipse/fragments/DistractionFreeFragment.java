@@ -1,5 +1,6 @@
 package ps.reso.instaeclipse.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,11 +23,17 @@ public class DistractionFreeFragment extends Fragment {
     private static final String EXPLORE_KEY = "disableExplore";
     private static final String COMMENTS_KEY = "disableComments";
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch enableAllToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch storiesToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch feedToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch reelsToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch exploreToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch commentsToggle;
 
     private SharedPreferences preferences;

@@ -1,7 +1,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Version: 0.2.1</string>
+    <string name="version">Version: 0.3</string>
     <string name="home">Home</string>
     <string name="features">Features</string>
     <string name="help">Help</string>
@@ -97,6 +97,12 @@
     <string name="disable_explore">Disable Explore</string>
     <string name="disable_comments">Disable Comments</string>
 
+    <!-- Miscellaneous -->
+    <string name="misc">Miscellaneous</string>
+    <string name="miscellaneous_options">Miscellaneous Options</string>
+    <string name="story_flipping">Disable Story Flipping</string>
+    <string name="video_autoplay">Disable Video Auto play</string>
+
     <!-- contributor card -->
     <string name="contributor_name">Contributor Name</string>
 
@@ -105,4 +111,5 @@
     <string name="failed_restart_insta_toast">Failed to restart Instagram</string>
     <string name="non_root_restart_insta_toast">Please force stop Instagram and open it</string>
     <string name="clear_cache_insta_toast">Please clear Instagram\'s app cache for the best experience</string>
+
 </resources>

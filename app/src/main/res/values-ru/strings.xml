@@ -2,7 +2,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Версия: 0.2.1</string>
+    <string name="version">Версия: 0.3</string>
     <string name="home">Главная</string>
     <string name="features">Функции</string>
     <string name="help">Помощь</string>
@@ -97,6 +97,12 @@
     <string name="disable_reels">Выключить Reels</string>
     <string name="disable_explore">Выключить Explore</string>
     <string name="disable_comments">Выключить Комментарии</string>
+
+    <!-- Miscellaneous -->
+    <string name="misc">Разное</string>
+    <string name="miscellaneous_options">Дополнительные параметры</string>
+    <string name="story_flipping">Отключить пролистывание историй</string>
+    <string name="video_autoplay">Отключить автоматическое воспроизведение видео</string>
 
     <!-- contributor card -->
     <string name="contributor_name">Имя участника</string>

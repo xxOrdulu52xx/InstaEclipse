@@ -2,7 +2,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Sürüm: 0.2.1</string>
+    <string name="version">Sürüm: 0.3</string>
     <string name="home">Ana Sayfa</string>
     <string name="features">Özellikler</string>
     <string name="help">Yardım</string>
@@ -97,6 +97,12 @@
     <string name="disable_reels">Reels\'leri Devre Dışı Bırak</string>
     <string name="disable_explore">Keşfet\'i Devre Dışı Bırak</string>
     <string name="disable_comments">Yorumları Devre Dışı Bırak</string>
+
+    <!-- Miscellaneous -->
+    <string name="misc">Çeşitli</string>
+    <string name="miscellaneous_options">Çeşitli Seçenekler</string>
+    <string name="story_flipping">Hikaye Çevirmeyi Devre Dışı Bırak</string>
+    <string name="video_autoplay">Video Otomatik Oynatmayı Devre Dışı Bırak</string>
 
     <!-- contributor card -->
     <string name="contributor_name">Katkıda Bulunan\'ın İsmi</string>

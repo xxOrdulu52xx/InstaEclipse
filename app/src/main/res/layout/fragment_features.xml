@@ -1,315 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/distraction_free_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    android:padding="16dp">
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <!-- App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@color/black"
+        android:fitsSystemWindows="true">
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:gravity="center_horizontal">
+        android:padding="16dp">
 
-        <!-- Title Section -->
-        <TextView
-            android:id="@+id/fragment_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/features"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Developer Options Section -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/dev_options_card"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:focusable="true">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <!-- Title Section -->
+            <TextView
+                android:id="@+id/fragment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="@string/features"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Developer Options Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/dev_options_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
-                <!-- Image -->
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_dev_options"
-                    android:contentDescription="@string/developer_options"
-                    android:layout_marginEnd="8dp"
-                    app:tint="@color/warning_yellow" />
-
-                <!-- Title -->
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/developer_options"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-                <!-- Toggle -->
-                <Switch
-                    android:id="@+id/dev_options_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:text=""
-                    android:textColor="@color/white"
-                    tools:ignore="UseSwitchCompatOrMaterialXml,DuplicateSpeakableTextCheck" />
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/developer_options"
+                        android:layoutDirection="ltr"
+                        android:src="@drawable/ic_dev_options"
+                        app:tint="@color/warning_yellow" />
 
-                <!-- Hint -->
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="@string/hint"
-                    android:src="@drawable/ic_arrow_right"
-                    app:tint="@color/gray"
-                    tools:ignore="ImageContrastCheck" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/developer_options"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-        <!-- Ghost Mode Section -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/ghost_mode_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:focusable="true">
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/dev_options_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        android:text=""
+                        android:textColor="@color/white" />
 
-            <LinearLayout
+                    <!-- Hint -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/hint"
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@color/gray" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Ghost Mode Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/ghost_mode_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
-                <!-- Image -->
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_ghost_mode"
-                    android:contentDescription="@string/ghost_mode"
-                    android:layout_marginEnd="8dp"
-                    app:tint="@color/white" />
-
-                <!-- Title -->
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ghost_mode"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-                <!-- Toggle -->
-                <Switch
-                    android:id="@+id/ghost_mode_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:text=""
-                    android:textColor="@color/white"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/ghost_mode"
+                        android:layoutDirection="ltr"
+                        android:src="@drawable/ic_ghost_mode"
+                        app:tint="@color/white" />
 
-                <!-- Hint -->
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="@string/hint"
-                    android:src="@drawable/ic_arrow_right"
-                    app:tint="@color/gray"
-                    tools:ignore="ImageContrastCheck" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/ghost_mode"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-        <!-- Distraction Free Section -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/distraction_free_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:focusable="true">
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/ghost_mode_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        android:text=""
+                        android:textColor="@color/white" />
 
-            <LinearLayout
+                    <!-- Hint -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/hint"
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@color/gray" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Distraction Free Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/distraction_free_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
-                <!-- Image -->
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_distraction_free"
-                    android:contentDescription="@string/distraction_free"
-                    android:layout_marginEnd="8dp"
-                    app:tint="@color/white" />
-
-                <!-- Title -->
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/distraction_free"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-                <!-- Toggle -->
-                <Switch
-                    android:id="@+id/distraction_free_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:text=""
-                    android:textColor="@color/white"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/distraction_free"
+                        android:layoutDirection="ltr"
+                        android:src="@drawable/ic_distraction_free"
+                        app:tint="@color/white" />
 
-                <!-- Hint -->
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:contentDescription="@string/hint"
-                    android:src="@drawable/ic_arrow_right"
-                    app:tint="@color/gray"
-                    tools:ignore="ImageContrastCheck" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/distraction_free"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-        <!-- Remove Ads Section -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/remove_ads_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            android:clickable="false">
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/distraction_free_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        android:text=""
+                        android:textColor="@color/white" />
 
-            <LinearLayout
+                    <!-- Hint -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/hint"
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@color/gray" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Remove Ads Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/remove_ads_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="16dp"
+                android:clickable="false"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
-                <!-- Image -->
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_remove_ads"
-                    android:contentDescription="@string/remove_ads"
-                    android:layout_marginEnd="8dp"
-                    app:tint="@color/white" />
-
-                <!-- Title -->
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/remove_ads"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-                <!-- Toggle -->
-                <Switch
-                    android:id="@+id/remove_ads_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:text=""
-                    android:textColor="@color/white"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/remove_ads"
+                        android:src="@drawable/ic_remove_ads"
+                        app:tint="@color/white" />
 
-        <!-- Remove Ads Section -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/remove_Analytics_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            android:clickable="false">
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/remove_ads"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/remove_ads_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        android:text=""
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Remove Analytics Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/remove_Analytics_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="16dp"
+                android:clickable="false"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
-                <!-- Image -->
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_analytics"
-                    android:contentDescription="@string/remove_analytics"
-                    android:layout_marginEnd="8dp"
-                    app:tint="@color/white" />
-
-                <!-- Title -->
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/remove_analytics"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-                <!-- Toggle -->
-                <Switch
-                    android:id="@+id/remove_Analytics_toggle"
-                    android:layout_width="wrap_content"
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/remove_analytics"
+                        android:src="@drawable/ic_analytics"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/remove_analytics"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/remove_Analytics_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        android:text=""
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Misc Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/misc_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:text=""
-                    android:textColor="@color/white"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-    </LinearLayout>
-</ScrollView>
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/misc"
+                        android:layoutDirection="ltr"
+                        android:src="@drawable/ic_misc"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/misc"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/misc_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        android:text=""
+                        android:textColor="@color/white" />
+
+                    <!-- Hint -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/hint"
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@color/gray" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

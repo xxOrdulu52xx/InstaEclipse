@@ -1,0 +1,114 @@
+<resources>
+    <!-- app wide -->
+    <string name="app_name">InstaEclipse</string>
+    <string name="version">الإصدار: 0.3</string>
+    <string name="home">الرئيسية</string>
+    <string name="features">الميزات</string>
+    <string name="help">المساعدة</string>
+
+    <!-- home -->
+    <string name="module_disabled">الوحدة غير مفعلة. يرجى تفعيلها.</string>
+
+    <string name="module_status">حالة الوحدة:</string>
+
+    <string name="module_status_disabled">حالة الوحدة: معطلة</string>
+    <string name="request_enable_module">يرجى تفعيل الوحدة في مسؤول وحدات Xposed.</string>
+
+    <string name="module_status_enabled_no_root">حالة الوحدة: مفعلة (بدون صلاحيات الروت)</string>
+    <string name="request_enable_root">صلاحيات الروت مطلوبة لإعادة التشغيل التلقائي. يلزم إعادة التشغيل اليدوي.</string>
+
+    <string name="module_status_enabled">حالة الوحدة: مفعلة</string>
+    <string name="module_active">الوحدة نشطة وتعمل.</string>
+
+    <string name="checking_instagram">جارٍ التحقق من إنستجرام</string>
+    <string name="installed_instagram_version">إنستجرام مثبت - الإصدار: </string>
+    <string name="not_installed_instagram">إنستجرام غير مثبت.</string>
+    <string name="error_instagram">خطأ في التحقق من حالة إنستجرام.</string>
+
+    <string name="restart_instagram">إعادة تشغيل إنستجرام</string>
+    <string name="contributors">المساهمون</string>
+    <string name="special_thanks">شكر خاص</string>
+
+    <!-- Don't translate! -->
+    <string name="instagram_logo" translatable="false">Instagram Logo</string>
+
+    <!-- help -->
+    <string name="help_amp_troubleshooting">المساعدة و استكشاف الأخطاء وإصلاحها</string>
+    <string name="find_updates_and_documentation">اعثر على التحديثات والوثائق.</string>
+    <string name="go_to_github">اذهب إلى GitHub</string>
+    <string name="find_support">اعثر على الدعم.</string>
+    <string name="go_to_telegram">اذهب إلى تليجرام</string>
+    <string name="instaeclipse_telegram_group" translatable="false">مجموعة إنستا إكليبس على تليجرام</string>
+
+    <!-- Don't translate! -->
+    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
+
+    <!-- faq -->
+    <string name="frequently_asked_questions">الأسئلة الشائعة</string>
+    <string name="faq_1">1. لا يعمل/يتعطل عند استخدام إصدار Google Play؟ استخدم APKs من APKMirror</string>
+    <string name="faq_2">2. الوحدة غير مفعلة؟ قم بتعطيل وإعادة تفعيل الوحدة من LSPosed.</string>
+    <string name="faq_3">3. الميزات لا تعمل؟ أوقف إنستجرام بالقوة وأعد تشغيله.</string>
+    <string name="faq_4">4. تتسبب خيارات المطور في تعطل التطبيق؟ اتبع دليل خيارات المطور.</string>
+    <string name="faq_5">5. خيارات المطور بها تسميات أو أرقام غريبة؟ استخدم الإصدارات Beta أو Alpha حيث أن الإصدارات المستقرة بها تعتيم.</string>
+    <string name="faq_6">6. ميزة "بدون إلهاء" مفعلة لكن المحتوى لا يزال يظهر؟ أوقف إنستجرام بالقوة وقم بمسح ذاكرة التخزين المؤقتة الخاصة به.</string>
+
+    <!-- features -->
+    <string name="developer_options">خيارات المطور</string>
+    <string name="ghost_mode">وضع الشبح</string>
+    <string name="distraction_free">بدون إلهاء</string>
+    <string name="remove_ads">إزالة الإعلانات</string>
+    <string name="remove_analytics">إزالة التحليلات</string>
+
+    <string name="enable_disable_all">تفعيل/تعطيل الكل</string>
+
+    <!-- Don't translate! -->
+    <string name="hint" translatable="false">Hint</string>
+
+    <!-- ghost -->
+    <string name="ghost_mode_options">خيارات وضع الشبح</string>
+    <string name="typing">الكتابة</string>
+    <string name="story">القصة</string>
+    <string name="live">البث المباشر</string>
+    <string name="direct_messages">الرسائل المباشرة</string>
+    <string name="disable_typing">تعطيل الكتابة</string>
+
+    <!-- developer_options -->
+    <string name="developer_options_guide">دليل خيارات المطور</string>
+    <string name="dev_options_version_req">استخدمها فقط على الإصدارات Beta/Alpha!</string>
+    <string name="dev_options_req">تأكد من تسجيل الدخول أولاً!</string>
+
+    <string name="dev_options_1">1. افتح إنستجرام واضغط مع الاستمرار على زر الصفحة الرئيسية.</string>
+    <string name="dev_options_2">2. انتقل إلى خيارات المطور > إعدادات MetaConfig &amp; Overrides.</string>
+    <string name="dev_options_3">3. ابحث عن \'Employee\' وقم بتفعيل الخيارات التالية:</string>
+    <string name="dev_options_4">4. أخيرًا، قم بتعطيل خيارات المطور من الوحدة لتجنب تعطل التطبيق.</string>
+
+    <!-- Don't translate! -->
+    <string name="is_employee" translatable="false">• is employee</string>
+    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
+    <string name="employee_options" translatable="false">• employee options</string>
+
+    <!-- distraction free -->
+    <string name="distraction_free_options">خيارات بدون إلهاء</string>
+    <string name="disable_stories">تعطيل القصص</string>
+    <string name="disable_feed">تعطيل المحتوى الرئيسي</string>
+    <string name="disable_reels">تعطيل الريلز</string>
+    <string name="disable_explore">تعطيل الاستكشاف</string>
+    <string name="disable_comments">تعطيل التعليقات</string>
+
+    <!-- Miscellaneous -->
+    <string name="misc">الخيارات الأضافية</string>
+    <string name="miscellaneous_options">الخيارات الأضافية</string>
+    <string name="story_flipping">تعطيل التنقل التلقائي للقصص</string>
+    <string name="video_autoplay">تعطيل التشغيل التلقائي للفيديوهات</string>
+
+    <!-- contributor card -->
+    <string name="contributor_name">اسم المساهم</string>
+
+    <!-- Toast -->
+    <string name="restart_insta_toast">جاري إعادة تشغيل إنستجرام</string>
+    <string name="failed_restart_insta_toast">فشل في إعادة تشغيل إنستجرام</string>
+    <string name="non_root_restart_insta_toast">يرجى إيقاف إنستجرام بالقوة وفتحه مرة أخرى</string>
+    <string name="clear_cache_insta_toast">يرجى مسح ذاكرة التخزين المؤقتة لإنستجرام لتحسين التجربة</string>
+</resources>

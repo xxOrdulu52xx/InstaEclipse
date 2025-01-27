@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ghost_mode_fragment"
+    android:id="@+id/misc_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -26,7 +26,7 @@
                 android:id="@+id/fragment_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ghost_mode_options"
+                android:text="@string/miscellaneous_options"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -88,59 +88,8 @@
                 android:background="@color/gray"
                 android:layout_marginVertical="16dp" />
 
-            <!-- Direct Messages -->
+            <!-- Disable auto story flipping -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/dm_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/dark_gray">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <!-- Image -->
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:src="@drawable/ic_dm"
-                        android:contentDescription="@string/direct_messages"
-                        android:layout_marginEnd="8dp"
-                        android:layoutDirection="ltr"
-                        app:tint="@color/white" />
-
-                    <!-- Title -->
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/direct_messages"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <!-- Toggle -->
-                    <Switch
-                        android:id="@+id/dm_toggle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="48dp"
-                        android:minHeight="48dp"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-
-            <!-- Story -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/story_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
@@ -160,8 +109,9 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_story"
-                        android:contentDescription="@string/story"
+                        android:contentDescription="@string/story_flipping"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -169,14 +119,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/story"
+                        android:text="@string/story_flipping"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <!-- Toggle -->
                     <Switch
-                        android:id="@+id/story_toggle"
+                        android:id="@+id/story_flipping_toggle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="48dp"
@@ -185,13 +135,13 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Live -->
+            <!-- Disable auto video play -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/live_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/dark_gray">
 
                 <LinearLayout
@@ -205,8 +155,8 @@
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/ic_live"
-                        android:contentDescription="@string/live"
+                        android:src="@drawable/ic_video"
+                        android:contentDescription="@string/video_autoplay"
                         android:layout_marginEnd="8dp"
                         android:layoutDirection="ltr"
                         app:tint="@color/white" />
@@ -216,14 +166,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/live"
+                        android:text="@string/video_autoplay"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <!-- Toggle -->
                     <Switch
-                        android:id="@+id/live_toggle"
+                        android:id="@+id/video_autoplay_toggle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="48dp"

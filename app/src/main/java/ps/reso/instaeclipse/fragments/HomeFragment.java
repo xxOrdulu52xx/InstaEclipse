@@ -148,7 +148,8 @@ public class HomeFragment extends Fragment {
         LinearLayout specialThanksContainer = rootView.findViewById(R.id.special_thanks_container);
 
         List<Contributor> contributors = Arrays.asList(
-                new Contributor("ReSo7200", "https://github.com/ReSo7200", "https://linkedin.com/in/abdalhaleem-altamimi", null)
+                new Contributor("ReSo7200", "https://github.com/ReSo7200", "https://linkedin.com/in/abdalhaleem-altamimi", null),
+                new Contributor("frknkrc44", "https://github.com/frknkrc44", null, null)
         );
 
         List<Contributor> specialThanks = Arrays.asList(

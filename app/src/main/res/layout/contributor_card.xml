@@ -41,6 +41,7 @@
             android:contentDescription="GitHub"
             android:src="@drawable/ic_github_logo"
             android:visibility="gone"
+            android:layoutDirection="ltr"
             tools:ignore="HardcodedText" />
 
         <!-- LinkedIn Button -->
@@ -54,6 +55,7 @@
             android:contentDescription="LinkedIn"
             android:src="@drawable/ic_linkedin_logo"
             android:visibility="gone"
+            android:layoutDirection="ltr"
             tools:ignore="HardcodedText" />
 
         <!-- Telegram Button -->
@@ -67,6 +69,7 @@
             android:contentDescription="Telegram"
             android:src="@drawable/ic_telegram_logo"
             android:visibility="gone"
+            android:layoutDirection="ltr"
             tools:ignore="HardcodedText" />
 </LinearLayout>
 </androidx.cardview.widget.CardView>

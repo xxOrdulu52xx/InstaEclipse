@@ -63,6 +63,7 @@
                         android:src="@drawable/ic_toggle_all"
                         android:contentDescription="@string/enable_disable_all"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -208,6 +209,7 @@
                         android:src="@drawable/ic_reels"
                         android:contentDescription="@string/disable_reels"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -254,6 +256,7 @@
                         android:src="@drawable/ic_explore"
                         android:contentDescription="@string/disable_explore"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -300,6 +303,7 @@
                         android:src="@drawable/ic_reels"
                         android:contentDescription="@string/disable_comments"
                         android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
                         app:tint="@color/white" />
 
                     <!-- Title -->

@@ -86,8 +86,8 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             if (isGhost_Enabled) {
                 isGhost_DM_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeDM", false);
-                isGhost_Story_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeLive", false);
-                isGhost_Live_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeStory", false);
+                isGhost_Story_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeStory", false);
+                isGhost_Live_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeLive", false);
             }
 
             // Distraction free

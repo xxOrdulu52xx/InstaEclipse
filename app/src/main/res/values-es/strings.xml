@@ -2,7 +2,7 @@
 <resources>
     <!-- aplicación -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Versión: 0.3</string>
+    <string name="version">Versión:0.3.1</string>
     <string name="home">Inicio</string>
     <string name="features">Características</string>
     <string name="help">Ayuda</string>

@@ -86,8 +86,8 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             if (isGhost_Enabled) {
                 isGhost_DM_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeDM", false);
-                isGhost_Story_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeLive", false);
-                isGhost_Live_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeStory", false);
+                isGhost_Story_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeStory", false);
+                isGhost_Live_Enabled = XposedPreferences.getPrefs().getBoolean("ghostModeLive", false);
             }
 
             // Distraction free
@@ -236,7 +236,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             if (isRemove_Ads_Enabled) {
                 uriConditions.add(uri -> uri.getPath().contains("profile_ads/get_profile_ads/"));
-                uriConditions.add(uri -> uri.getPath().contains("/ads/"));
+                uriConditions.add(uri -> uri.getPath().contains("/async_ads/"));
                 uriConditions.add(uri -> uri.getPath().contains("/feed/injected_reels_media/"));
                 uriConditions.add(uri -> uri.getPath().equals("/api/v1/ads/graphql/"));
             }
@@ -245,7 +245,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 uriConditions.add(uri -> uri.getHost().contains("graph.instagram.com"));
                 uriConditions.add(uri -> uri.getHost().contains("graph.facebook.com"));
                 uriConditions.add(uri -> uri.getPath().contains("/logging_client_events"));
-                uriConditions.add(uri -> uri.getPath().endsWith("/activities"));
             }
 
             if (is_Misc_Enabled){

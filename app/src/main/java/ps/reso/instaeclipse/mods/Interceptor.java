@@ -83,9 +83,9 @@ public class Interceptor {
                                         }
                                     }
                                     // DevPurposes
-                                    // else {
-                                        // XposedBridge.log("NotBlocked: " + uri.getHost() + uri.getPath());
-                                    // }
+                                     /*else {
+                                         XposedBridge.log("NotBlocked: " + uri.getHost() + uri.getPath());
+                                     }*/
                                 }
                             }
                         }

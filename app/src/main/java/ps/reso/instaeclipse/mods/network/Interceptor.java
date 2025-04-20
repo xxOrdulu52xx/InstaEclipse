@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.mods;
+package ps.reso.instaeclipse.mods.network;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -63,29 +63,17 @@ public class Interceptor {
                                     boolean shouldDrop = uriConditions.stream().anyMatch(condition -> condition.test(uri));
 
                                     if (shouldDrop) {
-                                        // Handle return value dynamically
-                                        if (param.method instanceof Method) {
-                                            Method method = (Method) param.method;
-                                            Class<?> returnType = method.getReturnType();
-
-                                            if (returnType != null && returnType.isInterface()) {
-                                                Object mockInstance = java.lang.reflect.Proxy.newProxyInstance(
-                                                        returnType.getClassLoader(),
-                                                        new Class[]{returnType},
-                                                        (proxy, method1, args) -> null
-                                                );
-                                                param.setResult(mockInstance);
-                                            } else {
-                                                param.setResult(null);
-                                            }
-                                        } else {
-                                            param.setResult(null);
+                                        // Modify the URI to divert the request to a harmless endpoint
+                                        try {
+                                            URI fakeUri = new URI("https", "127.0.0.1", "/404", null);
+                                            XposedHelpers.setObjectField(requestObj, finalUriFieldName, fakeUri);
+                                            XposedBridge.log("🚫 [InstaEclipse] Changed URI to: " + fakeUri);
+                                        } catch (Exception e) {
+                                            XposedBridge.log("❌ [InstaEclipse] Failed to modify URI: " + e.getMessage());
                                         }
+                                    } else {
+                                        XposedBridge.log("✅ [InstaEclipse] NotBlocked: " + uri.getHost() + uri.getPath());
                                     }
-                                    // DevPurposes
-                                     /*else {
-                                         XposedBridge.log("NotBlocked: " + uri.getHost() + uri.getPath());
-                                     }*/
                                 }
                             }
                         }

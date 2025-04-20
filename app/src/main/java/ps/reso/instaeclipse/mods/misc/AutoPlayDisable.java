@@ -64,10 +64,10 @@ public class AutoPlayDisable {
             // Hook the method to always return true
             XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.returnConstant(true));
 
-            XposedBridge.log("(InstaEclipse | AutoPlayDisable): Successfully hooked method: " +
+            XposedBridge.log("(InstaEclipse | AutoPlayDisable): ✅ hooked: " +
                     method.getClassName() + "." + method.getName());
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | AutoPlayDisable): Error hooking method: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ Error hooking method: " + e.getMessage());
         }
     }
 }

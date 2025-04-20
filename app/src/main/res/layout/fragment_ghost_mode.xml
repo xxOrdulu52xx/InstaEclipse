@@ -136,7 +136,147 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Direct Messages Typing -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/typing_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/dark_gray">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_no_typing"
+                        android:contentDescription="@string/disable_typing"
+                        android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/disable_typing"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/dm_typing_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ScreenShot -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/screen_shot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/dark_gray">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/screen_shot"
+                        android:src="@drawable/ic_screenshot"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/screen_shot"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/screenshot_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- One Time -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/one_time_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/dark_gray">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_view_once"
+                        android:contentDescription="@string/view_once"
+                        android:layout_marginEnd="8dp"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/view_once"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/view_once_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Story -->
             <com.google.android.material.card.MaterialCardView
@@ -184,6 +324,8 @@
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+
 
             <!-- Live -->
             <com.google.android.material.card.MaterialCardView

@@ -2,7 +2,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Versão: 0.3.1</string>
+    <string name="version">Versão:0.3.2 b.4 (D)</string>
     <string name="home">Início</string>
     <string name="features">Recursos</string>
     <string name="help">Ajuda</string>
@@ -68,11 +68,13 @@
     <string name="ghost_mode_options">Opções do Modo Invisível</string>
     <string name="typing">Digitando</string>
     <string name="story">Stories</string>
+    <string name="view_once">Ver uma vez</string>
     <string name="live">Ao Vivo</string>
     <string name="direct_messages">Mensagens Diretas</string>
     <string name="disable_typing">Desativar digitação</string>
 
     <!-- developer_options -->
+    <string name="screen_shot">A captura de tela</string>
     <string name="developer_options_guide">Guia de Opções de Desenvolvedor</string>
     <string name="dev_options_version_req">Use apenas em versões Beta/Alpha!</string>
     <string name="dev_options_req">Certifique-se de estar logado primeiro!</string>
@@ -102,6 +104,7 @@
     <string name="video_autoplay">Desativar Reprodução Automática de Vídeo</string>
 
     <!-- cartão de colaborador -->
+    <string name="hooked_methods_toast">Recursos ativados</string>
     <string name="contributor_name">Nome do Colaborador</string>
 
     <!-- Toast -->
@@ -109,4 +112,5 @@
     <string name="failed_restart_insta_toast">Falha ao reiniciar o Instagram</string>
     <string name="non_root_restart_insta_toast">Por favor, force a parada do Instagram e abra novamente</string>
     <string name="clear_cache_insta_toast">Por favor, limpe o cache do aplicativo do Instagram para uma melhor experiência</string>
+    <string name="follower_toast">Status de seguimento</string>
 </resources>

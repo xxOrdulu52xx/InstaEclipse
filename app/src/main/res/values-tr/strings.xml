@@ -2,7 +2,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Sürüm: 0.3.1</string>
+    <string name="version">Sürüm:0.3.2 b.4 (D)</string>
     <string name="home">Ana Sayfa</string>
     <string name="features">Özellikler</string>
     <string name="help">Yardım</string>
@@ -71,11 +71,13 @@
     <string name="ghost_mode_options">Hayalet Modu Seçenekleri</string>
     <string name="typing">Yazıyor</string>
     <string name="story">Hikaye</string>
+    <string name="view_once">Bir kez görüntüle</string>
     <string name="live">Canlı Yayın</string>
     <string name="direct_messages">Direkt Mesajlar</string>
     <string name="disable_typing">Yazıyor\'u Devre Dışı Bırak</string>
 
     <!-- developer_options -->
+    <string name="screen_shot">Ekran görüntüsü</string>
     <string name="developer_options_guide">Geliştirici Seçenekleri Rehberi</string>
     <string name="dev_options_version_req">Sadece Beta/Alpha sürümlerinde kullanın!</string>
     <string name="dev_options_req">Önce giriş yaptığınızdan emin olun!</string>
@@ -105,6 +107,7 @@
     <string name="video_autoplay">Video Otomatik Oynatmayı Devre Dışı Bırak</string>
 
     <!-- contributor card -->
+    <string name="hooked_methods_toast">Etkinleştirilen özellikler</string>
     <string name="contributor_name">Katkıda Bulunan\'ın İsmi</string>
 
     <!-- Toast -->
@@ -112,4 +115,5 @@
     <string name="failed_restart_insta_toast">Instagram yeniden başlatılamadı</string>
     <string name="non_root_restart_insta_toast">Lütfen Instagram\'ı durmaya zorlayın ve yeniden açın</string>
     <string name="clear_cache_insta_toast">En iyi deneyim için lütfen Instagram\'ın önbelleğini temizleyin</string>
+    <string name="follower_toast">Takip durumu</string>
 </resources>

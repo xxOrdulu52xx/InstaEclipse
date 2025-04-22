@@ -70,11 +70,13 @@
     <string name="ghost_mode_options">خيارات وضع الشبح</string>
     <string name="typing">الكتابة</string>
     <string name="story">القصة</string>
+    <string name="view_once">عرض لمرة واحدة</string>
     <string name="live">البث المباشر</string>
     <string name="direct_messages">الرسائل المباشرة</string>
-    <string name="disable_typing">تعطيل الكتابة</string>
+    <string name="disable_typing">الكتابة</string>
 
     <!-- developer_options -->
+    <string name="screen_shot">لقطة الشاشة</string>
     <string name="developer_options_guide">دليل خيارات المطور</string>
     <string name="dev_options_version_req">استخدمها فقط على الإصدارات Beta/Alpha!</string>
     <string name="dev_options_req">تأكد من تسجيل الدخول أولاً!</string>
@@ -104,6 +106,7 @@
     <string name="video_autoplay">تعطيل التشغيل التلقائي للفيديوهات</string>
 
     <!-- contributor card -->
+    <string name="hooked_methods_toast">المزايا المفعّلة</string>
     <string name="contributor_name">اسم المساهم</string>
 
     <!-- Toast -->
@@ -111,4 +114,5 @@
     <string name="failed_restart_insta_toast">فشل في إعادة تشغيل إنستجرام</string>
     <string name="non_root_restart_insta_toast">يرجى إيقاف إنستجرام بالقوة وفتحه مرة أخرى</string>
     <string name="clear_cache_insta_toast">يرجى مسح ذاكرة التخزين المؤقتة لإنستجرام لتحسين التجربة</string>
+    <string name="follower_toast">حالة المتابعة</string>
 </resources>

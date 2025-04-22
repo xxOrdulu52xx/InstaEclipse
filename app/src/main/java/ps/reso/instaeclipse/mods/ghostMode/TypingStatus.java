@@ -16,6 +16,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class TypingStatus {
 
@@ -65,6 +66,7 @@ public class TypingStatus {
 
                         XposedBridge.log("(InstaEclipse | TypingBlock): ✅ Hooked: " +
                                 method.getClassName() + "." + method.getName());
+                        FeatureStatusTracker.setHooked("GhostTyping");
                         return;
 
                     } catch (Throwable e) {

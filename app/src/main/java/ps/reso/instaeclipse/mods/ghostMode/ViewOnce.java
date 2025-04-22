@@ -12,6 +12,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class ViewOnce {
     public void handleViewOnceBlock(DexKitBridge bridge) {
@@ -71,6 +72,7 @@ public class ViewOnce {
 
                     XposedBridge.log("(InstaEclipse | ViewOnce): ✅ Hooked: " +
                             method.getClassName() + "." + method.getName());
+                    FeatureStatusTracker.setHooked("GhostViewOnce");
                     return;
                 }
             }

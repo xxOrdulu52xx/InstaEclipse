@@ -14,6 +14,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class DevOptionsEnable {
 
@@ -99,7 +100,6 @@ public class DevOptionsEnable {
                     paramTypes.add(String.valueOf(param));
                 }
 
-
                 if (returnType.contains("boolean") &&
                         paramTypes.size() == 1 &&
                         paramTypes.get(0).contains("com.instagram.common.session.UserSession")) {
@@ -109,6 +109,7 @@ public class DevOptionsEnable {
                         XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.returnConstant(true));
                         XposedBridge.log("(InstaEclipse | DevOptionsEnable): ✅ hooked: " +
                                 method.getClassName() + "." + method.getName());
+                        FeatureStatusTracker.setHooked("DevOptions");
                     } catch (Throwable e) {
                         XposedBridge.log("(InstaEclipse | DevOptionsEnable): ❌ Failed to hook " + method.getName() + ": " + e.getMessage());
                     }

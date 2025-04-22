@@ -16,6 +16,8 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
+
 public class StorySeen {
     public void handleStorySeenBlock(DexKitBridge bridge) {
         try {
@@ -60,6 +62,7 @@ public class StorySeen {
 
                         XposedBridge.log("(InstaEclipse | StoryBlock): ✅ Hooked: " +
                                 method.getClassName() + "." + method.getName());
+                        FeatureStatusTracker.setHooked("GhostStories");
                         return;
 
                     } catch (Throwable e) {

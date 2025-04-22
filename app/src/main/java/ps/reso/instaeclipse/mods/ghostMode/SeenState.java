@@ -13,6 +13,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 /**
  * Handles Ghost Mode for Direct Messages (DM) in Instagram.
@@ -62,6 +63,7 @@ public class SeenState {
 
                         XposedBridge.log("(InstaEclipse | GhostModeSeen): ✅ Hooked: " +
                                 method.getClassName() + "." + method.getName());
+                        FeatureStatusTracker.setHooked("GhostSeen");
                         return;
 
                     } catch (Throwable e) {

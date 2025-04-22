@@ -13,6 +13,8 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
+
 public class LiveSeen {
     public void handleLiveSeenBlock(DexKitBridge bridge) {
         try {
@@ -59,6 +61,7 @@ public class LiveSeen {
 
                         XposedBridge.log("(InstaEclipse | LiveGhost): ✅ Hooked: " +
                                 method.getClassName() + "." + method.getName());
+                        FeatureStatusTracker.setHooked("GhostLive");
                         return;
 
                     } catch (Throwable e) {

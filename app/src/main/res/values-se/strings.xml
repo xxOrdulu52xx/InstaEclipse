@@ -1,7 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Version: 0.2.1</string>
+    <string name="version">Version: 0.3.2</string>
     <string name="home">Hem</string>
     <string name="features">Funktioner</string>
     <string name="help">Hjälp</string>
@@ -53,7 +53,7 @@
     <string name="faq_4">4. Leder utvecklaralternativ till krascher? Följ guiden för utvecklaralternativ.</string>
     <string name="faq_5">5. Visas konstiga etiketter eller nummer i utvecklaralternativen? Använd Beta- eller Alpha-versioner; stabila versioner är obfuskerade.</string>
     <string name="faq_6">6. Är störningsfritt läge aktiverat men innehåll visas ändå? Tvinga stopp på Instagram och rensa dess cache.</string>
-    
+
     <!-- features -->
     <string name="developer_options">Utvecklaralternativ</string>
     <string name="ghost_mode">Spökläge</string>
@@ -70,11 +70,13 @@
     <string name="ghost_mode_options">Inställningar för spökläge</string>
     <string name="typing">Skrivindikator</string>
     <string name="story">Story</string>
+    <string name="view_once">Visa en gång</string>
     <string name="live">Live</string>
     <string name="direct_messages">Direktmeddelanden</string>
     <string name="disable_typing">Inaktivera skrivindikator</string>
 
     <!-- developer_options -->
+    <string name="screen_shot">Skärmdump</string>
     <string name="developer_options_guide">Guide för utvecklaralternativ</string>
     <string name="dev_options_version_req">Använd enbart på Beta/Alpha-versioner!</string>
     <string name="dev_options_req">Säkerställ att du är inloggad först!</string>
@@ -98,11 +100,19 @@
     <string name="disable_comments">Inaktivera kommentarer</string>
 
     <!-- contributor card -->
+    <string name="hooked_methods_toast">Visa notifikation om aktiverade funktioner</string>
     <string name="contributor_name">Contributor Name</string>
+
+    <!-- Miscellaneous -->
+    <string name="misc">Övrigt</string>
+    <string name="miscellaneous_options">Övriga alternativ</string>
+    <string name="story_flipping">"Inaktivera bläddring mellan stories  "</string>
+    <string name="video_autoplay">Inaktivera automatisk uppspelning av video</string>
 
     <!-- Toast -->
     <string name="restart_insta_toast">Startar om Instagram...</string>
     <string name="failed_restart_insta_toast">Misslyckades med att starta om Instagram</string>
     <string name="non_root_restart_insta_toast">Tvinga stopp på Instagram och starta det manuellt</string>
     <string name="clear_cache_insta_toast">Rensa Instagrams cache för att säkerställa korrekt funktion</string>
+    <string name="follower_toast">Visa följarnotifikation</string>
 </resources>

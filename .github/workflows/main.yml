@@ -33,10 +33,6 @@ jobs:
       # Step 4: Set up Android SDK
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
-        with:
-          api-level: 34  # Match with your compileSdkVersion
-          build-tools: 34.0.0  # Match with your buildToolsVersion
-          target: android-34
 
       # Step 5: Grant execution permissions to gradlew
       - name: Grant execute permission to gradlew

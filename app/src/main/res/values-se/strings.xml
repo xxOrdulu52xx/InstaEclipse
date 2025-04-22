@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">InstaEclipse</string>
+    <string name="version">Version: 0.3.2</string>
+    <string name="home">Hem</string>
+    <string name="features">Funktioner</string>
+    <string name="help">Hjälp</string>
+
+    <!-- home -->
+    <string name="module_disabled">Modulen är inaktiverad. Aktivera den i Xposed Installer.</string>
+
+    <string name="module_status">Modulstatus:</string>
+
+    <string name="module_status_disabled">Modulstatus: Inaktiverad</string>
+    <string name="request_enable_module">Aktivera modulen via Xposed Installer.</string>
+
+    <string name="module_status_enabled_no_root">Modulstatus: Aktiverad (Ingen root-åtkomst)</string>
+    <string name="request_enable_root">Root-åtkomst krävs för automatisk omstart. Manuell omstart behövs utan root.</string>
+
+    <string name="module_status_enabled">Modulstatus: Aktiverad</string>
+    <string name="module_active">Modulen är aktiv och fungerar korrekt.</string>
+
+    <string name="checking_instagram">Verifierar Instagram...</string>
+    <string name="installed_instagram_version">Instagram installerat - Version: </string>
+    <string name="not_installed_instagram">Instagram är inte installerat.</string>
+    <string name="error_instagram">Fel vid verifiering av Instagram-status.</string>
+
+    <string name="restart_instagram">Starta om Instagram</string>
+    <string name="contributors">Bidragsgivare</string>
+    <string name="special_thanks">Särskilt tack</string>
+
+    <!-- Don't translate! -->
+    <string name="instagram_logo" translatable="false">Instagram Logo</string>
+
+    <!-- help -->
+    <string name="help_amp_troubleshooting">Hjälp och felsökning</string>
+    <string name="find_updates_and_documentation">Sök efter uppdateringar och dokumentation.</string>
+    <string name="go_to_github">Besök GitHub</string>
+    <string name="find_support">Hitta support.</string>
+    <string name="go_to_telegram">Besök Telegram</string>
+    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
+
+    <!-- Don't translate! -->
+    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
+
+    <!-- faq -->
+    <string name="frequently_asked_questions">Vanliga frågor (FAQ)</string>
+    <string name="faq_1">1. Fungerar det inte eller kraschar det med Google Play-versionen? Använd APK:er från APKMirror istället.</string>
+    <string name="faq_2">2. Är modulen inte aktiverad? Avaktivera och återaktivera den i LSPosed.</string>
+    <string name="faq_3">3. Fungerar funktionerna inte? Tvinga stopp och starta om Instagram.</string>
+    <string name="faq_4">4. Leder utvecklaralternativ till krascher? Följ guiden för utvecklaralternativ.</string>
+    <string name="faq_5">5. Visas konstiga etiketter eller nummer i utvecklaralternativen? Använd Beta- eller Alpha-versioner; stabila versioner är obfuskerade.</string>
+    <string name="faq_6">6. Är störningsfritt läge aktiverat men innehåll visas ändå? Tvinga stopp på Instagram och rensa dess cache.</string>
+
+    <!-- features -->
+    <string name="developer_options">Utvecklaralternativ</string>
+    <string name="ghost_mode">Spökläge</string>
+    <string name="distraction_free">Störningsfritt läge</string>
+    <string name="remove_ads">Ta bort annonser</string>
+    <string name="remove_analytics">Inaktivera analys</string>
+
+    <string name="enable_disable_all">Aktivera/avaktivera allt</string>
+
+    <!-- Don't translate! -->
+    <string name="hint" translatable="false">Hint</string>
+
+    <!-- ghost -->
+    <string name="ghost_mode_options">Inställningar för spökläge</string>
+    <string name="typing">Skrivindikator</string>
+    <string name="story">Story</string>
+    <string name="view_once">Visa en gång</string>
+    <string name="live">Live</string>
+    <string name="direct_messages">Direktmeddelanden</string>
+    <string name="disable_typing">Inaktivera skrivindikator</string>
+
+    <!-- developer_options -->
+    <string name="screen_shot">Skärmdump</string>
+    <string name="developer_options_guide">Guide för utvecklaralternativ</string>
+    <string name="dev_options_version_req">Använd enbart på Beta/Alpha-versioner!</string>
+    <string name="dev_options_req">Säkerställ att du är inloggad först!</string>
+
+    <string name="dev_options_1">1. Öppna Instagram och håll nere Hem-knappen.</string>
+    <string name="dev_options_2">2. Navigera till Utvecklaralternativ > MetaConfig-inställningar och åsidosättningar.</string>
+    <string name="dev_options_3">3. Sök efter \"Employee\" och aktivera följande alternativ:</string>
+    <string name="dev_options_4">4. Avaktivera sedan utvecklaralternativen i modulen för att förhindra krascher.</string>
+
+    <!-- Don't translate! -->
+    <string name="is_employee" translatable="false">• is employee</string>
+    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
+    <string name="employee_options" translatable="false">• employee options</string>
+
+    <!-- distraction free -->
+    <string name="distraction_free_options">Inställningar för störningsfritt läge</string>
+    <string name="disable_stories">Inaktivera Stories</string>
+    <string name="disable_feed">Inaktivera flödet</string>
+    <string name="disable_reels">Inaktivera Reels</string>
+    <string name="disable_explore">Inaktivera Utforska</string>
+    <string name="disable_comments">Inaktivera kommentarer</string>
+
+    <!-- contributor card -->
+    <string name="hooked_methods_toast">Visa notifikation om aktiverade funktioner</string>
+    <string name="contributor_name">Contributor Name</string>
+
+    <!-- Miscellaneous -->
+    <string name="misc">Övrigt</string>
+    <string name="miscellaneous_options">Övriga alternativ</string>
+    <string name="story_flipping">"Inaktivera bläddring mellan stories  "</string>
+    <string name="video_autoplay">Inaktivera automatisk uppspelning av video</string>
+
+    <!-- Toast -->
+    <string name="restart_insta_toast">Startar om Instagram...</string>
+    <string name="failed_restart_insta_toast">Misslyckades med att starta om Instagram</string>
+    <string name="non_root_restart_insta_toast">Tvinga stopp på Instagram och starta det manuellt</string>
+    <string name="clear_cache_insta_toast">Rensa Instagrams cache för att säkerställa korrekt funktion</string>
+    <string name="follower_toast">Visa följarnotifikation</string>
+</resources>

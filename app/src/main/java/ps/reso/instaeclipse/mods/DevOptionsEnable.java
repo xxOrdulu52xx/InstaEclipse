@@ -14,103 +14,110 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
-
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class DevOptionsEnable {
+
     public void handleDevOptions(DexKitBridge bridge) {
         try {
             findAndHookDynamicMethod(bridge);
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error handling Dev Options: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | DevOptionsEnable): ❌ Error handling Dev Options: " + e.getMessage());
         }
     }
 
     private void findAndHookDynamicMethod(DexKitBridge bridge) {
         try {
-            // Step 1: Find classes containing "is_employee"
+            // Step 1: Find classes referencing "is_employee"
             List<ClassData> classes = bridge.findClass(FindClass.create()
-                    .matcher(ClassMatcher.create()
-                            .usingStrings("is_employee") // Match classes referencing "is_employee"
-                    )
+                    .matcher(ClassMatcher.create().usingStrings("is_employee"))
             );
 
-            if (classes.isEmpty()) {
-                return;
-            }
+            if (classes.isEmpty()) return;
 
-
-            // Step 2: Inspect each class for methods referencing "is_employee"
             for (ClassData classData : classes) {
                 String className = classData.getName();
-                if (!className.startsWith("X.")) {
-                    continue; // Skip non-relevant classes
-                }
+                if (!className.startsWith("X.")) continue;
 
-                // Step 3: Locate methods referencing "is_employee"
+                // Step 2: Find methods referencing "is_employee" within the class
                 List<MethodData> methods = bridge.findMethod(FindMethod.create()
                         .matcher(MethodMatcher.create()
-                                .declaredClass(className) // Inspect methods in the current class
-                                .usingStrings("is_employee") // Reference "is_employee"
-                        )
+                                .declaredClass(className)
+                                .usingStrings("is_employee"))
                 );
 
-                if (methods.isEmpty()) {
-                    continue;
-                }
+                if (methods.isEmpty()) continue;
 
                 for (MethodData method : methods) {
-
-                    // Step 4: Inspect the invoked methods
-                    inspectInvokedMethods(method);
+                    inspectInvokedMethods(bridge, method);
                 }
             }
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error during dynamic method discovery and hooking: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | DevOptionsEnable): ❌ Error during discovery: " + e.getMessage());
         }
     }
 
-    private void inspectInvokedMethods(MethodData method) {
+    private void inspectInvokedMethods(DexKitBridge bridge, MethodData method) {
         try {
-            // Step 1: Get all methods invoked by the current method
-            List<MethodData> invokedMethods = method.getInvokes(); // Access the invoked methods directly.
-
-            if (invokedMethods.isEmpty()) {
-                return;
-            }
+            List<MethodData> invokedMethods = method.getInvokes();
+            if (invokedMethods.isEmpty()) return;
 
             for (MethodData invokedMethod : invokedMethods) {
+                String returnType = String.valueOf(invokedMethod.getReturnType());
 
-                boolean returnTypeMatch = String.valueOf(invokedMethod.getReturnType()).contains("boolean");
+                if (!returnType.contains("boolean")) continue;
 
-                // Directly check if the parameter type matches "com.instagram.common.session.UserSession"
-                boolean paramTypesMatch = false;
-                if (!invokedMethod.getParamTypes().isEmpty()) {
-                    String rawParamTypeName = String.valueOf(invokedMethod.getParamTypes().get(0)); // Get raw param type
-
-                    // Simplify the check by matching the expected type directly
-                    if (rawParamTypeName.contains("com.instagram.common.session.UserSession")) {
-                        paramTypesMatch = true;
-                    }
+                List<String> paramTypes = new java.util.ArrayList<>();
+                for (Object param : invokedMethod.getParamTypes()) {
+                    paramTypes.add(String.valueOf(param));
                 }
 
-                if (returnTypeMatch && paramTypesMatch) {
+                if (paramTypes.size() == 1 &&
+                        paramTypes.get(0).contains("com.instagram.common.session.UserSession")) {
 
-                    // Hook the target method
+                    String targetClass = invokedMethod.getClassName();
+                    XposedBridge.log("(InstaEclipse | DevOptionsEnable): 📦 Hooking boolean methods in: " + targetClass);
+                    hookAllBooleanMethodsInClass(bridge, targetClass);
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            XposedBridge.log("(InstaEclipse | DevOptionsEnable): ❌ Error inspecting invoked methods: " + e.getMessage());
+        }
+    }
+
+    private void hookAllBooleanMethodsInClass(DexKitBridge bridge, String className) {
+        try {
+            List<MethodData> methods = bridge.findMethod(FindMethod.create()
+                    .matcher(MethodMatcher.create()
+                            .declaredClass(className))
+            );
+
+            for (MethodData method : methods) {
+                String returnType = String.valueOf(method.getReturnType());
+                List<String> paramTypes = new java.util.ArrayList<>();
+                for (Object param : method.getParamTypes()) {
+                    paramTypes.add(String.valueOf(param));
+                }
+
+                if (returnType.contains("boolean") &&
+                        paramTypes.size() == 1 &&
+                        paramTypes.get(0).contains("com.instagram.common.session.UserSession")) {
+
                     try {
-                        Method targetMethod = invokedMethod.getMethodInstance(Module.hostClassLoader);
+                        Method targetMethod = method.getMethodInstance(Module.hostClassLoader);
                         XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.returnConstant(true));
-                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): Successfully hooked target method: " +
-                                invokedMethod.getClassName() + "." + invokedMethod.getName());
-                    } catch (Exception e) {
-                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error hooking method: " + e.getMessage());
+                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): ✅ hooked: " +
+                                method.getClassName() + "." + method.getName());
+                        FeatureStatusTracker.setHooked("DevOptions");
+                    } catch (Throwable e) {
+                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): ❌ Failed to hook " + method.getName() + ": " + e.getMessage());
                     }
-                    return; // Exit after hooking the target
                 }
             }
 
-
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | DevOptionsEnable): Error inspecting invoked methods: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | DevOptionsEnable): ❌ Error while hooking class: " + className + " → " + e.getMessage());
         }
     }
 }

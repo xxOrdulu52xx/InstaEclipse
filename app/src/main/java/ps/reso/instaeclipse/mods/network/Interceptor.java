@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.mods;
+package ps.reso.instaeclipse.mods.network;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -10,6 +10,8 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.mods.misc.FollowerIndicator;
 
 public class Interceptor {
 
@@ -63,29 +65,34 @@ public class Interceptor {
                                     boolean shouldDrop = uriConditions.stream().anyMatch(condition -> condition.test(uri));
 
                                     if (shouldDrop) {
-                                        // Handle return value dynamically
-                                        if (param.method instanceof Method) {
-                                            Method method = (Method) param.method;
-                                            Class<?> returnType = method.getReturnType();
-
-                                            if (returnType != null && returnType.isInterface()) {
-                                                Object mockInstance = java.lang.reflect.Proxy.newProxyInstance(
-                                                        returnType.getClassLoader(),
-                                                        new Class[]{returnType},
-                                                        (proxy, method1, args) -> null
-                                                );
-                                                param.setResult(mockInstance);
-                                            } else {
-                                                param.setResult(null);
-                                            }
-                                        } else {
-                                            param.setResult(null);
+                                        // Modify the URI to divert the request to a harmless endpoint
+                                        try {
+                                            URI fakeUri = new URI("https", "127.0.0.1", "/404", null);
+                                            XposedHelpers.setObjectField(requestObj, finalUriFieldName, fakeUri);
+                                            // XposedBridge.log("🚫 [InstaEclipse] Changed URI to: " + fakeUri);
+                                        } catch (Exception e) {
+                                            // XposedBridge.log("❌ [InstaEclipse] Failed to modify URI: " + e.getMessage());
                                         }
                                     }
-                                    // DevPurposes
-                                     /*else {
-                                         XposedBridge.log("NotBlocked: " + uri.getHost() + uri.getPath());
-                                     }*/
+                                    /*
+                                     {
+                                        XposedBridge.log("✅ [InstaEclipse] NotBlocked: " + uri.getHost() + uri.getPath());
+                                    }*/
+
+                                    if (Module.isShow_Follower_Status_Enabled) {
+                                        if (uri.getPath() != null && uri.getPath().startsWith("/api/v1/users/") && uri.getPath().contains("/info_stream/")) {
+                                            String[] parts = uri.getPath().split("/");
+                                            if (parts.length >= 5) {
+                                                // Extracted ID from /api/v1/users/{id}/info_stream/
+                                                ps.reso.instaeclipse.utils.FollowToastTracker.currentlyViewedUserId = parts[4];
+                                                FollowerIndicator followerIndicator = new FollowerIndicator();
+                                                String bridge = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
+                                                followerIndicator.checkFollow(classLoader, bridge);
+                                                // XposedBridge.log("👁️ [InstaEclipse] Viewing profile of user: " + userId);
+                                            }
+                                        }
+                                    }
+
                                 }
                             }
                         }

@@ -1,21 +1,36 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Keep everything — no obfuscation, no shrinking
+-dontobfuscate
+-dontoptimize
+-keepattributes *Annotation*, SourceFile, LineNumberTable
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Keep ALL classes & members (methods, fields)
+-keep class ps.reso.instaeclipse.** { *; }
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Keep everything related to Xposed API
+-keep class de.robv.android.xposed.** { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Keep reflection / DexKit-accessed symbols
+-keep class * {
+    public protected *;
+}
+
+# Keep any dynamically called methods (like URI matchers)
+-keepclassmembers class * {
+    *** get*();
+    void set*(***);
+}
+
+# Avoid warnings from missing Android APIs
+-dontwarn android.support.**
+-dontwarn androidx.**
+-dontwarn com.android.**
+-dontwarn org.lsposed.**
+# Suppress missing javax.lang.model warnings
+-dontwarn javax.lang.model.**
+-dontwarn com.google.errorprone.annotations.**
+-dontwarn org.checkerframework.**
+
+
+# keep GSON serialized classes
+-keep class * implements com.google.gson.JsonDeserializer { *; }
+-keep class * implements com.google.gson.JsonSerializer { *; }

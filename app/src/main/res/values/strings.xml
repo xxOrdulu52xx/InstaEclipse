@@ -1,7 +1,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Version: 0.3.1</string>
+    <string name="version">Version: 0.3.2</string>
     <string name="home">Home</string>
     <string name="features">Features</string>
     <string name="help">Help</string>
@@ -70,9 +70,11 @@
     <string name="ghost_mode_options">Ghost Mode Options</string>
     <string name="typing">Typing</string>
     <string name="story">Story</string>
+    <string name="view_once">View Once</string>
     <string name="live">Live</string>
     <string name="direct_messages">Direct Messages</string>
-    <string name="disable_typing">Disable typing</string>
+    <string name="disable_typing">Typing</string>
+    <string name="screen_shot">Screenshot</string>
 
     <!-- developer_options -->
     <string name="developer_options_guide">Developer Options Guide</string>
@@ -102,6 +104,8 @@
     <string name="miscellaneous_options">Miscellaneous Options</string>
     <string name="story_flipping">Disable Story Flipping</string>
     <string name="video_autoplay">Disable Video Auto play</string>
+    <string name="follower_toast">Show Follower Toast</string>
+    <string name="hooked_methods_toast">Show Enabled Features Toast</string>
 
     <!-- contributor card -->
     <string name="contributor_name">Contributor Name</string>

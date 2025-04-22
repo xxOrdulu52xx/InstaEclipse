@@ -5,8 +5,8 @@
     android:id="@+id/misc_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/black">
+    android:background="@color/black"
+    android:fitsSystemWindows="true">
 
     <!-- Scrollable Content -->
     <ScrollView
@@ -18,46 +18,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <!-- Title Section -->
             <TextView
                 android:id="@+id/fragment_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
                 android:text="@string/miscellaneous_options"
                 android:textColor="@color/white"
                 android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp" />
+                android:textStyle="bold" />
 
             <!-- Enable/Disable All -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/enable_all_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/dark_gray">
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:padding="16dp">
 
                     <!-- Image -->
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/ic_toggle_all"
-                        android:contentDescription="@string/enable_disable_all"
                         android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/enable_disable_all"
                         android:layoutDirection="ltr"
+                        android:src="@drawable/ic_toggle_all"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -85,33 +85,33 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"
-                android:layout_marginVertical="16dp" />
+                android:layout_marginVertical="16dp"
+                android:background="@color/gray" />
 
             <!-- Disable auto story flipping -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/dark_gray">
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:padding="16dp">
 
                     <!-- Image -->
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/ic_story"
-                        android:contentDescription="@string/story_flipping"
                         android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/story_flipping"
                         android:layoutDirection="ltr"
+                        android:src="@drawable/ic_story"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -139,26 +139,26 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/dark_gray">
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:padding="16dp">
 
                     <!-- Image -->
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/ic_video"
-                        android:contentDescription="@string/video_autoplay"
                         android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/video_autoplay"
                         android:layoutDirection="ltr"
+                        android:src="@drawable/ic_video"
                         app:tint="@color/white" />
 
                     <!-- Title -->
@@ -174,6 +174,100 @@
                     <!-- Toggle -->
                     <Switch
                         android:id="@+id/video_autoplay_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Enable follower toast -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/follower_toast"
+                        android:layoutDirection="ltr"
+                        android:src="@drawable/ic_follower"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/follower_toast"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/follower_toast_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Enable hooked methods toast -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/dark_gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <!-- Image -->
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/hooked_methods_toast"
+                        android:layoutDirection="ltr"
+                        android:src="@drawable/ic_enabled_features"
+                        app:tint="@color/white" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/hooked_methods_toast"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Toggle -->
+                    <Switch
+                        android:id="@+id/hooked_methods_toggle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="48dp"

@@ -2,7 +2,7 @@
 <resources>
     <!-- aplicación -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Versión: 0.3.1</string>
+    <string name="version">Versión: 0.3.2</string>
     <string name="home">Inicio</string>
     <string name="features">Características</string>
     <string name="help">Ayuda</string>
@@ -73,11 +73,13 @@
     <string name="ghost_mode_options">Opciones de Modo Fantasma</string>
     <string name="typing">Escribiendo</string>
     <string name="story">Historia</string>
+    <string name="view_once">Ver una vez</string>
     <string name="live">En Vivo</string>
     <string name="direct_messages">Mensajes Directos</string>
     <string name="disable_typing">Desactivar escribiendo</string>
 
     <!-- opciones de desarrollador -->
+    <string name="screen_shot">La captura de pantalla</string>
     <string name="developer_options_guide">Guía de Opciones de Desarrollador</string>
     <string name="dev_options_version_req">¡Úsalo solo en versiones Beta/Alpha!</string>
     <string name="dev_options_req">¡Asegúrate de haber iniciado sesión primero!</string>
@@ -107,6 +109,7 @@
     <string name="video_autoplay">Desactivar Reproducción Automática de Video</string>
 
     <!-- tarjeta de contribuidor -->
+    <string name="hooked_methods_toast">Funciones habilitadas</string>
     <string name="contributor_name">Nombre del Contribuidor</string>
 
     <!-- Toast -->
@@ -114,4 +117,5 @@
     <string name="failed_restart_insta_toast">No se pudo reiniciar Instagram</string>
     <string name="non_root_restart_insta_toast">Por favor, fuerza el cierre de Instagram y ábrelo</string>
     <string name="clear_cache_insta_toast">Por favor, borra la caché de Instagram para la mejor experiencia</string>
+    <string name="follower_toast">Estado de seguimiento</string>
 </resources>

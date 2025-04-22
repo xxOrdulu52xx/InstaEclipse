@@ -27,12 +27,12 @@ public class StoryFlipping {
             List<MethodData> methods = bridge.findMethod(FindMethod.create()
                     .matcher(MethodMatcher.create()
                             .declaredClass("instagram.features.stories.fragment.ReelViewerFragment") // Target class
-                            .usingStrings("upsell_impressions") // Look for methods referencing this string
+                            .usingStrings("end_scene") // Look for methods referencing this string
                     )
             );
 
             if (methods.isEmpty()) {
-                XposedBridge.log("(InstaEclipse | StoryFlipping): No methods found referencing 'upsell_impressions'.");
+                XposedBridge.log("(InstaEclipse | StoryFlipping): ❌ No methods found referencing 'end_scene'.");
                 return;
             }
 
@@ -43,15 +43,15 @@ public class StoryFlipping {
 
                     XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.DO_NOTHING); // Disable the method
 
-                    XposedBridge.log("(InstaEclipse | StoryFlipping): Successfully hooked method: " +
+                    XposedBridge.log("(InstaEclipse | StoryFlipping): ✅ hooked method: " +
                             method.getClassName() + "." + method.getName());
                     return; // Exit after hooking the first match
                 } catch (Exception e) {
-                    XposedBridge.log("(InstaEclipse | StoryFlipping): Error hooking method: " + e.getMessage());
+                    XposedBridge.log("(InstaEclipse | StoryFlipping): ❌ Error hooking method: " + e.getMessage());
                 }
             }
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | StoryFlipping): Error during dynamic method discovery: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | StoryFlipping): ❌ during dynamic method discovery: " + e.getMessage());
         }
     }
 }

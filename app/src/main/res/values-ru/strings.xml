@@ -2,7 +2,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Версия: 0.3.1</string>
+    <string name="version">Версия: 0.3.2</string>
     <string name="home">Главная</string>
     <string name="features">Функции</string>
     <string name="help">Помощь</string>
@@ -71,11 +71,13 @@
     <string name="ghost_mode_options">Настройки Режима Призрака</string>
     <string name="typing">Печатание</string>
     <string name="story">История</string>
+    <string name="view_once">Просмотреть один раз</string>
     <string name="live">Прямой эфир</string>
     <string name="direct_messages">Личные сообщения</string>
     <string name="disable_typing">Не отправлять "печатает"</string>
 
     <!-- developer_options -->
+    <string name="screen_shot">Скриншот</string>
     <string name="developer_options_guide">Инструкция для Режима Разработчика</string>
     <string name="dev_options_version_req">Используйте только с Alpha/Beta версиями!</string>
     <string name="dev_options_req">Убидитесь, что вы вошли в аккаунт!</string>
@@ -105,6 +107,7 @@
     <string name="video_autoplay">Отключить автоматическое воспроизведение видео</string>
 
     <!-- contributor card -->
+    <string name="hooked_methods_toast">Активированные функции</string>
     <string name="contributor_name">Имя участника</string>
 
     <!-- Toast -->
@@ -112,4 +115,5 @@
     <string name="failed_restart_insta_toast">Не удалось перезагрузить Instagram</string>
     <string name="non_root_restart_insta_toast">Пожалуйста остановите Instagram и откройте его</string>
     <string name="clear_cache_insta_toast">Пожалуйста очистите кэш Instagram для лучшего использования</string>
+    <string name="follower_toast">Статус подписки</string>
 </resources>

@@ -149,7 +149,8 @@ public class HomeFragment extends Fragment {
 
         List<Contributor> contributors = Arrays.asList(
                 new Contributor("ReSo7200", "https://github.com/ReSo7200", "https://linkedin.com/in/abdalhaleem-altamimi", null),
-                new Contributor("frknkrc44", "https://github.com/frknkrc44", null, null)
+                new Contributor("frknkrc44", "https://github.com/frknkrc44", null, null),
+                new Contributor("BrianML", "https://github.com/brianml31", null, "https://t.me/instamoon_channel")
         );
 
         List<Contributor> specialThanks = Arrays.asList(

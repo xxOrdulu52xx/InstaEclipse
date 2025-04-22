@@ -27,7 +27,6 @@ import ps.reso.instaeclipse.mods.ghostMode.TypingStatus;
 import ps.reso.instaeclipse.mods.ghostMode.ViewOnce;
 import ps.reso.instaeclipse.mods.misc.AutoPlayDisable;
 import ps.reso.instaeclipse.mods.misc.StoryFlipping;
-import ps.reso.instaeclipse.mods.misc.Testing;
 import ps.reso.instaeclipse.mods.network.Interceptor;
 import ps.reso.instaeclipse.utils.CustomToast;
 import ps.reso.instaeclipse.utils.FeatureStatusTracker;

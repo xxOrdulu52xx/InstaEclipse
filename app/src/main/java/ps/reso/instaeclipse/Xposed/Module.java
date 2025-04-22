@@ -212,9 +212,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             Interceptor interceptor = new Interceptor();
 
-            Testing testing = new Testing();
-            testing.disableSponsoredContent(dexKitBridge, hostClassLoader);
-
             if (isDevEnabled) {
                 FeatureStatusTracker.setEnabled("DevOptions");
 
@@ -307,7 +304,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 FeatureStatusTracker.setEnabled("AdBlocker");
                 try {
                     AdBlocker adBlocker = new AdBlocker();
-                    adBlocker.handleAdInsertionBlock(dexKitBridge);
+                    adBlocker.disableSponsoredContent(dexKitBridge, hostClassLoader);
                 } catch (Exception ignored) {
 
                 }

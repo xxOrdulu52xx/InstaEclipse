@@ -1,7 +1,7 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">الإصدار: ٠.٣.١</string>
+    <string name="version">الإصدار: ٠.٣.٢</string>
     <string name="home">الرئيسية</string>
     <string name="features">الميزات</string>
     <string name="help">المساعدة</string>

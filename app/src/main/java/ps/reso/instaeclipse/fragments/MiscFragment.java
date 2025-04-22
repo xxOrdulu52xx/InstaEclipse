@@ -19,6 +19,7 @@ public class MiscFragment extends Fragment {
     private static final String ENABLE_ALL_KEY = "enableAllMiscOptions";
     private static final String STORY_FLIPPING_KEY = "storyFlipping";
     private static final String VIDEO_AUTOPLAY_KEY = "videoAutoPlay";
+    private static final String FOLLOW_TOAST_KEY = "followerToast";
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch enableAllToggle;
@@ -26,6 +27,8 @@ public class MiscFragment extends Fragment {
     private Switch storyFlippingToggle;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch videoAutoPlayToggle;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private Switch followerToastToggle;
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -42,7 +45,7 @@ public class MiscFragment extends Fragment {
         enableAllToggle = view.findViewById(R.id.toggle_all);
         storyFlippingToggle = view.findViewById(R.id.story_flipping_toggle);
         videoAutoPlayToggle = view.findViewById(R.id.video_autoplay_toggle);
-
+        followerToastToggle = view.findViewById(R.id.follower_toast_toggle);
 
         // Load saved states
         loadToggleStates();
@@ -52,11 +55,13 @@ public class MiscFragment extends Fragment {
             saveToggleState(ENABLE_ALL_KEY, isChecked);
             storyFlippingToggle.setChecked(isChecked);
             videoAutoPlayToggle.setChecked(isChecked);
+            followerToastToggle.setChecked(isChecked);
         });
 
         // Individual toggles
         storyFlippingToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(STORY_FLIPPING_KEY, isChecked));
         videoAutoPlayToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(VIDEO_AUTOPLAY_KEY, isChecked));
+        followerToastToggle.setOnCheckedChangeListener((buttonView, isChecked) -> saveToggleState(FOLLOW_TOAST_KEY, isChecked));
 
         return view;
     }
@@ -65,6 +70,7 @@ public class MiscFragment extends Fragment {
         enableAllToggle.setChecked(preferences.getBoolean(ENABLE_ALL_KEY, false));
         storyFlippingToggle.setChecked(preferences.getBoolean(STORY_FLIPPING_KEY, false));
         videoAutoPlayToggle.setChecked(preferences.getBoolean(VIDEO_AUTOPLAY_KEY, false));
+        followerToastToggle.setChecked(preferences.getBoolean(FOLLOW_TOAST_KEY, false));
     }
 
     private void saveToggleState(String key, boolean value) {

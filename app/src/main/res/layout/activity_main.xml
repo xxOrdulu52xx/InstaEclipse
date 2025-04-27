@@ -31,10 +31,11 @@
                 android:src="@drawable/ic_logo"
                 android:contentDescription="App Logo"
                 android:paddingStart="2dp"
-		android:paddingEnd="6dp"
+                android:paddingEnd="6dp"
                 android:maxWidth="40dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                app:tint="@color/white" /> 
 
             <!-- App Name -->
             <TextView
@@ -46,7 +47,8 @@
                 android:contentDescription="App Name"
                 android:maxWidth="160dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:textColor="@color/white" />
 
 
             <!-- App Version -->

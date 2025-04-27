@@ -2,10 +2,13 @@ package ps.reso.instaeclipse.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -61,7 +64,7 @@ public class VersionCheckUtility {
     }
 
     private static void showUpdateDialog(Context context, String updateUrl, String newVersion) {
-        AlertDialog dialog = new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
                 .setTitle("Update Available")
                 .setMessage("A new version (" + newVersion + ") is available. Would you like to update now?")
                 .setPositiveButton("Update", (dialogInterface, which) -> {
@@ -73,13 +76,11 @@ public class VersionCheckUtility {
                     // Dismiss the dialog
                     dialogInterface.dismiss();
                 })
-                .create();
-
-        dialog.show();
+		.show();
     }
 
     private static void showErrorDialog(Context context) {
-        new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
                 .setTitle("Error")
                 .setMessage("Failed to check for updates. Please try again later.")
                 .setPositiveButton("OK", (dialogInterface, which) -> dialogInterface.dismiss())

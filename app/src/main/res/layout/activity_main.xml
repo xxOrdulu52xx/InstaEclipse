@@ -80,7 +80,9 @@
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_navigation_menu"
         app:itemTextColor="@color/white"
-        app:itemIconTint="@drawable/nav_selector"
+	app:itemIconTint="@drawable/nav_selector"
+	app:itemActiveIndicatorStyle="@null"
+	app:itemRippleColor="@android:color/transparent"
         android:background="@color/black" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

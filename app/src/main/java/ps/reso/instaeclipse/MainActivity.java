@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
+	// Select Home by default in the navbar
+	bottomNavigation.setSelectedItemId(R.id.nav_home);
+
         // Handle bottom navigation item clicks
         bottomNavigation.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;

@@ -120,16 +120,17 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
                         android:layout_marginBottom="8dp"
-                        app:cardBackgroundColor="@color/dark_gray">
+			app:cardBackgroundColor="#262626"
+			app:strokeWidth="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="10dp">
+                            android:padding="16dp">
 
                             <TextView
                                 android:id="@+id/contributors_title"
@@ -139,7 +140,7 @@
                                 android:textSize="18sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/white"
-                                android:layout_gravity="center_horizontal" />
+                                android:layout_gravity="left" />
 
                             <LinearLayout
                                 android:id="@+id/contributors_container"
@@ -154,16 +155,19 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
                         android:layout_marginTop="16dp"
-                        app:cardBackgroundColor="@color/dark_gray">
+			android:layout_marginBottom="2dp"
+			app:contentPaddingTop="1dp"
+			app:cardBackgroundColor="#262626"
+			app:strokeWidth="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="6dp">
+                            android:padding="16dp">
 
                             <TextView
                                 android:id="@+id/special_thanks_title"
@@ -173,7 +177,7 @@
                                 android:textSize="18sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/white"
-                                android:layout_gravity="center_horizontal" />
+                                android:layout_gravity="left" />
 
                             <LinearLayout
                                 android:id="@+id/special_thanks_container"

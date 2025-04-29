@@ -150,12 +150,15 @@ public class HomeFragment extends Fragment {
         List<Contributor> contributors = Arrays.asList(
                 new Contributor("ReSo7200", "https://github.com/ReSo7200", "https://linkedin.com/in/abdalhaleem-altamimi", null),
                 new Contributor("frknkrc44", "https://github.com/frknkrc44", null, null),
-                new Contributor("BrianML", "https://github.com/brianml31", null, "https://t.me/instamoon_channel")
+                new Contributor("BrianML", "https://github.com/brianml31", null, "https://t.me/instamoon_channel"),
+		new Contributor("silvzr", "https://github.com/silvzr", null, null)
         );
 
         List<Contributor> specialThanks = Arrays.asList(
+		new Contributor("xHookman", "https://github.com/xHookman", null, null),
                 new Contributor("Amàzing World", null, null, null),
-                new Contributor("Bluepapilte", null, null, "https://t.me/instasmashrepo")
+                new Contributor("Bluepapilte", null, null, "https://t.me/instasmashrepo"),
+		new Contributor("BdrcnAYYDIN", null, null, "https://t.me/BdrcnAYYDIN")
         );
 
         for (Contributor contributor : contributors) {

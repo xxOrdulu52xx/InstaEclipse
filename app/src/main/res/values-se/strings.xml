@@ -46,12 +46,12 @@
 
     <!-- faq -->
     <string name="frequently_asked_questions">Vanliga frågor (FAQ)</string>
-    <string name="faq_1">1. Fungerar det inte eller kraschar det med Google Play-versionen? Använd APK:er från APKMirror istället.</string>
-    <string name="faq_2">2. Är modulen inte aktiverad? Avaktivera och återaktivera den i LSPosed.</string>
-    <string name="faq_3">3. Fungerar funktionerna inte? Tvinga stopp och starta om Instagram.</string>
-    <string name="faq_4">4. Leder utvecklaralternativ till krascher? Följ guiden för utvecklaralternativ.</string>
-    <string name="faq_5">5. Visas konstiga etiketter eller nummer i utvecklaralternativen? Använd Beta- eller Alpha-versioner; stabila versioner är obfuskerade.</string>
-    <string name="faq_6">6. Är störningsfritt läge aktiverat men innehåll visas ändå? Tvinga stopp på Instagram och rensa dess cache.</string>
+    <string name="faq_1">1. Fungerar det inte eller kraschar det med Google Play-versionen?\n- Använd APK:er från APKMirror istället.</string>
+    <string name="faq_2">2. Är modulen inte aktiverad?\n- Avaktivera och återaktivera den i LSPosed.</string>
+    <string name="faq_3">3. Fungerar funktionerna inte?\n- Tvinga stopp och starta om Instagram.</string>
+    <string name="faq_4">4. Leder utvecklaralternativ till krascher?\n- Följ guiden för utvecklaralternativ.</string>
+    <string name="faq_5">5. Visas konstiga etiketter eller nummer i utvecklaralternativen?\n- Använd Beta- eller Alpha-versioner; stabila versioner är obfuskerade.</string>
+    <string name="faq_6">6. Är störningsfritt läge aktiverat men innehåll visas ändå?\n- Tvinga stopp på Instagram och rensa dess cache.</string>
 
     <!-- features -->
     <string name="developer_options">Utvecklaralternativ</string>

@@ -47,12 +47,12 @@
 
     <!-- faq -->
     <string name="frequently_asked_questions">Sıkça Sorulan Sorular</string>
-    <string name="faq_1">1. Google Play Sürümünü kullanırken çalışmıyor veya çöküyor mu? APKMirror APK\'lerini kullanın.</string>
-    <string name="faq_2">2. Modül etkin değil mi? Modülü LSPosed\'de devre dışı bırakıp tekrar etkinleştirin.</string>
-    <string name="faq_3">3. Özellikler çalışmıyor mu? Instagram\'ı zorla durdurup yeniden başlatın.</string>
-    <string name="faq_4">4. Geliştirici seçenekleri çöküyor mu? Geliştirici seçenekleri rehberini takip edin.</string>
-    <string name="faq_5">5. Geliştirici seçeneklerinde garip etiketler veya numaralar mı var? Kararlı sürümler karıştırma içerdiğinden Beta veya Alpha sürümlerini kullanın.</string>
-    <string name="faq_6">6. Dikkat Dağıtıcıları Kapat seçeneği etkin ancak içerik hâlâ görünüyor mu? Instagram\'ı zorla durdurun ve önbelleğini temizleyin.</string>
+    <string name="faq_1">1. Google Play Sürümünü kullanırken çalışmıyor veya çöküyor mu?\n- APKMirror APK\'lerini kullanın.</string>
+    <string name="faq_2">2. Modül etkin değil mi?\n- Modülü LSPosed\'de devre dışı bırakıp tekrar etkinleştirin.</string>
+    <string name="faq_3">3. Özellikler çalışmıyor mu?\n- Instagram\'ı zorla durdurup yeniden başlatın.</string>
+    <string name="faq_4">4. Geliştirici seçenekleri çöküyor mu?\n- Geliştirici seçenekleri rehberini takip edin.</string>
+    <string name="faq_5">5. Geliştirici seçeneklerinde garip etiketler veya numaralar mı var?\n- Kararlı sürümler karıştırma içerdiğinden Beta veya Alpha sürümlerini kullanın.</string>
+    <string name="faq_6">6. Dikkat Dağıtıcıları Kapat seçeneği etkin ancak içerik hâlâ görünüyor mu?\n- Instagram\'ı zorla durdurun ve önbelleğini temizleyin.</string>
 
     <!-- features -->
     <string name="developer_options">Geliştirici Seçenekleri</string>

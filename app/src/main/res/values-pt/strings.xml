@@ -44,12 +44,12 @@
 
     <!-- faq -->
     <string name="frequently_asked_questions">Perguntas Frequentes</string>
-    <string name="faq_1">1. Não está funcionando/travando ao usar a versão do Google Play? Use os APKs do APKMirror.</string>
-    <string name="faq_2">2. O módulo não está habilitado? Desative e reative o módulo no LSPosed.</string>
-    <string name="faq_3">3. Recursos não estão funcionando? Force a parada e reinicie o Instagram.</string>
-    <string name="faq_4">4. As opções de desenvolvedor causam falhas? Siga o guia de opções de desenvolvedor.</string>
-    <string name="faq_5">5. As opções de desenvolvedor têm rótulos ou números estranhos? Use versões Beta ou Alpha, pois as versões estáveis possuem ofuscação.</string>
-    <string name="faq_6">6. Distraction Free ativado, mas o conteúdo ainda aparece? Force a parada do Instagram e limpe o cache.</string>
+    <string name="faq_1">1. Não está funcionando/travando ao usar a versão do Google Play?\n- Use os APKs do APKMirror.</string>
+    <string name="faq_2">2. O módulo não está habilitado?\n- Desative e reative o módulo no LSPosed.</string>
+    <string name="faq_3">3. Recursos não estão funcionando?\n- Force a parada e reinicie o Instagram.</string>
+    <string name="faq_4">4. As opções de desenvolvedor causam falhas?\n- Siga o guia de opções de desenvolvedor.</string>
+    <string name="faq_5">5. As opções de desenvolvedor têm rótulos ou números estranhos?\n- Use versões Beta ou Alpha, pois as versões estáveis possuem ofuscação.</string>
+    <string name="faq_6">6. Distraction Free ativado, mas o conteúdo ainda aparece?\n- Force a parada do Instagram e limpe o cache.</string>
 
     <!-- features -->
     <string name="developer_options">Opções de Desenvolvedor</string>

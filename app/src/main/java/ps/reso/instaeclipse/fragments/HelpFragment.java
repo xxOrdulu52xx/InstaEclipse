@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.card.MaterialCardView;
 
 import ps.reso.instaeclipse.R;
 
@@ -25,20 +26,20 @@ public class HelpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_help, container, false);
 
         // Find the GitHub button
-        ImageButton githubButton = view.findViewById(R.id.github_button);
+        MaterialCardView githubCard = view.findViewById(R.id.github_card);
 
         // Find the Telegram button
-        ImageButton telegramButton = view.findViewById(R.id.telegram_button);
+        MaterialCardView telegramCard = view.findViewById(R.id.telegram_card);
 
 
         // Set the click listener for the GitHub button
-        githubButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ReSo7200/InstaEclipse/tree/main"));
+        githubCard.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ReSo7200/InstaEclipse"));
             startActivity(intent);
         });
 
         // Set the click listener for the Telegram button
-        telegramButton.setOnClickListener(v -> {
+        telegramCard.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/InstaEclipse"));
             startActivity(intent);
         });

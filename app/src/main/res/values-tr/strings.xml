@@ -2,7 +2,6 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Sürüm: 0.3.2</string>
     <string name="home">Ana Sayfa</string>
     <string name="features">Özellikler</string>
     <string name="help">Yardım</string>

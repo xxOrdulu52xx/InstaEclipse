@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.DataOutputStream;
 import java.util.Arrays;
@@ -31,12 +33,12 @@ import ps.reso.instaeclipse.utils.Utils;
 
 public class HomeFragment extends Fragment {
 
-    private TextView moduleStatus;
-    private TextView moduleSubtext;
     private MaterialButton restartInstagramButton;
     private MaterialButton downloadButton;
     private final boolean hasRootAccess = MainActivity.hasRootAccess;
+    private MaterialCardView instagramStatusCard;
     private TextView instagramStatusText;
+    private ImageView instagramLogo;
 
     @Nullable
     @Override
@@ -46,16 +48,14 @@ public class HomeFragment extends Fragment {
 
 
         // Initialize views
-        moduleStatus = view.findViewById(R.id.module_status);
-        moduleSubtext = view.findViewById(R.id.module_subtext);
         restartInstagramButton = view.findViewById(R.id.restart_instagram_button);
 	downloadButton = view.findViewById(R.id.download_instagram_button);
 
-        // Check module and root status
-        checkModuleStatus();
 
-        // Find the TextView to display Instagram status
+        // Find the Card, TextView and Logo to display Instagram status
+	instagramStatusCard = view.findViewById(R.id.instagram_status_card);
         instagramStatusText = view.findViewById(R.id.instagram_status_text);
+	instagramLogo = view.findViewById(R.id.instagram_logo);
 
         // Check Instagram installation and version
         checkInstagramStatus();
@@ -80,29 +80,6 @@ public class HomeFragment extends Fragment {
         setupContributorsAndSpecialThanks(view);
 
         return view;
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void checkModuleStatus() {
-        // Replace these checks with actual logic
-        boolean isModuleEnabled = MainActivity.isModuleActive();
-
-        if (!isModuleEnabled) {
-            moduleStatus.setText(R.string.module_status_disabled);
-            moduleStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-            moduleSubtext.setText(R.string.request_enable_module);
-            restartInstagramButton.setEnabled(false);
-        } else if (!hasRootAccess) {
-            moduleStatus.setText(R.string.module_status_enabled_no_root);
-            moduleStatus.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
-            moduleSubtext.setText(R.string.request_enable_root);
-            restartInstagramButton.setEnabled(true);
-        } else {
-            moduleStatus.setText(R.string.module_status_enabled);
-            moduleStatus.setTextColor(getResources().getColor(android.R.color.holo_green_light));
-            moduleSubtext.setText(R.string.module_active);
-            restartInstagramButton.setEnabled(true);
-        }
     }
 
     private void restartInstagramWithRoot() {
@@ -140,14 +117,17 @@ public class HomeFragment extends Fragment {
             PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
             String versionName = packageInfo.versionName;
 
-            instagramStatusText.setText(getString(R.string.installed_instagram_version) + versionName);
-            instagramStatusText.setTextColor(getResources().getColor(R.color.green));
+            instagramStatusText.setText(getString(R.string.installed_instagram_version) + "ver." + " " + versionName);
+            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+	    instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
         } catch (PackageManager.NameNotFoundException e) {
             instagramStatusText.setText(getString(R.string.not_installed_instagram));
-            instagramStatusText.setTextColor(getResources().getColor(R.color.red));
+            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
+	    instagramLogo.setImageResource(R.drawable.ic_cancel);
         } catch (Exception e) {
             instagramStatusText.setText(getString(R.string.error_instagram));
-            instagramStatusText.setTextColor(getResources().getColor(R.color.red));
+            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
+	    instagramLogo.setImageResource(R.drawable.ic_error);
         }
     }
 

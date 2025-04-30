@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -12,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
+	android:scrollbars="none"
         android:background="@color/black">
 
         <LinearLayout
@@ -91,21 +93,45 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Restart Instagram Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/restart_instagram_button"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/restart_instagram"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/accent_blue"
-                android:enabled="false" />
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+
+            	<!-- Restart Instagram Button -->
+            	<com.google.android.material.button.MaterialButton
+                    android:id="@+id/restart_instagram_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+                    android:text="@string/restart_instagram"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/accent_blue"
+		    android:layout_marginEnd="4dp"
+		    app:cornerRadius="12dp"
+                    android:enabled="false" />
+
+		<!-- Download APK Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/download_instagram_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+                    android:text="@string/download_apk"
+                    android:textColor="@color/white"
+                    android:backgroundTint="#262626"
+		    android:layout_marginStart="4dp"
+                    app:cornerRadius="12dp"
+                    android:enabled="true" />
+	    </LinearLayout>
 
             <!-- Follow Us Card -->
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
+		android:scrollbars="none"
                 android:background="@color/black">
 
                 <LinearLayout

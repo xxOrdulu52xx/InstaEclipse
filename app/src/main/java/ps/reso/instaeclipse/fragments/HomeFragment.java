@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment {
     private TextView moduleStatus;
     private TextView moduleSubtext;
     private MaterialButton restartInstagramButton;
+    private MaterialButton downloadButton;
     private final boolean hasRootAccess = MainActivity.hasRootAccess;
     private TextView instagramStatusText;
 
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment {
         moduleStatus = view.findViewById(R.id.module_status);
         moduleSubtext = view.findViewById(R.id.module_subtext);
         restartInstagramButton = view.findViewById(R.id.restart_instagram_button);
+	downloadButton = view.findViewById(R.id.download_instagram_button);
 
         // Check module and root status
         checkModuleStatus();
@@ -66,6 +68,13 @@ public class HomeFragment extends Fragment {
                 restartInstagramNonRoot();
             }
         });
+
+	// Download APK Button Logic
+	downloadButton.setOnClickListener(v -> {
+    	    String url = "https://www.apkmirror.com/uploads/?appcategory=instagram-instagram";
+    	    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    	    startActivity(intent);
+	});
 
         // Setup Contributors and Special Thanks
         setupContributorsAndSpecialThanks(view);

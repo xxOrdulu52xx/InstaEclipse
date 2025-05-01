@@ -9,16 +9,32 @@ import android.view.Window;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import ps.reso.instaeclipse.fragments.FeaturesFragment;
 import ps.reso.instaeclipse.fragments.HelpFragment;
 import ps.reso.instaeclipse.fragments.HomeFragment;
 import ps.reso.instaeclipse.utils.Preferences;
 import ps.reso.instaeclipse.utils.VersionCheckUtility;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static boolean hasRootAccess = checkForRootAccess();
+
+    public static boolean isModuleActive() {
+        return false;
+    }
+
+    private static boolean checkForRootAccess() {
+        try {
+            Process process = Runtime.getRuntime().exec("su -c echo success");
+            int exitCode = process.waitFor();
+
+            return exitCode == 0; // Root access granted
+        } catch (Exception e) {
+            // Root access denied
+            return false; // No root access or error occurred
+        }
+    }
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -53,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
             if (item.getItemId() == R.id.nav_home) {
                 selectedFragment = new HomeFragment();
-            } else if (item.getItemId() == R.id.nav_features) {
-                selectedFragment = new FeaturesFragment();
             } else if (item.getItemId() == R.id.nav_help) {
                 selectedFragment = new HelpFragment();
             }
@@ -80,24 +94,5 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
-    public static boolean isModuleActive() {
-        return false;
-    }
-
-
-    private static boolean checkForRootAccess() {
-        try {
-            Process process = Runtime.getRuntime().exec("su -c echo success");
-            int exitCode = process.waitFor();
-
-            return exitCode == 0; // Root access granted
-        } catch (Exception e) {
-            // Root access denied
-            return false; // No root access or error occurred
-        }
-    }
-
-    public static boolean hasRootAccess = checkForRootAccess();
 
 }

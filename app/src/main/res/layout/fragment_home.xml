@@ -112,6 +112,58 @@
                     android:gravity="center_horizontal"
                     android:padding="8dp">
 
+                    <!-- How to Use Section -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/how_to_use_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        android:layout_marginBottom="8dp"
+                        app:cardBackgroundColor="#262626"
+                        app:strokeWidth="0dp">
+
+    		    	<RelativeLayout
+       			    android:layout_width="match_parent"
+        		    android:layout_height="wrap_content"
+        		    android:padding="16dp">
+
+        	    	    <TextView
+            		    	android:id="@+id/how_to_use_title"
+            		    	android:layout_width="wrap_content"
+            		    	android:layout_height="wrap_content"
+            		    	android:text="@string/how_to_use"
+            		    	android:textSize="18sp"
+            		    	android:textStyle="bold"
+            		    	android:textColor="@color/white"
+            		    	android:layout_alignParentTop="true"
+            		    	android:layout_alignParentStart="true"
+            		    	android:layout_marginBottom="8dp"/> 
+
+        	    	    <ImageView
+            		    	android:id="@+id/search_icon"
+            		    	android:layout_width="34dp"
+            		    	android:layout_height="34dp"
+            		    	android:src="@drawable/ic_search"
+            		    	app:tint="@color/white"
+            		    	android:layout_alignParentEnd="true"
+				android:layout_marginEnd="6dp"
+            		    	android:layout_centerVertical="true" />
+
+        	    	    <TextView
+            		    	android:id="@+id/instruction_text"
+            		    	android:layout_width="wrap_content"
+            		    	android:layout_height="wrap_content"
+            		    	android:text="@string/usage_instructions"
+            		    	android:textColor="@color/white"
+            		    	android:textSize="14sp"
+            		    	android:layout_alignParentStart="true"
+            		    	android:layout_toStartOf="@id/search_icon"
+				android:layout_marginTop="36dp"
+				android:layout_marginBottom="6dp"
+            		    	android:layout_marginEnd="8dp"/>
+    			</RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
                     <!-- Contributors Section -->
                     <com.google.android.material.card.MaterialCardView
@@ -119,6 +171,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="0dp"
+			android:layout_marginTop="12dp"
                         android:layout_marginBottom="8dp"
 			app:cardBackgroundColor="#262626"
 			app:strokeWidth="0dp">
@@ -154,8 +207,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="0dp"
-                        android:layout_marginTop="16dp"
-			android:layout_marginBottom="2dp"
+			android:layout_marginTop="12dp"
 			app:contentPaddingTop="1dp"
 			app:cardBackgroundColor="#262626"
 			app:strokeWidth="0dp">

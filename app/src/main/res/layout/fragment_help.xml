@@ -121,8 +121,8 @@
                     	    android:foreground="?attr/selectableItemBackgroundBorderless">
 
                     	    <ImageView
-                        	android:layout_width="47dp" 
-                        	android:layout_height="47dp"
+                        	android:layout_width="40dp" 
+                        	android:layout_height="40dp"
                         	android:layout_gravity="center"
                         	android:src="@drawable/ic_github_logo"
                         	app:tint="@color/white"

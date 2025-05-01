@@ -145,9 +145,9 @@ public class HomeFragment extends Fragment {
 
         List<Contributor> specialThanks = Arrays.asList(
 		new Contributor("xHookman", "https://github.com/xHookman", null, null),
-                new Contributor("Amàzing World", null, null, null),
                 new Contributor("Bluepapilte", null, null, "https://t.me/instasmashrepo"),
-		new Contributor("BdrcnAYYDIN", null, null, "https://t.me/BdrcnAYYDIN")
+		new Contributor("BdrcnAYYDIN", null, null, "https://t.me/BdrcnAYYDIN"),
+                new Contributor("Amàzing World", null, null, null)
         );
 
         for (Contributor contributor : contributors) {

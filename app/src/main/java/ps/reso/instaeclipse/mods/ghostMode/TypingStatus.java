@@ -1,11 +1,8 @@
 package ps.reso.instaeclipse.mods.ghostMode;
 
 import org.luckypray.dexkit.DexKitBridge;
-import org.luckypray.dexkit.query.FindClass;
 import org.luckypray.dexkit.query.FindMethod;
-import org.luckypray.dexkit.query.matchers.ClassMatcher;
 import org.luckypray.dexkit.query.matchers.MethodMatcher;
-import org.luckypray.dexkit.result.ClassData;
 import org.luckypray.dexkit.result.ClassDataList;
 import org.luckypray.dexkit.result.MethodData;
 
@@ -16,6 +13,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureFlags;
 import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class TypingStatus {
@@ -39,12 +37,13 @@ public class TypingStatus {
                 try {
                     reflectMethod = method.getMethodInstance(Module.hostClassLoader);
                 } catch (Throwable e) {
-                    continue; // Skip if the method can't be loaded
+                    // Skip method if it can't be resolved
+                    continue;
                 }
 
                 int modifiers = reflectMethod.getModifiers();
 
-                // Match: static final void method(ClassType, boolean)
+                // Step 2: Match: static final void method(ClassType, boolean)
                 if (Modifier.isStatic(modifiers) &&
                         Modifier.isFinal(modifiers) &&
                         returnType.contains("void") &&
@@ -52,19 +51,18 @@ public class TypingStatus {
                         String.valueOf(paramTypes.get(1)).contains("boolean")) {
 
                     try {
+                        // Step 3: Hook method dynamically
                         XposedBridge.hookMethod(reflectMethod, new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) {
-                                /*
-                                Debug purposes
-                                boolean isTyping = (boolean) param.args[1];
-                                XposedBridge.log("(InstaEclipse | TypingBlock): ✋ Typing ping blocked. isTyping=" + isTyping);
-                                */
-                                param.setResult(null); // Block logic
+                                if (FeatureFlags.isGhostTyping) {
+                                    // If ghost typing is enabled, block typing ping
+                                    param.setResult(null);
+                                }
                             }
                         });
 
-                        XposedBridge.log("(InstaEclipse | TypingBlock): ✅ Hooked: " +
+                        XposedBridge.log("(InstaEclipse | TypingBlock): ✅ Hooked (dynamic check): " +
                                 method.getClassName() + "." + method.getName());
                         FeatureStatusTracker.setHooked("GhostTyping");
                         return;
@@ -79,5 +77,4 @@ public class TypingStatus {
             XposedBridge.log("(InstaEclipse | TypingBlock): ❌ Exception: " + t.getMessage());
         }
     }
-
 }

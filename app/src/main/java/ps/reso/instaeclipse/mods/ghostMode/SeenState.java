@@ -13,6 +13,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureFlags;
 import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 /**
@@ -57,7 +58,10 @@ public class SeenState {
                                 XposedBridge.log("(InstaEclipse | GhostModeSeen): 🚫 Blocked seen ping from: " +
                                         method.getClassName() + "." + method.getName());
                                 */
-                                param.setResult(null);
+                                // ✅ Only block if GhostSeen is active
+                                if (FeatureFlags.isGhostSeen) {
+                                    param.setResult(null);
+                                }
                             }
                         });
 

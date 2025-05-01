@@ -17,7 +17,7 @@ import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class Interceptor {
 
-    public void handleInterceptor(XC_LoadPackage.LoadPackageParam lpparam, List<Predicate<URI>> uriConditions) {
+    public void handleInterceptor(XC_LoadPackage.LoadPackageParam lpparam) {
         try {
             ClassLoader classLoader = lpparam.classLoader;
 

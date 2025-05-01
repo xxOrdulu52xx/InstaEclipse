@@ -14,7 +14,9 @@ import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureFlags;
 import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class ScreenshotDetection {
@@ -51,16 +53,14 @@ public class ScreenshotDetection {
 
                             XposedBridge.hookMethod(targetMethod, new XC_MethodHook() {
                                 @Override
-                                protected void beforeHookedMethod(MethodHookParam param) {
-                                    /*
-                                    Debug purposes
-                                    XposedBridge.log("(InstaEclipse | ScreenshotBlock): 🛑 Screenshot blocked");
-                                    */
-                                    param.setResult(null); // Block logic
+                                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                    if (FeatureFlags.isGhostScreenshot) {
+                                        param.setResult(null); // Block logic
+                                    }
                                 }
                             });
 
-                            XposedBridge.log("(InstaEclipse | ScreenshotBlock): ✅ Hooked: " +
+                            XposedBridge.log("(InstaEclipse | ScreenshotBlock): ✅ Hooked (dynamic check): " +
                                     method.getClassName() + "." + method.getName());
                             FeatureStatusTracker.setHooked("GhostScreenshot");
                             return;

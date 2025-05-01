@@ -12,6 +12,8 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import ps.reso.instaeclipse.Xposed.Module;
 import ps.reso.instaeclipse.mods.misc.FollowerIndicator;
+import ps.reso.instaeclipse.utils.FeatureFlags;
+import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class Interceptor {
 
@@ -62,9 +64,67 @@ public class Interceptor {
                                 if (uri != null && uri.getPath() != null) {
 
                                     // Check all conditions passed in as predicates
-                                    boolean shouldDrop = uriConditions.stream().anyMatch(condition -> condition.test(uri));
+                                    boolean shouldDrop = false;
+
+                                    // Ghost Mode URIs
+                                    if (FeatureFlags.isGhostScreenshot) {
+                                        shouldDrop |= uri.getPath().endsWith("/screenshot/") || uri.getPath().endsWith("/ephemeral_screenshot/");
+                                    }
+                                    if (FeatureFlags.isGhostViewOnce) {
+                                        shouldDrop |= uri.getPath().endsWith("/item_replayed/");
+                                    }
+                                    if (FeatureFlags.isGhostStory) {
+                                        shouldDrop |= uri.getPath().contains("/api/v2/media/seen/");
+                                    }
+                                    if (FeatureFlags.isGhostLive) {
+                                        shouldDrop |= uri.getPath().contains("/heartbeat_and_get_viewer_count/");
+                                        FeatureStatusTracker.setHooked("GhostLive");
+                                    }
+
+                                    // Distraction Free
+                                    if (FeatureFlags.disableStories) {
+                                        shouldDrop |= uri.getPath().contains("/feed/reels_tray/")
+                                                || uri.getPath().contains("feed/get_latest_reel_media/")
+                                                || uri.getPath().contains("direct_v2/pending_inbox/?visual_message")
+                                                || uri.getPath().contains("stories/hallpass/")
+                                                || uri.getPath().contains("/api/v1/feed/reels_media_stream/");
+                                    }
+                                    if (FeatureFlags.disableFeed) {
+                                        shouldDrop |= uri.getPath().endsWith("/feed/timeline/");
+                                    }
+                                    if (FeatureFlags.disableReels) {
+                                        shouldDrop |= uri.getPath().endsWith("/qp/batch_fetch/")
+                                                || uri.getPath().contains("api/v1/clips")
+                                                || uri.getPath().contains("clips")
+                                                || uri.getPath().contains("mixed_media")
+                                                || uri.getPath().contains("mixed_media/discover/stream/");
+                                    }
+                                    if (FeatureFlags.disableExplore) {
+                                        shouldDrop |= uri.getPath().contains("/discover/topical_explore")
+                                                || uri.getPath().contains("/discover/topical_explore_stream")
+                                                || (uri.getHost().contains("i.instagram.com") && uri.getPath().contains("/api/v1/fbsearch/top_serp/"));
+                                    }
+                                    if (FeatureFlags.disableComments) {
+                                        shouldDrop |= uri.getPath().contains("/api/v1/media/") && uri.getPath().contains("comments/");
+                                    }
+
+                                    // Ads
+                                    if (FeatureFlags.isAdBlockEnabled) {
+                                        shouldDrop |= uri.getPath().contains("profile_ads/get_profile_ads/")
+                                                || uri.getPath().contains("/async_ads/")
+                                                || uri.getPath().contains("/feed/injected_reels_media/")
+                                                || uri.getPath().equals("/api/v1/ads/graphql/");
+                                    }
+
+                                    // Analytics
+                                    if (FeatureFlags.isAnalyticsBlocked) {
+                                        shouldDrop |= uri.getHost().contains("graph.instagram.com")
+                                                || uri.getHost().contains("graph.facebook.com")
+                                                || uri.getPath().contains("/logging_client_events");
+                                    }
 
                                     if (shouldDrop) {
+                                        XposedBridge.log("the URI was blocked: " + uri.getPath());
                                         // Modify the URI to divert the request to a harmless endpoint
                                         try {
                                             URI fakeUri = new URI("https", "127.0.0.1", "/404", null);
@@ -74,10 +134,6 @@ public class Interceptor {
                                             // XposedBridge.log("❌ [InstaEclipse] Failed to modify URI: " + e.getMessage());
                                         }
                                     }
-                                    /*
-                                     {
-                                        XposedBridge.log("✅ [InstaEclipse] NotBlocked: " + uri.getHost() + uri.getPath());
-                                    }*/
 
                                     if (Module.isShow_Follower_Status_Enabled) {
                                         if (uri.getPath() != null && uri.getPath().startsWith("/api/v1/users/") && uri.getPath().contains("/info_stream/")) {

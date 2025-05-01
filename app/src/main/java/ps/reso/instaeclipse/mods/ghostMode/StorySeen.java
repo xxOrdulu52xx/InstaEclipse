@@ -16,9 +16,11 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureFlags;
 import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class StorySeen {
+
     public void handleStorySeenBlock(DexKitBridge bridge) {
         try {
             // Step 1: Find methods containing the string "media/seen/"
@@ -38,7 +40,7 @@ public class StorySeen {
                 try {
                     reflectMethod = method.getMethodInstance(Module.hostClassLoader);
                 } catch (Throwable e) {
-                    continue; // Skip if it can't be reflected
+                    continue; // Skip if cannot reflect
                 }
 
                 int modifiers = reflectMethod.getModifiers();
@@ -52,15 +54,13 @@ public class StorySeen {
                         XposedBridge.hookMethod(reflectMethod, new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) {
-                                /*
-                                Debug purposes
-                                XposedBridge.log("(InstaEclipse | StoryBlock): 🚫 Blocked story seen ping");
-                                */
-                                param.setResult(null);
+                                if (FeatureFlags.isGhostStory) {
+                                    param.setResult(null); // Block if GhostStory is enabled
+                                }
                             }
                         });
 
-                        XposedBridge.log("(InstaEclipse | StoryBlock): ✅ Hooked: " +
+                        XposedBridge.log("(InstaEclipse | StoryBlock): ✅ Hooked (dynamic check): " +
                                 method.getClassName() + "." + method.getName());
                         FeatureStatusTracker.setHooked("GhostStories");
                         return;

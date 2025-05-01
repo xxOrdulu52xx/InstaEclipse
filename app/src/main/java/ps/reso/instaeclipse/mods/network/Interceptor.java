@@ -135,16 +135,12 @@ public class Interceptor {
                                         }
                                     }
 
-                                    if (Module.isShow_Follower_Status_Enabled) {
-                                        if (uri.getPath() != null && uri.getPath().startsWith("/api/v1/users/") && uri.getPath().contains("/info_stream/")) {
+                                    if (FeatureFlags.showFollowerToast) {
+                                        if (uri.getPath() != null && uri.getPath().startsWith("/api/v1/friendships/show/")) {
                                             String[] parts = uri.getPath().split("/");
                                             if (parts.length >= 5) {
-                                                // Extracted ID from /api/v1/users/{id}/info_stream/
-                                                ps.reso.instaeclipse.utils.FollowToastTracker.currentlyViewedUserId = parts[4];
-                                                FollowerIndicator followerIndicator = new FollowerIndicator();
-                                                String bridge = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
-                                                followerIndicator.checkFollow(classLoader, bridge);
-                                                // XposedBridge.log("👁️ [InstaEclipse] Viewing profile of user: " + userId);
+                                                // Extracted ID from /api/v1/friendships/show/{id}
+                                                ps.reso.instaeclipse.utils.FollowToastTracker.currentlyViewedUserId = parts[5];
                                             }
                                         }
                                     }

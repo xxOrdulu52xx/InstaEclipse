@@ -11,9 +11,10 @@ import org.luckypray.dexkit.result.MethodData;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.FeatureFlags;
 import ps.reso.instaeclipse.utils.FeatureStatusTracker;
 
 public class DevOptionsEnable {
@@ -106,10 +107,20 @@ public class DevOptionsEnable {
 
                     try {
                         Method targetMethod = method.getMethodInstance(Module.hostClassLoader);
-                        XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.returnConstant(true));
-                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): ✅ hooked: " +
+
+                        XposedBridge.hookMethod(targetMethod, new XC_MethodHook() {
+                            @Override
+                            protected void beforeHookedMethod(MethodHookParam param) {
+                                if (FeatureFlags.isDevEnabled) {
+                                    param.setResult(true);
+                                    FeatureStatusTracker.setHooked("DevOptions");
+                                }
+                            }
+                        });
+
+                        XposedBridge.log("(InstaEclipse | DevOptionsEnable): ✅ Hooked: " +
                                 method.getClassName() + "." + method.getName());
-                        FeatureStatusTracker.setHooked("DevOptions");
+
                     } catch (Throwable e) {
                         XposedBridge.log("(InstaEclipse | DevOptionsEnable): ❌ Failed to hook " + method.getName() + ": " + e.getMessage());
                     }

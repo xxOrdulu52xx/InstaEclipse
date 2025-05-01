@@ -74,14 +74,24 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     @Override
     public void initZygote(StartupParam startupParam) {
         XposedBridge.log("(InstaEclipse): Zygote initialized.");
+
         // Save the module's APK path
         moduleSourceDir = startupParam.modulePath;
+
+        // Detect ABI correctly
         String abi = Build.SUPPORTED_ABIS[0]; // Primary ABI
-        abi = abi.replaceAll("-v\\d+a$", ""); // Regex to remove version suffix
-        moduleLibDir = moduleSourceDir.substring(0, moduleSourceDir.lastIndexOf("/")) + "/lib/" + abi;
+        String abiFolder = null;
 
+        if (abi.equalsIgnoreCase("arm64-v8a")) abiFolder = "arm64";
+        else if (abi.equalsIgnoreCase("armeabi-v7a") || abi.equalsIgnoreCase("armeabi") || abi.equalsIgnoreCase("armv8i"))
+            abiFolder = "arm";
+        else if (abi.equalsIgnoreCase("x86")) abiFolder = "x86";
+        else if (abi.equalsIgnoreCase("x86_64")) abiFolder = "x86_64";
+        else abiFolder = abi; // fallback just in case
 
-        // XposedBridge.log("InstaEclipse | Module paths initialized:" + "\nSourceDir: " + moduleSourceDir + "\nLibDir: " + moduleLibDir);
+        moduleLibDir = moduleSourceDir.substring(0, moduleSourceDir.lastIndexOf("/")) + "/lib/" + abiFolder;
+
+        // XposedBridge.log("(InstaEclipse) Module paths initialized:" + "\nSourceDir: " + moduleSourceDir + "\nLibDir: " + moduleLibDir);
     }
 
     public void loadPreferences() {

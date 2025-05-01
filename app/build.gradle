@@ -10,8 +10,8 @@ android {
         applicationId "ps.reso.instaeclipse"
         minSdkVersion 28
         targetSdk 34
-        versionCode 6
-        versionName '0.3.2'
+        versionCode 7
+        versionName '0.4'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,6 +42,9 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.gson
     implementation libs.dexkit
+    //noinspection UseTomlInstead
+    implementation libs.material.v1100
+
 
     // External library for shared preferences
     implementation libs.fileprefs

@@ -12,27 +12,23 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:background="@color/black">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/top_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/black"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_height="48dp"
+            android:background="@color/black">
 
             <!-- App Logo -->
             <ImageView
                 android:id="@+id/toolbar_title_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_gravity="start|center_vertical"
                 android:src="@drawable/ic_logo"
                 android:contentDescription="App Logo"
-                android:paddingStart="2dp"
-                android:paddingEnd="6dp"
-                android:maxWidth="40dp"
+                android:paddingEnd="7dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 app:tint="@color/white" /> 
@@ -44,12 +40,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:text="@string/app_name"
+		android:textSize="18sp"
+		android:textStyle="bold"
                 android:contentDescription="App Name"
                 android:maxWidth="160dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:textColor="@color/white" />
-
 
             <!-- App Version -->
             <TextView
@@ -57,9 +54,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
+		android:layout_marginEnd="4dp"
                 android:text="@string/version"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="15sp"
+		android:textStyle="bold"
                 android:paddingEnd="16dp"
                 tools:ignore="RtlSymmetry" />
         </com.google.android.material.appbar.MaterialToolbar>
@@ -70,7 +69,8 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="56dp" />
+        android:layout_marginBottom="56dp" 
+	app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

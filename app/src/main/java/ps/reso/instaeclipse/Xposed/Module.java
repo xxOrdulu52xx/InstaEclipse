@@ -19,7 +19,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import ps.reso.instaeclipse.mods.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.ads.AdBlocker;
-import ps.reso.instaeclipse.mods.ghostMode.LiveSeen;
 import ps.reso.instaeclipse.mods.ghostMode.ScreenshotDetection;
 import ps.reso.instaeclipse.mods.ghostMode.SeenState;
 import ps.reso.instaeclipse.mods.ghostMode.StorySeen;
@@ -267,18 +266,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     }
 
                     uriConditions.add(uri -> uri.getPath().contains("/api/v2/media/seen/"));
-                }
-
-                if (isGhost_Live_Enabled) {
-                    FeatureStatusTracker.setEnabled("GhostLive");
-
-                    try {
-                        LiveSeen liveSeen = new LiveSeen();
-                        liveSeen.handleLiveSeenBlock(dexKitBridge);
-                    } catch (Exception ignored) {
-                    }
-
-                    uriConditions.add(uri -> uri.getPath().contains("/heartbeat_and_get_viewer_count/"));
                 }
             }
 

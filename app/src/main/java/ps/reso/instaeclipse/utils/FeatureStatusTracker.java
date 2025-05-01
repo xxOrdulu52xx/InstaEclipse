@@ -11,6 +11,11 @@ public class FeatureStatusTracker {
         features.put(name, false); // default: not hooked
     }
 
+    public static void setDisabled(String name) {
+        features.remove(name);
+    }
+
+
     public static void setHooked(String name) {
         if (features.containsKey(name)) {
             features.put(name, true);

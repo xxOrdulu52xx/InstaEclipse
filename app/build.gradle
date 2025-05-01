@@ -42,8 +42,6 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.gson
     implementation libs.dexkit
-    //noinspection UseTomlInstead
-    implementation libs.material.v1100
     implementation 'com.google.android.material:material:1.12.0'
 
     // External library for shared preferences

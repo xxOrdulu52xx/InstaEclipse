@@ -25,7 +25,7 @@
     <string name="not_installed_instagram">Instagram is not installed</string>
     <string name="error_instagram">Error checking Instagram status</string>
 
-    <string name="restart_instagram">Restart Instagram</string>
+    <string name="launch_instagram">Launch Instagram</string>
     <string name="download_apk">Download APK</string>
     <string name="how_to_use">How to use</string>
     <string name="usage_instructions">Hold down the search icon</string>

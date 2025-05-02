@@ -62,18 +62,18 @@
             android:orientation="horizontal"
             android:layout_marginTop="6dp">
 
-            <!-- Restart Instagram Button -->
+            <!-- Launch Instagram Button -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/restart_instagram_button"
+                android:id="@+id/launch_instagram_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/restart_instagram"
+                android:text="@string/launch_instagram"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/accent_blue"
                 android:layout_marginEnd="4dp"
                 app:cornerRadius="12dp"
-                android:enabled="false" />
+                android:enabled="true" />
 
             <!-- Download APK Button -->
             <com.google.android.material.button.MaterialButton

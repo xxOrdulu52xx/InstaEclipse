@@ -33,7 +33,7 @@ import ps.reso.instaeclipse.utils.Utils;
 
 public class HomeFragment extends Fragment {
 
-    private MaterialButton restartInstagramButton;
+    private MaterialButton launchInstagramButton;
     private MaterialButton downloadButton;
     private final boolean hasRootAccess = MainActivity.hasRootAccess;
     private MaterialCardView instagramStatusCard;
@@ -48,33 +48,35 @@ public class HomeFragment extends Fragment {
 
 
         // Initialize views
-        restartInstagramButton = view.findViewById(R.id.restart_instagram_button);
-	downloadButton = view.findViewById(R.id.download_instagram_button);
+        launchInstagramButton = view.findViewById(R.id.launch_instagram_button);
+        downloadButton = view.findViewById(R.id.download_instagram_button);
 
 
         // Find the Card, TextView and Logo to display Instagram status
-	instagramStatusCard = view.findViewById(R.id.instagram_status_card);
+        instagramStatusCard = view.findViewById(R.id.instagram_status_card);
         instagramStatusText = view.findViewById(R.id.instagram_status_text);
-	instagramLogo = view.findViewById(R.id.instagram_logo);
+        instagramLogo = view.findViewById(R.id.instagram_logo);
 
         // Check Instagram installation and version
         checkInstagramStatus();
 
-        // Restart Instagram Button Logic
-        restartInstagramButton.setOnClickListener(v -> {
-            if (hasRootAccess) {
-                restartInstagramWithRoot();
+        // Launch Instagram Button Listener
+        launchInstagramButton.setOnClickListener(v -> {
+            PackageManager pm = requireContext().getPackageManager();
+            Intent launchIntent = pm.getLaunchIntentForPackage("com.instagram.android");
+            if (launchIntent != null) {
+                startActivity(launchIntent);
             } else {
-                restartInstagramNonRoot();
+                Toast.makeText(getActivity(), getString(R.string.not_installed_instagram), Toast.LENGTH_SHORT).show();
             }
         });
 
-	// Download APK Button Logic
-	downloadButton.setOnClickListener(v -> {
-    	    String url = "https://www.apkmirror.com/uploads/?appcategory=instagram-instagram";
-    	    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-    	    startActivity(intent);
-	});
+        // Download APK Button Logic
+        downloadButton.setOnClickListener(v -> {
+            String url = "https://www.apkmirror.com/uploads/?appcategory=instagram-instagram";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        });
 
         // Setup Contributors and Special Thanks
         setupContributorsAndSpecialThanks(view);
@@ -82,54 +84,30 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void restartInstagramWithRoot() {
-        try {
-            Process su = Runtime.getRuntime().exec("su");
-            DataOutputStream os = new DataOutputStream(su.getOutputStream());
-            os.writeBytes("am force-stop " + Utils.IG_PACKAGE_NAME + "\n");
-            os.flush();
-            os.writeBytes("am start -n " + Utils.IG_PACKAGE_NAME + "/com.instagram.mainactivity.InstagramMainActivity\n");
-            os.flush();
-            Toast.makeText(getActivity(), getString(R.string.restart_insta_toast), Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), getString(R.string.failed_restart_insta_toast), Toast.LENGTH_SHORT).show();
+        @SuppressLint("SetTextI18n")
+        private void checkInstagramStatus() {
+            String instagramPackage = Utils.IG_PACKAGE_NAME; // IG package name
+            PackageManager pm = requireContext().getPackageManager(); // Get PackageManager
+
+            try {
+                PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
+                String versionName = packageInfo.versionName;
+
+                instagramStatusText.setText(getString(R.string.installed_instagram_version) + "ver." + " " + versionName);
+                instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+            instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
+            } catch (PackageManager.NameNotFoundException e) {
+                instagramStatusText.setText(getString(R.string.not_installed_instagram));
+                instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
+            instagramLogo.setImageResource(R.drawable.ic_cancel);
+                launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
+            } catch (Exception e) {
+                instagramStatusText.setText(getString(R.string.error_instagram));
+                instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
+            instagramLogo.setImageResource(R.drawable.ic_error);
+                launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
+            }
         }
-    }
-
-    private void restartInstagramNonRoot() {
-        String instagramPackage = "com.instagram.android";
-
-        // Redirect the user to the app settings
-        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.parse("package:" + instagramPackage));
-        startActivity(intent);
-
-        Toast.makeText(requireContext(), getString(R.string.non_root_restart_insta_toast), Toast.LENGTH_SHORT).show();
-
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void checkInstagramStatus() {
-        String instagramPackage = Utils.IG_PACKAGE_NAME; // IG package name
-        PackageManager pm = requireContext().getPackageManager(); // Get PackageManager
-
-        try {
-            PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
-            String versionName = packageInfo.versionName;
-
-            instagramStatusText.setText(getString(R.string.installed_instagram_version) + "ver." + " " + versionName);
-            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-	    instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
-        } catch (PackageManager.NameNotFoundException e) {
-            instagramStatusText.setText(getString(R.string.not_installed_instagram));
-            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
-	    instagramLogo.setImageResource(R.drawable.ic_cancel);
-        } catch (Exception e) {
-            instagramStatusText.setText(getString(R.string.error_instagram));
-            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
-	    instagramLogo.setImageResource(R.drawable.ic_error);
-        }
-    }
 
 
     private void setupContributorsAndSpecialThanks(View rootView) {

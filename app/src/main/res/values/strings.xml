@@ -50,13 +50,17 @@
 
     <!-- faq -->
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
-    <string name="faq_1">1. Not working/crashes when using Google Play Version?\n- Use APKMirror APKs</string>
-    <string name="faq_2">2. Module not enabled?\n- Disable and re-enable the module in LSPosed.</string>
-    <string name="faq_3">3. Features not working?\n- Force stop and restart Instagram.</string>
-    <string name="faq_4">4. Developer options cause crashes?\n- Follow the developer options guide.</string>
-    <string name="faq_5">5. Developer options have weird labels or numbers?\n- Use Beta or Alpha versions as Stable versions have obfuscation.</string>
-    <string name="faq_6">6. Distraction Free enabled but content still appears?\n- Force stop Instagram and clear its cache.</string>
-    
+    <string name="faq_1"><b>1. Not working/crashes when using Google Play Version?</b>\n- Use APKMirror APKs</string>
+    <string name="faq_2"><b>2. Module not enabled?</b>\n- Disable and re-enable the module in LSPosed.</string>
+    <string name="faq_3"><b>3. Features not working?</b>\n- Force stop and restart Instagram.</string>
+    <string name="faq_4"><b>4. Developer options cause crashes?</b>\n- Follow the developer options guide.</string>
+    <string name="faq_5"><b>5. Developer options have weird labels or numbers?</b>\n- Use Beta or Alpha versions as Stable versions have obfuscation.</string>
+    <string name="faq_6"><b>6. Distraction Free enabled but content still appears?</b>\n- Force stop Instagram and clear its cache.</string>
+
+    <!-- guide -->
+    <string name="module_not_working_title">Module still isn\'t working?</string>
+    <string name="module_not_working_description"><![CDATA[If you are <b>rooted</b> try using <a href="https://github.com/JingMatrix/LSPosed/releases/latest">JingMatrix\'s LSPosed</a><br/><br/>If you are <b>not rooted</b> install <a href="https://github.com/JingMatrix/LSPatch/releases/latest">JingMatrix\'s LSPatch</a> then follow <a href="https://t.me/instaEclipse_discussion/158/5149">this guide</a>]]></string>
+
     <!-- features -->
     <string name="developer_options">Developer Options</string>
     <string name="ghost_mode">Ghost Mode</string>

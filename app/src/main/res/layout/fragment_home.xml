@@ -42,7 +42,7 @@
                     android:tint="@android:color/white"
                     android:src="@drawable/ic_instagram_logo"
                     android:contentDescription="@string/instagram_logo"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="16dp" />
 
                 <!-- Instagram Status -->
                 <TextView
@@ -51,8 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/checking_instagram"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

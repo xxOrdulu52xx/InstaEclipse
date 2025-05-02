@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,18 +94,40 @@ public class HomeFragment extends Fragment {
                 PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
                 String versionName = packageInfo.versionName;
 
-                instagramStatusText.setText(getString(R.string.installed_instagram_version) + "ver." + " " + versionName);
+                String installedText = getString(R.string.installed_instagram_version);
+                String versionText = "ver." + " " + versionName;
+                String fullText = installedText + "\n" + versionText;
+
+                SpannableString spannableString = new SpannableString(fullText);
+
+                spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, installedText.length(), android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                int versionStartIndex = installedText.length() + 1;
+                spannableString.setSpan(new android.text.style.RelativeSizeSpan(0.85f), versionStartIndex, fullText.length(), 0);
+
+                instagramStatusText.setText(spannableString);
                 instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-            instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
+                instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
+
+                // Add OnClickListener to open app settings if Instagram is installed
+                instagramStatusCard.setOnClickListener(v -> {
+                    Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.setData(Uri.parse("package:" + instagramPackage));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                });
+
             } catch (PackageManager.NameNotFoundException e) {
                 instagramStatusText.setText(getString(R.string.not_installed_instagram));
+                instagramStatusText.setTypeface(null, android.graphics.Typeface.BOLD);
                 instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
-            instagramLogo.setImageResource(R.drawable.ic_cancel);
+                instagramLogo.setImageResource(R.drawable.ic_cancel);
                 launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
+
             } catch (Exception e) {
                 instagramStatusText.setText(getString(R.string.error_instagram));
+                instagramStatusText.setTypeface(null, android.graphics.Typeface.BOLD);
                 instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
-            instagramLogo.setImageResource(R.drawable.ic_error);
+                instagramLogo.setImageResource(R.drawable.ic_error);
                 launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
             }
         }

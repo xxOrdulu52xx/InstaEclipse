@@ -21,7 +21,7 @@
     <string name="module_active">The module is active and working.</string>
 
     <string name="checking_instagram">Checking Instagram</string>
-    <string name="installed_instagram_version">Instagram is installed\n </string>
+    <string name="installed_instagram_version">Instagram is installed</string>
     <string name="not_installed_instagram">Instagram is not installed</string>
     <string name="error_instagram">Error checking Instagram status</string>
 

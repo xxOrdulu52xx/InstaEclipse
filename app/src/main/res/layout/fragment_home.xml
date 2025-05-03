@@ -1,34 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fillViewport="true"
+    android:scrollbars="none"> 
 
-    android:background="@color/black">
-
-    <!-- Scrollable Content -->
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="@color/black">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
 
+        <!-- Instagram Status Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/instagram_status_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:contentPaddingBottom="10dp"
+            app:contentPaddingTop="8dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="18dp"
+                android:gravity="center_vertical">
+
+                <!-- Instagram Logo -->
+                <ImageView
+                    android:id="@+id/instagram_logo"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_instagram_logo"
+                    android:contentDescription="@string/instagram_logo"
+                    android:layout_marginEnd="16dp"
+                    app:tint="@android:color/white" />
+
+                <!-- Instagram Status -->
+                <TextView
+                    android:id="@+id/instagram_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checking_instagram"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+
+            <!-- Launch Instagram Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/launch_instagram_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/launch_instagram"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/accent_blue"
+                android:layout_marginEnd="4dp"
+                app:cornerRadius="12dp"
+                android:enabled="true" />
+
+            <!-- Download APK Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/download_instagram_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/download_apk"
+                android:textColor="@color/white"
+                android:backgroundTint="#262626"
+                android:layout_marginStart="4dp"
+                app:cornerRadius="12dp"
+                android:enabled="true" />
+        </LinearLayout>
+
+        <!-- Follow Us Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="16dp">
+            android:padding="8dp"
+            android:layout_marginTop="10dp">
 
-            <!-- Module Status Card -->
+            <!-- How to Use Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/how_to_use_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="#262626"
+                app:strokeWidth="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/how_to_use_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/how_to_use"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="8dp"/>
+
+                    <ImageView
+                        android:id="@+id/search_icon"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:src="@drawable/ic_search"
+                        app:tint="@color/white"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp"
+                        android:layout_centerVertical="true" />
+
+                    <TextView
+                        android:id="@+id/instruction_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/usage_instructions"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/search_icon"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginEnd="8dp"/>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Contributors Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/dark_gray">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="#262626"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -37,158 +168,60 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/module_status"
+                        android:id="@+id/contributors_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/module_status_disabled"
-                        android:textSize="16sp"
+                        android:text="@string/contributors"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@color/red" />
-
-                    <TextView
-                        android:id="@+id/module_subtext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/module_disabled"
-                        android:textSize="14sp"
                         android:textColor="@color/white"
-                        android:layout_marginTop="4dp" />
+                        android:layout_gravity="left" />
+
+                    <LinearLayout
+                        android:id="@+id/contributors_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Instagram Status Card -->
+            <!-- Special Thanks Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/dark_gray">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <!-- Instagram Logo -->
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/ic_instagram_logo"
-                        android:contentDescription="@string/instagram_logo"
-                        android:layout_marginEnd="12dp" />
-
-                    <!-- Instagram Status -->
-                    <TextView
-                        android:id="@+id/instagram_status_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/checking_instagram"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Restart Instagram Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/restart_instagram_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/restart_instagram"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/accent_blue"
-                android:enabled="false" />
-
-            <!-- Follow Us Card -->
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:background="@color/black">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                android:layout_marginTop="12dp"
+                app:contentPaddingTop="1dp"
+                app:cardBackgroundColor="#262626"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp">
+                    android:padding="16dp">
 
+                    <TextView
+                        android:id="@+id/special_thanks_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/special_thanks"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_gravity="left" />
 
-                    <!-- Contributors Section -->
-                    <com.google.android.material.card.MaterialCardView
+                    <LinearLayout
+                        android:id="@+id/special_thanks_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
-                        android:layout_marginBottom="8dp"
-                        app:cardBackgroundColor="@color/dark_gray">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:id="@+id/contributors_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/contributors"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/white"
-                                android:layout_gravity="center_horizontal" />
-
-                            <LinearLayout
-                                android:id="@+id/contributors_container"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginTop="8dp" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Special Thanks Section -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp"
-                        android:layout_marginTop="16dp"
-                        app:cardBackgroundColor="@color/dark_gray">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="6dp">
-
-                            <TextView
-                                android:id="@+id/special_thanks_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/special_thanks"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/white"
-                                android:layout_gravity="center_horizontal" />
-
-                            <LinearLayout
-                                android:id="@+id/special_thanks_container"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginTop="8dp" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
-            </ScrollView>
-
-
-
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </ScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -2,12 +2,12 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Versão: 0.3.2</string>
     <string name="home">Início</string>
     <string name="features">Recursos</string>
     <string name="help">Ajuda</string>
 
     <!-- home -->
+    <string name="instagram_version">Versão</string>
     <string name="module_disabled">O módulo não está habilitado. Por favor, habilite-o.</string>
 
     <string name="module_status">Status do Módulo:</string>
@@ -23,12 +23,18 @@
     <string name="installed_instagram_version">Instagram Instalado - Versão: </string>
     <string name="not_installed_instagram">O Instagram não está instalado.</string>
     <string name="error_instagram">Erro ao verificar o status do Instagram.</string>
-    <string name="restart_instagram">Reiniciar Instagram</string>
+
+
+    <string name="launch_instagram">Abrir Instagram</string>
+    <string name="download_apk">Baixar APK</string>
+    <string name="how_to_use">Como usar</string>
+    <string name="module_not_working_title">O módulo ainda não está funcionando?</string>
+    
+    <string name="usage_instructions">Mantenha pressionado o ícone de pesquisa</string>
     <string name="contributors">Colaboradores</string>
     <string name="special_thanks">Agradecimentos Especiais</string>
 
     <!-- Não traduzir! -->
-    <string name="instagram_logo" translatable="false">Instagram Logo</string>
 
     <!-- ajuda -->
     <string name="help_amp_troubleshooting">Ajuda e Solução de Problemas</string>
@@ -36,21 +42,19 @@
     <string name="go_to_github">Ir para o GitHub</string>
     <string name="find_support">Encontre suporte.</string>
     <string name="go_to_telegram">Ir para o Telegram</string>
-    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
 
     <!-- Não traduzir! -->
-    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
 
     <!-- faq -->
     <string name="frequently_asked_questions">Perguntas Frequentes</string>
-    <string name="faq_1">1. Não está funcionando/travando ao usar a versão do Google Play? Use os APKs do APKMirror.</string>
-    <string name="faq_2">2. O módulo não está habilitado? Desative e reative o módulo no LSPosed.</string>
-    <string name="faq_3">3. Recursos não estão funcionando? Force a parada e reinicie o Instagram.</string>
-    <string name="faq_4">4. As opções de desenvolvedor causam falhas? Siga o guia de opções de desenvolvedor.</string>
-    <string name="faq_5">5. As opções de desenvolvedor têm rótulos ou números estranhos? Use versões Beta ou Alpha, pois as versões estáveis possuem ofuscação.</string>
-    <string name="faq_6">6. Distraction Free ativado, mas o conteúdo ainda aparece? Force a parada do Instagram e limpe o cache.</string>
+    <string name="faq_1">1. Não está funcionando/travando ao usar a versão do Google Play?\n- Use os APKs do APKMirror.</string>
+    <string name="faq_2">2. O módulo não está habilitado?\n- Desative e reative o módulo no LSPosed.</string>
+    <string name="faq_3">3. Recursos não estão funcionando?\n- Force a parada e reinicie o Instagram.</string>
+    <string name="faq_4">4. As opções de desenvolvedor causam falhas?\n- Siga o guia de opções de desenvolvedor.</string>
+    <string name="faq_5">5. As opções de desenvolvedor têm rótulos ou números estranhos?\n- Use versões Beta ou Alpha, pois as versões estáveis possuem ofuscação.</string>
+    <string name="faq_6">6. Distraction Free ativado, mas o conteúdo ainda aparece?\n- Force a parada do Instagram e limpe o cache.</string>
 
     <!-- features -->
     <string name="developer_options">Opções de Desenvolvedor</string>
@@ -62,7 +66,6 @@
     <string name="enable_disable_all">Ativar/Desativar Tudo</string>
 
     <!-- Não traduzir! -->
-    <string name="hint" translatable="false">Hint</string>
 
     <!-- ghost -->
     <string name="ghost_mode_options">Opções do Modo Invisível</string>
@@ -85,9 +88,6 @@
     <string name="dev_options_4">4. Por fim, desative as Opções de Desenvolvedor no módulo para evitar falhas no aplicativo.</string>
 
     <!-- Não traduzir! -->
-    <string name="is_employee" translatable="false">• is employee</string>
-    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
-    <string name="employee_options" translatable="false">• employee options</string>
 
     <!-- distraction free -->
     <string name="distraction_free_options">Opções do modo Sem Distrações</string>
@@ -108,9 +108,5 @@
     <string name="contributor_name">Nome do Colaborador</string>
 
     <!-- Toast -->
-    <string name="restart_insta_toast">Reiniciando o Instagram</string>
-    <string name="failed_restart_insta_toast">Falha ao reiniciar o Instagram</string>
-    <string name="non_root_restart_insta_toast">Por favor, force a parada do Instagram e abra novamente</string>
-    <string name="clear_cache_insta_toast">Por favor, limpe o cache do aplicativo do Instagram para uma melhor experiência</string>
     <string name="follower_toast">Status de seguimento</string>
 </resources>

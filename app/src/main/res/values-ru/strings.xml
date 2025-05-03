@@ -2,12 +2,12 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Версия: 0.3.2</string>
     <string name="home">Главная</string>
     <string name="features">Функции</string>
     <string name="help">Помощь</string>
 
     <!-- home -->
+    <string name="instagram_version">Версия</string>
     <string name="module_disabled">Модуль не включен. Пожалуйста включите его.</string>
 
     <string name="module_status">Статус модуля:</string>
@@ -26,12 +26,16 @@
     <string name="not_installed_instagram">Instagram не установлен.</string>
     <string name="error_instagram">Ошибка проверки статуса Instagram.</string>
 
-    <string name="restart_instagram">Перезагрузка Instagram</string>
+    <string name="launch_instagram">Запустить Instagram</string>
+    <string name="download_apk">Скачать APK</string>
+    <string name="how_to_use">Как использовать</string>
+    <string name="module_not_working_title">Модуль всё ещё не работает?</string>
+
+    <string name="usage_instructions">Удерживайте значок поиска</string>
     <string name="contributors">Участники</string>
     <string name="special_thanks">Большое Cпасибо</string>
 
     <!-- Don't translate! -->
-    <string name="instagram_logo" translatable="false">Instagram Logo</string>
 
     <!-- help -->
     <string name="help_amp_troubleshooting">Помощь &amp; Поддержка</string>
@@ -39,21 +43,19 @@
     <string name="go_to_github">Перейти в GitHub</string>
     <string name="find_support">Найти поддержку.</string>
     <string name="go_to_telegram">Перейти в Telegram</string>
-    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram группа</string>
 
     <!-- Don't translate! -->
-    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
 
     <!-- faq -->
     <string name="frequently_asked_questions">Часто задаваемые вопросы (FAQ)</string>
-    <string name="faq_1">1. Не работает/вылетает с версией из Google Play? Используйте APK файлы с APKMirror</string>
-    <string name="faq_2">2. Модуль не включен? Выключите and сново включите модуль в LSPosed.</string>
-    <string name="faq_3">3. Функции не работают? Остановите и перезапустите Instagram.</string>
-    <string name="faq_4">4. Режим Разработчика вызывает вылеты? Следуйте инструкции для Режима Разработчика.</string>
-    <string name="faq_5">5. Режим Разработчика имеет странные название или цифры? Используйте Alpha и Beta версии, так как обычные версии имеют искажение.</string>
-    <string name="faq_6">6. Режим Без Отвлечений включен, но контент все еще присуствует? Остановите Instagram и очистите кэш.</string>
+    <string name="faq_1">1. Не работает/вылетает с версией из Google Play?\n- Используйте APK файлы с APKMirror</string>
+    <string name="faq_2">2. Модуль не включен?\n- Выключите and сново включите модуль в LSPosed.</string>
+    <string name="faq_3">3. Функции не работают?\n- Остановите и перезапустите Instagram.</string>
+    <string name="faq_4">4. Режим Разработчика вызывает вылеты?\n- Следуйте инструкции для Режима Разработчика.</string>
+    <string name="faq_5">5. Режим Разработчика имеет странные название или цифры?\n- Используйте Alpha и Beta версии, так как обычные версии имеют искажение.</string>
+    <string name="faq_6">6. Режим Без Отвлечений включен, но контент все еще присуствует?\n- Остановите Instagram и очистите кэш.</string>
 
     <!-- features -->
     <string name="developer_options">Режим Разработчика</string>
@@ -65,7 +67,6 @@
     <string name="enable_disable_all">Включить/Выключить все</string>
 
     <!-- Don't translate! -->
-    <string name="hint" translatable="false">Hint</string>
 
     <!-- ghost -->
     <string name="ghost_mode_options">Настройки Режима Призрака</string>
@@ -88,9 +89,6 @@
     <string name="dev_options_4">4. И наконец, выключите Режим Разработчика в модуле, чтобы Instagram не вылетал.</string>
 
     <!-- Don't translate! -->
-    <string name="is_employee" translatable="false">• is employee</string>
-    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
-    <string name="employee_options" translatable="false">• employee options</string>
 
     <!-- distraction free -->
     <string name="distraction_free_options">Настройки Режима Без Отвлечений</string>
@@ -111,9 +109,5 @@
     <string name="contributor_name">Имя участника</string>
 
     <!-- Toast -->
-    <string name="restart_insta_toast">Перезагрузка Instagram</string>
-    <string name="failed_restart_insta_toast">Не удалось перезагрузить Instagram</string>
-    <string name="non_root_restart_insta_toast">Пожалуйста остановите Instagram и откройте его</string>
-    <string name="clear_cache_insta_toast">Пожалуйста очистите кэш Instagram для лучшего использования</string>
     <string name="follower_toast">Статус подписки</string>
 </resources>

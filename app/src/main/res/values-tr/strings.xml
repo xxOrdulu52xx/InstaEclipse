@@ -2,12 +2,12 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Sürüm: 0.3.2</string>
     <string name="home">Ana Sayfa</string>
     <string name="features">Özellikler</string>
     <string name="help">Yardım</string>
 
     <!-- home -->
+    <string name="instagram_version">Sürüm</string>
     <string name="module_disabled">Modül etkin değil. Lütfen etkinleştirin.</string>
 
     <string name="module_status">Modül Durumu:</string>
@@ -26,12 +26,16 @@
     <string name="not_installed_instagram">Instagram yüklü değil.</string>
     <string name="error_instagram">Instagram durumu kontrol edilirken hata oluştu.</string>
 
-    <string name="restart_instagram">Instagram\'ı Yeniden Başlat</string>
+    <string name="launch_instagram">Instagram\'ı başlat</string>
+    <string name="download_apk">APK indir</string>
+    <string name="how_to_use">Nasıl kullanılır</string>
+    <string name="module_not_working_title">Modül hâlâ çalışmıyor mu?</string>
+
+    <string name="usage_instructions">Arama simgesine uzun basın</string>
     <string name="contributors">Katkıda Bulunanlar</string>
     <string name="special_thanks">Özel Teşekkürler</string>
 
     <!-- Don't translate! -->
-    <string name="instagram_logo" translatable="false">Instagram Logo</string>
 
     <!-- help -->
     <string name="help_amp_troubleshooting">Yardım &amp; Sorun Giderme</string>
@@ -39,21 +43,19 @@
     <string name="go_to_github">GitHub\'a Git</string>
     <string name="find_support">Destek bulun.</string>
     <string name="go_to_telegram">Telegram\'a Git</string>
-    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
 
     <!-- Don't translate! -->
-    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
 
     <!-- faq -->
     <string name="frequently_asked_questions">Sıkça Sorulan Sorular</string>
-    <string name="faq_1">1. Google Play Sürümünü kullanırken çalışmıyor veya çöküyor mu? APKMirror APK\'lerini kullanın.</string>
-    <string name="faq_2">2. Modül etkin değil mi? Modülü LSPosed\'de devre dışı bırakıp tekrar etkinleştirin.</string>
-    <string name="faq_3">3. Özellikler çalışmıyor mu? Instagram\'ı zorla durdurup yeniden başlatın.</string>
-    <string name="faq_4">4. Geliştirici seçenekleri çöküyor mu? Geliştirici seçenekleri rehberini takip edin.</string>
-    <string name="faq_5">5. Geliştirici seçeneklerinde garip etiketler veya numaralar mı var? Kararlı sürümler karıştırma içerdiğinden Beta veya Alpha sürümlerini kullanın.</string>
-    <string name="faq_6">6. Dikkat Dağıtıcıları Kapat seçeneği etkin ancak içerik hâlâ görünüyor mu? Instagram\'ı zorla durdurun ve önbelleğini temizleyin.</string>
+    <string name="faq_1">1. Google Play Sürümünü kullanırken çalışmıyor veya çöküyor mu?\n- APKMirror APK\'lerini kullanın.</string>
+    <string name="faq_2">2. Modül etkin değil mi?\n- Modülü LSPosed\'de devre dışı bırakıp tekrar etkinleştirin.</string>
+    <string name="faq_3">3. Özellikler çalışmıyor mu?\n- Instagram\'ı zorla durdurup yeniden başlatın.</string>
+    <string name="faq_4">4. Geliştirici seçenekleri çöküyor mu?\n- Geliştirici seçenekleri rehberini takip edin.</string>
+    <string name="faq_5">5. Geliştirici seçeneklerinde garip etiketler veya numaralar mı var?\n- Kararlı sürümler karıştırma içerdiğinden Beta veya Alpha sürümlerini kullanın.</string>
+    <string name="faq_6">6. Dikkat Dağıtıcıları Kapat seçeneği etkin ancak içerik hâlâ görünüyor mu?\n- Instagram\'ı zorla durdurun ve önbelleğini temizleyin.</string>
 
     <!-- features -->
     <string name="developer_options">Geliştirici Seçenekleri</string>
@@ -65,7 +67,6 @@
     <string name="enable_disable_all">Tümünü Etkinleştir/Devre Dışı Bırak</string>
 
     <!-- Don't translate! -->
-    <string name="hint" translatable="false">Hint</string>
 
     <!-- ghost -->
     <string name="ghost_mode_options">Hayalet Modu Seçenekleri</string>
@@ -88,9 +89,6 @@
     <string name="dev_options_4">4. Son olarak, uygulama çökmesini önlemek için modülden Geliştirici Seçeneklerini devre dışı bırakın.</string>
 
     <!-- Don't translate! -->
-    <string name="is_employee" translatable="false">• is employee</string>
-    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
-    <string name="employee_options" translatable="false">• employee options</string>
 
     <!-- distraction free -->
     <string name="distraction_free_options">Dikkat Dağıtıcıları Kapat</string>
@@ -111,9 +109,5 @@
     <string name="contributor_name">Katkıda Bulunan\'ın İsmi</string>
 
     <!-- Toast -->
-    <string name="restart_insta_toast">Instagram Yeniden Başlatılıyor</string>
-    <string name="failed_restart_insta_toast">Instagram yeniden başlatılamadı</string>
-    <string name="non_root_restart_insta_toast">Lütfen Instagram\'ı durmaya zorlayın ve yeniden açın</string>
-    <string name="clear_cache_insta_toast">En iyi deneyim için lütfen Instagram\'ın önbelleğini temizleyin</string>
     <string name="follower_toast">Takip durumu</string>
 </resources>

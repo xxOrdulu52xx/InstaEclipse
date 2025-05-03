@@ -99,7 +99,7 @@ public class FollowerIndicator {
                                                 String existingText = titleTextView.getText().toString();
 
                                                 if (!existingText.contains("✅") && !existingText.contains("❌")) {
-                                                    String newText = existingText + (followsMe ? " ✅" : " ❌");
+                                                    String newText =  (followsMe ? " ✅" : " ❌") + existingText;
                                                     titleTextView.setText(newText);
                                                 }
                                             }, 1000); // Wait 1 second (1000 ms)

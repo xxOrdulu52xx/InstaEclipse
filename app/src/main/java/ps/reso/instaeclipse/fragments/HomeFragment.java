@@ -33,10 +33,10 @@ import ps.reso.instaeclipse.utils.core.CommonUtils;
 public class HomeFragment extends Fragment {
 
     private MaterialButton launchInstagramButton;
-    private MaterialButton downloadButton;
     private MaterialCardView instagramStatusCard;
     private TextView instagramStatusText;
-    private ImageView instagramLogo;
+    private ImageView instagramLogo, instagramInfoIcon;
+
 
     @Nullable
     @Override
@@ -47,13 +47,15 @@ public class HomeFragment extends Fragment {
 
         // Initialize views
         launchInstagramButton = view.findViewById(R.id.launch_instagram_button);
-        downloadButton = view.findViewById(R.id.download_instagram_button);
+        MaterialButton downloadButton = view.findViewById(R.id.download_instagram_button);
 
 
         // Find the Card, TextView and Logo to display Instagram status
         instagramStatusCard = view.findViewById(R.id.instagram_status_card);
         instagramStatusText = view.findViewById(R.id.instagram_status_text);
         instagramLogo = view.findViewById(R.id.instagram_logo);
+        instagramInfoIcon = view.findViewById(R.id.instagram_info_icon);
+
 
         // Check Instagram installation and version
         checkInstagramStatus();
@@ -106,12 +108,13 @@ public class HomeFragment extends Fragment {
                 instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
 
                 // Add OnClickListener to open app settings if Instagram is installed
-                instagramStatusCard.setOnClickListener(v -> {
+                instagramInfoIcon.setOnClickListener(v -> {
                     Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     intent.setData(Uri.parse("package:" + instagramPackage));
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 });
+
 
             } catch (PackageManager.NameNotFoundException e) {
                 instagramStatusText.setText(getString(R.string.not_installed_instagram));

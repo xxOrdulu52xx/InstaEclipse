@@ -52,6 +52,22 @@
                     android:text="@string/checking_instagram"
                     android:textColor="@color/white"
                     android:textSize="17sp" />
+
+                <!-- Info Icon -->
+                <ImageView
+                    android:id="@+id/instagram_info_icon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="70dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="@string/instagram_info"
+                    android:focusable="true"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_info"
+                    app:tint="@android:color/white"
+                    tools:ignore="TouchTargetSizeCheck" />
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

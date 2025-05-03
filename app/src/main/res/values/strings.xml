@@ -35,6 +35,7 @@
 
     <!-- Don't translate! -->
     <string name="instagram_logo" translatable="false">Instagram Logo</string>
+    <string name="instagram_info" translatable="false">instagram_info</string>
 
     <!-- help -->
     <string name="help_amp_troubleshooting">Help &amp; Troubleshooting</string>

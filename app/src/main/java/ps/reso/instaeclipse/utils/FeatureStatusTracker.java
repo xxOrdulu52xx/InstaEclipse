@@ -30,7 +30,4 @@ public class FeatureStatusTracker {
         return !features.isEmpty();
     }
 
-    public static void reset() {
-        features.clear();
-    }
 }

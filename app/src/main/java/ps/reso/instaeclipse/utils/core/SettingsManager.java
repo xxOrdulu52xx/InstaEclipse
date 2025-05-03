@@ -1,7 +1,10 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureManager;
 
 public class SettingsManager {
     private static final String PREF_NAME = "instaeclipse_prefs";

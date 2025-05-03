@@ -16,8 +16,9 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import ps.reso.instaeclipse.utils.FeatureFlags;
-import ps.reso.instaeclipse.utils.FeatureStatusTracker;
+import ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 
 public class FollowerIndicator {
     public String findFollowerStatusMethod(DexKitBridge bridge) {
@@ -78,7 +79,7 @@ public class FollowerIndicator {
                         Boolean followsMe = (Boolean) param.getResult();
                         FeatureStatusTracker.setHooked("ShowFollowerToast");
 
-                        String targetId = ps.reso.instaeclipse.utils.FollowToastTracker.currentlyViewedUserId;
+                        String targetId = FollowIndicatorTracker.currentlyViewedUserId;
 
                         if (userId != null && userId.equals(targetId)) {
                             Activity activity = ps.reso.instaeclipse.mods.ui.InstagramUI.getCurrentActivity();
@@ -110,7 +111,7 @@ public class FollowerIndicator {
 
                             }
 
-                            ps.reso.instaeclipse.utils.FollowToastTracker.currentlyViewedUserId = null;
+                            FollowIndicatorTracker.currentlyViewedUserId = null;
                         }
                     }
                 }

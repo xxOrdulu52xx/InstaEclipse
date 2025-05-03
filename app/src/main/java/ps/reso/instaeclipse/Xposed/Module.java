@@ -15,23 +15,23 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import ps.reso.instaeclipse.mods.DevOptionsEnable;
+import ps.reso.instaeclipse.mods.devops.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.ads.AdBlocker;
-import ps.reso.instaeclipse.mods.ghostMode.ScreenshotDetection;
-import ps.reso.instaeclipse.mods.ghostMode.SeenState;
-import ps.reso.instaeclipse.mods.ghostMode.StorySeen;
-import ps.reso.instaeclipse.mods.ghostMode.TypingStatus;
-import ps.reso.instaeclipse.mods.ghostMode.ViewOnce;
+import ps.reso.instaeclipse.mods.ghost.ScreenshotDetection;
+import ps.reso.instaeclipse.mods.ghost.SeenState;
+import ps.reso.instaeclipse.mods.ghost.StorySeen;
+import ps.reso.instaeclipse.mods.ghost.TypingStatus;
+import ps.reso.instaeclipse.mods.ghost.ViewOnce;
 import ps.reso.instaeclipse.mods.misc.AutoPlayDisable;
 import ps.reso.instaeclipse.mods.misc.FollowerIndicator;
 import ps.reso.instaeclipse.mods.misc.StoryFlipping;
 import ps.reso.instaeclipse.mods.network.Interceptor;
 import ps.reso.instaeclipse.mods.ui.InstagramUI;
-import ps.reso.instaeclipse.utils.CustomToast;
-import ps.reso.instaeclipse.utils.FeatureFlags;
-import ps.reso.instaeclipse.utils.FeatureManager;
-import ps.reso.instaeclipse.utils.SettingsManager;
-import ps.reso.instaeclipse.utils.Utils;
+import ps.reso.instaeclipse.utils.toast.CustomToast;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureManager;
+import ps.reso.instaeclipse.utils.core.SettingsManager;
+import ps.reso.instaeclipse.utils.core.CommonUtils;
 
 
 @SuppressLint("UnsafeDynamicallyLoadedCode")
@@ -79,7 +79,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         XposedBridge.log("(InstaEclipse): Loaded package: " + lpparam.packageName);
 
         // Hook into your module
-        if (lpparam.packageName.equals(Utils.MY_PACKAGE_NAME)) {
+        if (lpparam.packageName.equals(CommonUtils.MY_PACKAGE_NAME)) {
             try {
 
                 if (dexKitBridge == null) {
@@ -102,7 +102,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         }
 
         // Hook into Instagram
-        if (lpparam.packageName.equals(Utils.IG_PACKAGE_NAME)) {
+        if (lpparam.packageName.equals(CommonUtils.IG_PACKAGE_NAME)) {
             try {
                 if (dexKitBridge == null) {
                     // Load the .so file from your module (if not already loaded)
@@ -128,7 +128,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     private void hookOwnModule(XC_LoadPackage.LoadPackageParam lpparam) {
         try {
-            findAndHookMethod(Utils.MY_PACKAGE_NAME + ".MainActivity", lpparam.classLoader, "isModuleActive", XC_MethodReplacement.returnConstant(true));
+            findAndHookMethod(CommonUtils.MY_PACKAGE_NAME + ".MainActivity", lpparam.classLoader, "isModuleActive", XC_MethodReplacement.returnConstant(true));
             // XposedBridge.log("InstaEclipse | Successfully hooked isModuleActive().");
         } catch (Exception e) {
             XposedBridge.log("(InstaEclipse): Failed to hook MainActivity: " + e.getMessage());

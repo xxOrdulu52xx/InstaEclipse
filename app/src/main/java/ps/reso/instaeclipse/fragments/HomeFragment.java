@@ -26,9 +26,9 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.Arrays;
 import java.util.List;
 
-import ps.reso.instaeclipse.utils.Contributor;
+import ps.reso.instaeclipse.utils.core.Contributor;
 import ps.reso.instaeclipse.R;
-import ps.reso.instaeclipse.utils.Utils;
+import ps.reso.instaeclipse.utils.core.CommonUtils;
 
 public class HomeFragment extends Fragment {
 
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
 
         @SuppressLint("SetTextI18n")
         private void checkInstagramStatus() {
-            String instagramPackage = Utils.IG_PACKAGE_NAME; // IG package name
+            String instagramPackage = CommonUtils.IG_PACKAGE_NAME; // IG package name
             PackageManager pm = requireContext().getPackageManager(); // Get PackageManager
 
             try {

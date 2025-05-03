@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.toast;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 
 public class CustomToast {
 

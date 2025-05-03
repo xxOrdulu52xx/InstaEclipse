@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.feature;
 
 public class FeatureFlags {
     public static boolean isDevEnabled = false;

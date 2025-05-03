@@ -12,8 +12,8 @@ import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import ps.reso.instaeclipse.utils.DialogUtils;
-import ps.reso.instaeclipse.utils.GhostModeUtils;
+import ps.reso.instaeclipse.utils.dialog.DialogUtils;
+import ps.reso.instaeclipse.utils.ghost.GhostModeUtils;
 
 public class InstagramUI {
     @SuppressLint("StaticFieldLeak")

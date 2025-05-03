@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.version;
 
 public class VersionCheck {
     private final String latest_version;

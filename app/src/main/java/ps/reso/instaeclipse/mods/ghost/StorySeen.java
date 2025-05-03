@@ -1,11 +1,8 @@
-package ps.reso.instaeclipse.mods.ghostMode;
+package ps.reso.instaeclipse.mods.ghost;
 
 import org.luckypray.dexkit.DexKitBridge;
-import org.luckypray.dexkit.query.FindClass;
 import org.luckypray.dexkit.query.FindMethod;
-import org.luckypray.dexkit.query.matchers.ClassMatcher;
 import org.luckypray.dexkit.query.matchers.MethodMatcher;
-import org.luckypray.dexkit.result.ClassData;
 import org.luckypray.dexkit.result.ClassDataList;
 import org.luckypray.dexkit.result.MethodData;
 
@@ -16,8 +13,8 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
-import ps.reso.instaeclipse.utils.FeatureFlags;
-import ps.reso.instaeclipse.utils.FeatureStatusTracker;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 
 public class StorySeen {
 

@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -23,6 +23,9 @@ import java.util.Objects;
 
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.mods.ui.InstagramUI;
+import ps.reso.instaeclipse.utils.core.SettingsManager;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.ghost.GhostModeUtils;
 
 public class DialogUtils {
 

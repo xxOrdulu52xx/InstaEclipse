@@ -8,7 +8,7 @@ import org.luckypray.dexkit.result.MethodData;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
-import ps.reso.instaeclipse.utils.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 
 import java.lang.reflect.Method;
 import java.util.List;

@@ -1,10 +1,12 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.ghost;
 
 import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
 import ps.reso.instaeclipse.mods.ui.InstagramUI;
+import ps.reso.instaeclipse.utils.core.SettingsManager;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 
 public class GhostModeUtils {
     public static boolean isGhostModeActive() {

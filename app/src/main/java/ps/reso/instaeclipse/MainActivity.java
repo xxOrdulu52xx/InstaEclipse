@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ps.reso.instaeclipse.fragments.HelpFragment;
 import ps.reso.instaeclipse.fragments.HomeFragment;
-import ps.reso.instaeclipse.utils.VersionCheckUtility;
+import ps.reso.instaeclipse.utils.version.VersionCheckUtility;
 
 public class MainActivity extends AppCompatActivity {
 

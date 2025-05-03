@@ -3,17 +3,14 @@ package ps.reso.instaeclipse.mods.network;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
-import java.util.List;
-import java.util.function.Predicate;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import ps.reso.instaeclipse.Xposed.Module;
-import ps.reso.instaeclipse.mods.misc.FollowerIndicator;
-import ps.reso.instaeclipse.utils.FeatureFlags;
-import ps.reso.instaeclipse.utils.FeatureStatusTracker;
+import ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 
 public class Interceptor {
 
@@ -140,7 +137,7 @@ public class Interceptor {
                                             String[] parts = uri.getPath().split("/");
                                             if (parts.length >= 5) {
                                                 // Extracted ID from /api/v1/friendships/show/{id}
-                                                ps.reso.instaeclipse.utils.FollowToastTracker.currentlyViewedUserId = parts[5];
+                                                FollowIndicatorTracker.currentlyViewedUserId = parts[5];
                                             }
                                         }
                                     }

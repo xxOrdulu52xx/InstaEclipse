@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.feature;
 
 import java.util.Collections;
 import java.util.HashMap;

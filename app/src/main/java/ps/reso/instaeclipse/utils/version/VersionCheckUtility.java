@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.utils;
+package ps.reso.instaeclipse.utils.version;
 
 import android.content.Context;
 import android.content.Intent;

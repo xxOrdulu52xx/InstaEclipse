@@ -2,12 +2,12 @@
 <resources>
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Versiya: 0.3.2</string>
     <string name="home">Ana Səhifə</string>
     <string name="features">Funksiyalar</string>
     <string name="help">Kömək</string>
 
     <!-- home -->
+    <string name="instagram_version">Versiya</string>
     <string name="module_disabled">Modul aktiv deyil. Lütfən aktiv edin.</string>
 
     <string name="module_status">Modul Statusu:</string>
@@ -25,13 +25,17 @@
     <string name="installed_instagram_version">Quraşdırılmış Instagram Versiyası: </string>
     <string name="not_installed_instagram">Instagram quraşdırılmayıb.</string>
     <string name="error_instagram">Instagram statusu yoxlanarkən xəta baş verdi.</string>
+    
+    <string name="launch_instagram">Instagram-ı işə sal</string>
+    <string name="download_apk">APK-ni yüklə</string>
+    <string name="how_to_use">Necə istifadə etməli</string>
+    <string name="module_not_working_title">Modul hələ də işləmir?</string>
 
-    <string name="restart_instagram">Instagram\'ı Yenidən Başlat</string>
+    <string name="usage_instructions">Axtarış ikonuna uzun basın</string>
     <string name="contributors">Təhfə Verənlər</string>
     <string name="special_thanks">Xüsusi Təşəkkürlər</string>
 
     <!-- Don’t translate! -->
-    <string name="instagram_logo" translatable="false">Instagram Logo</string>
 
     <!-- help -->
     <string name="help_amp_troubleshooting">Kömək &amp; Problemlərin Həlli</string>
@@ -39,21 +43,19 @@
     <string name="go_to_github">GitHub\'a Keç</string>
     <string name="find_support">Dəstək alın.</string>
     <string name="go_to_telegram">Telegram\'a Keç</string>
-    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
 
     <!-- Don’t translate! -->
-    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
 
     <!-- faq -->
     <string name="frequently_asked_questions">Tez-tez Soruşulan Suallar</string>
-    <string name="faq_1">1. Google Play Versiyasındı işləmir və ya xəta verir? APKMirror APK\'lərindən istifadə edin.</string>
-    <string name="faq_2">2. Modul aktiv deyil? Modulu LSPosed\'də deaktiv edib yenidən aktiv edin.</string>
-    <string name="faq_3">3. Funksiyalar işləmir? Instagram\'ı zorla dayandırıb keşini təmizləyin.</string>
-    <string name="faq_4">4. Tərtibatçı variantları xəta verir? Tərtibatçı variantları bələdçisini izləyin.</string>
-    <string name="faq_5">5. Tərtibatçı variantlarında qəribə etiketlər və ya nömrələr var? Sabit versiyalardı qarışıq olduğunu gözünə alaraq Beta və ya Alfa versiyalardan istifadə edin.</string>
-    <string name="faq_6">6. "Dikkat Dağıtıcıları Bağla" funksiyası aktiv amma məzmun hələ də görünür? Instagram\'ı zorla dayandırın və keşini təmizləyin.</string>
+    <string name="faq_1">1. Google Play Versiyasındı işləmir və ya xəta verir?\n- APKMirror APK\'lərindən istifadə edin.</string>
+    <string name="faq_2">2. Modul aktiv deyil?\n- Modulu LSPosed\'də deaktiv edib yenidən aktiv edin.</string>
+    <string name="faq_3">3. Funksiyalar işləmir?\n- Instagram\'ı zorla dayandırıb keşini təmizləyin.</string>
+    <string name="faq_4">4. Tərtibatçı variantları xəta verir?\n- Tərtibatçı variantları bələdçisini izləyin.</string>
+    <string name="faq_5">5. Tərtibatçı variantlarında qəribə etiketlər və ya nömrələr var?\n- Sabit versiyalardı qarışıq olduğunu gözünə alaraq Beta və ya Alfa versiyalardan istifadə edin.</string>
+    <string name="faq_6">6. "Dikkat Dağıtıcıları Bağla" funksiyası aktiv amma məzmun hələ də görünür?\n- Instagram\'ı zorla dayandırın və keşini təmizləyin.</string>
 
     <!-- features -->
     <string name="developer_options">Tərtibatçı Variantları</string>
@@ -65,7 +67,6 @@
     <string name="enable_disable_all">Hamısını Aktiv/Deaktiv Et</string>
 
     <!-- Don’t translate! -->
-    <string name="hint" translatable="false">Hint</string>
 
     <!-- ghost -->
     <string name="ghost_mode_options">Gizli Rejim Seçimləri</string>
@@ -88,9 +89,6 @@
     <string name="dev_options_4">4. Sonda, tətbiqin xəta verməməsi üçün moduldaki Tərtibatçı Variantlarını deaktiv edin.</string>
 
     <!-- Don’t translate! -->
-    <string name="is_employee" translatable="false">• is employee</string>
-    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
-    <string name="employee_options" translatable="false">• employee options</string>
 
     <!-- distraction free -->
     <string name="distraction_free_options">Diqqət Dağıtıcıları Bağlat Seçimləri</string>
@@ -111,9 +109,5 @@
     <string name="contributor_name">Töhfə Verənin Adı</string>
 
     <!-- Toast -->
-    <string name="restart_insta_toast">Instagram Yenidən Başlatılır</string>
-    <string name="failed_restart_insta_toast">Instagram yenidən başlatıla bilmədi</string>
-    <string name="non_root_restart_insta_toast">Zəhmət olmasa Instagram\'ı zorla dayandırıb yenidən açın</string>
-    <string name="clear_cache_insta_toast">Ən yaxşı təcrübə üçün Instagram\'ın keşini təmizləyin</string>
     <string name="follower_toast">İzləmə statusu</string>
 </resources>

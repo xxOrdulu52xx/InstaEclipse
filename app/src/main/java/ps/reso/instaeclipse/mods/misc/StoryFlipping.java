@@ -5,29 +5,31 @@ import org.luckypray.dexkit.query.FindMethod;
 import org.luckypray.dexkit.query.matchers.MethodMatcher;
 import org.luckypray.dexkit.result.MethodData;
 
-import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
 public class StoryFlipping {
+
     public void handleStoryFlippingDisable(DexKitBridge bridge) {
         try {
             findAndHookMethod(bridge);
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | StoryFlipping): Error handling Story Flipping hook: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | StoryFlipping): ❌ Error handling Story Flipping hook: " + e.getMessage());
         }
     }
 
     private void findAndHookMethod(DexKitBridge bridge) {
         try {
-            // Find methods referencing the string "upsell_impressions"
+            // Step 1: Find methods referencing the string "end_scene"
             List<MethodData> methods = bridge.findMethod(FindMethod.create()
                     .matcher(MethodMatcher.create()
-                            .declaredClass("instagram.features.stories.fragment.ReelViewerFragment") // Target class
-                            .usingStrings("end_scene") // Look for methods referencing this string
+                            .declaredClass("instagram.features.stories.fragment.ReelViewerFragment")
+                            .usingStrings("end_scene")
                     )
             );
 
@@ -36,22 +38,31 @@ public class StoryFlipping {
                 return;
             }
 
-            // Hook the first matched method
+            // Step 2: Hook the correct method
             for (MethodData method : methods) {
                 try {
                     Method targetMethod = method.getMethodInstance(Module.hostClassLoader);
 
-                    XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.DO_NOTHING); // Disable the method
+                    XposedBridge.hookMethod(targetMethod, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (FeatureFlags.disableStoryFlipping) {
+                                // If disableStoryFlipping is enabled, block story flipping
+                                param.setResult(null); // Skip original method
+                            }
+                        }
+                    });
 
-                    XposedBridge.log("(InstaEclipse | StoryFlipping): ✅ hooked method: " +
+                    XposedBridge.log("(InstaEclipse | StoryFlipping): ✅ Hooked (dynamic check): " +
                             method.getClassName() + "." + method.getName());
-                    return; // Exit after hooking the first match
+                    return;
+
                 } catch (Exception e) {
                     XposedBridge.log("(InstaEclipse | StoryFlipping): ❌ Error hooking method: " + e.getMessage());
                 }
             }
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | StoryFlipping): ❌ during dynamic method discovery: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | StoryFlipping): ❌ Error during dynamic method discovery: " + e.getMessage());
         }
     }
 }

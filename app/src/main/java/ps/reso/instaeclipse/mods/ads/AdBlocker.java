@@ -8,9 +8,10 @@ import org.luckypray.dexkit.result.MethodData;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
-import ps.reso.instaeclipse.utils.FeatureStatusTracker;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 
 public class AdBlocker {
 
@@ -32,13 +33,21 @@ public class AdBlocker {
                 if (!returnType.contains("boolean")) continue;
 
                 try {
-                    Method reflectedMethod = method.getMethodInstance(classLoader);
-                    XposedBridge.hookMethod(reflectedMethod, XC_MethodReplacement.returnConstant(false));
+                    Method targetMethod = method.getMethodInstance(classLoader);
 
-                    XposedBridge.log("(InstaEclipse | AdBlocker): ✅ Hooked method: " +
+                    XposedBridge.hookMethod(targetMethod, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (FeatureFlags.isAdBlockEnabled) {
+                                param.setResult(false); // prevent ad
+                            }
+                        }
+                    });
+
+                    XposedBridge.log("(InstaEclipse | AdBlocker): ✅ Hooked (dynamic check): " +
                             method.getClassName() + "." + method.getName());
                     FeatureStatusTracker.setHooked("AdBlocker");
-                    return; // Stop after the first successful hook
+                    return; // Stop after first successful hook
 
                 } catch (Throwable hookEx) {
                     XposedBridge.log("(InstaEclipse | AdBlocker): ❌ Failed to hook: " +
@@ -49,7 +58,7 @@ public class AdBlocker {
             XposedBridge.log("(InstaEclipse | AdBlocker): ❌ No valid methods hooked.");
 
         } catch (Throwable t) {
-            XposedBridge.log("(InstaEclipse | AdBlocker): ❌: " + t.getMessage());
+            XposedBridge.log("(InstaEclipse | AdBlocker): ❌ Exception: " + t.getMessage());
         }
     }
 }

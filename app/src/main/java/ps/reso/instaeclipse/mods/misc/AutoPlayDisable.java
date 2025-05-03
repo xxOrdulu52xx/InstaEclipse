@@ -8,11 +8,13 @@ import org.luckypray.dexkit.result.MethodData;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.Xposed.Module;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 
 public class AutoPlayDisable {
+
     public void handleAutoPlayDisable(DexKitBridge bridge) {
         try {
             findAndHookDynamicMethod(bridge);
@@ -26,46 +28,50 @@ public class AutoPlayDisable {
             // Step 1: Find methods referencing "ig_disable_video_autoplay"
             List<MethodData> methods = bridge.findMethod(FindMethod.create()
                     .matcher(MethodMatcher.create()
-                            .usingStrings("ig_disable_video_autoplay") // Match methods referencing the string
+                            .usingStrings("ig_disable_video_autoplay")
                     )
             );
 
             if (methods.isEmpty()) {
-                XposedBridge.log("(InstaEclipse | AutoPlayDisable): No matching methods found.");
+                XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ No matching methods found.");
                 return;
             }
 
-            // Step 2: Narrow down to methods with correct signature
+            // Step 2: Find the correct method: boolean return type, 1 parameter
             for (MethodData method : methods) {
-                // Check if the method has the correct return type
-                boolean returnTypeMatch = String.valueOf(method.getReturnType()).contains("boolean"); // Ensure return type is boolean
-
-                // Check if the method takes exactly one parameter
+                boolean returnTypeMatch = String.valueOf(method.getReturnType()).contains("boolean");
                 boolean paramTypesMatch = method.getParamTypes().size() == 1;
 
                 if (returnTypeMatch && paramTypesMatch) {
-                    // Step 3: Hook the method
                     hookMethod(method);
-                    return; // Exit after hooking the first valid method
+                    return;
                 }
             }
 
-            XposedBridge.log("(InstaEclipse | AutoPlayDisable): No matching methods with the correct signature were found.");
+            XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ No matching methods with correct signature.");
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse | AutoPlayDisable): Error during dynamic method discovery: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ Error during method discovery: " + e.getMessage());
         }
     }
 
     private void hookMethod(MethodData method) {
         try {
-            // Get the target method instance
             Method targetMethod = method.getMethodInstance(Module.hostClassLoader);
 
-            // Hook the method to always return true
-            XposedBridge.hookMethod(targetMethod, XC_MethodReplacement.returnConstant(true));
+            // Step 3: Hook the method dynamically
+            XposedBridge.hookMethod(targetMethod, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (FeatureFlags.disableVideoAutoPlay) {
+                        // If disableVideoAutoPlay is true, force return true
+                        param.setResult(true);
+                    }
+                }
+            });
 
-            XposedBridge.log("(InstaEclipse | AutoPlayDisable): ✅ hooked: " +
+            XposedBridge.log("(InstaEclipse | AutoPlayDisable): ✅ Hooked (dynamic check): " +
                     method.getClassName() + "." + method.getName());
+
         } catch (Exception e) {
             XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ Error hooking method: " + e.getMessage());
         }

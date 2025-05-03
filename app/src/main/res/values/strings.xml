@@ -1,10 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">Version: 0.3.2</string>
+    <string name="version" translatable="false">v0.4</string>
     <string name="home">Home</string>
     <string name="features">Features</string>
     <string name="help">Help</string>
+    <string name="instagram_version">Version</string>
 
     <!-- home -->
     <string name="module_disabled">Module is not enabled. Please enable it.</string>
@@ -21,16 +22,20 @@
     <string name="module_active">The module is active and working.</string>
 
     <string name="checking_instagram">Checking Instagram</string>
-    <string name="installed_instagram_version">Instagram Installed - Version: </string>
-    <string name="not_installed_instagram">Instagram is not installed.</string>
-    <string name="error_instagram">Error checking Instagram status.</string>
+    <string name="installed_instagram_version">Instagram is installed</string>
+    <string name="not_installed_instagram">Instagram is not installed</string>
+    <string name="error_instagram">Error checking Instagram status</string>
 
-    <string name="restart_instagram">Restart Instagram</string>
+    <string name="launch_instagram">Launch Instagram</string>
+    <string name="download_apk">Download APK</string>
+    <string name="how_to_use">How to use</string>
+    <string name="usage_instructions">Hold down the search icon</string>
     <string name="contributors">Contributors</string>
     <string name="special_thanks">Special Thanks</string>
 
     <!-- Don't translate! -->
     <string name="instagram_logo" translatable="false">Instagram Logo</string>
+    <string name="instagram_info" translatable="false">instagram_info</string>
 
     <!-- help -->
     <string name="help_amp_troubleshooting">Help &amp; Troubleshooting</string>
@@ -47,13 +52,17 @@
 
     <!-- faq -->
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
-    <string name="faq_1">1. Not working/crashes when using Google Play Version? Use APKMirror APKs</string>
-    <string name="faq_2">2. Module not enabled? Disable and re-enable the module in LSPosed.</string>
-    <string name="faq_3">3. Features not working? Force stop and restart Instagram.</string>
-    <string name="faq_4">4. Developer options cause crashes? Follow the developer options guide.</string>
-    <string name="faq_5">5. Developer options have weird labels or numbers? Use Beta or Alpha versions as Stable versions have obfuscation.</string>
-    <string name="faq_6">6. Distraction Free enabled but content still appears? Force stop Instagram and clear its cache.</string>
-    
+    <string name="faq_1"><b>1. Not working/crashes when using Google Play Version?</b>\n- Use APKMirror APKs</string>
+    <string name="faq_2"><b>2. Module not enabled?</b>\n- Disable and re-enable the module in LSPosed.</string>
+    <string name="faq_3"><b>3. Features not working?</b>\n- Force stop and restart Instagram.</string>
+    <string name="faq_4"><b>4. Developer options cause crashes?</b>\n- Follow the developer options guide.</string>
+    <string name="faq_5"><b>5. Developer options have weird labels or numbers?</b>\n- Use Beta or Alpha versions as Stable versions have obfuscation.</string>
+    <string name="faq_6"><b>6. Distraction Free enabled but content still appears?</b>\n- Force stop Instagram and clear its cache.</string>
+
+    <!-- guide -->
+    <string name="module_not_working_title">Module still isn\'t working?</string>
+    <string name="module_not_working_description" tools:ignore="MissingTranslation" translatable="false"><![CDATA[If you are <b>rooted</b> try using <a href="https://github.com/JingMatrix/LSPosed/releases/latest">JingMatrix\'s LSPosed</a><br/><br/>If you are <b>not rooted</b> install <a href="https://github.com/JingMatrix/LSPatch/releases/latest">JingMatrix\'s LSPatch</a> then follow <a href="https://t.me/instaEclipse_discussion/158/5149">this guide</a>]]></string>
+
     <!-- features -->
     <string name="developer_options">Developer Options</string>
     <string name="ghost_mode">Ghost Mode</string>
@@ -109,11 +118,5 @@
 
     <!-- contributor card -->
     <string name="contributor_name">Contributor Name</string>
-
-    <!-- Toast -->
-    <string name="restart_insta_toast">Restarting Instagram</string>
-    <string name="failed_restart_insta_toast">Failed to restart Instagram</string>
-    <string name="non_root_restart_insta_toast">Please force stop Instagram and open it</string>
-    <string name="clear_cache_insta_toast">Please clear Instagram\'s app cache for the best experience</string>
 
 </resources>

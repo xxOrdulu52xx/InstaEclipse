@@ -7,6 +7,7 @@
     <string name="help">Ayuda</string>
 
     <!-- inicio -->
+    <string name="instagram_version">Versión</string>
     <string name="module_disabled">El módulo no está habilitado. Por favor, actívalo.</string>
 
     <string name="module_status">Estado del Módulo:</string>
@@ -25,12 +26,16 @@
     <string name="not_installed_instagram">Instagram no está instalado.</string>
     <string name="error_instagram">Error al verificar el estado de Instagram.</string>
 
-    <string name="restart_instagram">Reiniciar Instagram</string>
+    <string name="launch_instagram">Abrir Instagram</string>
+    <string name="download_apk">Descargar APK</string>
+    <string name="how_to_use">Cómo usar</string>
+    <string name="module_not_working_title">Modül hâlâ çalışmıyor mu?</string>
+
+    <string name="usage_instructions">Mantén presionado el ícono de búsqueda</string>
     <string name="contributors">Contribuidores</string>
     <string name="special_thanks">Agradecimientos Especiales</string>
 
     <!-- Don't translate! -->
-    <string name="instagram_logo" translatable="false">Instagram Logo</string>
 
 
     <!-- ayuda -->
@@ -39,10 +44,8 @@
     <string name="go_to_github">Ir a GitHub</string>
     <string name="find_support">Encuentra soporte.</string>
     <string name="go_to_telegram">Ir a Telegram</string>
-    <string name="instaeclipse_telegram_group" translatable="false">Grupo de Telegram InstaEclipse</string>
 
     <!-- No traducir -->
-    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
 
@@ -66,7 +69,6 @@
     <string name="enable_disable_all">Activar/Desactivar Todo</string>
 
     <!-- No traducir -->
-    <string name="hint" translatable="false">Hint</string>
 
     <!-- modo fantasma -->
     <string name="ghost_mode_options">Opciones de Modo Fantasma</string>
@@ -89,9 +91,6 @@
     <string name="dev_options_4">4. Finalmente, desactiva las Opciones de Desarrollador desde el módulo para evitar fallos.</string>
 
     <!-- No traducir -->
-    <string name="is_employee" translatable="false">• is employee</string>
-    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
-    <string name="employee_options" translatable="false">• employee options</string>
 
     <!-- sin distracciones -->
     <string name="distraction_free_options">Opciones Sin Distracciones</string>
@@ -112,9 +111,5 @@
     <string name="contributor_name">Nombre del Contribuidor</string>
 
     <!-- Toast -->
-    <string name="restart_insta_toast">Reiniciando Instagram</string>
-    <string name="failed_restart_insta_toast">No se pudo reiniciar Instagram</string>
-    <string name="non_root_restart_insta_toast">Por favor, fuerza el cierre de Instagram y ábrelo</string>
-    <string name="clear_cache_insta_toast">Por favor, borra la caché de Instagram para la mejor experiencia</string>
     <string name="follower_toast">Estado de seguimiento</string>
 </resources>

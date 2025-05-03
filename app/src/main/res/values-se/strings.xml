@@ -6,6 +6,7 @@
     <string name="help">Hjälp</string>
 
     <!-- home -->
+    <string name="instagram_version">Versuvdna</string>
     <string name="module_disabled">Modulen är inaktiverad. Aktivera den i Xposed Installer.</string>
 
     <string name="module_status">Modulstatus:</string>
@@ -23,13 +24,17 @@
     <string name="installed_instagram_version">Instagram installerat - Version: </string>
     <string name="not_installed_instagram">Instagram är inte installerat.</string>
     <string name="error_instagram">Fel vid verifiering av Instagram-status.</string>
+    
+    <string name="launch_instagram">Lansere Instagram</string>
+    <string name="download_apk">Lasta APK</string>
+    <string name="how_to_use">Mo geavahit</string>
+    <string name="module_not_working_title">Modula ii doahttá ain?</string>
 
-    <string name="restart_instagram">Starta om Instagram</string>
+    <string name="usage_instructions">Doalvva gitta ohcamušikona</string>
     <string name="contributors">Bidragsgivare</string>
     <string name="special_thanks">Särskilt tack</string>
 
     <!-- Don't translate! -->
-    <string name="instagram_logo" translatable="false">Instagram Logo</string>
 
     <!-- help -->
     <string name="help_amp_troubleshooting">Hjälp och felsökning</string>
@@ -37,10 +42,8 @@
     <string name="go_to_github">Besök GitHub</string>
     <string name="find_support">Hitta support.</string>
     <string name="go_to_telegram">Besök Telegram</string>
-    <string name="instaeclipse_telegram_group" translatable="false">InstaEclipse Telegram Group</string>
 
     <!-- Don't translate! -->
-    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
 
@@ -63,7 +66,6 @@
     <string name="enable_disable_all">Aktivera/avaktivera allt</string>
 
     <!-- Don't translate! -->
-    <string name="hint" translatable="false">Hint</string>
 
     <!-- ghost -->
     <string name="ghost_mode_options">Inställningar för spökläge</string>
@@ -86,9 +88,6 @@
     <string name="dev_options_4">4. Avaktivera sedan utvecklaralternativen i modulen för att förhindra krascher.</string>
 
     <!-- Don't translate! -->
-    <string name="is_employee" translatable="false">• is employee</string>
-    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
-    <string name="employee_options" translatable="false">• employee options</string>
 
     <!-- distraction free -->
     <string name="distraction_free_options">Inställningar för störningsfritt läge</string>
@@ -109,9 +108,5 @@
     <string name="video_autoplay">Inaktivera automatisk uppspelning av video</string>
 
     <!-- Toast -->
-    <string name="restart_insta_toast">Startar om Instagram...</string>
-    <string name="failed_restart_insta_toast">Misslyckades med att starta om Instagram</string>
-    <string name="non_root_restart_insta_toast">Tvinga stopp på Instagram och starta det manuellt</string>
-    <string name="clear_cache_insta_toast">Rensa Instagrams cache för att säkerställa korrekt funktion</string>
     <string name="follower_toast">Visa följarnotifikation</string>
 </resources>

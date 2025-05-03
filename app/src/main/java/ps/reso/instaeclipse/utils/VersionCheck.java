@@ -1,8 +1,13 @@
 package ps.reso.instaeclipse.utils;
 
 public class VersionCheck {
-    private String latest_version;
-    private String update_url;
+    private final String latest_version;
+    private final String update_url;
+
+    public VersionCheck(String latestVersion, String updateUrl) {
+        latest_version = latestVersion;
+        update_url = updateUrl;
+    }
 
     // Getter for the latest version
     public String getLatestVersion() {

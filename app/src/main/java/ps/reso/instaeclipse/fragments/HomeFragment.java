@@ -23,12 +23,10 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
-import java.io.DataOutputStream;
 import java.util.Arrays;
 import java.util.List;
 
 import ps.reso.instaeclipse.utils.Contributor;
-import ps.reso.instaeclipse.MainActivity;
 import ps.reso.instaeclipse.R;
 import ps.reso.instaeclipse.utils.Utils;
 
@@ -94,7 +92,7 @@ public class HomeFragment extends Fragment {
                 String versionName = packageInfo.versionName;
 
                 String installedText = getString(R.string.installed_instagram_version);
-                String versionText = getString(R.string.instagram_version) + " " + versionName;
+                String versionText = getString(R.string.instagram_version) + ": " + versionName;
                 String fullText = installedText + "\n" + versionText;
 
                 SpannableString spannableString = new SpannableString(fullText);
@@ -165,28 +163,28 @@ public class HomeFragment extends Fragment {
 
     private void setupContributorCard(View view, Contributor contributor) {
         TextView nameTextView = view.findViewById(R.id.contributor_name);
-        nameTextView.setText(contributor.getName());
+        nameTextView.setText(contributor.name());
 
         ImageButton githubButton = view.findViewById(R.id.github_button);
-        if (contributor.getGithubUrl() != null) {
+        if (contributor.githubUrl() != null) {
             githubButton.setVisibility(View.VISIBLE);
-            githubButton.setOnClickListener(v -> openLink(contributor.getGithubUrl()));
+            githubButton.setOnClickListener(v -> openLink(contributor.githubUrl()));
         } else {
             githubButton.setVisibility(View.GONE);
         }
 
         ImageButton linkedinButton = view.findViewById(R.id.linkedin_button);
-        if (contributor.getLinkedinUrl() != null) {
+        if (contributor.linkedinUrl() != null) {
             linkedinButton.setVisibility(View.VISIBLE);
-            linkedinButton.setOnClickListener(v -> openLink(contributor.getLinkedinUrl()));
+            linkedinButton.setOnClickListener(v -> openLink(contributor.linkedinUrl()));
         } else {
             linkedinButton.setVisibility(View.GONE);
         }
 
         ImageButton telegramButton = view.findViewById(R.id.telegram_button);
-        if (contributor.getTelegramUrl() != null) {
+        if (contributor.telegramUrl() != null) {
             telegramButton.setVisibility(View.VISIBLE);
-            telegramButton.setOnClickListener(v -> openLink(contributor.getTelegramUrl()));
+            telegramButton.setOnClickListener(v -> openLink(contributor.telegramUrl()));
         } else {
             telegramButton.setVisibility(View.GONE);
         }

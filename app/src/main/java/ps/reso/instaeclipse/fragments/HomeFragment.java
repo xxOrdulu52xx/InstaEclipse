@@ -36,7 +36,6 @@ public class HomeFragment extends Fragment {
 
     private MaterialButton launchInstagramButton;
     private MaterialButton downloadButton;
-    private final boolean hasRootAccess = MainActivity.hasRootAccess;
     private MaterialCardView instagramStatusCard;
     private TextView instagramStatusText;
     private ImageView instagramLogo;
@@ -95,7 +94,7 @@ public class HomeFragment extends Fragment {
                 String versionName = packageInfo.versionName;
 
                 String installedText = getString(R.string.installed_instagram_version);
-                String versionText = "ver." + " " + versionName;
+                String versionText = getString(R.string.instagram_version) + " " + versionName;
                 String fullText = installedText + "\n" + versionText;
 
                 SpannableString spannableString = new SpannableString(fullText);

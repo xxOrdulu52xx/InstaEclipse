@@ -1,10 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version">v0.3.2</string>
+    <string name="version" translatable="false">v0.3.2</string>
     <string name="home">Home</string>
     <string name="features">Features</string>
     <string name="help">Help</string>
+    <string name="instagram_version">Version:</string>
 
     <!-- home -->
     <string name="module_disabled">Module is not enabled. Please enable it.</string>
@@ -59,7 +60,7 @@
 
     <!-- guide -->
     <string name="module_not_working_title">Module still isn\'t working?</string>
-    <string name="module_not_working_description"><![CDATA[If you are <b>rooted</b> try using <a href="https://github.com/JingMatrix/LSPosed/releases/latest">JingMatrix\'s LSPosed</a><br/><br/>If you are <b>not rooted</b> install <a href="https://github.com/JingMatrix/LSPatch/releases/latest">JingMatrix\'s LSPatch</a> then follow <a href="https://t.me/instaEclipse_discussion/158/5149">this guide</a>]]></string>
+    <string name="module_not_working_description" tools:ignore="MissingTranslation" translatable="false"><![CDATA[If you are <b>rooted</b> try using <a href="https://github.com/JingMatrix/LSPosed/releases/latest">JingMatrix\'s LSPosed</a><br/><br/>If you are <b>not rooted</b> install <a href="https://github.com/JingMatrix/LSPatch/releases/latest">JingMatrix\'s LSPatch</a> then follow <a href="https://t.me/instaEclipse_discussion/158/5149">this guide</a>]]></string>
 
     <!-- features -->
     <string name="developer_options">Developer Options</string>
@@ -116,11 +117,5 @@
 
     <!-- contributor card -->
     <string name="contributor_name">Contributor Name</string>
-
-    <!-- Toast -->
-    <string name="restart_insta_toast">Restarting Instagram</string>
-    <string name="failed_restart_insta_toast">Failed to restart Instagram</string>
-    <string name="non_root_restart_insta_toast">Please force stop Instagram and open it</string>
-    <string name="clear_cache_insta_toast">Please clear Instagram\'s app cache for the best experience</string>
 
 </resources>

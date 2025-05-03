@@ -4,15 +4,9 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.XModuleResources;
 import android.os.Build;
 
 import org.luckypray.dexkit.DexKitBridge;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
@@ -37,19 +31,15 @@ import ps.reso.instaeclipse.utils.CustomToast;
 import ps.reso.instaeclipse.utils.FeatureFlags;
 import ps.reso.instaeclipse.utils.FeatureManager;
 import ps.reso.instaeclipse.utils.SettingsManager;
+import ps.reso.instaeclipse.utils.Utils;
 
 
 @SuppressLint("UnsafeDynamicallyLoadedCode")
 public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
-    private static final String IG_PACKAGE_NAME = "com.instagram.android";
-    private static final String MY_PACKAGE_NAME = "ps.reso.instaeclipse";
     public static DexKitBridge dexKitBridge;
     public static ClassLoader hostClassLoader;
-    public static String MODULE_PATH;
-    public static XModuleResources MODULE_RES;
     private static String moduleSourceDir;
     private static String moduleLibDir;
-    List<Predicate<URI>> uriConditions = new ArrayList<>();
 
     // for dev usage
     /*
@@ -67,7 +57,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
         // Detect ABI correctly
         String abi = Build.SUPPORTED_ABIS[0]; // Primary ABI
-        String abiFolder = null;
+        String abiFolder;
 
         if (abi.equalsIgnoreCase("arm64-v8a")) abiFolder = "arm64";
         else if (abi.equalsIgnoreCase("armeabi-v7a") || abi.equalsIgnoreCase("armeabi") || abi.equalsIgnoreCase("armv8i"))
@@ -89,7 +79,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         XposedBridge.log("(InstaEclipse): Loaded package: " + lpparam.packageName);
 
         // Hook into your module
-        if (lpparam.packageName.equals(MY_PACKAGE_NAME)) {
+        if (lpparam.packageName.equals(Utils.MY_PACKAGE_NAME)) {
             try {
 
                 if (dexKitBridge == null) {
@@ -112,7 +102,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         }
 
         // Hook into Instagram
-        if (lpparam.packageName.equals(IG_PACKAGE_NAME)) {
+        if (lpparam.packageName.equals(Utils.IG_PACKAGE_NAME)) {
             try {
                 if (dexKitBridge == null) {
                     // Load the .so file from your module (if not already loaded)
@@ -138,7 +128,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     private void hookOwnModule(XC_LoadPackage.LoadPackageParam lpparam) {
         try {
-            findAndHookMethod(MY_PACKAGE_NAME + ".MainActivity", lpparam.classLoader, "isModuleActive", XC_MethodReplacement.returnConstant(true));
+            findAndHookMethod(Utils.MY_PACKAGE_NAME + ".MainActivity", lpparam.classLoader, "isModuleActive", XC_MethodReplacement.returnConstant(true));
             // XposedBridge.log("InstaEclipse | Successfully hooked isModuleActive().");
         } catch (Exception e) {
             XposedBridge.log("(InstaEclipse): Failed to hook MainActivity: " + e.getMessage());
@@ -153,7 +143,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
             XposedHelpers.findAndHookMethod("android.app.Application", lpparam.classLoader, "attach", Context.class, new XC_MethodHook() {
                 @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) {
 
                     XposedBridge.log("InstaEclipse: Settings loaded via Application.attach");
 

@@ -1,10 +1,7 @@
 package ps.reso.instaeclipse;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
@@ -15,7 +12,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ps.reso.instaeclipse.fragments.HelpFragment;
 import ps.reso.instaeclipse.fragments.HomeFragment;
-import ps.reso.instaeclipse.utils.Preferences;
 import ps.reso.instaeclipse.utils.VersionCheckUtility;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,10 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         VersionCheckUtility.checkForUpdates(this);
-
-        // Load preferences at the start of the app
-        SharedPreferences sharedPreferences = Preferences.loadPreferences(this);
-        SharedPreferences.Editor editor = Preferences.getEditor();
 
         setContentView(R.layout.activity_main);
 

@@ -53,13 +53,14 @@ public class DialogUtils {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private static LinearLayout buildMainMenuLayout(Context context) {
         LinearLayout mainLayout = new LinearLayout(context);
         mainLayout.setOrientation(LinearLayout.VERTICAL);
         mainLayout.setPadding(40, 40, 40, 20);
 
         GradientDrawable background = new GradientDrawable();
-        background.setColor(Color.parseColor("#1E1E1E"));
+        background.setColor(Color.parseColor("#262626"));
         background.setCornerRadius(32);
         mainLayout.setBackground(background);
 
@@ -177,20 +178,32 @@ public class DialogUtils {
                     }
                 });
 
-                // 🔥 Update corresponding FeatureFlag instantly
+                // Update corresponding FeatureFlag instantly
                 switch (index) {
-                    case 0: FeatureFlags.quickToggleSeen = isChecked; break;
-                    case 1: FeatureFlags.quickToggleTyping = isChecked; break;
-                    case 2: FeatureFlags.quickToggleScreenshot = isChecked; break;
-                    case 3: FeatureFlags.quickToggleViewOnce = isChecked; break;
-                    case 4: FeatureFlags.quickToggleStory = isChecked; break;
-                    case 5: FeatureFlags.quickToggleLive = isChecked; break;
+                    case 0:
+                        FeatureFlags.quickToggleSeen = isChecked;
+                        break;
+                    case 1:
+                        FeatureFlags.quickToggleTyping = isChecked;
+                        break;
+                    case 2:
+                        FeatureFlags.quickToggleScreenshot = isChecked;
+                        break;
+                    case 3:
+                        FeatureFlags.quickToggleViewOnce = isChecked;
+                        break;
+                    case 4:
+                        FeatureFlags.quickToggleStory = isChecked;
+                        break;
+                    case 5:
+                        FeatureFlags.quickToggleLive = isChecked;
+                        break;
                 }
 
-                // 🔥 Save immediately
+                // Save immediately
                 SettingsManager.saveAllFlags();
 
-                // 🔥 Update ghost emoji immediately
+                // Update ghost emoji immediately
                 Activity activity = InstagramUI.getCurrentActivity();
                 if (activity != null) {
                     InstagramUI.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
@@ -209,11 +222,10 @@ public class DialogUtils {
         }
 
         // Show dialog
-        showSectionDialog(context, "Customize Quick Toggle 🛠️", layout, () -> {});
+        showSectionDialog(context, "Customize Quick Toggle 🛠️", layout, () -> {
+        });
 
     }
-
-
 
 
     private static View createDivider(Context context) {
@@ -278,20 +290,32 @@ public class DialogUtils {
                     }
                 });
 
-                // 🔥 Set FeatureFlag immediately
+                // Set FeatureFlag immediately
                 switch (index) {
-                    case 0: FeatureFlags.isGhostSeen = isChecked; break;
-                    case 1: FeatureFlags.isGhostTyping = isChecked; break;
-                    case 2: FeatureFlags.isGhostScreenshot = isChecked; break;
-                    case 3: FeatureFlags.isGhostViewOnce = isChecked; break;
-                    case 4: FeatureFlags.isGhostStory = isChecked; break;
-                    case 5: FeatureFlags.isGhostLive = isChecked; break;
+                    case 0:
+                        FeatureFlags.isGhostSeen = isChecked;
+                        break;
+                    case 1:
+                        FeatureFlags.isGhostTyping = isChecked;
+                        break;
+                    case 2:
+                        FeatureFlags.isGhostScreenshot = isChecked;
+                        break;
+                    case 3:
+                        FeatureFlags.isGhostViewOnce = isChecked;
+                        break;
+                    case 4:
+                        FeatureFlags.isGhostStory = isChecked;
+                        break;
+                    case 5:
+                        FeatureFlags.isGhostLive = isChecked;
+                        break;
                 }
 
-                // 🔥 Save immediately
+                // Save immediately
                 SettingsManager.saveAllFlags();
 
-                // 🔥 Update ghost emoji immediately
+                // Update ghost emoji immediately
                 Activity activity = InstagramUI.getCurrentActivity();
                 if (activity != null) {
                     InstagramUI.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
@@ -323,7 +347,7 @@ public class DialogUtils {
         @SuppressLint("UseSwitchCompatOrMaterialCode")
         Switch analytics = createSwitch(context, "Block Analytics", FeatureFlags.isAnalyticsBlocked);
 
-        Switch[] switches = new Switch[]{ adBlock, analytics };
+        Switch[] switches = new Switch[]{adBlock, analytics};
 
         // Create Enable/Disable All switch
         @SuppressLint("UseSwitchCompatOrMaterialCode")
@@ -348,11 +372,11 @@ public class DialogUtils {
                     }
                 });
 
-                // 🔥 Update FeatureFlag immediately
+                // Update FeatureFlag immediately
                 if (index == 0) FeatureFlags.isAdBlockEnabled = isChecked;
                 if (index == 1) FeatureFlags.isAnalyticsBlocked = isChecked;
 
-                // 🔥 Save immediately
+                // Save immediately
                 SettingsManager.saveAllFlags();
             });
         }
@@ -368,7 +392,8 @@ public class DialogUtils {
         }
 
         // Show the dialog
-        showSectionDialog(context, "Ad/Analytics Block 🛡️", layout, () -> {});
+        showSectionDialog(context, "Ad/Analytics Block 🛡️", layout, () -> {
+        });
     }
 
 
@@ -465,15 +490,23 @@ public class DialogUtils {
                     }
                 });
 
-                // 🔥 Update corresponding FeatureFlag immediately
+                // Update corresponding FeatureFlag immediately
                 switch (index) {
-                    case 0: FeatureFlags.disableStoryFlipping = isChecked; break;
-                    case 1: FeatureFlags.disableVideoAutoPlay = isChecked; break;
-                    case 2: FeatureFlags.showFollowerToast = isChecked; break;
-                    case 3: FeatureFlags.showFeatureToasts = isChecked; break;
+                    case 0:
+                        FeatureFlags.disableStoryFlipping = isChecked;
+                        break;
+                    case 1:
+                        FeatureFlags.disableVideoAutoPlay = isChecked;
+                        break;
+                    case 2:
+                        FeatureFlags.showFollowerToast = isChecked;
+                        break;
+                    case 3:
+                        FeatureFlags.showFeatureToasts = isChecked;
+                        break;
                 }
 
-                // 🔥 Save immediately
+                // Save immediately
                 SettingsManager.saveAllFlags();
             });
         }
@@ -489,10 +522,12 @@ public class DialogUtils {
         }
 
         // Show the dialog
-        showSectionDialog(context, "Miscellaneous ⚙️", layout, () -> {});
+        showSectionDialog(context, "Miscellaneous ⚙️", layout, () -> {
+        });
     }
 
 
+    @SuppressLint("SetTextI18n")
     private static void showAboutDialog(Context context) {
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -542,6 +577,7 @@ public class DialogUtils {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private static void showRestartSection(Context context) {
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -572,6 +608,7 @@ public class DialogUtils {
 
     // ==== HELPERS ====
 
+    @SuppressLint("SetTextI18n")
     private static void showSectionDialog(Context context, String title, LinearLayout contentLayout, Runnable onSave) {
         if (currentDialog != null) currentDialog.dismiss();
 
@@ -581,7 +618,7 @@ public class DialogUtils {
         container.setPadding(40, 40, 40, 20);
 
         GradientDrawable background = new GradientDrawable();
-        background.setColor(Color.parseColor("#1E1E1E"));
+        background.setColor(Color.parseColor("#262626"));
         background.setCornerRadius(32);
         container.setBackground(background);
 
@@ -601,7 +638,7 @@ public class DialogUtils {
         // Footer button
         TextView backBtn = new TextView(context);
         backBtn.setText("← Back");
-        backBtn.setTextColor(Color.LTGRAY);
+        backBtn.setTextColor(Color.WHITE);
         backBtn.setTextSize(16);
         backBtn.setGravity(Gravity.CENTER);
         backBtn.setBackgroundResource(android.R.drawable.list_selector_background);
@@ -658,8 +695,8 @@ public class DialogUtils {
                         new int[]{-android.R.attr.state_checked}   // Unchecked
                 },
                 new int[]{
-                        Color.parseColor("#dabd03"),  // Green when ON
-                        Color.parseColor("#111111")   // Grey when OFF
+                        Color.parseColor("#dabd03"),  //  ON
+                        Color.parseColor("#4d4b4b")   // OFF
                 }
         );
     }
@@ -671,8 +708,8 @@ public class DialogUtils {
                         new int[]{-android.R.attr.state_checked}
                 },
                 new int[]{
-                        Color.parseColor("#CFD8DC"),  // Light green when ON
-                        Color.parseColor("#000000")   // Light grey when OFF
+                        Color.parseColor("#CFD8DC"),  //  ON
+                        Color.parseColor("#000000")   //  OFF
                 }
         );
     }
@@ -689,7 +726,7 @@ public class DialogUtils {
     }
 
 
-    private static LinearLayout createEnableAllSwitch(Context context, Switch enableAllSwitch) {
+    private static LinearLayout createEnableAllSwitch(Context context, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch) {
         // Customize the main Enable/Disable All switch style
         enableAllSwitch.setTextSize(18f);
         enableAllSwitch.setTextColor(Color.parseColor("#FFEB3B")); // Bright yellow

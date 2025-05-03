@@ -5,7 +5,7 @@
     <string name="home">Home</string>
     <string name="features">Features</string>
     <string name="help">Help</string>
-    <string name="instagram_version">Version:</string>
+    <string name="instagram_version">Version</string>
 
     <!-- home -->
     <string name="module_disabled">Module is not enabled. Please enable it.</string>

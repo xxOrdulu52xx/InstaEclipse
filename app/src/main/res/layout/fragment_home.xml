@@ -39,10 +39,10 @@
                     android:id="@+id/instagram_logo"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:tint="@android:color/white"
                     android:src="@drawable/ic_instagram_logo"
                     android:contentDescription="@string/instagram_logo"
-                    android:layout_marginEnd="16dp" />
+                    android:layout_marginEnd="16dp"
+                    app:tint="@android:color/white" />
 
                 <!-- Instagram Status -->
                 <TextView

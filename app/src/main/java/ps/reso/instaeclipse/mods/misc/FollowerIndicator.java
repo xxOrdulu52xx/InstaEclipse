@@ -92,27 +92,29 @@ public class FollowerIndicator {
                                         View titleView = activity.findViewById(titleId);
 
                                         if (titleView instanceof TextView titleTextView) {
-
-                                            // Delay the text modification
-                                            titleTextView.postDelayed(() -> {
+                                            Runnable modifyTitle = () -> {
                                                 // Get existing username text
                                                 String existingText = titleTextView.getText().toString();
 
                                                 if (!existingText.contains("✅") && !existingText.contains("❌")) {
-                                                    String newText =  (followsMe ? " ✅" : " ❌") + existingText;
+                                                    String newText = (followsMe ? " ✅ " : " ❌ ") + existingText;
                                                     titleTextView.setText(newText);
                                                 }
-                                            }, 1000); // Wait 1 second (1000 ms)
+                                            };
+
+                                            // Run twice
+                                            titleTextView.postDelayed(modifyTitle, 1000);
+                                            titleTextView.postDelayed(modifyTitle, 2000);
                                         }
                                     } catch (Exception e) {
                                         XposedBridge.log("InstaEclipse: Error modifying action_bar_title: " + e.getMessage());
                                     }
                                 });
-
                             }
 
                             FollowIndicatorTracker.currentlyViewedUserId = null;
                         }
+
                     }
                 }
             });

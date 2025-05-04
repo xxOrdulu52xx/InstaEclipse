@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
@@ -126,7 +128,12 @@ public class DialogUtils {
         closeButton.setTextSize(16);
         closeButton.setPadding(20, 30, 20, 30);
         closeButton.setGravity(Gravity.CENTER);
-        closeButton.setBackgroundResource(android.R.drawable.list_selector_background);
+
+        StateListDrawable states = new StateListDrawable();
+        states.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(Color.parseColor("#40FFFFFF")));
+        states.addState(new int[]{}, new ColorDrawable(Color.TRANSPARENT));
+        closeButton.setBackground(states);
+
         closeButton.setOnClickListener(v -> {
             if (currentDialog != null) currentDialog.dismiss();
         });
@@ -644,7 +651,12 @@ public class DialogUtils {
         backBtn.setTextColor(Color.WHITE);
         backBtn.setTextSize(16);
         backBtn.setGravity(Gravity.CENTER);
-        backBtn.setBackgroundResource(android.R.drawable.list_selector_background);
+
+        StateListDrawable states = new StateListDrawable();
+        states.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(Color.parseColor("#40FFFFFF")));
+        states.addState(new int[]{}, new ColorDrawable(Color.TRANSPARENT));
+        backBtn.setBackground(states);
+
         backBtn.setPadding(0, 30, 0, 10);
         backBtn.setOnClickListener(v -> {
             onSave.run();
@@ -698,8 +710,8 @@ public class DialogUtils {
                         new int[]{-android.R.attr.state_checked}   // Unchecked
                 },
                 new int[]{
-                        Color.parseColor("#dabd03"),  //  ON
-                        Color.parseColor("#4d4b4b")   // OFF
+                        Color.parseColor("#448AFF"),  //  ON
+                        Color.parseColor("#FFFFFF")   // OFF
                 }
         );
     }
@@ -711,8 +723,8 @@ public class DialogUtils {
                         new int[]{-android.R.attr.state_checked}
                 },
                 new int[]{
-                        Color.parseColor("#CFD8DC"),  //  ON
-                        Color.parseColor("#000000")   //  OFF
+                        Color.parseColor("#1C4C78"),  //  ON
+                        Color.parseColor("#CFD8DC")   //  OFF
                 }
         );
     }
@@ -723,7 +735,12 @@ public class DialogUtils {
         section.setTextSize(18);
         section.setTextColor(Color.WHITE);
         section.setPadding(20, 24, 20, 24);
-        section.setBackgroundResource(android.R.drawable.list_selector_background);
+
+        StateListDrawable states = new StateListDrawable();
+        states.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(Color.parseColor("#40FFFFFF")));
+        states.addState(new int[]{}, new ColorDrawable(Color.TRANSPARENT));
+        section.setBackground(states);
+
         section.setOnClickListener(v -> onClick.run());
         return section;
     }
@@ -732,7 +749,8 @@ public class DialogUtils {
     private static LinearLayout createEnableAllSwitch(Context context, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch) {
         // Customize the main Enable/Disable All switch style
         enableAllSwitch.setTextSize(18f);
-        enableAllSwitch.setTextColor(Color.parseColor("#FFEB3B")); // Bright yellow
+        enableAllSwitch.setTextColor(Color.WHITE);
+        enableAllSwitch.setTypeface(null, Typeface.BOLD);
         enableAllSwitch.setPadding(40, 40, 40, 40);
 
         // Create a container layout

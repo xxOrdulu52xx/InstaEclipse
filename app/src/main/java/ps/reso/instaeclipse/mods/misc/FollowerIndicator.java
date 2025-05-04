@@ -10,12 +10,14 @@ import org.luckypray.dexkit.query.FindMethod;
 import org.luckypray.dexkit.query.matchers.MethodMatcher;
 import org.luckypray.dexkit.result.MethodData;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import ps.reso.instaeclipse.mods.ui.InstagramUI;
 import ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
@@ -62,7 +64,7 @@ public class FollowerIndicator {
         return null;
     }
 
-    public void checkFollow(ClassLoader classLoader, String followerStatusMethod) {
+    public void checkFollow(ClassLoader classLoader, String followerStatusMethod, DexKitBridge bridge) {
         try {
             if (followerStatusMethod == null) {
                 XposedBridge.log("❌ method name not found. Skipping hook.");
@@ -78,52 +80,95 @@ public class FollowerIndicator {
                         String userId = (String) XposedHelpers.callMethod(user, "getId");
                         Boolean followsMe = (Boolean) param.getResult();
                         FeatureStatusTracker.setHooked("ShowFollowerToast");
-
                         String targetId = FollowIndicatorTracker.currentlyViewedUserId;
 
                         if (userId != null && userId.equals(targetId)) {
-                            Activity activity = ps.reso.instaeclipse.mods.ui.InstagramUI.getCurrentActivity();
 
-                            if (activity != null) {
-                                activity.runOnUiThread(() -> {
-                                    try {
-                                        @SuppressLint("DiscouragedApi")
-                                        int titleId = activity.getResources().getIdentifier("action_bar_title", "id", activity.getPackageName());
-                                        View titleView = activity.findViewById(titleId);
+                            FollowIndicatorTracker.followsMe = followsMe;
 
-                                        if (titleView instanceof TextView titleTextView) {
-                                            Runnable modifyTitle = () -> {
-                                                // Get existing username text
-                                                String existingText = titleTextView.getText().toString();
-
-                                                if (!existingText.contains("✅") && !existingText.contains("❌")) {
-                                                    String newText = (followsMe ? " ✅ " : " ❌ ") + existingText;
-                                                    titleTextView.setText(newText);
-                                                }
-                                            };
-
-                                            // Run twice
-                                            titleTextView.postDelayed(modifyTitle, 1000);
-                                            titleTextView.postDelayed(modifyTitle, 2000);
-                                        }
-                                    } catch (Exception e) {
-                                        XposedBridge.log("InstaEclipse: Error modifying action_bar_title: " + e.getMessage());
-                                    }
-                                });
-                            }
+                            hookConfigureActionBar(bridge, classLoader);
 
                             FollowIndicatorTracker.currentlyViewedUserId = null;
                         }
-
                     }
                 }
             });
 
-
-
         } catch (Exception e) {
             XposedBridge.log("❌ Error hooking User class: " + e.getMessage());
         }
+    }
+
+    public void hookConfigureActionBar(DexKitBridge bridge, ClassLoader classLoader) {
+        try {
+            List<MethodData> methods = bridge.findMethod(
+                    FindMethod.create().matcher(
+                            MethodMatcher.create()
+                                    .name("configureActionBar")
+                                    .declaredClass("com.instagram.profile.fragment.UserDetailFragment")
+                                    .returnType("void")
+                                    .paramCount(1)
+                    )
+            );
+
+            if (methods.isEmpty()) {
+                XposedBridge.log("❌ DexKit: No configureActionBar method found");
+                return;
+            }
+
+            MethodData method = methods.get(0);
+            Method targetMethod = method.getMethodInstance(classLoader);
+            Class<?> paramClass = targetMethod.getParameterTypes()[0];
+
+            XposedHelpers.findAndHookMethod(
+                    "com.instagram.profile.fragment.UserDetailFragment",
+                    classLoader,
+                    "configureActionBar",
+                    paramClass,
+                    new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) {
+                            Activity activity = InstagramUI.getCurrentActivity();
+                            if (activity != null && FollowIndicatorTracker.followsMe != null) {
+                                try {
+                                    @SuppressLint("DiscouragedApi")
+                                    int titleId = activity.getResources().getIdentifier("action_bar_title", "id", activity.getPackageName());
+                                    View titleView = activity.findViewById(titleId);
+
+                                    if (titleView instanceof TextView titleTextView) {
+                                        try {
+                                            String existingText = titleTextView.getText().toString();
+                                            String newText;
+
+                                            if (FeatureFlags.showFollowerToast) {
+                                                if (!existingText.contains("✅") && !existingText.contains("❌")) {
+                                                    newText = (FollowIndicatorTracker.followsMe ? "✅ " : "❌ ") + existingText;
+                                                    titleTextView.setText(newText);
+                                                }
+                                            } else {
+                                                // If badges exist, strip them
+                                                if (existingText.contains("✅") || existingText.contains("❌")) {
+                                                    newText = existingText.replace("✅ ", "").replace("❌ ", "");
+                                                    titleTextView.setText(newText);
+                                                }
+                                            }
+                                        } catch (Exception ex) {
+                                            XposedBridge.log("❌ Error updating badge: " + ex.getMessage());
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+                                    XposedBridge.log("❌ Error locating title: " + e.getMessage());
+                                }
+                            }
+                        }
+                    }
+            );
+
+        } catch (Throwable t) {
+            XposedBridge.log("❌ Exception while hooking configureActionBar: " + t.getMessage());
+        }
+
     }
 
 }

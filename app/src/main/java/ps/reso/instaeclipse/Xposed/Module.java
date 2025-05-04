@@ -223,7 +223,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     try {
                         FollowerIndicator followerIndicator = new FollowerIndicator();
                         String bridge = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
-                        followerIndicator.checkFollow(hostClassLoader, bridge);
+                        followerIndicator.checkFollow(hostClassLoader, bridge, Module.dexKitBridge);
                     } catch (Throwable ignored) {
                         XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ Failed to hook");
                     }

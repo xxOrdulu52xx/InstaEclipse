@@ -3,6 +3,7 @@ package ps.reso.instaeclipse.utils.feature;
 public class FeatureFlags {
     public static boolean isDevEnabled = false;
     public static boolean isImportingConfig = false;
+    public static boolean isExportingConfig = false;
 
     public static boolean isGhostModeEnabled = false;
     public static boolean isGhostSeen = false;

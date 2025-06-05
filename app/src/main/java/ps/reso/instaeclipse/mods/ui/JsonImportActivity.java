@@ -39,7 +39,6 @@ public class JsonImportActivity extends Activity {
                 ClipData clip = ClipData.newPlainText("json", json);
                 clipboard.setPrimaryClip(clip);
 
-                Toast.makeText(this, "✅ JSON copied to clipboard.\nReturn to Instagram.", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 Toast.makeText(this, "❌ Failed to read file: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }

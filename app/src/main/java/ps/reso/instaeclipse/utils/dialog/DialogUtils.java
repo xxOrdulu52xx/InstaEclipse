@@ -1,5 +1,7 @@
 package ps.reso.instaeclipse.utils.dialog;
 
+import static ps.reso.instaeclipse.mods.ui.InstagramUI.exportCurrentDevConfig;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -289,19 +291,61 @@ public class DialogUtils {
         Button importButton = new Button(context);
         importButton.setText("📥 Import Dev Config");
         importButton.setOnClickListener(v -> {
-            FeatureFlags.isImportingConfig = true;
-            Activity activity = extractActivity(context);
-            if (activity != null) {
-                Intent i = new Intent();
-                i.setComponent(new ComponentName("ps.reso.instaeclipse", "ps.reso.instaeclipse.mods.ui.JsonImportActivity"));
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(i);
+            Activity instagramActivity = InstagramUI.getCurrentActivity();
+            if (instagramActivity != null && !instagramActivity.isFinishing()) {
+                FeatureFlags.isImportingConfig = true;
+
+                Intent importIntent = new Intent();
+                importIntent.setComponent(new ComponentName(
+                        "ps.reso.instaeclipse",
+                        "ps.reso.instaeclipse.mods.ui.JsonImportActivity"
+                ));
+                importIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                try {
+                    instagramActivity.startActivity(importIntent);
+                } catch (Exception e) {
+                    XposedBridge.log("InstaEclipse | ❌ Failed to start JsonImportActivity: " + e.getMessage());
+                    showSimpleDialog(context, "Error", "Unable to open InstaEclipse UI.");
+                }
+
             } else {
-                showSimpleDialog(context, "Error", "Please open InstaEclipse before importing.");
+                showSimpleDialog(context, "Error", "Instagram is not open or ready.");
             }
         });
 
         layout.addView(importButton);
+
+
+        // 📤 Export Dev Config Button
+        Button exportButton = new Button(context);
+        exportButton.setText("📤 Export Dev Config");
+        exportButton.setOnClickListener(v -> {
+            FeatureFlags.isExportingConfig = true;
+            Activity instagramActivity = InstagramUI.getCurrentActivity();
+            if (instagramActivity != null && !instagramActivity.isFinishing()) {
+                exportCurrentDevConfig(instagramActivity);
+
+                // Launch InstaEclipse export screen
+                Intent exportIntent = new Intent();
+                exportIntent.setComponent(new ComponentName(
+                        "ps.reso.instaeclipse",
+                        "ps.reso.instaeclipse.mods.ui.JsonExportActivity"
+                ));
+                exportIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                try {
+                    instagramActivity.startActivity(exportIntent);
+                } catch (Exception e) {
+                    showSimpleDialog(context, "Error", "Unable to open InstaEclipse UI.");
+                }
+
+            } else {
+                showSimpleDialog(context, "Error", "Instagram is not open or ready.");
+            }
+        });
+
+        layout.addView(exportButton);
 
         // Save current dev mode flag when dialog is closed
         showSectionDialog(context, "Developer Options 🎛", layout, SettingsManager::saveAllFlags);

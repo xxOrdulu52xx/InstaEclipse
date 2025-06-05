@@ -10,9 +10,12 @@ import android.os.Vibrator;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -98,10 +101,7 @@ public class InstagramUI {
 
 
     // Importing meta config from clipboard
-    private static void importConfigFromClipboard(Context context) {
-        if (!FeatureFlags.isImportingConfig) {
-            return;
-        }
+    public static void importConfigFromClipboard(Context context) {
 
         try {
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -132,13 +132,53 @@ public class InstagramUI {
                 fos.flush();
             }
 
+            Toast.makeText(context, "✅ Imported into mc_overrides.json", Toast.LENGTH_LONG).show();
             XposedBridge.log("InstaEclipse | ✅ JSON imported from clipboard into mc_overrides.json");
 
         } catch (Exception e) {
             XposedBridge.log("InstaEclipse | ❌ Clipboard import failed: " + e.getMessage());
-        } finally {
-            FeatureFlags.isImportingConfig = false;
         }
+    }
+
+    public static void exportCurrentDevConfig(Context context) {
+        if (!FeatureFlags.isExportingConfig) {
+            return;
+        }
+        try {
+            File source = new File(context.getFilesDir(), "mobileconfig/mc_overrides.json");
+            if (!source.exists()) {
+                XposedBridge.log("InstaEclipse | ❌ mc_overrides.json not found.");
+                return;
+            }
+
+            StringBuilder jsonBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    jsonBuilder.append(line).append("\n");
+                }
+            }
+
+            String jsonContent = jsonBuilder.toString().trim();
+
+            if (!jsonContent.startsWith("{") || !jsonContent.endsWith("}")) {
+                XposedBridge.log("InstaEclipse | ❌ mc_overrides.json does not contain valid JSON.");
+                return;
+            }
+
+            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard != null) {
+                ClipData clip = ClipData.newPlainText("json", jsonContent);
+                clipboard.setPrimaryClip(clip);
+                XposedBridge.log("InstaEclipse | ✅ Copied mc_overrides.json to clipboard.");
+            }
+
+        } catch (Exception e) {
+            XposedBridge.log("InstaEclipse | ❌ Failed to export config: " + e.getMessage());
+        } finally {
+            FeatureFlags.isExportingConfig = false;
+        }
+
     }
 
 
@@ -191,8 +231,11 @@ public class InstagramUI {
                     try {
                         setupHooks(activity);
                         addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
-                        XposedBridge.log("BACK TO ONRESUME!");
-                        importConfigFromClipboard(activity);
+                        if (FeatureFlags.isImportingConfig) {
+                            FeatureFlags.isImportingConfig = false;
+                            importConfigFromClipboard(activity);
+                        }
+
                     } catch (Exception ignored) {
                     }
                 });

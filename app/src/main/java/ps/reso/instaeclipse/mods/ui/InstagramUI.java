@@ -38,8 +38,16 @@ public class InstagramUI {
 
     public static void addGhostEmojiNextToInbox(Activity activity, boolean showGhost) {
         try {
-            @SuppressLint("DiscouragedApi") int inboxButtonId = activity.getResources().getIdentifier("action_bar_inbox_button", "id", activity.getPackageName());
+            int inboxButtonId = activity.getResources().getIdentifier("action_bar_inbox_button", "id", activity.getPackageName());
             View inboxButton = activity.findViewById(inboxButtonId);
+            int translationY = -65; // default for action_bar_inbox_button
+
+            // If "action_bar_inbox_button" wasn't found, try "direct_tab"
+            if (inboxButton == null) {
+                inboxButtonId = activity.getResources().getIdentifier("direct_tab", "id", activity.getPackageName());
+                inboxButton = activity.findViewById(inboxButtonId);
+                translationY = 35;
+            }
 
             if (inboxButton != null) {
                 ViewGroup parent = (ViewGroup) inboxButton.getParent();
@@ -51,7 +59,7 @@ public class InstagramUI {
                         ghostEmojiView.setTextSize(18);
                         ghostEmojiView.setTextColor(android.graphics.Color.WHITE);
                         ghostEmojiView.setPadding(8, 0, 0, 0);
-                        ghostEmojiView.setTranslationY(-65);
+                        ghostEmojiView.setTranslationY(translationY);
 
                         int index = parent.indexOfChild(inboxButton);
                         parent.addView(ghostEmojiView, index + 1);
@@ -62,13 +70,11 @@ public class InstagramUI {
                         ghostEmojiView.setVisibility(View.GONE);
                     }
                 }
-            } else {
-                XposedBridge.log("InstaEclipse: action_bar_inbox_button not found");
             }
         } catch (Exception ignored) {
-
         }
     }
+
 
     private static void setupHooks(Activity activity) {
         // Hook Search Tab (open InstaEclipse Settings)
@@ -79,12 +85,23 @@ public class InstagramUI {
         }, "search_tab");
 
         // Hook Inbox Button (toggle Ghost Quick Options)
-        hookLongPress(activity, "action_bar_inbox_button", v -> {
-            GhostModeUtils.toggleSelectedGhostOptions(activity);
-            vibrate(activity);
-            return true;
-        }, "action_bar_inbox_button");
+        String[] possibleIds = {"action_bar_inbox_button", "direct_tab"};
+
+        for (String id : possibleIds) {
+            int viewId = activity.getResources().getIdentifier(id, "id", activity.getPackageName());
+            View view = activity.findViewById(viewId);
+            if (view != null) {
+                hookLongPress(activity, id, v -> {
+                    GhostModeUtils.toggleSelectedGhostOptions(activity);
+                    vibrate(activity);
+                    return true;
+                }, id);
+                break;
+            }
+        }
+
         addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
+
     }
 
     private static void hookLongPress(Activity activity, String viewName, View.OnLongClickListener listener, String logName) {

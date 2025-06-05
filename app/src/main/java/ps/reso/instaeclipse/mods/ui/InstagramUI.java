@@ -2,6 +2,8 @@ package ps.reso.instaeclipse.mods.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -9,10 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import ps.reso.instaeclipse.utils.dialog.DialogUtils;
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.ghost.GhostModeUtils;
 
 public class InstagramUI {
@@ -89,6 +96,52 @@ public class InstagramUI {
         }
     }
 
+
+    // Importing meta config from clipboard
+    private static void importConfigFromClipboard(Context context) {
+        if (!FeatureFlags.isImportingConfig) {
+            return;
+        }
+
+        try {
+            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard == null || !clipboard.hasPrimaryClip()) {
+                return;
+            }
+
+            ClipData clipData = clipboard.getPrimaryClip();
+            if (clipData == null || clipData.getItemCount() == 0) {
+                return;
+            }
+
+            CharSequence clipText = clipData.getItemAt(0).getText();
+            if (clipText == null || clipText.length() == 0) {
+                return;
+            }
+
+            String json = clipText.toString().trim();
+            if (!json.startsWith("{") || !json.endsWith("}")) {
+                return;
+            }
+
+            File dest = new File(context.getFilesDir(), "mobileconfig/mc_overrides.json");
+            if (!dest.getParentFile().exists()) dest.getParentFile().mkdirs();
+
+            try (FileOutputStream fos = new FileOutputStream(dest, false)) {
+                fos.write(json.getBytes(StandardCharsets.UTF_8));
+                fos.flush();
+            }
+
+            XposedBridge.log("InstaEclipse | ✅ JSON imported from clipboard into mc_overrides.json");
+
+        } catch (Exception e) {
+            XposedBridge.log("InstaEclipse | ❌ Clipboard import failed: " + e.getMessage());
+        } finally {
+            FeatureFlags.isImportingConfig = false;
+        }
+    }
+
+
     @SuppressLint("ObsoleteSdkInt")
     private static void vibrate(Context context) {
         try {
@@ -138,6 +191,8 @@ public class InstagramUI {
                     try {
                         setupHooks(activity);
                         addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
+                        XposedBridge.log("BACK TO ONRESUME!");
+                        importConfigFromClipboard(activity);
                     } catch (Exception ignored) {
                     }
                 });

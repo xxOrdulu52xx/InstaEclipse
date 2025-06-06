@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.mods.ui;
+package ps.reso.instaeclipse.mods.devops.config;
 
 import android.app.Activity;
 import android.content.ClipData;

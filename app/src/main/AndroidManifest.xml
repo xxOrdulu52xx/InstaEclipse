@@ -25,13 +25,13 @@
         </activity>
 
         <activity
-            android:name=".mods.ui.JsonImportActivity"
+            android:name=".mods.devops.config.JsonImportActivity"
             android:exported="true"
             android:theme="@style/Theme.InstaEclipse">
         </activity>
 
         <activity
-            android:name=".mods.ui.JsonExportActivity"
+            android:name=".mods.devops.config.JsonExportActivity"
             android:exported="true"
             android:theme="@style/Theme.InstaEclipse" />
 

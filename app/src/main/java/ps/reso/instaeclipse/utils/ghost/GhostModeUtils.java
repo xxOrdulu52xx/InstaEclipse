@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
-import ps.reso.instaeclipse.mods.ui.InstagramUI;
+import ps.reso.instaeclipse.mods.ghost.ui.GhostEmojiManager;
+import ps.reso.instaeclipse.mods.ui.UIHookManager;
 import ps.reso.instaeclipse.utils.core.SettingsManager;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 
@@ -49,9 +50,9 @@ public class GhostModeUtils {
         }
 
         if (!anySelected) {
-            Activity activity = InstagramUI.getCurrentActivity();
+            Activity activity = UIHookManager.getCurrentActivity();
             if (activity != null) {
-                InstagramUI.addGhostEmojiNextToInbox(activity, false);
+                GhostEmojiManager.addGhostEmojiNextToInbox(activity, false);
             }
             Toast.makeText(context, "❗ No Ghost Mode options selected!", Toast.LENGTH_SHORT).show();
             return; // Nothing to do
@@ -69,9 +70,9 @@ public class GhostModeUtils {
         // Save changes
         SettingsManager.saveAllFlags();
 
-        Activity activity = InstagramUI.getCurrentActivity();
+        Activity activity = UIHookManager.getCurrentActivity();
         if (activity != null) {
-            InstagramUI.addGhostEmojiNextToInbox(activity, newState); // true = show ghost, false = hide
+            GhostEmojiManager.addGhostEmojiNextToInbox(activity, newState); // true = show ghost, false = hide
         }
 
 

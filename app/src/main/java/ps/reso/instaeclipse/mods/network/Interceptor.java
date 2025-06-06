@@ -59,7 +59,6 @@ public class Interceptor {
                                 URI uri = (URI) XposedHelpers.getObjectField(requestObj, finalUriFieldName);
 
                                 if (uri != null && uri.getPath() != null) {
-
                                     // Check all conditions passed in as predicates
                                     boolean shouldDrop = false;
 

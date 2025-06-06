@@ -27,7 +27,7 @@ import ps.reso.instaeclipse.mods.misc.FollowerIndicator;
 import ps.reso.instaeclipse.mods.misc.StoryFlipping;
 import ps.reso.instaeclipse.mods.ads.TrackingLinkDisable;
 import ps.reso.instaeclipse.mods.network.Interceptor;
-import ps.reso.instaeclipse.mods.ui.InstagramUI;
+import ps.reso.instaeclipse.mods.ui.UIHookManager;
 import ps.reso.instaeclipse.utils.toast.CustomToast;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.feature.FeatureManager;
@@ -154,7 +154,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     SettingsManager.loadAllFlags(context);
                     FeatureManager.refreshFeatureStatus(); // Update internal feature states
 
-                    InstagramUI instagramUI = new InstagramUI();
+                    UIHookManager instagramUI = new UIHookManager();
                     instagramUI.mainActivity(hostClassLoader);
 
                     XposedBridge.log("(InstaEclipse): Instagram package detected. Starting feature hooks...");
@@ -214,6 +214,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     } catch (Throwable ignored) {
                         XposedBridge.log("(InstaEclipse | TrackingLinkDisable): ❌ Failed to hook");
                     }
+
 
                     // Miscellaneous
                     try {

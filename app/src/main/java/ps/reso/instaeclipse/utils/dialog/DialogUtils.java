@@ -1,7 +1,5 @@
 package ps.reso.instaeclipse.utils.dialog;
 
-import static ps.reso.instaeclipse.mods.ui.InstagramUI.exportCurrentDevConfig;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,7 +25,9 @@ import android.widget.Toast;
 import java.util.Objects;
 
 import de.robv.android.xposed.XposedBridge;
-import ps.reso.instaeclipse.mods.ui.InstagramUI;
+import ps.reso.instaeclipse.mods.ui.UIHookManager;
+import ps.reso.instaeclipse.mods.devops.config.ConfigManager;
+import ps.reso.instaeclipse.mods.ghost.ui.GhostEmojiManager;
 import ps.reso.instaeclipse.utils.core.SettingsManager;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.ghost.GhostModeUtils;
@@ -150,9 +150,9 @@ public class DialogUtils {
 
         SettingsManager.saveAllFlags();
 
-        Activity activity = InstagramUI.getCurrentActivity();
+        Activity activity = UIHookManager.getCurrentActivity();
         if (activity != null) {
-            InstagramUI.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
+            GhostEmojiManager.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
         }
 
         return mainLayout;
@@ -221,9 +221,9 @@ public class DialogUtils {
                 SettingsManager.saveAllFlags();
 
                 // Update ghost emoji immediately
-                Activity activity = InstagramUI.getCurrentActivity();
+                Activity activity = UIHookManager.getCurrentActivity();
                 if (activity != null) {
-                    InstagramUI.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
+                    GhostEmojiManager.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
                 }
             });
         }
@@ -273,6 +273,7 @@ public class DialogUtils {
 
     // ==== SECTIONS ====
 
+    @SuppressLint("SetTextI18n")
     private static void showDevOptions(Context context) {
         LinearLayout layout = createSwitchLayout(context);
 
@@ -291,14 +292,14 @@ public class DialogUtils {
         Button importButton = new Button(context);
         importButton.setText("📥 Import Dev Config");
         importButton.setOnClickListener(v -> {
-            Activity instagramActivity = InstagramUI.getCurrentActivity();
+            Activity instagramActivity = UIHookManager.getCurrentActivity();
             if (instagramActivity != null && !instagramActivity.isFinishing()) {
                 FeatureFlags.isImportingConfig = true;
 
                 Intent importIntent = new Intent();
                 importIntent.setComponent(new ComponentName(
                         "ps.reso.instaeclipse",
-                        "ps.reso.instaeclipse.mods.ui.JsonImportActivity"
+                        "ps.reso.instaeclipse.mods.devops.config.JsonImportActivity"
                 ));
                 importIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -322,15 +323,15 @@ public class DialogUtils {
         exportButton.setText("📤 Export Dev Config");
         exportButton.setOnClickListener(v -> {
             FeatureFlags.isExportingConfig = true;
-            Activity instagramActivity = InstagramUI.getCurrentActivity();
+            Activity instagramActivity = UIHookManager.getCurrentActivity();
             if (instagramActivity != null && !instagramActivity.isFinishing()) {
-                exportCurrentDevConfig(instagramActivity);
+                ConfigManager.exportCurrentDevConfig(instagramActivity);
 
                 // Launch InstaEclipse export screen
                 Intent exportIntent = new Intent();
                 exportIntent.setComponent(new ComponentName(
                         "ps.reso.instaeclipse",
-                        "ps.reso.instaeclipse.mods.ui.JsonExportActivity"
+                        "ps.reso.instaeclipse.mods.devops.config.JsonExportActivity"
                 ));
                 exportIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -411,9 +412,9 @@ public class DialogUtils {
                 SettingsManager.saveAllFlags();
 
                 // Update ghost emoji immediately
-                Activity activity = InstagramUI.getCurrentActivity();
+                Activity activity = UIHookManager.getCurrentActivity();
                 if (activity != null) {
-                    InstagramUI.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
+                    GhostEmojiManager.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
                 }
             });
         }

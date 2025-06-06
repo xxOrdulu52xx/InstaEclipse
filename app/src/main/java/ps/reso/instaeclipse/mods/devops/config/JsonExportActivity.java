@@ -1,4 +1,4 @@
-package ps.reso.instaeclipse.mods.ui;
+package ps.reso.instaeclipse.mods.devops.config;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -71,9 +71,11 @@ public class JsonExportActivity extends Activity {
                 }
 
                 try (OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
+                    assert outputStream != null;
                     outputStream.write(json.getBytes(StandardCharsets.UTF_8));
                     outputStream.flush();
                     Toast.makeText(this, "✅ JSON exported successfully.", Toast.LENGTH_LONG).show();
+
                 } catch (Exception e) {
                     Toast.makeText(this, "❌ Failed to save file: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }

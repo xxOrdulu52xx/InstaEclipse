@@ -63,7 +63,7 @@ public class UIHookManager {
         hookLongPress(activity, "row_thread_composer_button_gallery", v -> {
             VibrationUtil.vibrate(activity);
 
-            if (!GhostModeUtils.isGhostModeActive()) {
+            if (!FeatureFlags.isGhostSeen) {
                 return true;
             }
 

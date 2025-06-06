@@ -5,8 +5,11 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -102,8 +105,56 @@ public class InstagramUI {
 
         addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
 
+        // Mark messages (DM) as seen by holding on gallery button
+        hookLongPress(activity, "row_thread_composer_button_gallery", v -> {
+            vibrate(activity);
+
+            if (!GhostModeUtils.isGhostModeActive()) {
+                return true;
+            }
+
+            FeatureFlags.isGhostSeen = false;
+
+            activity.getWindow().getDecorView().post(() -> {
+                try {
+                    // Look for the exact message list view by ID
+                    int messageListId = activity.getResources().getIdentifier("message_list", "id", activity.getPackageName());
+                    View view = activity.findViewById(messageListId);
+
+                    if (view instanceof ViewGroup) {
+                        ViewGroup messageList = (ViewGroup) view;
+
+                        // Try scrolling via translation if standard scroll methods don't exist
+                        messageList.scrollBy(0, -100); // scroll up
+
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            messageList.scrollBy(0, 100); // scroll back down
+
+                            FeatureFlags.isGhostSeen = true;
+                            Toast.makeText(activity, "✅ Message was marked as read", Toast.LENGTH_SHORT).show();
+
+                        }, 300);
+
+
+                    } else {
+                        XposedBridge.log("⚠️ message_list not a ViewGroup or not found — fallback to reset flag");
+
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            FeatureFlags.isGhostSeen = true;
+                        }, 300);
+                    }
+                } catch (Exception e) {
+                    XposedBridge.log("❌ Exception in scroll logic: " + Log.getStackTraceString(e));
+                }
+            });
+
+            return true;
+        }, "row_thread_composer_button_gallery");
+
+
     }
 
+    // Hook long press method
     private static void hookLongPress(Activity activity, String viewName, View.OnLongClickListener listener, String logName) {
         try {
             @SuppressLint("DiscouragedApi") int viewId = activity.getResources().getIdentifier(viewName, "id", activity.getPackageName());
@@ -215,7 +266,6 @@ public class InstagramUI {
         }
     }
 
-
     private static boolean isAnyGhostOptionEnabled() {
         return GhostModeUtils.isGhostModeActive();
     }
@@ -266,8 +316,24 @@ public class InstagramUI {
                 if (activity != null) {
                     activity.runOnUiThread(() -> {
                         try {
-                            InstagramUI.setupHooks(activity);
-                            InstagramUI.addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
+                            setupHooks(activity);
+                            addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
+                        } catch (Exception ignored) {
+                        }
+                    });
+                }
+            }
+        });
+
+
+        XposedHelpers.findAndHookMethod("com.instagram.modal.ModalActivity", classLoader, "onResume", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                Activity activity = (Activity) param.thisObject;
+                if (activity != null) {
+                    activity.runOnUiThread(() -> {
+                        try {
+                            setupHooks(activity);
                         } catch (Exception ignored) {
                         }
                     });

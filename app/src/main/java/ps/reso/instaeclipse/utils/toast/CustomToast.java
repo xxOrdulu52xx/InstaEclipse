@@ -64,7 +64,8 @@ public class CustomToast {
                             toastShown = true;
 
                             Context context = ((Activity) param.thisObject).getApplicationContext();
-                            if (context == null || !FeatureStatusTracker.hasEnabledFeatures()) return;
+                            if (context == null || !FeatureStatusTracker.hasEnabledFeatures())
+                                return;
 
                             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                                 StringBuilder sb = new StringBuilder("InstaEclipse Loaded 🎯\n");

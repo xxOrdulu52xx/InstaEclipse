@@ -26,9 +26,9 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.Arrays;
 import java.util.List;
 
-import ps.reso.instaeclipse.utils.core.Contributor;
 import ps.reso.instaeclipse.R;
 import ps.reso.instaeclipse.utils.core.CommonUtils;
+import ps.reso.instaeclipse.utils.core.Contributor;
 
 public class HomeFragment extends Fragment {
 
@@ -84,53 +84,53 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-        @SuppressLint("SetTextI18n")
-        private void checkInstagramStatus() {
-            String instagramPackage = CommonUtils.IG_PACKAGE_NAME; // IG package name
-            PackageManager pm = requireContext().getPackageManager(); // Get PackageManager
+    @SuppressLint("SetTextI18n")
+    private void checkInstagramStatus() {
+        String instagramPackage = CommonUtils.IG_PACKAGE_NAME; // IG package name
+        PackageManager pm = requireContext().getPackageManager(); // Get PackageManager
 
-            try {
-                PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
-                String versionName = packageInfo.versionName;
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(instagramPackage, 0);
+            String versionName = packageInfo.versionName;
 
-                String installedText = getString(R.string.installed_instagram_version);
-                String versionText = getString(R.string.instagram_version) + ": " + versionName;
-                String fullText = installedText + "\n" + versionText;
+            String installedText = getString(R.string.installed_instagram_version);
+            String versionText = getString(R.string.instagram_version) + ": " + versionName;
+            String fullText = installedText + "\n" + versionText;
 
-                SpannableString spannableString = new SpannableString(fullText);
+            SpannableString spannableString = new SpannableString(fullText);
 
-                spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, installedText.length(), android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                int versionStartIndex = installedText.length() + 1;
-                spannableString.setSpan(new android.text.style.RelativeSizeSpan(0.85f), versionStartIndex, fullText.length(), 0);
+            spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, installedText.length(), android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            int versionStartIndex = installedText.length() + 1;
+            spannableString.setSpan(new android.text.style.RelativeSizeSpan(0.85f), versionStartIndex, fullText.length(), 0);
 
-                instagramStatusText.setText(spannableString);
-                instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-                instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
+            instagramStatusText.setText(spannableString);
+            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+            instagramLogo.setImageResource(R.drawable.ic_instagram_logo);
 
-                // Add OnClickListener to open app settings if Instagram is installed
-                instagramInfoIcon.setOnClickListener(v -> {
-                    Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    intent.setData(Uri.parse("package:" + instagramPackage));
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                });
+            // Add OnClickListener to open app settings if Instagram is installed
+            instagramInfoIcon.setOnClickListener(v -> {
+                Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                intent.setData(Uri.parse("package:" + instagramPackage));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            });
 
 
-            } catch (PackageManager.NameNotFoundException e) {
-                instagramStatusText.setText(getString(R.string.not_installed_instagram));
-                instagramStatusText.setTypeface(null, android.graphics.Typeface.BOLD);
-                instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
-                instagramLogo.setImageResource(R.drawable.ic_cancel);
-                launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
+        } catch (PackageManager.NameNotFoundException e) {
+            instagramStatusText.setText(getString(R.string.not_installed_instagram));
+            instagramStatusText.setTypeface(null, android.graphics.Typeface.BOLD);
+            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
+            instagramLogo.setImageResource(R.drawable.ic_cancel);
+            launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
 
-            } catch (Exception e) {
-                instagramStatusText.setText(getString(R.string.error_instagram));
-                instagramStatusText.setTypeface(null, android.graphics.Typeface.BOLD);
-                instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
-                instagramLogo.setImageResource(R.drawable.ic_error);
-                launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
-            }
+        } catch (Exception e) {
+            instagramStatusText.setText(getString(R.string.error_instagram));
+            instagramStatusText.setTypeface(null, android.graphics.Typeface.BOLD);
+            instagramStatusCard.setCardBackgroundColor(getResources().getColor(R.color.dark_red));
+            instagramLogo.setImageResource(R.drawable.ic_error);
+            launchInstagramButton.setBackgroundColor(android.graphics.Color.parseColor("#262626"));
         }
+    }
 
 
     private void setupContributorsAndSpecialThanks(View rootView) {
@@ -141,13 +141,13 @@ public class HomeFragment extends Fragment {
                 new Contributor("ReSo7200", "https://github.com/ReSo7200", "https://linkedin.com/in/abdalhaleem-altamimi", null),
                 new Contributor("frknkrc44", "https://github.com/frknkrc44", null, null),
                 new Contributor("BrianML", "https://github.com/brianml31", null, "https://t.me/instamoon_channel"),
-		new Contributor("silvzr", "https://github.com/silvzr", null, null)
+                new Contributor("silvzr", "https://github.com/silvzr", null, null)
         );
 
         List<Contributor> specialThanks = Arrays.asList(
-		new Contributor("xHookman", "https://github.com/xHookman", null, null),
+                new Contributor("xHookman", "https://github.com/xHookman", null, null),
                 new Contributor("Bluepapilte", null, null, "https://t.me/instasmashrepo"),
-		new Contributor("BdrcnAYYDIN", null, null, "https://t.me/BdrcnAYYDIN"),
+                new Contributor("BdrcnAYYDIN", null, null, "https://t.me/BdrcnAYYDIN"),
                 new Contributor("Amàzing World", null, null, null)
         );
 

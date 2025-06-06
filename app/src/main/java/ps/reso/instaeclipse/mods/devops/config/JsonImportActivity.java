@@ -1,5 +1,6 @@
 package ps.reso.instaeclipse.mods.devops.config;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -49,7 +50,7 @@ public class JsonImportActivity extends Activity {
     }
 
     private String readStream(InputStream inputStream) {
-        Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name()).useDelimiter("\\A");
+        @SuppressLint({"NewApi", "LocalSuppress"}) Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8).useDelimiter("\\A");
         return scanner.hasNext() ? scanner.next() : "";
     }
 }

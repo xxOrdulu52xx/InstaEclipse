@@ -73,7 +73,7 @@ public class VersionCheckUtility {
                     // Dismiss the dialog
                     dialogInterface.dismiss();
                 })
-		.show();
+                .show();
     }
 
     private static void showErrorDialog(Context context) {

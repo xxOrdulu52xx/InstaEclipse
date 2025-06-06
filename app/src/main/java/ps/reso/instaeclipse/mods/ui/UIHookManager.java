@@ -28,81 +28,9 @@ public class UIHookManager {
     public static Activity getCurrentActivity() {
         return currentActivity;
     }
+
     private static boolean isAnyGhostOptionEnabled() {
         return GhostModeUtils.isGhostModeActive();
-    }
-
-    public void mainActivity(ClassLoader classLoader) {
-        // Hook onCreate of Instagram Main
-        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "onCreate", android.os.Bundle.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) {
-                final Activity activity = (Activity) param.thisObject;
-                currentActivity = activity;
-                activity.runOnUiThread(() -> {
-                    try {
-                        setupHooks(activity);
-                        addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
-                    } catch (Exception ignored) {
-
-                    }
-                });
-            }
-        });
-
-        // Hook onResume - Instagram Main
-        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "onResume", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) {
-                final Activity activity = (Activity) param.thisObject;
-                currentActivity = activity;
-                activity.runOnUiThread(() -> {
-                    try {
-                        setupHooks(activity);
-                        addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
-                        if (FeatureFlags.isImportingConfig) {
-                            FeatureFlags.isImportingConfig = false;
-                            ConfigManager.importConfigFromClipboard(activity);
-                        }
-
-                    } catch (Exception ignored) {
-                    }
-                });
-            }
-        });
-
-        // Hook getBottomSheetNavigator - Instagram Main
-        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "getBottomSheetNavigator", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) {
-                final Activity activity = getCurrentActivity();
-                if (activity != null) {
-                    activity.runOnUiThread(() -> {
-                        try {
-                            setupHooks(activity);
-                            addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
-                        } catch (Exception ignored) {
-                        }
-                    });
-                }
-            }
-        });
-
-        // Hook onResume - Model
-        XposedHelpers.findAndHookMethod("com.instagram.modal.ModalActivity", classLoader, "onResume", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) {
-                Activity activity = (Activity) param.thisObject;
-                if (activity != null) {
-                    activity.runOnUiThread(() -> {
-                        try {
-                            setupHooks(activity);
-                        } catch (Exception ignored) {
-                        }
-                    });
-                }
-            }
-        });
     }
 
     private static void setupHooks(Activity activity) {
@@ -187,6 +115,79 @@ public class UIHookManager {
             }
         } catch (Exception ignored) {
         }
+    }
+
+    public void mainActivity(ClassLoader classLoader) {
+        // Hook onCreate of Instagram Main
+        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "onCreate", android.os.Bundle.class, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) {
+                final Activity activity = (Activity) param.thisObject;
+                currentActivity = activity;
+                activity.runOnUiThread(() -> {
+                    try {
+                        setupHooks(activity);
+                        addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
+                    } catch (Exception ignored) {
+
+                    }
+                });
+            }
+        });
+
+        // Hook onResume - Instagram Main
+        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "onResume", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) {
+                final Activity activity = (Activity) param.thisObject;
+                currentActivity = activity;
+                activity.runOnUiThread(() -> {
+                    try {
+                        setupHooks(activity);
+                        addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
+                        if (FeatureFlags.isImportingConfig) {
+                            FeatureFlags.isImportingConfig = false;
+                            ConfigManager.importConfigFromClipboard(activity);
+                        }
+
+                    } catch (Exception ignored) {
+                    }
+                });
+            }
+        });
+
+        // Hook getBottomSheetNavigator - Instagram Main
+        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "getBottomSheetNavigator", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) {
+                final Activity activity = getCurrentActivity();
+                if (activity != null) {
+                    activity.runOnUiThread(() -> {
+                        try {
+                            setupHooks(activity);
+                            addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
+                        } catch (Exception ignored) {
+                        }
+                    });
+                }
+            }
+        });
+
+        // Hook onResume - Model
+        XposedHelpers.findAndHookMethod("com.instagram.modal.ModalActivity", classLoader, "onResume", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) {
+                Activity activity = (Activity) param.thisObject;
+                if (activity != null) {
+                    activity.runOnUiThread(() -> {
+                        try {
+                            setupHooks(activity);
+                        } catch (Exception ignored) {
+                        }
+                    });
+                }
+            }
+        });
     }
 
 }

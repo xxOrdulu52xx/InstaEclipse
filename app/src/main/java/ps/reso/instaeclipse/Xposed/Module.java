@@ -231,9 +231,11 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     try {
                         FollowerIndicator followerIndicator = new FollowerIndicator();
                         String bridge = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
-                        followerIndicator.checkFollow(hostClassLoader, bridge, Module.dexKitBridge);
+                        if (FeatureFlags.showFollowerToast){
+                            followerIndicator.checkFollow(hostClassLoader, bridge);
+                        }
                     } catch (Throwable ignored) {
-                        XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ Failed to hook");
+                        XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Failed to hook");
                     }
 
                     // Custom Toast

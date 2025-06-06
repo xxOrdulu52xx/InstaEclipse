@@ -8,9 +8,9 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
+import ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker;
 
 public class Interceptor {
 
@@ -59,7 +59,6 @@ public class Interceptor {
                                 URI uri = (URI) XposedHelpers.getObjectField(requestObj, finalUriFieldName);
 
                                 if (uri != null && uri.getPath() != null) {
-
                                     // Check all conditions passed in as predicates
                                     boolean shouldDrop = false;
 
@@ -121,7 +120,7 @@ public class Interceptor {
                                     }
 
                                     if (shouldDrop) {
-                                        XposedBridge.log("the URI was blocked: " + uri.getPath());
+                                        // XposedBridge.log("the URI was blocked: " + uri.getPath());
                                         // Modify the URI to divert the request to a harmless endpoint
                                         try {
                                             URI fakeUri = new URI("https", "127.0.0.1", "/404", null);

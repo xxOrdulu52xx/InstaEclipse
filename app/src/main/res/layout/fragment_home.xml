@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:fillViewport="true"
-    android:scrollbars="none"> 
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <!-- Instagram Status Card -->
@@ -20,106 +20,121 @@
             android:id="@+id/instagram_status_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
-            app:strokeWidth="0dp"
             app:contentPaddingBottom="10dp"
             app:contentPaddingTop="8dp"
-            android:layout_marginBottom="16dp">
+            app:strokeWidth="0dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="18dp"
-                android:gravity="center_vertical">
+                android:padding="18dp">
 
                 <!-- Instagram Logo -->
                 <ImageView
                     android:id="@+id/instagram_logo"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:src="@drawable/ic_instagram_logo"
                     android:contentDescription="@string/instagram_logo"
-                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_instagram_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:tint="@android:color/white" />
 
                 <!-- Instagram Status -->
                 <TextView
                     android:id="@+id/instagram_status_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/checking_instagram"
                     android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/instagram_info_icon"
+                    app:layout_constraintStart_toEndOf="@id/instagram_logo"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Info Icon -->
                 <ImageView
                     android:id="@+id/instagram_info_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="70dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/instagram_info"
                     android:padding="2dp"
                     android:src="@drawable/ic_info"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:tint="@android:color/white"
                     tools:ignore="TouchTargetSizeCheck" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Launch + Download Button Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
 
             <!-- Launch Instagram Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/launch_instagram_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/accent_blue"
+                android:enabled="true"
+                android:minWidth="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
                 android:text="@string/launch_instagram"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/accent_blue"
-                android:layout_marginEnd="4dp"
-                app:cornerRadius="12dp"
-                android:enabled="true" />
+                app:cornerRadius="12dp" />
 
             <!-- Download APK Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/download_instagram_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_weight="1"
+                android:backgroundTint="#262626"
+                android:enabled="true"
+                android:minWidth="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
                 android:text="@string/download_apk"
                 android:textColor="@color/white"
-                android:backgroundTint="#262626"
-                android:layout_marginStart="4dp"
-                app:cornerRadius="12dp"
-                android:enabled="true" />
+                app:cornerRadius="12dp" />
         </LinearLayout>
 
         <!-- Follow Us Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
-            android:padding="8dp"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <!-- How to Use Section -->
+            <!-- How to Use Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/how_to_use_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="#262626"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp">
 
                 <RelativeLayout
@@ -131,36 +146,36 @@
                         android:id="@+id/how_to_use_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/how_to_use"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/how_to_use"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/search_icon"
                         android:layout_width="34dp"
                         android:layout_height="34dp"
-                        android:src="@drawable/ic_search"
-                        app:tint="@color/white"
                         android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="6dp"
-                        android:layout_centerVertical="true" />
+                        android:src="@drawable/ic_search"
+                        app:tint="@color/white" />
 
                     <TextView
                         android:id="@+id/instruction_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_toStartOf="@id/search_icon"
                         android:text="@string/usage_instructions"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:layout_alignParentStart="true"
-                        android:layout_toStartOf="@id/search_icon"
-                        android:layout_marginTop="36dp"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginEnd="8dp"/>
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -168,11 +183,11 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="#262626"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
@@ -185,18 +200,18 @@
                         android:id="@+id/contributors_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:text="@string/contributors"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:layout_gravity="left" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/contributors_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="8dp" />
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -204,11 +219,11 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#262626"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp"
-                android:layout_marginTop="12dp"
                 app:contentPaddingTop="1dp"
-                app:cardBackgroundColor="#262626"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
@@ -221,21 +236,20 @@
                         android:id="@+id/special_thanks_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:text="@string/special_thanks"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:layout_gravity="left" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/special_thanks_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="8dp" />
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

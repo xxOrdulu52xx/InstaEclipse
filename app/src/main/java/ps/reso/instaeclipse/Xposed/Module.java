@@ -15,8 +15,9 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import ps.reso.instaeclipse.mods.devops.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.ads.AdBlocker;
+import ps.reso.instaeclipse.mods.ads.TrackingLinkDisable;
+import ps.reso.instaeclipse.mods.devops.DevOptionsEnable;
 import ps.reso.instaeclipse.mods.ghost.ScreenshotDetection;
 import ps.reso.instaeclipse.mods.ghost.SeenState;
 import ps.reso.instaeclipse.mods.ghost.StorySeen;
@@ -26,12 +27,12 @@ import ps.reso.instaeclipse.mods.misc.AutoPlayDisable;
 import ps.reso.instaeclipse.mods.misc.FollowerIndicator;
 import ps.reso.instaeclipse.mods.misc.StoryFlipping;
 import ps.reso.instaeclipse.mods.network.Interceptor;
-import ps.reso.instaeclipse.mods.ui.InstagramUI;
-import ps.reso.instaeclipse.utils.toast.CustomToast;
+import ps.reso.instaeclipse.mods.ui.UIHookManager;
+import ps.reso.instaeclipse.utils.core.CommonUtils;
+import ps.reso.instaeclipse.utils.core.SettingsManager;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.feature.FeatureManager;
-import ps.reso.instaeclipse.utils.core.SettingsManager;
-import ps.reso.instaeclipse.utils.core.CommonUtils;
+import ps.reso.instaeclipse.utils.toast.CustomToast;
 
 
 @SuppressLint("UnsafeDynamicallyLoadedCode")
@@ -135,11 +136,9 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         }
     }
 
-
     private void hookInstagram(XC_LoadPackage.LoadPackageParam lpparam) {
 
         try {
-
 
             XposedHelpers.findAndHookMethod("android.app.Application", lpparam.classLoader, "attach", Context.class, new XC_MethodHook() {
                 @Override
@@ -153,7 +152,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     SettingsManager.loadAllFlags(context);
                     FeatureManager.refreshFeatureStatus(); // Update internal feature states
 
-                    InstagramUI instagramUI = new InstagramUI();
+                    UIHookManager instagramUI = new UIHookManager();
                     instagramUI.mainActivity(hostClassLoader);
 
                     XposedBridge.log("(InstaEclipse): Instagram package detected. Starting feature hooks...");
@@ -207,6 +206,13 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         XposedBridge.log("(InstaEclipse | AdBlocker): ❌ Failed to hook");
                     }
 
+                    // tracking link disable
+                    try {
+                        new TrackingLinkDisable().disableTrackingLinks(hostClassLoader);
+                    } catch (Throwable ignored) {
+                        XposedBridge.log("(InstaEclipse | TrackingLinkDisable): ❌ Failed to hook");
+                    }
+
                     // Miscellaneous
                     try {
                         new StoryFlipping().handleStoryFlippingDisable(dexKitBridge); // Story Flipping
@@ -223,9 +229,11 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     try {
                         FollowerIndicator followerIndicator = new FollowerIndicator();
                         String bridge = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
-                        followerIndicator.checkFollow(hostClassLoader, bridge, Module.dexKitBridge);
+                        if (FeatureFlags.showFollowerToast) {
+                            followerIndicator.checkFollow(hostClassLoader, bridge);
+                        }
                     } catch (Throwable ignored) {
-                        XposedBridge.log("(InstaEclipse | AutoPlayDisable): ❌ Failed to hook");
+                        XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Failed to hook");
                     }
 
                     // Custom Toast
@@ -245,10 +253,10 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     } catch (Throwable ignored) {
                         XposedBridge.log("(InstaEclipse | Interceptor): ❌ Failed to hook");
                     }
+
                 }
 
             });
-
 
         } catch (Exception e) {
             XposedBridge.log("(InstaEclipse): Failed to hook Instagram: " + e.getMessage());

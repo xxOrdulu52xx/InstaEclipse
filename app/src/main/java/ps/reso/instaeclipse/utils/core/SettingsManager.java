@@ -49,6 +49,7 @@ public class SettingsManager {
         // Ads
         editor.putBoolean("isAdBlockEnabled", FeatureFlags.isAdBlockEnabled);
         editor.putBoolean("isAnalyticsBlocked", FeatureFlags.isAnalyticsBlocked);
+        editor.putBoolean("disableTrackingLinks", FeatureFlags.disableTrackingLinks);
 
         // Misc
         editor.putBoolean("isMiscEnabled", FeatureFlags.isMiscEnabled);
@@ -97,6 +98,7 @@ public class SettingsManager {
         // Ads
         FeatureFlags.isAdBlockEnabled = prefs.getBoolean("isAdBlockEnabled", false);
         FeatureFlags.isAnalyticsBlocked = prefs.getBoolean("isAnalyticsBlocked", false);
+        FeatureFlags.disableTrackingLinks = prefs.getBoolean("disableTrackingLinks", false);
 
         // Misc
         FeatureFlags.isMiscEnabled = prefs.getBoolean("isMiscEnabled", false);

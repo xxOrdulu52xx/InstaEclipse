@@ -13,11 +13,13 @@ This module is built to stay compatible with **new Instagram releases** by lever
 <summary><h2>✨ Features </h2></summary>
 
 ### 🎛️ Developer Options
-- Access hidden developer tools within Instagram for advanced functionality.  
+- Access hidden developer tools within Instagram for advanced functionality.
+- Import/Export config.
 - **Note:** These options are intended for use with **Alpha** or **Beta** versions of Instagram. (Beta is better) 
 
 ### 👻 Ghost Mode
 - Stay incognito while browsing stories, lives, or DMs.
+- Mark messages as read (Hold on the Gallery icon inside the DM)
 - No screenshot notifications sent.
 - View "view once" media more than once.
 - Hide your typing status in DMs.

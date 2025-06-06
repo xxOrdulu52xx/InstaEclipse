@@ -3,8 +3,8 @@ package ps.reso.instaeclipse;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-	Toolbar toolbar = findViewById(R.id.top_app_bar);
-	setSupportActionBar(toolbar);
-	ActionBar actionBar = getSupportActionBar();
-	actionBar.setDisplayShowTitleEnabled(false);
+        Toolbar toolbar = findViewById(R.id.top_app_bar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
 
@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-	// Select Home by default in the navbar
-	bottomNavigation.setSelectedItemId(R.id.nav_home);
+        // Select Home by default in the navbar
+        bottomNavigation.setSelectedItemId(R.id.nav_home);
 
         // Handle bottom navigation item clicks
         bottomNavigation.setOnItemSelectedListener(item -> {

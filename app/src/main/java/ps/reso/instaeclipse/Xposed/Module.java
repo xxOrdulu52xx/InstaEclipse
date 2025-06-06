@@ -25,7 +25,7 @@ import ps.reso.instaeclipse.mods.ghost.ViewOnce;
 import ps.reso.instaeclipse.mods.misc.AutoPlayDisable;
 import ps.reso.instaeclipse.mods.misc.FollowerIndicator;
 import ps.reso.instaeclipse.mods.misc.StoryFlipping;
-import ps.reso.instaeclipse.mods.misc.TrackingLinkDisable;
+import ps.reso.instaeclipse.mods.ads.TrackingLinkDisable;
 import ps.reso.instaeclipse.mods.network.Interceptor;
 import ps.reso.instaeclipse.mods.ui.InstagramUI;
 import ps.reso.instaeclipse.utils.toast.CustomToast;

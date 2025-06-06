@@ -442,7 +442,10 @@ public class DialogUtils {
         @SuppressLint("UseSwitchCompatOrMaterialCode")
         Switch analytics = createSwitch(context, "Block Analytics", FeatureFlags.isAnalyticsBlocked);
 
-        Switch[] switches = new Switch[]{adBlock, analytics};
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
+        Switch trackingLinks = createSwitch(context, "Disable Tracking Links", FeatureFlags.disableTrackingLinks);
+
+        Switch[] switches = new Switch[]{adBlock, analytics, trackingLinks};
 
         // Create Enable/Disable All switch
         @SuppressLint("UseSwitchCompatOrMaterialCode")
@@ -470,6 +473,7 @@ public class DialogUtils {
                 // Update FeatureFlag immediately
                 if (index == 0) FeatureFlags.isAdBlockEnabled = isChecked;
                 if (index == 1) FeatureFlags.isAnalyticsBlocked = isChecked;
+                if (index == 2) FeatureFlags.disableTrackingLinks = isChecked;
 
                 // Save immediately
                 SettingsManager.saveAllFlags();
@@ -559,8 +563,7 @@ public class DialogUtils {
                 createSwitch(context, "Disable Story Auto-Swipe", FeatureFlags.disableStoryFlipping),
                 createSwitch(context, "Disable Video Autoplay", FeatureFlags.disableVideoAutoPlay),
                 createSwitch(context, "Show Follower Toast", FeatureFlags.showFollowerToast),
-                createSwitch(context, "Show Feature Toasts", FeatureFlags.showFeatureToasts),
-                createSwitch(context, "Disable Tracking Links", FeatureFlags.disableTrackingLinks)
+                createSwitch(context, "Show Feature Toasts", FeatureFlags.showFeatureToasts)
         };
 
         // Create Enable/Disable All switch
@@ -598,9 +601,6 @@ public class DialogUtils {
                     case 3:
                         FeatureFlags.showFeatureToasts = isChecked;
                         break;
-                    case 4:
-                        FeatureFlags.disableTrackingLinks = isChecked;
-                        break;
                 }
 
                 SettingsManager.saveAllFlags();
@@ -620,17 +620,6 @@ public class DialogUtils {
         showSectionDialog(context, "Miscellaneous ⚙️", layout, () -> {
         });
     }
-
-    public static Activity extractActivity(Context context) {
-        if (context instanceof Activity) return (Activity) context;
-        if (context instanceof ContextThemeWrapper) {
-            Context baseContext = ((ContextThemeWrapper) context).getBaseContext();
-            if (baseContext instanceof Activity) return (Activity) baseContext;
-        }
-        return null;
-    }
-
-
 
 
     @SuppressLint("SetTextI18n")

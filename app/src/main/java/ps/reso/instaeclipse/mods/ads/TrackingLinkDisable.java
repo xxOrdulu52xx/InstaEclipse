@@ -1,10 +1,8 @@
-package ps.reso.instaeclipse.mods.misc;
+package ps.reso.instaeclipse.mods.ads;
 import android.content.ClipData;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import ps.reso.instaeclipse.Xposed.Module;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 public class TrackingLinkDisable {
     public TrackingLinkDisable(){

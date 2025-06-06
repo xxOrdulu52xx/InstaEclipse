@@ -120,7 +120,7 @@ public class Interceptor {
                                     }
 
                                     if (shouldDrop) {
-                                        XposedBridge.log("the URI was blocked: " + uri.getPath());
+                                        // XposedBridge.log("the URI was blocked: " + uri.getPath());
                                         // Modify the URI to divert the request to a harmless endpoint
                                         try {
                                             URI fakeUri = new URI("https", "127.0.0.1", "/404", null);

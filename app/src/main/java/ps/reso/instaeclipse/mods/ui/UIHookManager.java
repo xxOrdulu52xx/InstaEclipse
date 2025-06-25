@@ -14,7 +14,9 @@ import android.widget.Toast;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import ps.reso.instaeclipse.Xposed.Module;
 import ps.reso.instaeclipse.mods.devops.config.ConfigManager;
+import ps.reso.instaeclipse.mods.ui.utils.BottomSheetHookUtil;
 import ps.reso.instaeclipse.mods.ui.utils.VibrationUtil;
 import ps.reso.instaeclipse.utils.dialog.DialogUtils;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
@@ -33,7 +35,7 @@ public class UIHookManager {
         return GhostModeUtils.isGhostModeActive();
     }
 
-    private static void setupHooks(Activity activity) {
+    public static void setupHooks(Activity activity) {
         // Hook Search Tab (open InstaEclipse Settings)
         hookLongPress(activity, "search_tab", v -> {
             DialogUtils.showEclipseOptionsDialog(activity);
@@ -157,21 +159,7 @@ public class UIHookManager {
         });
 
         // Hook getBottomSheetNavigator - Instagram Main
-        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "getBottomSheetNavigator", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) {
-                final Activity activity = getCurrentActivity();
-                if (activity != null) {
-                    activity.runOnUiThread(() -> {
-                        try {
-                            setupHooks(activity);
-                            addGhostEmojiNextToInbox(activity, GhostModeUtils.isGhostModeActive());
-                        } catch (Exception ignored) {
-                        }
-                    });
-                }
-            }
-        });
+        BottomSheetHookUtil.hookBottomSheetNavigator(Module.dexKitBridge);
 
         // Hook onResume - Model
         XposedHelpers.findAndHookMethod("com.instagram.modal.ModalActivity", classLoader, "onResume", new XC_MethodHook() {

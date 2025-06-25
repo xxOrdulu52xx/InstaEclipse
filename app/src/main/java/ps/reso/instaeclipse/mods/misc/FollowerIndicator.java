@@ -75,15 +75,24 @@ public class FollowerIndicator {
                     Object user = param.thisObject;
 
                     String userId = (String) XposedHelpers.callMethod(user, "getId");
-                    String username = (String) XposedHelpers.callMethod(user, "getUsername");
-                    Boolean followsMe = (Boolean) param.getResult();
+                    String username = null;
+                    try {
+                        username = (String) XposedHelpers.callMethod(user, "getUsername");
+                    } catch (Throwable ignored) {
+                        // Obfuscated or missing method — skip username
+                    }                    Boolean followsMe = (Boolean) param.getResult();
 
                     String targetId = ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker.currentlyViewedUserId;
 
                     if (userId != null && userId.equals(targetId)) {
 
                         Context context = AndroidAppHelper.currentApplication().getApplicationContext();
-                        String message = "@" + username + " (" + userId + ") " + (followsMe ? "follows you ✅" : "doesn’t follow you ❌");
+                        String message;
+                        if (username != null && !username.isEmpty()) {
+                            message = "@" + username + " (" + userId + ") " + (followsMe ? "follows you ✅" : "doesn’t follow you ❌");
+                        } else {
+                            message = " (" + userId + ") " + (followsMe ? "follows you ✅" : "doesn’t follow you ❌");
+                        }
                         CustomToast.showCustomToast(context, message);
 
                         ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker.currentlyViewedUserId = null;

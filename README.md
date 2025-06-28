@@ -8,6 +8,7 @@ InstaEclipse is an **LSPosed module** designed to enhance your Instagram experie
 
 This module is built to stay compatible with **new Instagram releases** by leveraging dynamic analysis to locate targeted classes and methods automatically. 🧠✨
 
+[Telegram Channel](https://t.me/InstaEclipse)
 
 <details>
 <summary><h2>✨ Features </h2></summary>
@@ -91,14 +92,9 @@ This module is built to stay compatible with **new Instagram releases** by lever
 
 <summary><h2> 📖 FAQ </h2></summary>
 
-### ❓ Module not enabled?
-Disable and re-enable the module in LSPosed.
-
-### ❓ Features not working?
+### ❓ Module not enabled/Features not working?
+Disable and re-enable the module in LSPosed/LSPatch.
 Force stop and restart Instagram.
-
-### ❓ Developer options causing crashes?
-Follow the provided instructions for developer options and ensure you're using **Alpha** or **Beta** versions of Instagram.
 
 ### ❓ Why are some labels obfuscated or numbered?
 This is due to obfuscation in **Stable** versions of Instagram. Use **Beta** or **Alpha** versions to avoid this.
@@ -127,6 +123,7 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 - [frknkrc44](https://github.com/frknkrc44)
 - [BrianML](https://github.com/brianml31)
 - [silvzr](https://github.com/silvzr)
+- [oct888](https://github.com/oct888)
 
 ## 🙌 Special Thanks
 - [xHookman](https://github.com/xHookman)  

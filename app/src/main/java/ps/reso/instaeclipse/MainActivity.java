@@ -16,24 +16,6 @@ import ps.reso.instaeclipse.utils.version.VersionCheckUtility;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static boolean hasRootAccess = checkForRootAccess();
-
-    public static boolean isModuleActive() {
-        return false;
-    }
-
-    private static boolean checkForRootAccess() {
-        try {
-            Process process = Runtime.getRuntime().exec("su -c echo success");
-            int exitCode = process.waitFor();
-
-            return exitCode == 0; // Root access granted
-        } catch (Exception e) {
-            // Root access denied
-            return false; // No root access or error occurred
-        }
-    }
-
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

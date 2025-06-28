@@ -227,7 +227,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     }
 
                     try {
-                        FollowerIndicator followerIndicator = new FollowerIndicator();
+                        FollowerIndicator followerIndicator = new FollowerIndicator(); // Follower Indicator
                         String bridge = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
                         if (FeatureFlags.showFollowerToast) {
                             followerIndicator.checkFollow(hostClassLoader, bridge);

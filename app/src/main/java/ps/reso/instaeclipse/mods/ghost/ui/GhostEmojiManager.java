@@ -11,30 +11,31 @@ public class GhostEmojiManager {
     @SuppressLint("StaticFieldLeak")
     private static TextView ghostEmojiView;
 
+    @SuppressLint("DiscouragedApi")
     public static void addGhostEmojiNextToInbox(Activity activity, boolean showGhost) {
         try {
-            int inboxButtonId = activity.getResources().getIdentifier("action_bar_inbox_button", "id", activity.getPackageName());
-            View inboxButton = activity.findViewById(inboxButtonId);
-            int translationY = -65; // default for action_bar_inbox_button
+            int inboxButtonId1 = activity.getResources().getIdentifier("action_bar_inbox_button", "id", activity.getPackageName());
+            int inboxButtonId2 = activity.getResources().getIdentifier("direct_tab", "id", activity.getPackageName());
 
-            // If "action_bar_inbox_button" wasn't found, try "direct_tab"
-            if (inboxButton == null) {
-                inboxButtonId = activity.getResources().getIdentifier("direct_tab", "id", activity.getPackageName());
-                inboxButton = activity.findViewById(inboxButtonId);
-                translationY = 35;
-            }
+            View inboxButton1 = activity.findViewById(inboxButtonId1);
+            View inboxButton2 = activity.findViewById(inboxButtonId2);
+
+            View inboxButton = inboxButton1 != null ? inboxButton1 : inboxButton2;
 
             if (inboxButton != null) {
                 ViewGroup parent = (ViewGroup) inboxButton.getParent();
 
                 if (showGhost) {
+                    if (ghostEmojiView != null && ghostEmojiView.getParent() != null) {
+                        ((ViewGroup) ghostEmojiView.getParent()).removeView(ghostEmojiView);
+                    }
                     if (ghostEmojiView == null || ghostEmojiView.getParent() == null) {
                         ghostEmojiView = new TextView(activity);
                         ghostEmojiView.setText("👻");
                         ghostEmojiView.setTextSize(18);
                         ghostEmojiView.setTextColor(android.graphics.Color.WHITE);
-                        ghostEmojiView.setPadding(8, 0, 0, 0);
-                        ghostEmojiView.setTranslationY(translationY);
+                        ghostEmojiView.setPadding(0, inboxButton.getPaddingTop(), 0, inboxButton.getPaddingBottom());
+                        ghostEmojiView.setTranslationY(inboxButton.getTranslationY());
 
                         int index = parent.indexOfChild(inboxButton);
                         parent.addView(ghostEmojiView, index + 1);

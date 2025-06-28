@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version" translatable="false">v0.4.1 Beta</string>
     <string name="home">Startseite</string>
     <string name="features">Funktionen</string>
     <string name="help">Hilfe</string>

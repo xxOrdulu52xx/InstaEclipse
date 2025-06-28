@@ -8,6 +8,7 @@ InstaEclipse is an **LSPosed module** designed to enhance your Instagram experie
 
 This module is built to stay compatible with **new Instagram releases** by leveraging dynamic analysis to locate targeted classes and methods automatically. 🧠✨
 
+[Telegram Channel](https://t.me/InstaEclipse)
 
 <details>
 <summary><h2>✨ Features </h2></summary>

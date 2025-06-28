@@ -22,8 +22,13 @@ public class TrackingLinkDisable {
                                 return;
                             }
                             String x = clipData.getItemAt(0).getText().toString();
-                            if (x.contains("https://www.instagram.com/") && x.contains("?igsh=")) {
-                                param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?igsh=[a-zA-Z0-9=+/]*", ""));
+                            if (x.contains("https://www.instagram.com/") && x.contains("?igsh=")) { // Global
+                                param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?igsh=.*", ""));
+                            } else if (x.contains("https://www.instagram.com/") && x.contains("?utm_source=")) { // Stories
+                                param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?utm_source=.*", ""));
+                            }
+                            else if (x.contains("https://www.instagram.com/") && x.contains("?story_media_id=")){ // Highlights
+                                param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?story_media_id=.*", ""));
                             }
                         }
 

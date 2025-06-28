@@ -14,6 +14,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 import ps.reso.instaeclipse.utils.toast.CustomToast;
 
 public class FollowerIndicator {
@@ -50,6 +51,7 @@ public class FollowerIndicator {
                             // XposedBridge.log("🎯 Matched Method: " + className + "." + methodName);
                             return methodName;
                         }
+                        FeatureStatusTracker.setHooked("ShowFollowerToast");
                     }
                     // inspectInvokedMethods(bridge, method); // your helper
                 }

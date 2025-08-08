@@ -43,6 +43,7 @@ public class SettingsManager {
         editor.putBoolean("disableStories", FeatureFlags.disableStories);
         editor.putBoolean("disableFeed", FeatureFlags.disableFeed);
         editor.putBoolean("disableReels", FeatureFlags.disableReels);
+        editor.putBoolean("disableReelsExceptDM", FeatureFlags.disableReelsExceptDM);
         editor.putBoolean("disableExplore", FeatureFlags.disableExplore);
         editor.putBoolean("disableComments", FeatureFlags.disableComments);
 
@@ -92,6 +93,7 @@ public class SettingsManager {
         FeatureFlags.disableStories = prefs.getBoolean("disableStories", false);
         FeatureFlags.disableFeed = prefs.getBoolean("disableFeed", false);
         FeatureFlags.disableReels = prefs.getBoolean("disableReels", false);
+        FeatureFlags.disableReelsExceptDM = prefs.getBoolean("disableReelsExceptDM", false);
         FeatureFlags.disableExplore = prefs.getBoolean("disableExplore", false);
         FeatureFlags.disableComments = prefs.getBoolean("disableComments", false);
 

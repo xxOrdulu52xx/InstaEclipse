@@ -22,6 +22,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.Objects;
 
 import de.robv.android.xposed.XposedBridge;
@@ -255,9 +256,10 @@ public class DialogUtils {
         return divider;
     }
 
-    private static void restartInstagram(Context context) {
+    private static void restartInstagram(Context context) { // Restart Instagram and Remove its cache
         try {
             Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+            clearInstagramCache(context);
             if (intent != null) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -269,6 +271,33 @@ public class DialogUtils {
             XposedBridge.log("InstaEclipse: Restart failed - " + e.getMessage());
             Toast.makeText(context, "Restart failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private static void clearInstagramCache(Context context) { // Clear Instagram Cache
+        try {
+            File cacheDir = context.getCacheDir();
+            if (cacheDir != null && cacheDir.exists()) {
+                XposedBridge.log("");
+                deleteRecursive(cacheDir);
+                XposedBridge.log("InstaEclipse: Cache cleared");
+            } else {
+                XposedBridge.log("InstaEclipse: Cache dir not found");
+            }
+        } catch (Exception e) {
+            XposedBridge.log("InstaEclipse: Failed to clear cache - " + e.getMessage());
+        }
+    }
+
+    private static void deleteRecursive(File fileOrDirectory) { // Helper method
+        if (fileOrDirectory.isDirectory()) {
+            File[] children = fileOrDirectory.listFiles();
+            if (children != null) {
+                for (File child : children) {
+                    deleteRecursive(child);
+                }
+            }
+        }
+        fileOrDirectory.delete();
     }
 
     // ==== SECTIONS ====
@@ -681,7 +710,7 @@ public class DialogUtils {
         layout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         TextView message = new TextView(context);
-        message.setText("Restart Instagram to apply changes?");
+        message.setText("⚠️ Restart Instagram and remove its cache?!");
         message.setTextColor(Color.WHITE);
         message.setTextSize(18f);
         message.setGravity(Gravity.CENTER);

@@ -138,25 +138,31 @@ public class UIHookManager {
         });
 
         // Hook onResume - Instagram Main
-        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "onResume", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) {
-                final Activity activity = (Activity) param.thisObject;
-                currentActivity = activity;
-                activity.runOnUiThread(() -> {
-                    try {
-                        setupHooks(activity);
-                        addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
-                        if (FeatureFlags.isImportingConfig) {
-                            FeatureFlags.isImportingConfig = false;
-                            ConfigManager.importConfigFromClipboard(activity);
-                        }
+        XposedHelpers.findAndHookMethod(
+                "com.instagram.mainactivity.InstagramMainActivity",
+                classLoader,
+                "onResume",
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) {
+                        final Activity activity = (Activity) param.thisObject;
+                        currentActivity = activity;
+                        activity.runOnUiThread(() -> {
+                            try {
+                                setupHooks(activity);
+                                addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
 
-                    } catch (Exception ignored) {
+                                if (FeatureFlags.isImportingConfig) {
+                                    // De-bounce: flip it off first so it won't re-trigger on next onResume
+                                    FeatureFlags.isImportingConfig = false;
+                                    ConfigManager.importConfigFromClipboard(activity);
+                                }
+                            } catch (Exception ignored) {}
+                        });
                     }
-                });
-            }
-        });
+                }
+        );
+
 
         // Hook getBottomSheetNavigator - Instagram Main
         BottomSheetHookUtil.hookBottomSheetNavigator(Module.dexKitBridge);

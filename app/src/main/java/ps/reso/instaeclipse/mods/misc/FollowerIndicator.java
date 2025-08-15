@@ -14,6 +14,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 import ps.reso.instaeclipse.utils.toast.CustomToast;
 
 public class FollowerIndicator {
@@ -137,6 +138,7 @@ public class FollowerIndicator {
             });
 
             XposedBridge.log("✅ Hooked follower status method in: " + userClassName + "." + followerStatusMethod);
+            FeatureStatusTracker.setHooked("ShowFollowerToast");
 
         } catch (Exception e) {
             XposedBridge.log("❌ Error hooking follower status: " + e.getMessage());

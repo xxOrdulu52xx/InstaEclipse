@@ -89,7 +89,7 @@ public class Interceptor {
                                     if (FeatureFlags.disableFeed) {
                                         shouldDrop |= uri.getPath().endsWith("/feed/timeline/");
                                     }
-                                    if (FeatureFlags.disableReels) {
+                                    if (FeatureFlags.disableReels && !FeatureFlags.disableReelsExceptDM) {
                                         shouldDrop |= uri.getPath().endsWith("/qp/batch_fetch/")
                                                 || uri.getPath().contains("api/v1/clips")
                                                 || uri.getPath().contains("clips")

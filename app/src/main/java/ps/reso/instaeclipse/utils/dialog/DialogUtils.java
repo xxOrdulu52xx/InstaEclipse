@@ -529,42 +529,72 @@ public class DialogUtils {
     private static void showDistractionOptions(Context context) {
         LinearLayout layout = createSwitchLayout(context);
 
-        // Create all child switches
+        // Child switches
+        Switch disableStoriesSwitch = createSwitch(context, "Disable Stories", FeatureFlags.disableStories);
+        Switch disableFeedSwitch = createSwitch(context, "Disable Feed", FeatureFlags.disableFeed);
+        Switch disableReelsSwitch = createSwitch(context, "Disable Reels", FeatureFlags.disableReels);
+        Switch onlyInDMSwitch = createSwitch(context, "Disable Reels Except in DMs", FeatureFlags.disableReelsExceptDM);
+        Switch disableExploreSwitch = createSwitch(context, "Disable Explore", FeatureFlags.disableExplore);
+        Switch disableCommentsSwitch = createSwitch(context, "Disable Comments", FeatureFlags.disableComments);
+
         Switch[] switches = new Switch[]{
-                createSwitch(context, "Disable Stories", FeatureFlags.disableStories),
-                createSwitch(context, "Disable Feed", FeatureFlags.disableFeed),
-                createSwitch(context, "Disable Reels", FeatureFlags.disableReels),
-                createSwitch(context, "Disable Reels Except in DMs", FeatureFlags.disableReelsExceptDM),
-                createSwitch(context, "Disable Explore", FeatureFlags.disableExplore),
-                createSwitch(context, "Disable Comments", FeatureFlags.disableComments)
+                disableStoriesSwitch,
+                disableFeedSwitch,
+                disableReelsSwitch,
+                onlyInDMSwitch,
+                disableExploreSwitch,
+                disableCommentsSwitch
         };
 
-        // Create Enable/Disable All switch
+        // Enable/Disable All
         @SuppressLint("UseSwitchCompatOrMaterialCode")
         Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
 
-        // Master listener
+        // Master switch listener
         enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             for (Switch s : switches) {
                 s.setChecked(isChecked);
+                s.setEnabled(true);
+            }
+            if (!isChecked) {
+                onlyInDMSwitch.setChecked(false);
+                onlyInDMSwitch.setEnabled(false);
             }
         });
 
-        // Individual child listeners
-        for (Switch s : switches) {
+        // Parent-child logic for Reels
+        disableReelsSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            onlyInDMSwitch.setEnabled(isChecked);
+            if (!isChecked) {
+                onlyInDMSwitch.setChecked(false); // turn off child immediately
+                onlyInDMSwitch.setEnabled(false);
+            }
+            updateMasterSwitch(enableAllSwitch, switches, disableReelsSwitch, onlyInDMSwitch);
+            SettingsManager.saveAllFlags();
+        });
+
+        // Child logic for "Except in DMs"
+        onlyInDMSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked && !disableReelsSwitch.isChecked()) {
+                // Auto-enable parent if user enables child
+                disableReelsSwitch.setChecked(true);
+            }
+            updateMasterSwitch(enableAllSwitch, switches, disableReelsSwitch, onlyInDMSwitch);
+            SettingsManager.saveAllFlags();
+        });
+
+        // All other switches
+        for (Switch s : new Switch[]{disableStoriesSwitch, disableFeedSwitch, disableExploreSwitch, disableCommentsSwitch}) {
             s.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                enableAllSwitch.setOnCheckedChangeListener(null);
-                enableAllSwitch.setChecked(areAllEnabled(switches));
-                enableAllSwitch.setOnCheckedChangeListener((buttonView2, isChecked2) -> {
-                    for (Switch s2 : switches) {
-                        s2.setChecked(isChecked2);
-                    }
-                });
+                updateMasterSwitch(enableAllSwitch, switches, disableReelsSwitch, onlyInDMSwitch);
                 SettingsManager.saveAllFlags();
             });
         }
 
-        // Add to layout
+        // Init "Except in DMs" state
+        onlyInDMSwitch.setEnabled(disableReelsSwitch.isChecked());
+
+        // Layout building
         layout.addView(createDivider(context));
         layout.addView(createEnableAllSwitch(context, enableAllSwitch));
         layout.addView(createDivider(context));
@@ -573,18 +603,31 @@ public class DialogUtils {
             layout.addView(s);
         }
 
-        // Show the dialog
         showSectionDialog(context, "Distraction-Free Instagram 🧘", layout, () -> {
-            FeatureFlags.disableStories = switches[0].isChecked();
-            FeatureFlags.disableFeed = switches[1].isChecked();
-            FeatureFlags.disableReels = switches[2].isChecked();
-            FeatureFlags.disableReelsExceptDM = switches[3].isChecked();
-            FeatureFlags.disableExplore = switches[4].isChecked();
-            FeatureFlags.disableComments = switches[5].isChecked();
+            FeatureFlags.disableStories = disableStoriesSwitch.isChecked();
+            FeatureFlags.disableFeed = disableFeedSwitch.isChecked();
+            FeatureFlags.disableReels = disableReelsSwitch.isChecked();
+            FeatureFlags.disableReelsExceptDM = onlyInDMSwitch.isChecked();
+            FeatureFlags.disableExplore = disableExploreSwitch.isChecked();
+            FeatureFlags.disableComments = disableCommentsSwitch.isChecked();
         });
 
         SettingsManager.saveAllFlags();
     }
+
+
+    private static void updateMasterSwitch(@SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch, Switch[] switches,
+                                           @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableReelsSwitch, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch onlyInDMSwitch) {
+        enableAllSwitch.setOnCheckedChangeListener(null);
+        enableAllSwitch.setChecked(areAllEnabled(switches));
+        enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            for (Switch s : switches) {
+                s.setChecked(isChecked);
+            }
+            onlyInDMSwitch.setEnabled(disableReelsSwitch.isChecked());
+        });
+    }
+
 
 
     private static void showMiscOptions(Context context) {
@@ -823,11 +866,13 @@ public class DialogUtils {
     private static ColorStateList createThumbColor() {
         return new ColorStateList(
                 new int[][]{
-                        new int[]{android.R.attr.state_checked},   // Checked
-                        new int[]{-android.R.attr.state_checked}   // Unchecked
+                        new int[]{-android.R.attr.state_enabled},          // Disabled
+                        new int[]{android.R.attr.state_checked},           // Checked
+                        new int[]{-android.R.attr.state_checked}           // Unchecked
                 },
                 new int[]{
-                        Color.parseColor("#448AFF"),  //  ON
+                        Color.parseColor("#555555"),  // Disabled
+                        Color.parseColor("#448AFF"),  // ON
                         Color.parseColor("#FFFFFF")   // OFF
                 }
         );
@@ -836,12 +881,14 @@ public class DialogUtils {
     private static ColorStateList createTrackColor() {
         return new ColorStateList(
                 new int[][]{
-                        new int[]{android.R.attr.state_checked},
-                        new int[]{-android.R.attr.state_checked}
+                        new int[]{-android.R.attr.state_enabled},          // Disabled
+                        new int[]{android.R.attr.state_checked},           // Checked
+                        new int[]{-android.R.attr.state_checked}           // Unchecked
                 },
                 new int[]{
-                        Color.parseColor("#1C4C78"),  //  ON
-                        Color.parseColor("#CFD8DC")   //  OFF
+                        Color.parseColor("#777777"),  // Disabled
+                        Color.parseColor("#1C4C78"),  // ON
+                        Color.parseColor("#CFD8DC")   // OFF
                 }
         );
     }

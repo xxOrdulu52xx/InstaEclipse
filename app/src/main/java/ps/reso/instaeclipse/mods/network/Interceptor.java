@@ -68,6 +68,7 @@ public class Interceptor {
                                     }
                                     if (FeatureFlags.isGhostViewOnce) {
                                         shouldDrop |= uri.getPath().endsWith("/item_replayed/");
+                                        shouldDrop |= (uri.getPath().contains("/direct") && uri.getPath().endsWith("/item_seen/"));
                                     }
                                     if (FeatureFlags.isGhostStory) {
                                         shouldDrop |= uri.getPath().contains("/api/v2/media/seen/");
@@ -129,6 +130,9 @@ public class Interceptor {
                                         } catch (Exception e) {
                                             // XposedBridge.log("❌ [InstaEclipse] Failed to modify URI: " + e.getMessage());
                                         }
+                                    }
+                                    else {
+                                        XposedBridge.log("Logging: " + uri.getHost() + uri.getPath());
                                     }
 
                                     if (FeatureFlags.showFollowerToast) {

@@ -534,6 +534,7 @@ public class DialogUtils {
                 createSwitch(context, "Disable Stories", FeatureFlags.disableStories),
                 createSwitch(context, "Disable Feed", FeatureFlags.disableFeed),
                 createSwitch(context, "Disable Reels", FeatureFlags.disableReels),
+                createSwitch(context, "Disable Reels Except in DMs", FeatureFlags.disableReelsExceptDM),
                 createSwitch(context, "Disable Explore", FeatureFlags.disableExplore),
                 createSwitch(context, "Disable Comments", FeatureFlags.disableComments)
         };
@@ -577,8 +578,9 @@ public class DialogUtils {
             FeatureFlags.disableStories = switches[0].isChecked();
             FeatureFlags.disableFeed = switches[1].isChecked();
             FeatureFlags.disableReels = switches[2].isChecked();
-            FeatureFlags.disableExplore = switches[3].isChecked();
-            FeatureFlags.disableComments = switches[4].isChecked();
+            FeatureFlags.disableReelsExceptDM = switches[3].isChecked();
+            FeatureFlags.disableExplore = switches[4].isChecked();
+            FeatureFlags.disableComments = switches[5].isChecked();
         });
 
         SettingsManager.saveAllFlags();

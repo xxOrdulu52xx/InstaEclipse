@@ -96,6 +96,16 @@ public class Interceptor {
                                                 || uri.getPath().contains("mixed_media")
                                                 || uri.getPath().contains("mixed_media/discover/stream/");
                                     }
+                                    if (FeatureFlags.disableReelsExceptDM) {
+                                        if (uri.getPath().startsWith("/api/v1/direct_v2/")) {
+                                            return;
+                                        }
+                                        shouldDrop |= (uri.getPath().startsWith("/api/v1/clips/") && uri.getQuery() != null
+                                                       && (uri.getQuery().contains("next_media_ids=")
+                                                        || uri.getQuery().contains("max_id=")))
+                                                   || uri.getPath().contains("/clips/discover/")
+                                                   || uri.getPath().contains("/mixed_media/discover/stream/");
+                                    }
                                     if (FeatureFlags.disableExplore) {
                                         shouldDrop |= uri.getPath().contains("/discover/topical_explore")
                                                 || uri.getPath().contains("/discover/topical_explore_stream")

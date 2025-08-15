@@ -227,10 +227,14 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     }
 
                     try {
-                        FollowerIndicator followerIndicator = new FollowerIndicator(); // Follower Indicator
-                        String bridge = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
-                        if (FeatureFlags.showFollowerToast) {
-                            followerIndicator.checkFollow(hostClassLoader, bridge);
+                        FollowerIndicator followerIndicator = new FollowerIndicator();
+                        FollowerIndicator.FollowMethodResult result =
+                                followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
+
+                        if (result != null && FeatureFlags.showFollowerToast) {
+                            followerIndicator.checkFollow(hostClassLoader, result.methodName, result.userClassName);
+                        } else {
+                            XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Method not found");
                         }
                     } catch (Throwable ignored) {
                         XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Failed to hook");

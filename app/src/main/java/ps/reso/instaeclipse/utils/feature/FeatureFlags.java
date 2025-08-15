@@ -30,6 +30,7 @@ public class FeatureFlags {
     public static boolean disableStories = false;
     public static boolean disableFeed = false;
     public static boolean disableReels = false;
+    public static boolean disableReelsExceptDM = false;
     public static boolean disableExplore = false;
     public static boolean disableComments = false;
 

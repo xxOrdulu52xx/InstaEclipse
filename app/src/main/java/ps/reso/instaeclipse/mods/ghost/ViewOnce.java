@@ -51,35 +51,39 @@ public class ViewOnce {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             if (!FeatureFlags.isGhostViewOnce) {
-                                // If Ghost View Once is disabled, allow normal execution
+                                return; // Feature disabled → skip
+                            }
+
+                            Object rw = param.args[2]; // Third argument (visual item object)
+                            if (rw == null) {
                                 return;
                             }
 
-                            Object rw = param.args[2]; // Third argument (likely visual item object)
+                            for (Method m : rw.getClass().getDeclaredMethods()) {
+                                // Only check methods with no params returning String
+                                if (m.getParameterTypes().length != 0 || m.getReturnType() != String.class) {
+                                    continue;
+                                }
 
-                            if (rw != null) {
-                                Method[] allMethods = rw.getClass().getDeclaredMethods();
-
-                                for (Method m : allMethods) {
-                                    if (m.getParameterTypes().length == 0 &&
-                                            m.getReturnType() == String.class) {
-                                        try {
-                                            m.setAccessible(true);
-                                            String value = (String) m.invoke(rw);
-
-                                            if (value != null && value.contains("send_visual_item_seen_marker")) {
-                                                // If it matches visual seen marker, block it
-                                                param.setResult(null);
-                                                return;
-                                            }
-                                        } catch (Throwable ignored) {
-                                            // Ignore reflection exceptions
-                                        }
+                                try {
+                                    m.setAccessible(true);
+                                    String value = (String) m.invoke(rw);
+                                    if (value == null) {
+                                        continue;
                                     }
+
+                                    if (value.contains("visual_item_seen") ||
+                                            value.contains("send_visual_item_seen_marker")) {
+                                        // XposedBridge.log("Blocked ViewOnce send: " + value);
+                                        param.setResult(null); // Block this call
+                                    }
+                                } catch (Throwable ignored) {
+                                    // Ignore reflection errors
                                 }
                             }
                         }
                     });
+
 
                     XposedBridge.log("(InstaEclipse | ViewOnce): ✅ Hooked (dynamic check): " +
                             method.getClassName() + "." + method.getName());

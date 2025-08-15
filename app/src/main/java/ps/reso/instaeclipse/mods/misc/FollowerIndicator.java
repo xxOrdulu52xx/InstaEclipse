@@ -18,60 +18,94 @@ import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 import ps.reso.instaeclipse.utils.toast.CustomToast;
 
 public class FollowerIndicator {
-    public String findFollowerStatusMethod(DexKitBridge bridge) {
-        try {
-            List<MethodData> methods = bridge.findMethod(FindMethod.create().matcher(MethodMatcher.create().usingStrings("", "", "") // Look for 3+ empty strings
-                    .paramCount(2)));
 
-            for (MethodData method : methods) {
+    public static class FollowMethodResult {
+        public final String methodName;
+        public final String userClassName;
+
+        public FollowMethodResult(String methodName, String userClassName) {
+            this.methodName = methodName;
+            this.userClassName = userClassName;
+        }
+    }
+
+    public FollowMethodResult findFollowerStatusMethod(DexKitBridge bridge) {
+        try {
+            // 🔍 Step 1: Try new method detection first (obfuscated User class)
+            String obfUserClass = null;
+            List<MethodData> errMethods = bridge.findMethod(
+                    FindMethod.create().matcher(
+                            MethodMatcher.create().usingStrings("ERROR_INSERT_EXPIRED_URL")
+                    )
+            );
+            if (!errMethods.isEmpty()) {
+                obfUserClass = errMethods.get(0).getClassName();
+                // XposedBridge.log("🔍 Found obfuscated User class: " + obfUserClass);
+            }
+
+            if (obfUserClass != null) {
+                List<MethodData> methods = bridge.findMethod(
+                        FindMethod.create().matcher(
+                                MethodMatcher.create()
+                                        .usingStrings("", "", "")
+                                        .paramTypes("com.instagram.common.session.UserSession", obfUserClass)
+                        )
+                );
+
+                for (MethodData method : methods) {
+                    // XposedBridge.log("📌 Inspecting (new) method: " + method.getClassName() + "." + method.getName());
+
+                    for (MethodData invoked : method.getInvokes()) {
+                        String className = invoked.getClassName();
+                        String returnType = String.valueOf(invoked.getReturnType());
+
+                        if (className.contains(obfUserClass) && returnType.contains("boolean")) {
+                            XposedBridge.log("✅ Found follower status method (new): " + invoked.getName());
+                            return new FollowMethodResult(invoked.getName(), obfUserClass);
+                        }
+                    }
+                }
+            }
+
+            // 🔄 Step 2: Fallback to old detection
+            List<MethodData> methodsOld = bridge.findMethod(
+                    FindMethod.create().matcher(
+                            MethodMatcher.create().usingStrings("", "", "").paramCount(2)
+                    )
+            );
+
+            for (MethodData method : methodsOld) {
                 List<String> paramTypes = new ArrayList<>();
                 for (Object param : method.getParamTypes()) {
                     paramTypes.add(String.valueOf(param));
                 }
-
-                // Match (UserSession, User)
-                if (paramTypes.size() == 2 && paramTypes.get(0).contains("com.instagram.common.session.UserSession") && paramTypes.get(1).contains("com.instagram.user.model.User")) {
-
-
-                    XposedBridge.log("🔍 Inspecting method: " + method.getClassName() + "." + method.getName());
-
-
+                if (paramTypes.size() == 2 &&
+                        paramTypes.get(0).contains("com.instagram.common.session.UserSession") &&
+                        paramTypes.get(1).contains("com.instagram.user.model.User")) {
                     for (MethodData invoked : method.getInvokes()) {
-                        String className = invoked.getClassName();
-                        String methodName = invoked.getName();
-                        String returnType = String.valueOf(invoked.getReturnType());
-
-                        for (Object param : invoked.getParamTypes()) {
-                            paramTypes.add(String.valueOf(param));
+                        if (invoked.getClassName().contains("com.instagram.user.model.User") &&
+                                String.valueOf(invoked.getReturnType()).contains("boolean")) {
+                            XposedBridge.log("✅ Found follower status method (old): " + invoked.getName());
+                            return new FollowMethodResult(invoked.getName(), "com.instagram.user.model.User");
                         }
-
-                        // ✅ Just find first method in User class with returnType boolean & no params
-                        if (className.contains("com.instagram.user.model.User") && (returnType.contains("boolean"))) {
-
-                            // XposedBridge.log("🎯 Matched Method: " + className + "." + methodName);
-                            return methodName;
-                        }
-                        FeatureStatusTracker.setHooked("ShowFollowerToast");
                     }
-                    // inspectInvokedMethods(bridge, method); // your helper
                 }
             }
 
         } catch (Throwable e) {
-            XposedBridge.log("❌ Error in method discovery: " + e.getMessage());
+            XposedBridge.log("❌ Error in findFollowerStatusMethod: " + e.getMessage());
         }
         return null;
     }
 
-    public void checkFollow(ClassLoader classLoader, String followerStatusMethod) {
+    public void checkFollow(ClassLoader classLoader, String followerStatusMethod, String userClassName) {
         try {
-
-            if (followerStatusMethod == null) {
-                XposedBridge.log("❌ method name not found. Skipping hook.");
+            if (followerStatusMethod == null || userClassName == null) {
+                XposedBridge.log("❌ method or class name not found. Skipping hook.");
                 return;
             }
 
-            XposedHelpers.findAndHookMethod("com.instagram.user.model.User", classLoader, followerStatusMethod, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(userClassName, classLoader, followerStatusMethod, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Object user = param.thisObject;
@@ -81,31 +115,33 @@ public class FollowerIndicator {
                     try {
                         username = (String) XposedHelpers.callMethod(user, "getUsername");
                     } catch (Throwable ignored) {
-                        // Obfuscated or missing method — skip username
-                    }                    Boolean followsMe = (Boolean) param.getResult();
+                        // skip username for now in obfuscated versions
+                    }
 
+                    Boolean followsMe = (Boolean) param.getResult();
                     String targetId = ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker.currentlyViewedUserId;
 
                     if (userId != null && userId.equals(targetId)) {
-
                         Context context = AndroidAppHelper.currentApplication().getApplicationContext();
                         String message;
                         if (username != null && !username.isEmpty()) {
-                            message = "@" + username + " (" + userId + ") " + (followsMe ? "follows you ✅" : "doesn’t follow you ❌");
+                            message = "@" + username + " (" + userId + ") " +
+                                    (followsMe ? "follows you ✅" : "doesn’t follow you ❌");
                         } else {
-                            message = " (" + userId + ") " + (followsMe ? "follows you ✅" : "doesn’t follow you ❌");
+                            message = " (" + userId + ") " +
+                                    (followsMe ? "follows you ✅" : "doesn’t follow you ❌");
                         }
                         CustomToast.showCustomToast(context, message);
-
                         ps.reso.instaeclipse.utils.tracker.FollowIndicatorTracker.currentlyViewedUserId = null;
-
-
                     }
                 }
             });
 
+            XposedBridge.log("✅ Hooked follower status method in: " + userClassName + "." + followerStatusMethod);
+            FeatureStatusTracker.setHooked("ShowFollowerToast");
+
         } catch (Exception e) {
-            XposedBridge.log("❌ Error hooking User class: " + e.getMessage());
+            XposedBridge.log("❌ Error hooking follower status: " + e.getMessage());
         }
     }
 }

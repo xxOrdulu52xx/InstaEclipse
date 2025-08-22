@@ -38,7 +38,7 @@
     <string name="instagram_info" translatable="false">instagram_info</string>
 
     <!-- help -->
-    <string name="help_amp_troubleshooting">Βοήθεια & Υποστήριξη</string>
+    <string name="help_amp_troubleshooting">Βοήθεια &amp; Υποστήριξη</string>
     <string name="find_updates_and_documentation">Βρείτε ενημερώσεις και οδηγίες.</string>
     <string name="go_to_github">Μετάβαση στο GitHub</string>
     <string name="find_support">Βρείτε υποστήριξη.</string>

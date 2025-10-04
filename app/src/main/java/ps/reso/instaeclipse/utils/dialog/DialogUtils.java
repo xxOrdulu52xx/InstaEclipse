@@ -116,7 +116,7 @@ public class DialogUtils {
         mainLayout.addView(createClickableSection(context, "ℹ️ About", () -> showAboutDialog(context)));
 
         // 6 - Restart Instagram => OPEN PAGE
-        mainLayout.addView(createClickableSection(context, "🔁 Restart Instagram", () -> showRestartSection(context)));
+        mainLayout.addView(createClickableSection(context, "🔁 Restart App", () -> showRestartSection(context)));
 
         mainLayout.addView(createDivider(context));
 
@@ -256,39 +256,58 @@ public class DialogUtils {
         return divider;
     }
 
-    private static void restartInstagram(Context context) { // Restart Instagram and Remove its cache
+    /**
+     * Clears the application's cache and restarts it.
+     * Works for any package name this module is running in.
+     *
+     * @param context The application context.
+     */
+    private static void restartApp(Context context) {
         try {
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-            clearInstagramCache(context);
+            String packageName = context.getPackageName();
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+
             if (intent != null) {
+                clearAppCache(context); // Clear cache first
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+                // Forcibly kill the current process to ensure a clean restart
                 Runtime.getRuntime().exit(0);
             } else {
-                Toast.makeText(context, "Instagram not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Could not find the app to restart.", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            XposedBridge.log("InstaEclipse: Restart failed - " + e.getMessage());
+            String packageName = context.getPackageName();
+            XposedBridge.log("InstaEclipse: Restart failed for " + packageName + " - " + e.getMessage());
             Toast.makeText(context, "Restart failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    private static void clearInstagramCache(Context context) { // Clear Instagram Cache
+    /**
+     * Clears the cache directory for the current application.
+     *
+     * @param context The application context.
+     */
+    private static void clearAppCache(Context context) {
         try {
             File cacheDir = context.getCacheDir();
-            if (cacheDir != null && cacheDir.exists()) {
-                XposedBridge.log("");
+            if (cacheDir != null && cacheDir.isDirectory()) {
                 deleteRecursive(cacheDir);
-                XposedBridge.log("InstaEclipse: Cache cleared");
+                XposedBridge.log("InstaEclipse: Cache cleared for " + context.getPackageName());
             } else {
-                XposedBridge.log("InstaEclipse: Cache dir not found");
+                XposedBridge.log("InstaEclipse: Cache directory not found for " + context.getPackageName());
             }
         } catch (Exception e) {
-            XposedBridge.log("InstaEclipse: Failed to clear cache - " + e.getMessage());
+            XposedBridge.log("InstaEclipse: Failed to clear cache for " + context.getPackageName() + " - " + e.getMessage());
         }
     }
 
-    private static void deleteRecursive(File fileOrDirectory) { // Helper method
+    /**
+     * Recursively deletes a file or directory.
+     *
+     * @param fileOrDirectory The file or directory to delete.
+     */
+    private static void deleteRecursive(File fileOrDirectory) {
         if (fileOrDirectory.isDirectory()) {
             File[] children = fileOrDirectory.listFiles();
             if (children != null) {
@@ -297,8 +316,10 @@ public class DialogUtils {
                 }
             }
         }
+        // A direct result for a file or an empty directory
         fileOrDirectory.delete();
     }
+
 
     // ==== SECTIONS ====
 
@@ -755,7 +776,7 @@ public class DialogUtils {
         layout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         TextView message = new TextView(context);
-        message.setText("⚠️ Restart Instagram and remove its cache?!");
+        message.setText("⚠️ Clear app cache and restart?");
         message.setTextColor(Color.WHITE);
         message.setTextSize(18f);
         message.setGravity(Gravity.CENTER);
@@ -766,12 +787,12 @@ public class DialogUtils {
         restartButton.setTextColor(Color.WHITE);
         restartButton.setPadding(40, 20, 40, 20);
 
-        restartButton.setOnClickListener(v -> restartInstagram(context));
+        restartButton.setOnClickListener(v -> restartApp(context));
 
         layout.addView(message);
         layout.addView(restartButton);
 
-        showSectionDialog(context, "Restart Instagram", layout, () -> {
+        showSectionDialog(context, "Restart App", layout, () -> {
         });
     }
 

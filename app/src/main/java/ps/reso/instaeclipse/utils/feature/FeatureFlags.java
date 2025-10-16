@@ -26,6 +26,7 @@ public class FeatureFlags {
 
 
     // Distraction Free
+    public static boolean isExtremeMode = false; // Extreme Mode
     public static boolean isDistractionFree = false;
     public static boolean disableStories = false;
     public static boolean disableFeed = false;

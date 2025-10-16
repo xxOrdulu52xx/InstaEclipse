@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.Map;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -20,7 +22,9 @@ import ps.reso.instaeclipse.mods.ui.utils.BottomSheetHookUtil;
 import ps.reso.instaeclipse.mods.ui.utils.VibrationUtil;
 import ps.reso.instaeclipse.utils.dialog.DialogUtils;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+import ps.reso.instaeclipse.utils.feature.FeatureStatusTracker;
 import ps.reso.instaeclipse.utils.ghost.GhostModeUtils;
+import ps.reso.instaeclipse.utils.toast.CustomToast;
 
 public class UIHookManager {
 
@@ -130,6 +134,16 @@ public class UIHookManager {
                     try {
                         setupHooks(activity);
                         addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
+                        if (!FeatureFlags.showFeatureToasts || CustomToast.toastShown) return;
+                        CustomToast.toastShown = true;
+
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            StringBuilder sb = new StringBuilder("InstaEclipse Loaded 🎯\n");
+                            for (Map.Entry<String, Boolean> entry : FeatureStatusTracker.getStatus().entrySet()) {
+                                sb.append(entry.getValue() ? "✅ " : "❌ ").append(entry.getKey()).append("\n");
+                            }
+                            CustomToast.showCustomToast(activity.getApplicationContext(), sb.toString().trim());
+                        }, 1000);
                     } catch (Exception ignored) {
 
                     }
@@ -138,30 +152,26 @@ public class UIHookManager {
         });
 
         // Hook onResume - Instagram Main
-        XposedHelpers.findAndHookMethod(
-                "com.instagram.mainactivity.InstagramMainActivity",
-                classLoader,
-                "onResume",
-                new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        final Activity activity = (Activity) param.thisObject;
-                        currentActivity = activity;
-                        activity.runOnUiThread(() -> {
-                            try {
-                                setupHooks(activity);
-                                addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
+        XposedHelpers.findAndHookMethod("com.instagram.mainactivity.InstagramMainActivity", classLoader, "onResume", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) {
+                final Activity activity = (Activity) param.thisObject;
+                currentActivity = activity;
+                activity.runOnUiThread(() -> {
+                    try {
+                        setupHooks(activity);
+                        addGhostEmojiNextToInbox(activity, isAnyGhostOptionEnabled());
 
-                                if (FeatureFlags.isImportingConfig) {
-                                    // De-bounce: flip it off first so it won't re-trigger on next onResume
-                                    FeatureFlags.isImportingConfig = false;
-                                    ConfigManager.importConfigFromClipboard(activity);
-                                }
-                            } catch (Exception ignored) {}
-                        });
+                        if (FeatureFlags.isImportingConfig) {
+                            // De-bounce: flip it off first so it won't re-trigger on next onResume
+                            FeatureFlags.isImportingConfig = false;
+                            ConfigManager.importConfigFromClipboard(activity);
+                        }
+                    } catch (Exception ignored) {
                     }
-                }
-        );
+                });
+            }
+        });
 
 
         // Hook getBottomSheetNavigator - Instagram Main

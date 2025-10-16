@@ -35,37 +35,17 @@ import ps.reso.instaeclipse.utils.core.CommonUtils;
 import ps.reso.instaeclipse.utils.core.SettingsManager;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.feature.FeatureManager;
-import ps.reso.instaeclipse.utils.toast.CustomToast;
 
 
 @SuppressLint("UnsafeDynamicallyLoadedCode")
 public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
+    // List of supported Instagram package names
+    private static final List<String> SUPPORTED_PACKAGES = Arrays.asList(CommonUtils.IG_PACKAGE_NAME, // Original package name
+            "com.instagram.android", "com.instagold.android", "com.instaflux.app", "com.myinsta.android", "cc.honista.app", "com.instaprime.android", "com.instafel.android", "com.instadm.android", "com.dfistagram.android", "com.Instander.android", "com.aero.instagram", "com.instapro.android", "com.instaflow.android", "com.instagram1.android", "com.instagram2.android", "com.instagramclone.android", "com.instaclone.android");
     public static DexKitBridge dexKitBridge;
     public static ClassLoader hostClassLoader;
     private static String moduleSourceDir;
     private static String moduleLibDir;
-
-    // List of supported Instagram package names
-    private static final List<String> SUPPORTED_PACKAGES = Arrays.asList(
-            CommonUtils.IG_PACKAGE_NAME, // Original package name
-            "com.instagram.android",
-            "com.instagold.android",
-            "com.instaflux.app",
-            "com.myinsta.android",
-            "cc.honista.app",
-            "com.instaprime.android",
-            "com.instafel.android",
-            "com.instadm.android",
-            "com.dfistagram.android",
-            "com.Instander.android",
-            "com.aero.instagram",
-            "com.instapro.android",
-            "com.instaflow.android",
-            "com.instagram1.android",
-            "com.instagram2.android",
-            "com.instagramclone.android",
-            "com.instaclone.android"
-    );
 
     // for dev usage
     /*
@@ -253,8 +233,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
                     try {
                         FollowerIndicator followerIndicator = new FollowerIndicator();
-                        FollowerIndicator.FollowMethodResult result =
-                                followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
+                        FollowerIndicator.FollowMethodResult result = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
 
                         if (result != null && FeatureFlags.showFollowerToast) {
                             followerIndicator.checkFollow(hostClassLoader, result.methodName, result.userClassName);
@@ -263,17 +242,6 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     } catch (Throwable ignored) {
                         XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Failed to hook");
-                    }
-
-                    // Custom Toast
-                    if (FeatureFlags.showFeatureToasts) {
-                        try {
-
-                            CustomToast.hookMainActivity(lpparam);
-
-                        } catch (Throwable ignored) {
-                            XposedBridge.log("(InstaEclipse | CustomToast): ❌ Failed to hook");
-                        }
                     }
 
                     // Network Interceptor

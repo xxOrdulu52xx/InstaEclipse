@@ -143,7 +143,8 @@ public class HomeFragment extends Fragment {
                 new Contributor("BrianML", "https://github.com/brianml31", null, "https://t.me/instamoon_channel"),
                 new Contributor("silvzr", "https://github.com/silvzr", null, null),
                 new Contributor("oct", "https://github.com/oct888", null, null),
-                new Contributor("HalfManBear", "https://github.com/halfmanbear", null, null)
+                new Contributor("HalfManBear", "https://github.com/halfmanbear", null, null),
+                new Contributor("ar5to", "https://github.com/ar5to", null, "https://t.me/ar5to")
         );
 
         List<Contributor> specialThanks = Arrays.asList(

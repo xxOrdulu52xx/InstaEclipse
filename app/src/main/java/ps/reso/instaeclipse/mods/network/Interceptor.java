@@ -141,9 +141,12 @@ public class Interceptor {
                                             // XposedBridge.log("❌ [InstaEclipse] Failed to modify URI: " + e.getMessage());
                                         }
                                     }
+                                    /*
+                                     DEV Purposes
                                     else {
                                         XposedBridge.log("Logging: " + uri.getHost() + uri.getPath());
                                     }
+                                    */
 
                                     if (FeatureFlags.showFollowerToast) {
                                         if (uri.getPath() != null && uri.getPath().startsWith("/api/v1/friendships/show/")) {

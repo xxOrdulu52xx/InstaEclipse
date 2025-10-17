@@ -39,6 +39,7 @@ public class SettingsManager {
         editor.putBoolean("quickToggleLive", FeatureFlags.quickToggleLive);
 
         // Distraction Free
+        editor.putBoolean("isExtremeMode", FeatureFlags.isExtremeMode);
         editor.putBoolean("isDistractionFree", FeatureFlags.isDistractionFree);
         editor.putBoolean("disableStories", FeatureFlags.disableStories);
         editor.putBoolean("disableFeed", FeatureFlags.disableFeed);
@@ -89,6 +90,7 @@ public class SettingsManager {
         FeatureFlags.quickToggleLive = prefs.getBoolean("quickToggleLive", false);
 
         // Distraction Free
+        FeatureFlags.isExtremeMode = prefs.getBoolean("isExtremeMode", false);
         FeatureFlags.isDistractionFree = prefs.getBoolean("isDistractionFree", false);
         FeatureFlags.disableStories = prefs.getBoolean("disableStories", false);
         FeatureFlags.disableFeed = prefs.getBoolean("disableFeed", false);

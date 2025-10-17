@@ -8,6 +8,9 @@ import android.os.Build;
 
 import org.luckypray.dexkit.DexKitBridge;
 
+import java.util.Arrays;
+import java.util.List;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;
@@ -32,11 +35,13 @@ import ps.reso.instaeclipse.utils.core.CommonUtils;
 import ps.reso.instaeclipse.utils.core.SettingsManager;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
 import ps.reso.instaeclipse.utils.feature.FeatureManager;
-import ps.reso.instaeclipse.utils.toast.CustomToast;
 
 
 @SuppressLint("UnsafeDynamicallyLoadedCode")
 public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
+    // List of supported Instagram package names
+    private static final List<String> SUPPORTED_PACKAGES = Arrays.asList(CommonUtils.IG_PACKAGE_NAME, // Original package name
+            "com.instagram.android", "com.instagold.android", "com.instaflux.app", "com.myinsta.android", "cc.honista.app", "com.instaprime.android", "com.instafel.android", "com.instadm.android", "com.dfistagram.android", "com.Instander.android", "com.aero.instagram", "com.instapro.android", "com.instaflow.android", "com.instagram1.android", "com.instagram2.android", "com.instagramclone.android", "com.instaclone.android");
     public static DexKitBridge dexKitBridge;
     public static ClassLoader hostClassLoader;
     private static String moduleSourceDir;
@@ -102,27 +107,27 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             }
         }
 
-        // Hook into Instagram
-        if (lpparam.packageName.equals(CommonUtils.IG_PACKAGE_NAME)) {
+        // Hook into Instagram and its clones
+        if (SUPPORTED_PACKAGES.contains(lpparam.packageName)) {
             try {
                 if (dexKitBridge == null) {
                     // Load the .so file from your module (if not already loaded)
                     System.load(moduleLibDir + "/libdexkit.so");
                     // XposedBridge.log("libdexkit.so loaded successfully.");
 
-                    // Initialize DexKitBridge with Instagram's APK
+                    // Initialize DexKitBridge with the target app's APK
                     dexKitBridge = DexKitBridge.create(lpparam.appInfo.sourceDir);
-                    // XposedBridge.log("DexKitBridge initialized with Instagram's APK: " + lpparam.appInfo.sourceDir);
+                    // XposedBridge.log("DexKitBridge initialized with target APK: " + lpparam.appInfo.sourceDir);
                 }
 
-                // Use Instagram's ClassLoader
+                // Use the target app's ClassLoader
                 hostClassLoader = lpparam.classLoader;
 
-                // Call the method to hook Instagram
+                // Call the method to hook the target app
                 hookInstagram(lpparam);
 
             } catch (Exception e) {
-                XposedBridge.log("(InstaEclipse): Failed to initialize DexKitBridge for Instagram: " + e.getMessage());
+                XposedBridge.log("(InstaEclipse): Failed to initialize DexKitBridge for " + lpparam.packageName + ": " + e.getMessage());
             }
         }
     }
@@ -144,7 +149,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
 
-                    XposedBridge.log("InstaEclipse: Settings loaded via Application.attach");
+                    XposedBridge.log("InstaEclipse: Settings loaded via Application.attach for " + lpparam.packageName);
 
                     // Setup context, preferences
                     Context context = (Context) param.args[0];
@@ -155,7 +160,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     UIHookManager instagramUI = new UIHookManager();
                     instagramUI.mainActivity(hostClassLoader);
 
-                    XposedBridge.log("(InstaEclipse): Instagram package detected. Starting feature hooks...");
+                    XposedBridge.log("(InstaEclipse): " + lpparam.packageName + " package detected. Starting feature hooks...");
 
                     Interceptor interceptor = new Interceptor();
 
@@ -228,27 +233,20 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
                     try {
                         FollowerIndicator followerIndicator = new FollowerIndicator();
-                        FollowerIndicator.FollowMethodResult result =
-                                followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
+                        FollowerIndicator.FollowMethodResult result = followerIndicator.findFollowerStatusMethod(Module.dexKitBridge);
 
                         if (result != null && FeatureFlags.showFollowerToast) {
-                            followerIndicator.checkFollow(hostClassLoader, result.methodName, result.userClassName);
+
+                            String userIdClass = followerIndicator.findUserIdClassIfNeeded(Module.dexKitBridge, result.userClassName);
+
+                            followerIndicator.checkFollow(hostClassLoader, result.methodName, result.userClassName, userIdClass);
+
                         } else {
                             XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Method not found");
                         }
-                    } catch (Throwable ignored) {
-                        XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Failed to hook");
-                    }
+                    } catch (Throwable e) {
 
-                    // Custom Toast
-                    if (FeatureFlags.showFeatureToasts) {
-                        try {
-
-                            CustomToast.hookMainActivity(lpparam);
-
-                        } catch (Throwable ignored) {
-                            XposedBridge.log("(InstaEclipse | CustomToast): ❌ Failed to hook");
-                        }
+                        XposedBridge.log("(InstaEclipse | FollowerToast): ❌ Failed to hook + " + e);
                     }
 
                     // Network Interceptor
@@ -263,7 +261,7 @@ public class Module implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             });
 
         } catch (Exception e) {
-            XposedBridge.log("(InstaEclipse): Failed to hook Instagram: " + e.getMessage());
+            XposedBridge.log("(InstaEclipse): Failed to hook " + lpparam.packageName + ": " + e.getMessage());
         }
     }
 }

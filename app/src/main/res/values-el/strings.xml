@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app wide -->
+    <string name="app_name">InstaEclipse</string>
+    <string name="home">Αρχική</string>
+    <string name="features">Λειτουργίες</string>
+    <string name="help">Βοήθεια</string>
+    <string name="instagram_version">Έκδοση</string>
+
+    <!-- home -->
+    <string name="module_disabled">Το Module δεν είναι ενεργό. Παρακαλούμε ενεργοποιήστε το.</string>
+
+    <string name="module_status">Κατάσταση Module:</string>
+
+    <string name="module_status_disabled">Κατάσταση Module: Ανενεργό</string>
+    <string name="request_enable_module">Παρακαλούμε ενεργοποιήστε το Module στο Xposed Installer.</string>
+
+    <string name="module_status_enabled_no_root">Κατάσταση Module: Ενεργό (Χωρίς Πρόσβαση Root)</string>
+    <string name="request_enable_root">Η πρόσβαση Root είναι απαραίτητη για την αυτόματη επανεκκίνηση. Απαιτείται χειροκίνητη επανεκκίνηση.</string>
+
+    <string name="module_status_enabled">Κατάσταση Module: Ενεργό</string>
+    <string name="module_active">Το module είναι ενεργό και λειτουργεί.</string>
+
+    <string name="checking_instagram">Γίνεται έλεγχος του Instagram</string>
+    <string name="installed_instagram_version">Το Instagram είναι εγκατεστημένο</string>
+    <string name="not_installed_instagram">Το Instagram δεν είναι εγκατεστημένο</string>
+    <string name="error_instagram">Σφάλμα ελέγχου κατάστασης του Instagram</string>
+
+    <string name="launch_instagram">Άνοιγμα του Instagram</string>
+    <string name="download_apk">Λήψη APK</string>
+    <string name="how_to_use">Οδηγίες χρήσης</string>
+    <string name="usage_instructions">Πατήστε παρατεταμένα το κουμπί αναζήτησης</string>
+    <string name="contributors">Συνεισφέροντες</string>
+    <string name="special_thanks">Θερμές ευχαριστίες</string>
+
+    <!-- Don't translate! -->
+    <string name="instagram_logo" translatable="false">Instagram Logo</string>
+    <string name="instagram_info" translatable="false">instagram_info</string>
+
+    <!-- help -->
+    <string name="help_amp_troubleshooting">Βοήθεια &amp; Υποστήριξη</string>
+    <string name="find_updates_and_documentation">Βρείτε ενημερώσεις και οδηγίες.</string>
+    <string name="go_to_github">Μετάβαση στο GitHub</string>
+    <string name="find_support">Βρείτε υποστήριξη.</string>
+    <string name="go_to_telegram">Μετάβαση στο Telegram</string>
+    <string name="instaeclipse_telegram_group" translatable="false">Ομάδα Telegram του InstaEclipse</string>
+
+    <!-- Don't translate! -->
+    <string name="instaeclipse_github" translatable="false">InstaEclipse GitHub</string>
+    <string name="github">GitHub</string>
+    <string name="telegram">Telegram</string>
+
+    <!-- faq -->
+    <string name="frequently_asked_questions">Συχνές ερωτήσεις</string>
+    <string name="faq_1"><b>1. Δεν λειτουργεί ή κλείνει απότομα η έκδοση από το Google Play Store;</b>\n- Χρησιμοποιήστε APK από το APKMirror</string>
+    <string name="faq_2"><b>2. Το module δεν είναι ενεργό;</b>\n- Απενεργοποιήστε και ενεργοποιήστε ξανά το module στο LSPosed.</string>
+    <string name="faq_3"><b>3. Προβλήματα με τις λειτουργίες του InstaEclipse;</b>\n- Κλείστε αναγκαστικά το Instagram και ανοίξτε το ξανά.</string>
+    <string name="faq_4"><b>4. Οι επιλογές προγραμματιστών προκαλούν προβλήματα;</b>\n- Ακολουθήστε τον οδηγό επιλογών προγραμματιστών.</string>
+    <string name="faq_5"><b>5. Οι επιλογές προγραμματιστών έχουν περίεργες ετικέτες ή αριθμούς;</b>\n- Εγκαταστήστε τις εκδόσεις Beta ή Alpha, καθώς οι σταθερές εκδόσεις έχουν απόκρυψη ονομάτων/αριθμών.</string>
+    <string name="faq_6"><b>6. Η λειτουργία “Αφαίρεση Περισπασμών” είναι ενεργή αλλά εμφανίζεται ακόμα περιεχόμενο;</b>\n- Κλείστε αναγκαστικά το Instagram και κάντε εκκαθάριση της cache του.</string>
+
+    <!-- guide -->
+    <string name="module_not_working_title">Το Module εξακολουθεί να μην λειτουργεί;</string>
+
+    <!-- features -->
+    <string name="developer_options">Επιλογές Προγραμματιστών</string>
+    <string name="ghost_mode">Αόρατη Λειτουργία</string>
+    <string name="distraction_free">Αφαίρεση Περισπασμών</string>
+    <string name="remove_ads">Αφαίρεση Διαφημίσεων</string>
+    <string name="remove_analytics">Αφαίρεση Αναλυτικών Στοιχείων</string>
+
+    <string name="enable_disable_all">Ενεργοποίηση/Απενεργοποίηση Όλων</string>
+
+    <!-- Don't translate! -->
+    <string name="hint" translatable="false">Hint</string>
+
+    <!-- ghost -->
+    <string name="ghost_mode_options">Ρυθμίσεις Αόρατης Λειτουργίας</string>
+    <string name="typing">Πληκτρολόγηση</string>
+    <string name="story">Ιστορία</string>
+    <string name="view_once">Προβολή μία φορά</string>
+    <string name="live">Ζωντανή Παρακολούθηση</string>
+    <string name="direct_messages">Μηνύματα</string>
+    <string name="disable_typing">Πληκτρολόγηση</string>
+    <string name="screen_shot">Στιγμιότυπο Οθόνης</string>
+
+    <!-- developer_options -->
+    <string name="developer_options_guide">Οδηγός Επιλογών Προγραμματιστών</string>
+    <string name="dev_options_version_req">Χρησιμοποιήστε το σε εκδόσεις Beta/Alpha μόνο!</string>
+    <string name="dev_options_req">Βεβαιωθείτε πως έχετε συνδεθεί πρώτα!</string>
+
+    <string name="dev_options_1">1. Ανοίξτε το Instagram και πατήστε παρατεταμένα το κουμπί της αρχικής σελίδας.</string>
+    <string name="dev_options_2">2. Μεταβείτε στο Developer Options > MetaConfig Settings &amp; Overrides.</string>
+    <string name="dev_options_3">3. Κάντε αναζήτηση για \'Employee\' και ενεργοποιήστε τις ακόλουθες επιλογές:</string>
+    <string name="dev_options_4">4. Τέλος, απενεργοποιήστε τις Επιλογές Προγραμματιστών από το module για την αποφυγή προβλημάτων.</string>
+
+    <!-- Don't translate! -->
+    <string name="is_employee" translatable="false">• is employee</string>
+    <string name="is_employee_or_test_user" translatable="false">• is employee or test user</string>
+    <string name="employee_options" translatable="false">• employee options</string>
+
+    <!-- distraction free -->
+    <string name="distraction_free_options">Ρυθμίσεις Αφαίρεσης Περισπασμών</string>
+    <string name="disable_stories">Απενεργοποίηση Ιστοριών</string>
+    <string name="disable_feed">Απενεργοποίηση Ροής Δημοσιεύσεων</string>
+    <string name="disable_reels">Απενεργοποίηση των Reels</string>
+    <string name="disable_explore">Απενεργοποίηση Εξερεύνησης</string>
+    <string name="disable_comments">Απενεργοποίηση Σχολίων</string>
+
+    <!-- Miscellaneous -->
+    <string name="misc">Διάφορα</string>
+    <string name="miscellaneous_options">Διάφορες Ρυθμίσεις</string>
+    <string name="story_flipping">Απενεργοποίηση Εναλλαγής Ιστοριών</string>
+    <string name="video_autoplay">Απενεργοποίηση Αυτόματης Αναπαραγωγής Βίντεο</string>
+    <string name="follower_toast">Εμφάνιση μηνύματος ακόλουθου</string>
+    <string name="hooked_methods_toast">Εμφάνιση μηνύματος ενεργοποιημένων λειτουργιών</string>
+
+    <!-- contributor card -->
+    <string name="contributor_name">Όνομα Συνεισφέροντα</string>
+</resources>

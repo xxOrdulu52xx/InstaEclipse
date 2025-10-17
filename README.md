@@ -125,6 +125,7 @@ Force stop Instagram and **clear its cache** to apply the changes properly.
 - [silvzr](https://github.com/silvzr)
 - [oct888](https://github.com/oct888)
 - [HalfManBear](https://github.com/halfmanbear)
+- [ar5to](https://github.com/ar5to)
 
 ## 🙌 Special Thanks
 - [xHookman](https://github.com/xHookman)  

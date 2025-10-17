@@ -50,11 +50,7 @@ public class DialogUtils {
             currentDialog.dismiss();
         }
 
-        currentDialog = new AlertDialog.Builder(themedContext)
-                .setView(scrollView)
-                .setTitle(null)
-                .setCancelable(true)
-                .create();
+        currentDialog = new AlertDialog.Builder(themedContext).setView(scrollView).setTitle(null).setCancelable(true).create();
 
         Objects.requireNonNull(currentDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -63,11 +59,7 @@ public class DialogUtils {
 
     public static void showSimpleDialog(Context context, String title, String message) {
         try {
-            new AlertDialog.Builder(context)
-                    .setTitle(title)
-                    .setMessage(message)
-                    .setPositiveButton("OK", null)
-                    .show();
+            new AlertDialog.Builder(context).setTitle(title).setMessage(message).setPositiveButton("OK", null).show();
         } catch (Exception e) {
             // handle UI crash fallback
         }
@@ -116,7 +108,7 @@ public class DialogUtils {
         mainLayout.addView(createClickableSection(context, "ℹ️ About", () -> showAboutDialog(context)));
 
         // 6 - Restart Instagram => OPEN PAGE
-        mainLayout.addView(createClickableSection(context, "🔁 Restart Instagram", () -> showRestartSection(context)));
+        mainLayout.addView(createClickableSection(context, "🔁 Restart App", () -> showRestartSection(context)));
 
         mainLayout.addView(createDivider(context));
 
@@ -164,18 +156,10 @@ public class DialogUtils {
         LinearLayout layout = createSwitchLayout(context);
 
         // Create switches for customizing what gets toggled
-        Switch[] toggleSwitches = new Switch[]{
-                createSwitch(context, "Include Hide Seen", FeatureFlags.quickToggleSeen),
-                createSwitch(context, "Include Hide Typing", FeatureFlags.quickToggleTyping),
-                createSwitch(context, "Include Disable Screenshot Detection", FeatureFlags.quickToggleScreenshot),
-                createSwitch(context, "Include Hide View Once", FeatureFlags.quickToggleViewOnce),
-                createSwitch(context, "Include Hide Story Seen", FeatureFlags.quickToggleStory),
-                createSwitch(context, "Include Hide Live Seen", FeatureFlags.quickToggleLive)
-        };
+        Switch[] toggleSwitches = new Switch[]{createSwitch(context, "Include Hide Seen", FeatureFlags.quickToggleSeen), createSwitch(context, "Include Hide Typing", FeatureFlags.quickToggleTyping), createSwitch(context, "Include Disable Screenshot Detection", FeatureFlags.quickToggleScreenshot), createSwitch(context, "Include Hide View Once", FeatureFlags.quickToggleViewOnce), createSwitch(context, "Include Hide Story Seen", FeatureFlags.quickToggleStory), createSwitch(context, "Include Hide Live Seen", FeatureFlags.quickToggleLive)};
 
         // Create Enable/Disable All switch
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(toggleSwitches));
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(toggleSwitches));
 
         // Master listener
         enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -248,47 +232,65 @@ public class DialogUtils {
 
     private static View createDivider(Context context) {
         View divider = new View(context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, 2);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2);
         params.setMargins(0, 20, 0, 20);
         divider.setLayoutParams(params);
         divider.setBackgroundColor(Color.DKGRAY);
         return divider;
     }
 
-    private static void restartInstagram(Context context) { // Restart Instagram and Remove its cache
+    /**
+     * Clears the application's cache and restarts it.
+     * Works for any package name this module is running in.
+     *
+     * @param context The application context.
+     */
+    private static void restartApp(Context context) {
         try {
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-            clearInstagramCache(context);
+            String packageName = context.getPackageName();
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+
             if (intent != null) {
+                clearAppCache(context); // Clear cache first
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+                // Forcibly kill the current process to ensure a clean restart
                 Runtime.getRuntime().exit(0);
             } else {
-                Toast.makeText(context, "Instagram not found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Could not find the app to restart.", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            XposedBridge.log("InstaEclipse: Restart failed - " + e.getMessage());
+            String packageName = context.getPackageName();
+            XposedBridge.log("InstaEclipse: Restart failed for " + packageName + " - " + e.getMessage());
             Toast.makeText(context, "Restart failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    private static void clearInstagramCache(Context context) { // Clear Instagram Cache
+    /**
+     * Clears the cache directory for the current application.
+     *
+     * @param context The application context.
+     */
+    private static void clearAppCache(Context context) {
         try {
             File cacheDir = context.getCacheDir();
-            if (cacheDir != null && cacheDir.exists()) {
-                XposedBridge.log("");
+            if (cacheDir != null && cacheDir.isDirectory()) {
                 deleteRecursive(cacheDir);
-                XposedBridge.log("InstaEclipse: Cache cleared");
+                XposedBridge.log("InstaEclipse: Cache cleared for " + context.getPackageName());
             } else {
-                XposedBridge.log("InstaEclipse: Cache dir not found");
+                XposedBridge.log("InstaEclipse: Cache directory not found for " + context.getPackageName());
             }
         } catch (Exception e) {
-            XposedBridge.log("InstaEclipse: Failed to clear cache - " + e.getMessage());
+            XposedBridge.log("InstaEclipse: Failed to clear cache for " + context.getPackageName() + " - " + e.getMessage());
         }
     }
 
-    private static void deleteRecursive(File fileOrDirectory) { // Helper method
+    /**
+     * Recursively deletes a file or directory.
+     *
+     * @param fileOrDirectory The file or directory to delete.
+     */
+    private static void deleteRecursive(File fileOrDirectory) {
         if (fileOrDirectory.isDirectory()) {
             File[] children = fileOrDirectory.listFiles();
             if (children != null) {
@@ -297,8 +299,10 @@ public class DialogUtils {
                 }
             }
         }
+        // A direct result for a file or an empty directory
         fileOrDirectory.delete();
     }
+
 
     // ==== SECTIONS ====
 
@@ -307,8 +311,7 @@ public class DialogUtils {
         LinearLayout layout = createSwitchLayout(context);
 
         // Developer Mode Switch
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch devModeSwitch = createSwitch(context, "Enable Developer Mode", FeatureFlags.isDevEnabled);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch devModeSwitch = createSwitch(context, "Enable Developer Mode", FeatureFlags.isDevEnabled);
         devModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             FeatureFlags.isDevEnabled = isChecked;
             SettingsManager.saveAllFlags();
@@ -326,10 +329,7 @@ public class DialogUtils {
                 FeatureFlags.isImportingConfig = true;
 
                 Intent importIntent = new Intent();
-                importIntent.setComponent(new ComponentName(
-                        "ps.reso.instaeclipse",
-                        "ps.reso.instaeclipse.mods.devops.config.JsonImportActivity"
-                ));
+                importIntent.setComponent(new ComponentName("ps.reso.instaeclipse", "ps.reso.instaeclipse.mods.devops.config.JsonImportActivity"));
                 importIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 try {
@@ -358,10 +358,7 @@ public class DialogUtils {
 
                 // Launch InstaEclipse export screen
                 Intent exportIntent = new Intent();
-                exportIntent.setComponent(new ComponentName(
-                        "ps.reso.instaeclipse",
-                        "ps.reso.instaeclipse.mods.devops.config.JsonExportActivity"
-                ));
+                exportIntent.setComponent(new ComponentName("ps.reso.instaeclipse", "ps.reso.instaeclipse.mods.devops.config.JsonExportActivity"));
                 exportIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 try {
@@ -384,19 +381,11 @@ public class DialogUtils {
     private static void showGhostOptions(Context context) {
         LinearLayout layout = createSwitchLayout(context);
 
-        Switch[] switches = new Switch[]{
-                createSwitch(context, "Hide Seen", FeatureFlags.isGhostSeen),
-                createSwitch(context, "Hide Typing", FeatureFlags.isGhostTyping),
-                createSwitch(context, "Disable Screenshot Detection", FeatureFlags.isGhostScreenshot),
-                createSwitch(context, "Hide View Once", FeatureFlags.isGhostViewOnce),
-                createSwitch(context, "Hide Story Seen", FeatureFlags.isGhostStory),
-                createSwitch(context, "Hide Live Seen", FeatureFlags.isGhostLive)
-        };
+        Switch[] switches = new Switch[]{createSwitch(context, "Hide Seen", FeatureFlags.isGhostSeen), createSwitch(context, "Hide Typing", FeatureFlags.isGhostTyping), createSwitch(context, "Disable Screenshot Detection", FeatureFlags.isGhostScreenshot), createSwitch(context, "Hide View Once", FeatureFlags.isGhostViewOnce), createSwitch(context, "Hide Story Seen", FeatureFlags.isGhostStory), createSwitch(context, "Hide Live Seen", FeatureFlags.isGhostLive)};
 
         layout.addView(createClickableSection(context, "🛠 Customize Quick Toggle", () -> showGhostQuickToggleOptions(context)));
 
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
 
         enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             for (Switch s : switches) {
@@ -466,20 +455,16 @@ public class DialogUtils {
         LinearLayout layout = createSwitchLayout(context);
 
         // Create switches
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch adBlock = createSwitch(context, "Block Ads", FeatureFlags.isAdBlockEnabled);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch adBlock = createSwitch(context, "Block Ads", FeatureFlags.isAdBlockEnabled);
 
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch analytics = createSwitch(context, "Block Analytics", FeatureFlags.isAnalyticsBlocked);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch analytics = createSwitch(context, "Block Analytics", FeatureFlags.isAnalyticsBlocked);
 
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch trackingLinks = createSwitch(context, "Disable Tracking Links", FeatureFlags.disableTrackingLinks);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch trackingLinks = createSwitch(context, "Disable Tracking Links", FeatureFlags.disableTrackingLinks);
 
         Switch[] switches = new Switch[]{adBlock, analytics, trackingLinks};
 
         // Create Enable/Disable All switch
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
 
         // Master listener
         enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -530,25 +515,53 @@ public class DialogUtils {
         LinearLayout layout = createSwitchLayout(context);
 
         // Child switches
-        Switch disableStoriesSwitch = createSwitch(context, "Disable Stories", FeatureFlags.disableStories);
-        Switch disableFeedSwitch = createSwitch(context, "Disable Feed", FeatureFlags.disableFeed);
-        Switch disableReelsSwitch = createSwitch(context, "Disable Reels", FeatureFlags.disableReels);
-        Switch onlyInDMSwitch = createSwitch(context, "Disable Reels Except in DMs", FeatureFlags.disableReelsExceptDM);
-        Switch disableExploreSwitch = createSwitch(context, "Disable Explore", FeatureFlags.disableExplore);
-        Switch disableCommentsSwitch = createSwitch(context, "Disable Comments", FeatureFlags.disableComments);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch extremeModeSwitch = createSwitch(context, "Extreme Mode 🔒 (Irreversible until reinstall)", FeatureFlags.isExtremeMode);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableStoriesSwitch = createSwitch(context, "Disable Stories", FeatureFlags.disableStories);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableFeedSwitch = createSwitch(context, "Disable Feed", FeatureFlags.disableFeed);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableReelsSwitch = createSwitch(context, "Disable Reels", FeatureFlags.disableReels);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch onlyInDMSwitch = createSwitch(context, "Disable Reels Except in DMs", FeatureFlags.disableReelsExceptDM);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableExploreSwitch = createSwitch(context, "Disable Explore", FeatureFlags.disableExplore);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableCommentsSwitch = createSwitch(context, "Disable Comments", FeatureFlags.disableComments);
 
-        Switch[] switches = new Switch[]{
-                disableStoriesSwitch,
-                disableFeedSwitch,
-                disableReelsSwitch,
-                onlyInDMSwitch,
-                disableExploreSwitch,
-                disableCommentsSwitch
-        };
+        Switch[] switches = new Switch[]{disableStoriesSwitch, disableFeedSwitch, disableReelsSwitch, onlyInDMSwitch, disableExploreSwitch, disableCommentsSwitch};
+
 
         // Enable/Disable All
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
+
+        if (FeatureFlags.isExtremeMode) {
+            disableAllSwitches(switches, enableAllSwitch, onlyInDMSwitch);
+            extremeModeSwitch.setChecked(true);
+            extremeModeSwitch.setEnabled(false);
+        }
+
+        extremeModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Activate Extreme Mode?");
+                builder.setMessage("Once activated, you cannot disable Distraction-Free Mode until you reinstall the app. Continue?");
+                builder.setPositiveButton("Yes", (dialog, which) -> {
+                    FeatureFlags.isExtremeMode = true;
+                    FeatureFlags.isDistractionFree = true;
+
+                    // Save user’s current selections before freezing them
+                    FeatureFlags.disableStories = disableStoriesSwitch.isChecked();
+                    FeatureFlags.disableFeed = disableFeedSwitch.isChecked();
+                    FeatureFlags.disableReels = disableReelsSwitch.isChecked();
+                    FeatureFlags.disableReelsExceptDM = onlyInDMSwitch.isChecked();
+                    FeatureFlags.disableExplore = disableExploreSwitch.isChecked();
+                    FeatureFlags.disableComments = disableCommentsSwitch.isChecked();
+                    SettingsManager.saveAllFlags();
+
+                    // Disable all UI switches to lock them
+                    disableAllSwitches(switches, enableAllSwitch, onlyInDMSwitch);
+                    extremeModeSwitch.setEnabled(false);
+                });
+                builder.setNegativeButton("Cancel", (dialog, which) -> extremeModeSwitch.setChecked(false));
+                builder.show();
+            }
+        });
+
 
         // Master switch listener
         enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -595,6 +608,7 @@ public class DialogUtils {
         onlyInDMSwitch.setEnabled(disableReelsSwitch.isChecked());
 
         // Layout building
+        layout.addView(extremeModeSwitch);
         layout.addView(createDivider(context));
         layout.addView(createEnableAllSwitch(context, enableAllSwitch));
         layout.addView(createDivider(context));
@@ -615,9 +629,24 @@ public class DialogUtils {
         SettingsManager.saveAllFlags();
     }
 
+    private static void disableAllSwitches(Switch[] switches, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch master, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch onlyInDMSwitch) {
 
-    private static void updateMasterSwitch(@SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch, Switch[] switches,
-                                           @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableReelsSwitch, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch onlyInDMSwitch) {
+        for (Switch s : switches) {
+            if (s == onlyInDMSwitch) {
+                // Special rule for onlyInDM
+                s.setEnabled(s.isChecked()); // editable only if it was checked
+            } else {
+                // Normal switches: lock if checked, editable if unchecked
+                s.setEnabled(!s.isChecked());
+            }
+        }
+
+        // Master switch always frozen ON
+        master.setEnabled(false);
+    }
+
+
+    private static void updateMasterSwitch(@SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch, Switch[] switches, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch disableReelsSwitch, @SuppressLint("UseSwitchCompatOrMaterialCode") Switch onlyInDMSwitch) {
         enableAllSwitch.setOnCheckedChangeListener(null);
         enableAllSwitch.setChecked(areAllEnabled(switches));
         enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -629,21 +658,14 @@ public class DialogUtils {
     }
 
 
-
     private static void showMiscOptions(Context context) {
         LinearLayout layout = createSwitchLayout(context);
 
         // Create all child switches
-        Switch[] switches = new Switch[]{
-                createSwitch(context, "Disable Story Auto-Swipe", FeatureFlags.disableStoryFlipping),
-                createSwitch(context, "Disable Video Autoplay", FeatureFlags.disableVideoAutoPlay),
-                createSwitch(context, "Show Follower Toast", FeatureFlags.showFollowerToast),
-                createSwitch(context, "Show Feature Toasts", FeatureFlags.showFeatureToasts)
-        };
+        Switch[] switches = new Switch[]{createSwitch(context, "Disable Story Auto-Swipe", FeatureFlags.disableStoryFlipping), createSwitch(context, "Disable Video Autoplay", FeatureFlags.disableVideoAutoPlay), createSwitch(context, "Show Follower Toast", FeatureFlags.showFollowerToast), createSwitch(context, "Show Feature Toasts", FeatureFlags.showFeatureToasts)};
 
         // Create Enable/Disable All switch
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch enableAllSwitch = createSwitch(context, "Enable/Disable All", areAllEnabled(switches));
 
         enableAllSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             for (Switch s : switches) {
@@ -724,17 +746,13 @@ public class DialogUtils {
         githubButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3F51B5")));
         githubButton.setPadding(40, 20, 40, 20);
 
-        LinearLayout.LayoutParams githubParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
+        LinearLayout.LayoutParams githubParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         githubParams.gravity = Gravity.CENTER_HORIZONTAL;
         githubButton.setLayoutParams(githubParams);
 
 
         githubButton.setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                    android.net.Uri.parse("https://github.com/ReSo7200/InstaEclipse"));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/ReSo7200/InstaEclipse"));
             browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(browserIntent);
         });
@@ -755,7 +773,7 @@ public class DialogUtils {
         layout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         TextView message = new TextView(context);
-        message.setText("⚠️ Restart Instagram and remove its cache?!");
+        message.setText("⚠️ Clear app cache and restart?");
         message.setTextColor(Color.WHITE);
         message.setTextSize(18f);
         message.setGravity(Gravity.CENTER);
@@ -766,12 +784,12 @@ public class DialogUtils {
         restartButton.setTextColor(Color.WHITE);
         restartButton.setPadding(40, 20, 40, 20);
 
-        restartButton.setOnClickListener(v -> restartInstagram(context));
+        restartButton.setOnClickListener(v -> restartApp(context));
 
         layout.addView(message);
         layout.addView(restartButton);
 
-        showSectionDialog(context, "Restart Instagram", layout, () -> {
+        showSectionDialog(context, "Restart App", layout, () -> {
         });
     }
 
@@ -829,10 +847,7 @@ public class DialogUtils {
         ScrollView scrollView = new ScrollView(context);
         scrollView.addView(container);
 
-        currentDialog = new AlertDialog.Builder(context)
-                .setView(scrollView)
-                .setCancelable(true)
-                .create();
+        currentDialog = new AlertDialog.Builder(context).setView(scrollView).setCancelable(true).create();
 
         Objects.requireNonNull(currentDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -864,33 +879,23 @@ public class DialogUtils {
     }
 
     private static ColorStateList createThumbColor() {
-        return new ColorStateList(
-                new int[][]{
-                        new int[]{-android.R.attr.state_enabled},          // Disabled
-                        new int[]{android.R.attr.state_checked},           // Checked
-                        new int[]{-android.R.attr.state_checked}           // Unchecked
-                },
-                new int[]{
-                        Color.parseColor("#555555"),  // Disabled
-                        Color.parseColor("#448AFF"),  // ON
-                        Color.parseColor("#FFFFFF")   // OFF
-                }
-        );
+        return new ColorStateList(new int[][]{new int[]{-android.R.attr.state_enabled},          // Disabled
+                new int[]{android.R.attr.state_checked},           // Checked
+                new int[]{-android.R.attr.state_checked}           // Unchecked
+        }, new int[]{Color.parseColor("#555555"),  // Disabled
+                Color.parseColor("#448AFF"),  // ON
+                Color.parseColor("#FFFFFF")   // OFF
+        });
     }
 
     private static ColorStateList createTrackColor() {
-        return new ColorStateList(
-                new int[][]{
-                        new int[]{-android.R.attr.state_enabled},          // Disabled
-                        new int[]{android.R.attr.state_checked},           // Checked
-                        new int[]{-android.R.attr.state_checked}           // Unchecked
-                },
-                new int[]{
-                        Color.parseColor("#777777"),  // Disabled
-                        Color.parseColor("#1C4C78"),  // ON
-                        Color.parseColor("#CFD8DC")   // OFF
-                }
-        );
+        return new ColorStateList(new int[][]{new int[]{-android.R.attr.state_enabled},          // Disabled
+                new int[]{android.R.attr.state_checked},           // Checked
+                new int[]{-android.R.attr.state_checked}           // Unchecked
+        }, new int[]{Color.parseColor("#777777"),  // Disabled
+                Color.parseColor("#1C4C78"),  // ON
+                Color.parseColor("#CFD8DC")   // OFF
+        });
     }
 
     private static View createClickableSection(Context context, String label, Runnable onClick) {

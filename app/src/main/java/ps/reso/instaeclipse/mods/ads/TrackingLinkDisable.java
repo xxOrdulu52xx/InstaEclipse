@@ -22,13 +22,18 @@ public class TrackingLinkDisable {
                                 return;
                             }
                             String x = clipData.getItemAt(0).getText().toString();
-                            if (x.contains("https://www.instagram.com/") && x.contains("?igsh=")) { // Global
-                                param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?igsh=.*", ""));
+                            if (x.contains("https://www.instagram.com/") && (x.contains("igsh=") || (x.contains("ig_rid=")))) { // Global
+                                param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?.*", ""));
                             } else if (x.contains("https://www.instagram.com/") && x.contains("?utm_source=")) { // Stories
                                 param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?utm_source=.*", ""));
                             }
                             else if (x.contains("https://www.instagram.com/") && x.contains("?story_media_id=")){ // Highlights
                                 param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?story_media_id=.*", ""));
+                            }
+                            // Saved-by rule: match saved-by or saved_by anywhere in query
+                            else if (x.contains("https://www.instagram.com/") &&
+                                    x.matches("(?i).*saved[-_]by.*")) {
+                                param.args[0] = ClipData.newPlainText("URL", x.replaceAll("\\?.*", ""));
                             }
                         }
 

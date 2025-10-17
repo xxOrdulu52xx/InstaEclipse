@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import ps.reso.instaeclipse.utils.feature.FeatureFlags;
+
 public class JsonImportActivity extends Activity {
 
     private static final int PICK_JSON_FILE = 1234;
@@ -20,6 +22,7 @@ public class JsonImportActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FeatureFlags.isImportingConfig = false;
         openJsonPicker();
     }
 
@@ -30,21 +33,34 @@ public class JsonImportActivity extends Activity {
         startActivityForResult(Intent.createChooser(intent, "Select JSON Config"), PICK_JSON_FILE);
     }
 
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PICK_JSON_FILE && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            try (InputStream inputStream = getContentResolver().openInputStream(uri)) {
-                String json = readStream(inputStream);
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("json", json);
-                clipboard.setPrimaryClip(clip);
+        if (requestCode == PICK_JSON_FILE) {
+            if (resultCode == RESULT_OK && data != null) {
+                Uri uri = data.getData();
+                try (InputStream inputStream = getContentResolver().openInputStream(uri)) {
+                    String json = readStream(inputStream).trim();
 
-            } catch (Exception e) {
-                Toast.makeText(this, "❌ Failed to read file: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    // Validate before enabling the flag
+                    if (json.startsWith("{") && json.endsWith("}")) {
+                        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clip = ClipData.newPlainText("json", json);
+                        clipboard.setPrimaryClip(clip);
+
+                        FeatureFlags.isImportingConfig = true; // <- only now turn it ON
+                        //Toast.makeText(this, "Config copied, returning to import…", Toast.LENGTH_SHORT).show();
+                    } else {
+                        FeatureFlags.isImportingConfig = false;
+                        Toast.makeText(this, "❌ Not a valid JSON file", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    FeatureFlags.isImportingConfig = false; // <- make sure we reset on error
+                    Toast.makeText(this, "❌ Failed to read file: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            } else {
+                // User pressed back / cancelled
+                FeatureFlags.isImportingConfig = false; // <- ensure OFF on cancel
+                Toast.makeText(this, "Cancelled or no file selected", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(this, "Cancelled or no file selected", Toast.LENGTH_SHORT).show();
         }
         finish(); // Done, return to Instagram
     }

@@ -25,11 +25,14 @@ public class StoryFlipping {
 
     private void findAndHookMethod(DexKitBridge bridge) {
         try {
-            // Step 1: Find methods referencing the string "end_scene"
-            List<MethodData> methods = bridge.findMethod(FindMethod.create()
-                    .matcher(MethodMatcher.create()
-                            .declaredClass("instagram.features.stories.fragment.ReelViewerFragment")
-                            .usingStrings("end_scene")
+            // Step 1: Find methods matching the targeted method structure
+            List<MethodData> methods = bridge.findMethod(
+                    FindMethod.create().matcher(
+                            MethodMatcher.create()
+                                    .declaredClass("instagram.features.stories.fragment.ReelViewerFragment")
+                                    .paramTypes("java.lang.Object")
+                                    .returnType("void")
+                                    .usingStrings("userSession")
                     )
             );
 

@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 import de.robv.android.xposed.XposedBridge;
 import ps.reso.instaeclipse.utils.feature.FeatureFlags;
@@ -21,58 +20,56 @@ public class ConfigManager {
 
     // Import meta config from clipboard
     public static void importConfigFromClipboard(Context context) {
+
         android.app.ProgressDialog progress = new android.app.ProgressDialog(context);
         progress.setMessage("Importing config...");
         progress.setCancelable(false);
         progress.show();
 
         new Thread(() -> {
+            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             try {
-                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                if (clipboard == null || !clipboard.hasPrimaryClip()) {
-                    return;
-                }
+                if (clipboard == null || !clipboard.hasPrimaryClip()) throw new IllegalStateException("Empty clipboard");
 
                 ClipData clipData = clipboard.getPrimaryClip();
-                if (clipData == null || clipData.getItemCount() == 0) {
-                    return;
-                }
+                if (clipData == null || clipData.getItemCount() == 0) throw new IllegalStateException("Empty clipboard");
 
                 CharSequence clipText = clipData.getItemAt(0).getText();
-                if (clipText == null || clipText.length() == 0) {
-                    return;
-                }
+                if (clipText == null || clipText.length() == 0) throw new IllegalStateException("Empty clipboard");
 
                 String json = clipText.toString().trim();
-                if (!json.startsWith("{") || !json.endsWith("}")) {
-                    return;
-                }
+                if (!json.startsWith("{") || !json.endsWith("}")) throw new IllegalArgumentException("Clipboard is not valid JSON");
 
                 File dest = new File(context.getFilesDir(), "mobileconfig/mc_overrides.json");
-                if (!Objects.requireNonNull(dest.getParentFile()).exists()) {
-                    dest.getParentFile().mkdirs();
-                }
+                File parent = dest.getParentFile();
+                if (parent != null && !parent.exists()) parent.mkdirs();
 
                 try (FileOutputStream fos = new FileOutputStream(dest, false)) {
                     fos.write(json.getBytes(StandardCharsets.UTF_8));
                     fos.flush();
                 }
 
+                // (Optional) clear clipboard to avoid stale re-imports later
+                try { clipboard.setPrimaryClip(ClipData.newPlainText("", "")); } catch (Exception ignored) {}
+
                 new Handler(Looper.getMainLooper()).post(() -> {
                     progress.dismiss();
                     Toast.makeText(context, "✅ Imported into mc_overrides.json", Toast.LENGTH_LONG).show();
                     XposedBridge.log("InstaEclipse | ✅ JSON imported from clipboard into mc_overrides.json");
                 });
-
             } catch (Exception e) {
                 XposedBridge.log("InstaEclipse | ❌ Clipboard import failed: " + e.getMessage());
                 new Handler(Looper.getMainLooper()).post(() -> {
                     progress.dismiss();
                     Toast.makeText(context, "❌ Failed to import config", Toast.LENGTH_LONG).show();
                 });
+            } finally {
+                // 100% guarantee the flag is OFF after an attempt
+                FeatureFlags.isImportingConfig = false;
             }
         }).start();
     }
+
 
     // Export meta config to Device
     public static void exportCurrentDevConfig(Context context) {

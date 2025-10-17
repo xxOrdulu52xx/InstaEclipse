@@ -68,6 +68,7 @@ public class Interceptor {
                                     }
                                     if (FeatureFlags.isGhostViewOnce) {
                                         shouldDrop |= uri.getPath().endsWith("/item_replayed/");
+                                        shouldDrop |= (uri.getPath().contains("/direct") && uri.getPath().endsWith("/item_seen/"));
                                     }
                                     if (FeatureFlags.isGhostStory) {
                                         shouldDrop |= uri.getPath().contains("/api/v2/media/seen/");
@@ -88,12 +89,22 @@ public class Interceptor {
                                     if (FeatureFlags.disableFeed) {
                                         shouldDrop |= uri.getPath().endsWith("/feed/timeline/");
                                     }
-                                    if (FeatureFlags.disableReels) {
+                                    if (FeatureFlags.disableReels && !FeatureFlags.disableReelsExceptDM) {
                                         shouldDrop |= uri.getPath().endsWith("/qp/batch_fetch/")
                                                 || uri.getPath().contains("api/v1/clips")
                                                 || uri.getPath().contains("clips")
                                                 || uri.getPath().contains("mixed_media")
                                                 || uri.getPath().contains("mixed_media/discover/stream/");
+                                    }
+                                    if (FeatureFlags.disableReelsExceptDM) {
+                                        if (uri.getPath().startsWith("/api/v1/direct_v2/")) {
+                                            return;
+                                        }
+                                        shouldDrop |= (uri.getPath().startsWith("/api/v1/clips/") && uri.getQuery() != null
+                                                       && (uri.getQuery().contains("next_media_ids=")
+                                                        || uri.getQuery().contains("max_id=")))
+                                                   || uri.getPath().contains("/clips/discover/")
+                                                   || uri.getPath().contains("/mixed_media/discover/stream/");
                                     }
                                     if (FeatureFlags.disableExplore) {
                                         shouldDrop |= uri.getPath().contains("/discover/topical_explore")
@@ -129,6 +140,9 @@ public class Interceptor {
                                         } catch (Exception e) {
                                             // XposedBridge.log("❌ [InstaEclipse] Failed to modify URI: " + e.getMessage());
                                         }
+                                    }
+                                    else {
+                                        XposedBridge.log("Logging: " + uri.getHost() + uri.getPath());
                                     }
 
                                     if (FeatureFlags.showFollowerToast) {

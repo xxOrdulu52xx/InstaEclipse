@@ -130,6 +130,11 @@ public class Interceptor {
                                                 || uri.getPath().contains("/logging_client_events");
                                     }
 
+                                    // Misc
+                                    if (FeatureFlags.disableRepost){
+                                        shouldDrop |=  uri.getPath().contains("/media/create_note/");
+                                    }
+
                                     if (shouldDrop) {
                                         // XposedBridge.log("the URI was blocked: " + uri.getPath());
                                         // Modify the URI to divert the request to a harmless endpoint
@@ -143,10 +148,10 @@ public class Interceptor {
                                     }
                                     /*
                                      DEV Purposes
+                                     */
                                     else {
                                         XposedBridge.log("Logging: " + uri.getHost() + uri.getPath());
                                     }
-                                    */
 
                                     if (FeatureFlags.showFollowerToast) {
                                         if (uri.getPath() != null && uri.getPath().startsWith("/api/v1/friendships/show/")) {

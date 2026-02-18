@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- app wide -->
     <string name="app_name">InstaEclipse</string>
-    <string name="version" translatable="false">v0.4.4 Beta</string>
+    <string name="version" translatable="false">v0.4.5 Beta</string>
     <string name="home">Əsas səhifə</string>
     <string name="features">Xüsusiyyətlər</string>
     <string name="help">Kömək</string>

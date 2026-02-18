@@ -101,10 +101,10 @@ public class Interceptor {
                                             return;
                                         }
                                         shouldDrop |= (uri.getPath().startsWith("/api/v1/clips/") && uri.getQuery() != null
-                                                       && (uri.getQuery().contains("next_media_ids=")
-                                                        || uri.getQuery().contains("max_id=")))
-                                                   || uri.getPath().contains("/clips/discover/")
-                                                   || uri.getPath().contains("/mixed_media/discover/stream/");
+                                                && (uri.getQuery().contains("next_media_ids=")
+                                                || uri.getQuery().contains("max_id=")))
+                                                || uri.getPath().contains("/clips/discover/")
+                                                || uri.getPath().contains("/mixed_media/discover/stream/");
                                     }
                                     if (FeatureFlags.disableExplore) {
                                         shouldDrop |= uri.getPath().contains("/discover/topical_explore")
@@ -131,8 +131,8 @@ public class Interceptor {
                                     }
 
                                     // Misc
-                                    if (FeatureFlags.disableRepost){
-                                        shouldDrop |=  uri.getPath().contains("/media/create_note/");
+                                    if (FeatureFlags.disableRepost) {
+                                        shouldDrop |= uri.getPath().contains("/media/create_note/");
                                     }
 
                                     if (shouldDrop) {
@@ -148,10 +148,10 @@ public class Interceptor {
                                     }
                                     /*
                                      DEV Purposes
-                                     */
                                     else {
                                         XposedBridge.log("Logging: " + uri.getHost() + uri.getPath());
                                     }
+                                     */
 
                                     if (FeatureFlags.showFollowerToast) {
                                         if (uri.getPath() != null && uri.getPath().startsWith("/api/v1/friendships/show/")) {
